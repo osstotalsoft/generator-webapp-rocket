@@ -8,13 +8,13 @@ First, install [Yeoman](http://yeoman.io) and generator-ts-react-app using [npm]
 
 ```bash
 npm install -g yo
-npm install -g generator-webapp-rocket
+npm install -g @totalsoft/generator-webapp-rocket
 ```
 
 Then generate your new project:
 
 ```bash
-yo generator-webapp-rocket
+yo @totalsoft/generator-webapp-rocket
 ```
 
 You will be prompted to introduce the following information:
@@ -136,4 +136,4 @@ When you are ready you can deploy you application on any platform. This template
 MIT
 
 [npm-image]: https://badge.fury.io/js/generator-ts-react-app.svg
-[npm-url]: https://npmjs.org/package/generator-ts-react-app
+[npm-url]: https://www.npmjs.com/package/@totalsoft/generator-webapp-rocket
