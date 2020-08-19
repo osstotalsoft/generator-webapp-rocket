@@ -1,10 +1,10 @@
 {
-  "name": "generator-webapp-rocket",
-  "version": "0.0.0",
+  "name": "@totalsoft/generator-webapp-rocket",
+  "version": "1.0.0",
   "description": "React web application sample with GraphQL Apollo Client and Axa Oidc client integrations.",
   "homepage": "https://github.com/osstotalsoft/generator-webapp-rocket",
   "author": {
-    "name": "OSS Totalsoft",
+    "name": "Totalsoft",
     "url": "https://github.com/osstotalsoft"
   },
   "publishConfig": {
@@ -63,6 +63,6 @@
       "tmp"
     ]
   },
-  "repository": "https://github.com/osstotalsoft/generator-webapp-rocket",
+  "repository": "https://github.com/osstotalsoft/generator-webapp-rocket.git",
   "license": "MIT"
 }
