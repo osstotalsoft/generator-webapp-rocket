@@ -7,7 +7,7 @@
     "name": "OSS Totalsoft",
     "url": "https://github.com/osstotalsoft"
   },
-  "publishConfig":{
+  "publishConfig": {
     "access": "public"
   },
   "files": [
