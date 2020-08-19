@@ -1,0 +1,9 @@
+{
+  "generator-node": {
+    "promptValues": {
+      "authorName": "Alexandra Capatina",
+      "authorEmail": "capatinaalexandra@gmail.com",
+      "authorUrl": "https://github.com/osstotalsoft"
+    }
+  }
+}

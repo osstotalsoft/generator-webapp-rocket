@@ -1,0 +1,45 @@
+{
+  "BuildVersion": "v",
+  "RowsOf": "din",
+  "RowsPerPage": "Randuri pe pagina",
+  "MyProfile": "Profilul meu",
+  "Forbidden": "Nu aveti dreptul sa vedeti aceasta pagina!",
+  "NavBar": {
+    "Dashboard": "Panou central",
+    "Settings": "Setari",
+    "User": "Profil"
+  },
+  "Tooltips": {
+    "Logout": "Iesire"
+  },
+  "Dialog": {
+    "Yes": "Da",
+    "No": "Nu"
+  },
+  "DateTime": {
+    "InvalidDateMessage": "Formatul datei este invalid",
+    "MinDateMessage": "Data introdusa nu poate fi mai mica decat valoarea minima",
+    "MaxDateMessage": "Data introdusa nu poate fi mai mare decat valoarea maxima"
+  },
+  "Validations": {
+    "Cnp": "CNP-ul nu este valid",
+    "UniqueCnp": "CNP-ul nu este unic",
+    "Phone": "Numarul de telefon nu este valid",
+    "NoSpace": "Nu poate incepe cu spatiu",
+    "Integer": "Valoarea trebuie sa fie un numar intreg",
+    "Generic": {
+      "Mandatory": "Valoarea este obligatorie",
+      "AtLeastOne": "Trebuie sa existe cel putin un element",
+      "Regex": "Valoarea are un format invalid",
+      "Email": "Valoarea nu este o adresa de email valida",
+      "OutOfRange": "Valoarea trebuie sa fie intre {{min}} si {{max}}",
+      "Greater": "Valoarea trebuie sa fie mai mare decat {{min}}",
+      "GreaterOrEqual": "Valoarea trebuie sa fie mai mare sau egala cu {{min}}",
+      "Less": "Valoarea trebuie sa fie mai mica decat {{max}}",
+      "LessOrEqual": "Valoarea trebuie sa fie mai mica sau egala cu {{max}}",
+      "MaxCharacters": "Lungimea trebuie sa fie mai mica decat {{max}}",
+      "MinCharacters": "Lungimea trebuie sa fie mai mare decat {{min}}",
+      "Unique": "Valoarea pentru {{selector}} trebuie sa fie unica"
+    }
+  }
+}
