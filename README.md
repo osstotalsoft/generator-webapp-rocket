@@ -14,7 +14,7 @@ npm install -g @totalsoft/generator-webapp-rocket
 Then generate your new project:
 
 ```bash
-yo @totalsoft/generator-webapp-rocket
+yo @totalsoft/webapp-rocket
 ```
 
 You will be prompted to introduce the following information:
