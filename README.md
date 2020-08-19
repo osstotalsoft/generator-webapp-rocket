@@ -1,4 +1,4 @@
-# generator-ts-react-app [![NPM version][npm-image]][npm-url]
+# webapp-rocket [![NPM version][npm-image]][npm-url]
 > React web application sample with GraphQL, Apollo Client and Axa Oidc client integration.
 
 ![Building blocks](assets/img/appicon.png)
