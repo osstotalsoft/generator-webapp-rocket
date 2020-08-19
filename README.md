@@ -8,13 +8,13 @@ First, install [Yeoman](http://yeoman.io) and generator-ts-react-app using [npm]
 
 ```bash
 npm install -g yo
-npm install -g generator-ts-react-app
+npm install -g generator-webapp-rocket
 ```
 
 Then generate your new project:
 
 ```bash
-yo ts-react-app
+yo generator-webapp-rocket
 ```
 
 You will be prompted to introduce the following information:
