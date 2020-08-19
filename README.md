@@ -135,5 +135,5 @@ When you are ready you can deploy you application on any platform. This template
 
 MIT
 
-[npm-image]: https://badge.fury.io/js/generator-ts-react-app.svg
+[npm-image]: https://badge.fury.io/js/%40totalsoft%2Fgenerator-webapp-rocket.svg
 [npm-url]: https://www.npmjs.com/package/@totalsoft/generator-webapp-rocket
