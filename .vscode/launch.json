@@ -10,7 +10,7 @@
             "name": "yeoman",
             "program": "${workspaceRoot}/node_modules/yo/lib/cli.js",
             "args": [
-                "ts-react-app"
+                "@totalsoft/webapp-rocket"
             ],
             "stopOnEntry": false,
             "cwd": "${workspaceRoot}",

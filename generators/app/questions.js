@@ -68,7 +68,7 @@ module.exports = [
     {
         type: 'confirm',
         name: 'withMultiTenancy',
-        message: 'Would you like to use and implement multi tenancy?',
+        message: 'Would you like to use and implement multi-tenancy?',
         default: false
     },
     {
