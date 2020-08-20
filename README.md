@@ -1,5 +1,5 @@
 # webapp-rocket [![NPM version][npm-image]][npm-url]
-> React web application sample with GraphQL, Apollo Client and Axa Oidc client integration.
+> React web application sample with GraphQL, Apollo Client and AxaGuilDEv Oidc Client integration.
 
 ![Building blocks](assets/img/appicon.png)
 ## Installation
