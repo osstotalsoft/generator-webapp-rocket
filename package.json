@@ -48,7 +48,7 @@
     "yosay": "^2.0.1"
   },
   "scripts": {
-    "test": "jest --watchAll",
+    "test": "jest --watchAll --runInBand --detectOpenHandles",
     "test:coverage": "jest --collectCoverage",
     "eslint:report": "eslint --fix --ext .js ."
   },
