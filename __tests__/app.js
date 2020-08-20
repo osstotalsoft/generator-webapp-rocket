@@ -25,8 +25,8 @@ describe('generator-webapp-rocket:app', () => {
       })
   })
 
-  afterEach(async () => {
-    await rimraf(path.join(__dirname, 'tmp'))
+  afterEach(() => {
+    rimraf.sync(path.join(__dirname, 'tmp'))
   })
 
   it('create component with given name', () => {
