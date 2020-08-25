@@ -18,9 +18,7 @@ module.exports = class extends Generator {
   writing() {
     const { projectName, addHelm, withRights, withMultiTenancy } = this.answers
 
-    const templatePathAll = this.templatePath(this.templatePath("infrastructure/**/*.*"))
-    const templatePathConfigs = this.templatePath(this.templatePath("infrastructure/**/.*"))
-    const vscodePath = this.templatePath(this.templatePath("infrastructure/.vscode/*"))
+    const templatePath = this.templatePath(this.templatePath("infrastructure/**/*"))
     const destinationPath = this.destinationPath(projectName)
 
     let ignoreFiles = []
@@ -31,17 +29,9 @@ module.exports = class extends Generator {
     else
       ignoreFiles = concat(["**/tenantSelectorStyle.jss", "**/TenantSelector.js", "TenantAuthenticationProvider.js"], ignoreFiles)
 
-    this.fs.copyTpl(templatePathAll, destinationPath, this.answers, {},
-      { globOptions: { ignore: ignoreFiles } }
-    )
-
-    this.fs.copyTpl(templatePathConfigs, destinationPath, this.answers, {},
-      { globOptions: { ignore: ignoreFiles } }
-    )
-
-    this.fs.copyTpl(vscodePath, destinationPath, this.answers, {},
-      { globOptions: { ignore: ignoreFiles } }
-    )
+      this.fs.copyTpl(templatePath, destinationPath, this.answers, {},
+        { globOptions: { ignore: ignoreFiles, dot: true } }
+      )
   }
 
   install() {
