@@ -22,7 +22,7 @@ You will be prompted to introduce the following information:
  2. Project description. This will be visible in the browser tab and link details.
  3. GraphQL address. By default it would be set to `localhost:4000`
  4. Application theme. There is a list of available themes you can choose from.
- 5. Wheter to generate default helm files or not.
+ 5. Whether to generate default helm files or not.
  6. Identity client name, configured in Identity SAAS for your new application.
  7. Identity scopes.
  8. Identity authority.
@@ -33,7 +33,7 @@ You will be prompted to introduce the following information:
 If you would like to start the application, simply run ``npm run start`` in the newly created folder, otherwise you can begin editing and writing your application!
 
 ## What is a Generator?
-A Yeoman generator is a scaffolding tool. You can use Yeoman to install applications based on templates. This repo is an example of a template - an application with a build, code structure, and dependencies installed and organized for you!
+A Yeoman generator is a scaffolding tool. You can use Yeoman to install applications based on templates. This repository is an example of a template - an application with a build, code structure, and dependencies installed and organized for you!
 
 Using a generator accelerates application development. You don't have to worry about best practices for foundational elements, because we've incorporated them. Our template generates a fully functional web application foundation that becomes the infrastructure of your new project. Before this miracle generator existed, this code would probably took you a few days to write, oh well... now this will be done in only 30 seconds!
 
@@ -59,7 +59,7 @@ If you want to use another authentication service, the following files must be m
 ## Authorization
 When building a web application it is crucial to make it secure, besides token based authentication, there might be the need to limit access to certain areas or even whole pages. We can help you do this too. 
 
-If you answerd with `true` to the "use rights" question promped at the begining, there will be an example of permission checking included in this sample. In addition, there will be some custom hooks to help you (`useUserData` and `useRights`) and the following query will be generated, and it assumes that you have the code implemented in you GraphqQL server and database:
+If you answered with `true` to the "use rights" question prompted at the beginning, there will be an example of permission checking included in this sample. In addition, there will be some custom hooks to help you (`useUserData` and `useRights`) and the following query will be generated, and it assumes that you have the code implemented in you GraphQL server and database:
 ```
 const GET_USER_DATA = gql`
     query userData($externalId: ID!){
@@ -85,7 +85,7 @@ Read further to see some use cases.
 
 ## Custom hooks
 - `useQueryWithErrorHandling` - runs the query and automatically displays an error toast in case of some error occurs.
-- `useClientQueryWithErrorHandling` - runs the query using apollo client instance and display an error toast in case of an error.
+- `useClientQueryWithErrorHandling` - runs the query using Apollo Client instance and display an error toast in case of an error.
 - `useError` - displays an error toast with a friendly message.
 - `useToast` - allows you to display a custom toast
 - `useApolloLocalStorage` - retrieves a getter and a seetter pair for a certain key from Apollo client cache (used to handle local storage).
@@ -99,7 +99,7 @@ Our language and translation files are added as JSON files stored in the applica
 Here you will find a folder per supported language, with a translation.json file inside. 
 
 ## Multi-tenancy
-If you need to handle multi-tenancy in your new application, you can just reply with `yes` when you are being prompted about this topic at the begining and voilà! Everything will be done for you.
+If you need to handle multi-tenancy in your new application, you can just reply with `yes` when you are being prompted about this topic at the beginning and voilà! Everything will be done for you.
 
 This feature include a `TenantSelector` component, which allows a user to navigate to multiple tenants. This uses a `MY_TENANTS_QUERY` GraphQL query, which retrieves the same information exposed by <b>Identity SAAS</b>. This will have to be implemented in your GraphQL server.
 ```
