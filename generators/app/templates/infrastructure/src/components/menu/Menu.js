@@ -34,8 +34,9 @@ function Menu({ miniActive }) {
   const menuItems = menuConfig.filter(item => isEmpty(item.rights)
     ? intersect(userRoles, item.roles) || isEmpty(item.roles)
     : (intersect(userRoles, item.roles) && intersect(userRights, item.rights)) || isEmpty(item.roles)
-  )<%_ } _%>
-  <% if (!withRights){ %>const menuItems = menuConfig<%_ } _%>
+  )<%_ } else { _%>
+  const menuItems = menuConfig
+  <%_ } _%>
 
   return menuItems && <nav>
     <List className={classes.menuList}>

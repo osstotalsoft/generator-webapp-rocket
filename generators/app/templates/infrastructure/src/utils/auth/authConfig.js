@@ -12,8 +12,9 @@ const AUTH = {
 const getAuthenticationConfiguration = (<% if (withMultiTenancy) { %>tenant<%}%>) => {
     <%_ if (withMultiTenancy) { _%>
     const path = isNullOrWhitespace(tenant) ? "" : `/${tenant}` 
+    <%_ } else { _%>
+    const path = "" 
     <%_ } _%>
-    <% if (!withMultiTenancy) { %>const path = "" <% } %>
     return {
         client_id: env.REACT_APP_IDENTITY_CLIENT_ID,
         authority: env.REACT_APP_IDENTITY_AUTHORITY + path,

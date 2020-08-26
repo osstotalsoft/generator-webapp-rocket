@@ -15,8 +15,7 @@ import { AreasWrapper } from './providers/AreasProvider';
 import AuthApolloProvider from 'apollo/AuthApolloProvider';
 <%_ if (withMultiTenancy) { _%>
 import AuthProvider from 'providers/TenantAuthenticationProvider'; 
-<%_}_%>
-<%_ if (!withMultiTenancy) { _%>
+<%_} else {_%>
 import AuthProvider from 'providers/AuthenticationProvider'; 
 <%_}_%>
 

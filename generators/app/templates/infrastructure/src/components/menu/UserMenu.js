@@ -52,8 +52,7 @@ function UserMenu({ miniActive, avatar, language, changeLanguage }) {
         logout();
         setContextTenant();
     }, [logout, setContextTenant])
-    <%_}_%>
-    <%_ if (!withMultiTenancy) { _%>
+    <%_} else { _%>
     const logoutAction = useCallback(e => {
         e.preventDefault();
         logout();

@@ -25,8 +25,10 @@ function PrivateRoute({ component: Component, <% if (withRights) { %>roles, righ
     <%_ if (withRights) { _%>
     const allow = isEmpty(rights)
             ? intersect(userRoles, roles) || oidcUser
-            : (intersect(userRights, rights) && intersect(userRoles, roles)) || oidcUser <% } %>
-    <% if (!withRights) { %>const allow = oidcUser <% } %>
+            : (intersect(userRights, rights) && intersect(userRoles, roles)) || oidcUser 
+    <%_ } else { _%>
+    const allow = oidcUser 
+    <%_ } _%>
     return <Route {...rest} component={allow ? SecuredComponent : Forbidden} />;
 }
 
