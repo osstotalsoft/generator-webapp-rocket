@@ -4,7 +4,7 @@
 ![Building blocks](assets/img/appicon.png)
 ## Installation
 
-First, install [Yeoman](http://yeoman.io) and generator-ts-react-app using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
+First, install [Yeoman](http://yeoman.io) and @totalsoft/generator-webapp-rocket using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
 
 ```bash
 npm install -g yo
