@@ -48,7 +48,7 @@
     "yosay": "^2.0.1"
   },
   "scripts": {
-    "test": "jest --watchAll --runInBand --detectOpenHandles",
+    "test": "jest --watchAll --runInBand",
     "test:coverage": "jest --collectCoverage",
     "eslint:report": "eslint --fix --ext .js ."
   },
@@ -56,11 +56,11 @@
     "testEnvironment": "node",
     "testPathIgnorePatterns": [
       "templates",
-      "tmp"
+      "<rootDir>/.tmp"
     ],
     "watchPathIgnorePatterns": [
-      "templates",
-      "tmp"
+      "<rootDir>/.tmp",
+      ".tmp"
     ]
   },
   "repository": "https://github.com/osstotalsoft/generator-webapp-rocket.git",

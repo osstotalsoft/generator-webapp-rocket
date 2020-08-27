@@ -11,7 +11,7 @@ describe('generator-webapp-rocket:app', () => {
   beforeEach(() => {
     return helpers
       .run(path.join(__dirname, '../generators/app'))
-      .inDir(path.join(__dirname, 'tmp'))
+      .inDir(path.join(__dirname, '../.tmp'))
       .withPrompts({
         projectName,
         projectDescriptionName: 'test description',
@@ -25,30 +25,30 @@ describe('generator-webapp-rocket:app', () => {
       })
   })
 
-  afterEach(() => {
-    rimraf.sync(path.join(__dirname, 'tmp'))
+  afterAll(() => {
+    rimraf.sync(path.join(__dirname, '../.tmp'))
   })
 
   it('create component with given name', () => {
-    const resPath = path.join(__dirname, `tmp/${projectName}/src/index.js`)
+    const resPath = path.join(__dirname, `../.tmp/${projectName}/src/index.js`)
     assert.file(resPath)
   })
 
   it('project has given name', () => {
     assert.fileContent(
-      path.join(__dirname, `tmp/${projectName}/package.json`),
+      path.join(__dirname, `../.tmp/${projectName}/package.json`),
       `"name": "${projectName}"`
     )
   })
 
   it('gql address is configured', () => {
     assert.fileContent(
-      path.join(__dirname, `tmp/${projectName}/.env`),
+      path.join(__dirname, `../.tmp/${projectName}/.env`),
       `REACT_APP_GQL=${gqlAddress}`
     )
   })
 
   it('helm files are added when addHelm option is true', () => {
-    assert.file(path.join(__dirname, `tmp/${projectName}/helm`));
+    assert.file(path.join(__dirname, `../.tmp/${projectName}/helm`));
   });
 })
