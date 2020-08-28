@@ -2,6 +2,8 @@
 > React web application sample with GraphQL, Apollo Client and AxaGuilDEv Oidc Client integration.
 
 ![Building blocks](assets/img/appicon.png)
+
+> We can also help you get started with your GraphQL server. Check out our [GraphQL Rocket Generator](https://github.com/osstotalsoft/generator-graphql-rocket).
 ## Installation
 
 First, install [Yeoman](http://yeoman.io) and @totalsoft/generator-webapp-rocket using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
@@ -71,6 +73,7 @@ const GET_USER_DATA = gql`
     }
 `
 ```
+> If you use our [GraphQL Rocket Generator](https://github.com/osstotalsoft/generator-graphql-rocket#code-examples) this will already be done for you.
 
 There are 3 "areas" in your new application where you might want to limit the access: 
 - Routes: see `src/routes/app` file. Use `roles` and/or `rights` properties to limit the access to a route.
@@ -101,7 +104,10 @@ Here you will find a folder per supported language, with a translation.json file
 ## Multi-tenancy
 If you need to handle multi-tenancy in your new application, you can just reply with `yes` when you are being prompted about this topic at the beginning and voilà! Everything will be done for you.
 
-This feature include a `TenantSelector` component, which allows a user to navigate to multiple tenants. This uses a `MY_TENANTS_QUERY` GraphQL query, which retrieves the same information exposed by <b>Identity SAAS</b>. This will have to be implemented in your GraphQL server.
+This feature include a `TenantSelector` component, which allows a user to navigate to multiple tenants. This uses a `MY_TENANTS_QUERY` GraphQL query, which retrieves the same information exposed by <b>Identity SAAS</b>. This will have to be implemented in your GraphQL server. 
+
+> If you use our [GraphQL Rocket Generator](https://github.com/osstotalsoft/generator-graphql-rocket#multi-tenancy), it will include all of the missing code elements you need to make this work.
+
 ```
 export const MY_TENANTS_QUERY = gql`
 query {
