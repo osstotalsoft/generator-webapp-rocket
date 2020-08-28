@@ -30,7 +30,7 @@ You will be prompted to introduce the following information:
  8. Identity authority.
  9. Use rights. By default is set to false. This will also generate a `GET_USER_DATA` query that loads the users rights. (see the query below)
  10. Include multi-tenancy. By default is set to false.
- 11. What package manager you wish to use to install the application dependencies. (npm, yarn or bower).
+ 11. What package manager you wish to use to install the application dependencies. (npm or yarn).
  
 If you would like to start the application, simply run ``npm start`` in the newly created folder, otherwise you can begin editing and writing your application!
 
