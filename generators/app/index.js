@@ -16,7 +16,7 @@ module.exports = class extends Generator {
   }
 
   writing() {
-    const { projectName, addHelm, withRights, withMultiTenancy } = this.answers
+    const { projectName, addHelm, withRights, withMultiTenancy, packageManager } = this.answers
 
     const templatePath = this.templatePath(this.templatePath("infrastructure/**/*"))
     const destinationPath = this.destinationPath(projectName)
@@ -29,28 +29,25 @@ module.exports = class extends Generator {
     else
       ignoreFiles = concat(["**/tenantSelectorStyle.jss", "**/TenantSelector.js", "TenantAuthenticationProvider.js"], ignoreFiles)
 
-      this.fs.copyTpl(templatePath, destinationPath, this.answers, {},
-        { globOptions: { ignore: ignoreFiles, dot: true } }
-      )
+      const packageManagerVersion = packageManager === 'npm'
+      ? "10.0.0"
+      : packageManager === 'yarn'
+        ? "1.22.4"
+        : "10.0.0"
+
+    this.fs.copyTpl(templatePath, destinationPath, { ...this.answers, packageManagerVersion }, {},
+      { globOptions: { ignore: ignoreFiles, dot: true } }
+    )
   }
 
   install() {
     const { packageManager, projectName } = this.answers
 
-    switch (packageManager) {
-      case 'npm':
-        this.npmInstall(null, {}, { cwd: projectName })
-        break;
-      case 'yarn':
-        this.yarnInstall(null, {}, { cwd: projectName })
-        break;
-      case 'bower':
-        this.bowerInstall(null, {}, { cwd: projectName })
-        break;
-      default:
-        this.npmInstall(null, {}, { cwd: projectName })
-        break;
-    }
+    packageManager === 'npm'
+      ? this.npmInstall(null, {}, { cwd: projectName })
+      : packageManager === 'yarn'
+        ? this.yarnInstall(null, {}, { cwd: projectName })
+        : this.npmInstall(null, {}, { cwd: projectName })
   }
 
   end() {
