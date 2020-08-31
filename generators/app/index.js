@@ -25,9 +25,9 @@ module.exports = class extends Generator {
     if (!addHelm) ignoreFiles = append("**/helm/**", ignoreFiles)
     if (!withRights) ignoreFiles = append("**/hooks/rights.js", ignoreFiles)
     if (withMultiTenancy)
-      ignoreFiles = concat(["AuthenticationProvider.js"], ignoreFiles)
+      ignoreFiles = concat(["**/AuthenticationProvider.js"], ignoreFiles)
     else
-      ignoreFiles = concat(["**/tenantSelectorStyle.jss", "**/TenantSelector.js", "TenantAuthenticationProvider.js"], ignoreFiles)
+      ignoreFiles = concat(["**/tenantSelectorStyle.jss", "**/TenantSelector.js", "**/TenantAuthenticationProvider.js"], ignoreFiles)
 
       this.fs.copyTpl(templatePath, destinationPath, this.answers, {},
         { globOptions: { ignore: ignoreFiles, dot: true } }

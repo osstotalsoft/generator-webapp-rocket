@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: tsacr.azurecr.io/dckerImageName(lowercase)
+  repository: [organization].azurecr.io/<%= helmChartName %>
   tag: stable
   pullPolicy: IfNotPresent
 
