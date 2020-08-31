@@ -15,8 +15,8 @@ const { viewSettings } = permissions;
 <%_}_%>
 
 const menuItems = [
-    { icon: <Dashboard />, text: 'NavBar.Dashboard', path: '/dashboard', name: 'Dashboard' <%_ if (withRights) { _%>, roles={[]} rights={[]} <%_}_%>},
-    { icon: <Settings />, text: 'NavBar.Settings', path: '/settings', name: 'Settings' <%_ if (withRights) { _%>, roles={[admin, user<%_ if (withRights && withMultiTenancy) { _%>, globalAdmin<%}%>]} rights={[viewSettings]} <%_}_%> }
+    { icon: <Dashboard />, text: 'NavBar.Dashboard', path: '/dashboard', name: 'Dashboard' <%_ if (withRights) { _%>, roles:[], rights:[] <%_}_%>},
+    { icon: <Settings />, text: 'NavBar.Settings', path: '/settings', name: 'Settings' <%_ if (withRights) { _%>, roles:[admin, user<%_ if (withRights && withMultiTenancy) { _%>, globalAdmin<%}%>], rights:[viewSettings] <%_}_%> }
 ]
 
 export default menuItems

@@ -1,35 +1,40 @@
 import React, { useMemo } from "react";
 import { Route } from "react-router-dom";
-import Forbidden from "../common/Forbidden";
 import PropTypes from "prop-types";
-import { useReactOidc, withOidcSecure } from '@axa-fr/react-oidc-context';
+import { <% if (withRights) { %>useReactOidc, <% } %> withOidcSecure } from '@axa-fr/react-oidc-context';
 import { emptyArray } from "utils/constants";
 <%_ if (withRights) { _%>
+import Forbidden from "../common/Forbidden";
 import { isEmpty } from "ramda";
 import { useUserData } from "hooks/rights";
 import LoadingFakeText from "components/common/fakeText/LoadingFakeText";
 import { intersect } from "utils/functions";
 <% } %>
 function PrivateRoute({ component: Component, <% if (withRights) { %>roles, rights, <%}%>...rest }) {
-    const { oidcUser } = useReactOidc();
-    
     const SecuredComponent = useMemo(() => withOidcSecure(Component), [Component]);
+
     <%_ if (withRights) { _%>
+    const { oidcUser } = useReactOidc();
     const userRoles = oidcUser?.profile?.role || emptyArray;
     const { userData, loading } = useUserData();
     const userRights = userData?.rights || emptyArray
 
     if (loading) {
         return <LoadingFakeText lines={10} />
-    }<% } %>
-    <%_ if (withRights) { _%>
-    const allow = isEmpty(rights)
-            ? intersect(userRoles, roles) || oidcUser
-            : (intersect(userRights, rights) && intersect(userRoles, roles)) || oidcUser 
-    <%_ } else { _%>
-    const allow = oidcUser 
-    <%_ } _%>
+
+    let allow = false
+    if (isEmpty(rights) && isEmpty(roles) && oidcUser) {
+        allow = true
+    } else {
+        allow = isEmpty(rights)
+            ? intersect(userRoles, roles) || !oidcUser
+            : (intersect(userRights, rights) && intersect(userRoles, roles)) || !oidcUser
+    }
+    
     return <Route {...rest} component={allow ? SecuredComponent : Forbidden} />;
+    <%_ } else { _%>
+    return <Route {...rest} component={SecuredComponent} />;
+    <%_ } _%>
 }
 
 PrivateRoute.defaultProps = {

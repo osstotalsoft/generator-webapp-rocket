@@ -91,7 +91,7 @@ module.exports = [
         type: "list",
         name: "packageManager",
         message: 'What package manager would you like to use?',
-        choices: ['npm', 'yarn', 'bower'],
+        choices: ['npm', 'yarn'],
         default: 'npm'
     }
 ]

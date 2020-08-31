@@ -15,7 +15,7 @@ import { useReactOidc } from '@axa-fr/react-oidc-context';
 
 <%_ if (withMultiTenancy) { _%>
 import { useLazyQuery } from '@apollo/client';
-import { TenantContext } from 'providers/AuthenticationProvider'
+import { TenantContext } from 'providers/TenantAuthenticationProvider'
 import TenantSelector, { MY_TENANTS_QUERY } from './TenantSelector';
 <%_ } _%>
 

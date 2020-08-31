@@ -6,7 +6,7 @@ const langSelectorStyle = theme => {
     return {
         langSelectorContainer: {
             ...theme.palette.sideMenu,
-            padding: "0px 8px",
+            padding: "0px 10px",
             width: "100%",
             verticalAlign: "middle"
         },

@@ -25,7 +25,7 @@ You will be prompted to introduce the following information:
  3. GraphQL address. By default it would be set to `localhost:4000`
  4. Application theme. There is a list of available themes you can choose from.
  5. Whether to generate default helm files or not.
- 6. If you choose to include default heml files you would also be prompted to specify a name for your helm chart.
+ 6. If you choose to include default helm files you would also be prompted to specify a name for your helm chart.
  7. Identity client name, configured in Identity SaaS for your new application.
  8. Identity scopes.
  9. Identity authority.

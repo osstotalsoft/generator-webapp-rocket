@@ -185,7 +185,7 @@ const userMenuStyle = theme => {
         selectorItem: {
             color: "inherit",
             display: "block",
-            padding: "0px 10px",
+            padding: "0px",
             transition: "all 300ms linear",
             margin: "10px 15px 0",
             borderRadius: "3px",
