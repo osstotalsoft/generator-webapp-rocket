@@ -5,13 +5,14 @@ const helpers = require('yeoman-test')
 const rimraf = require('rimraf')
 
 describe('generator-webapp-rocket:app', () => {
+  const tempRoot = `../.tmp`
   const projectName = 'test'
   const gqlAddress = 'localhost:4000'
 
-  beforeEach(() => {
+  beforeAll(() => {
     return helpers
       .run(path.join(__dirname, '../generators/app'))
-      .inDir(path.join(__dirname, '../.tmp'))
+      .inDir(path.join(__dirname, tempRoot))
       .withPrompts({
         projectName,
         projectDescriptionName: 'test description',
@@ -26,29 +27,29 @@ describe('generator-webapp-rocket:app', () => {
   })
 
   afterAll(() => {
-    rimraf.sync(path.join(__dirname, '../.tmp'))
+    rimraf.sync(path.join(__dirname, tempRoot))
   })
 
   it('create component with given name', () => {
-    const resPath = path.join(__dirname, `../.tmp/${projectName}/src/index.js`)
+    const resPath = path.join(__dirname, `${tempRoot}/${projectName}/src/index.js`)
     assert.file(resPath)
   })
 
   it('project has given name', () => {
     assert.fileContent(
-      path.join(__dirname, `../.tmp/${projectName}/package.json`),
+      path.join(__dirname, `${tempRoot}/${projectName}/package.json`),
       `"name": "${projectName}"`
     )
   })
 
   it('gql address is configured', () => {
     assert.fileContent(
-      path.join(__dirname, `../.tmp/${projectName}/.env`),
+      path.join(__dirname, `${tempRoot}/${projectName}/.env`),
       `REACT_APP_GQL=${gqlAddress}`
     )
   })
 
   it('helm files are added when addHelm option is true', () => {
-    assert.file(path.join(__dirname, `../.tmp/${projectName}/helm`));
+    assert.file(path.join(__dirname, `${tempRoot}/${projectName}/helm`));
   });
 })
