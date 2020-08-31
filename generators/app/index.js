@@ -21,7 +21,7 @@ module.exports = class extends Generator {
     const templatePath = this.templatePath(this.templatePath("infrastructure/**/*"))
     const destinationPath = this.destinationPath(projectName)
 
-    let ignoreFiles = []
+    let ignoreFiles = ["**/.npmignore"]
     if (!addHelm) ignoreFiles = append("**/helm/**", ignoreFiles)
     if (!withRights) ignoreFiles = append("**/hooks/rights.js", ignoreFiles)
     if (withMultiTenancy)
