@@ -4,10 +4,15 @@ const chalk = require('chalk');
 const yosay = require('yosay');
 const { append, concat } = require('ramda');
 const questions = require('./questions');
+const { checkForLatestVersion } = require('../utils');
 
 module.exports = class extends Generator {
 
   async prompting() {
+    this.isLatest = await checkForLatestVersion()
+
+    if (!this.isLatest) return
+    
     this.log(
       yosay(`Welcome to the fantabulous ${chalk.red('TotalSoft React App')} generator! (⌐■_■)
      Out of the box I include Material-UI, React, Apollo Client and AxaGuilDEv Oidc Client to build your app.`)
@@ -16,6 +21,8 @@ module.exports = class extends Generator {
   }
 
   writing() {
+    if (!this.isLatest) return
+    
     const { projectName, addHelm, withRights, withMultiTenancy, packageManager } = this.answers
 
     const templatePath = this.templatePath(this.templatePath("infrastructure/**/*"))
@@ -29,7 +36,7 @@ module.exports = class extends Generator {
     else
       ignoreFiles = concat(["**/tenantSelectorStyle.jss", "**/TenantSelector.js", "**/TenantAuthenticationProvider.js"], ignoreFiles)
 
-      const packageManagerVersion = packageManager === 'npm'
+    const packageManagerVersion = packageManager === 'npm'
       ? "10.0.0"
       : packageManager === 'yarn'
         ? "1.22.4"
@@ -41,6 +48,8 @@ module.exports = class extends Generator {
   }
 
   install() {
+    if (!this.isLatest) return
+    
     const { packageManager, projectName } = this.answers
 
     packageManager === 'npm'
@@ -51,6 +60,8 @@ module.exports = class extends Generator {
   }
 
   end() {
+    if (!this.isLatest) return
+    
     this.log(
       yosay(`Congratulations, you just entered the exciting world of Web Applications! Enjoy! 
       Bye now! 
