@@ -20,13 +20,13 @@ yo @totalsoft/webapp-rocket
 ```
 
 You will be prompted to introduce the following information:
- 1. The project name. This will also be the name of the new folder in which the new application will live.
+ 1. The project name. This will also be the name of the new folder in which the new application will live. A valid project name, only includes lower and upper case letters, digits and '-' or '_' separators! No special characters and whitespace are allowed and do not start or end with a separator!
  2. Project description. This will be visible in the browser tab and link details.
  3. GraphQL address. By default it would be set to `localhost:4000`
  4. Use subscription. By default is set to false. This will include the WebSocket link in ApolloClient.
  5. Application theme. There is a list of available themes you can choose from.
  6. Whether to generate default helm files or not.
- 7. If you choose to include default helm files you would also be prompted to specify a name for your helm chart.
+ 7. If you choose to include default helm files you would also be prompted to specify a name for your helm chart. A valid helm chart name, only includes lower case letters, digits and '-' or '_' separators! No special characters and whitespace are allowed and do not start or end with a separator!
  8. Identity client name, configured in Identity SaaS for your new application.
  9. Identity scopes.
  10. Identity authority.
