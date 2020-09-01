@@ -1,13 +1,16 @@
-import { ApolloClient, ApolloLink, split, InMemoryCache } from "@apollo/client"
+import { ApolloClient, ApolloLink,<% if (withSubscription) { %>split, <% } %> InMemoryCache } from "@apollo/client"
+<%_ if (withSubscription) { _%>
 import { WebSocketLink } from "@apollo/client/link/ws"
+import { getMainDefinition } from "apollo-utilities"
+<%_ } _%>
 import { onError } from "@apollo/client/link/error"
 import { RetryLink } from '@apollo/client/link/retry';
-import { getMainDefinition } from "apollo-utilities"
 import { setContext } from "@apollo/client/link/context"
 import { env } from "../utils/env"
 import { createUploadLink } from 'apollo-upload-client'
 import omitDeep from 'omit-deep-lodash'
 
+<%_ if (withSubscription) { _%>
 // Create a WebSocket link:
 const wsLink = (token) => {
   const link = new WebSocketLink({
@@ -41,6 +44,7 @@ const wsLink = (token) => {
 
   return link;
 }
+<%_ } _%>
 
 const httpLink = createUploadLink({
   uri: `${env.REACT_APP_GQL_HTTP_PROTOCOL}://${env.REACT_APP_GQL}/graphql`,
@@ -73,6 +77,7 @@ const omitTypenameLink = new ApolloLink((operation, forward) => {
   return forward(operation)
 })
 
+<%_ if (withSubscription) { _%>
 const link = (token) => {
   return split(
     // split based on operation type
@@ -84,6 +89,7 @@ const link = (token) => {
     httpLink
   );
 }
+<%_ } _%>
 
 const retryLink = new RetryLink({
   delay: {
@@ -97,7 +103,7 @@ const retryLink = new RetryLink({
 });
 
 const myAppLink = (token) => {
-  return ApolloLink.from([omitTypenameLink, retryLink, authLink(token).concat(link(token))])
+  return ApolloLink.from([omitTypenameLink, retryLink, authLink(token).concat(<% if (withSubscription) { %> link(token) <% } else { %> httpLink <%} %>)])
 }
 
 const cache = new InMemoryCache({

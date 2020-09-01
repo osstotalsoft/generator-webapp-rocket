@@ -29,6 +29,12 @@ module.exports = [
         default: "localhost:4000"
     },
     {
+        type: 'confirm',
+        name: 'withSubscription',
+        message: 'Would you like to use subscription?',
+        default: false
+    },
+    {
         type: "list",
         name: "theme",
         message: 'What theme would you like to install?',

@@ -23,15 +23,16 @@ You will be prompted to introduce the following information:
  1. The project name. This will also be the name of the new folder in which the new application will live.
  2. Project description. This will be visible in the browser tab and link details.
  3. GraphQL address. By default it would be set to `localhost:4000`
- 4. Application theme. There is a list of available themes you can choose from.
- 5. Whether to generate default helm files or not.
- 6. If you choose to include default helm files you would also be prompted to specify a name for your helm chart.
- 7. Identity client name, configured in Identity SaaS for your new application.
- 8. Identity scopes.
- 9. Identity authority.
- 10. Use rights. By default is set to false. This will also generate a `GET_USER_DATA` query that loads the users rights. (see the query below)
- 11. Include multi-tenancy. By default is set to false.
- 12. What package manager you wish to use to install the application dependencies. (npm or yarn).
+ 4. Use subscription. By default is set to false. This will include the WebSocket link in ApolloClient.
+ 5. Application theme. There is a list of available themes you can choose from.
+ 6. Whether to generate default helm files or not.
+ 7. If you choose to include default helm files you would also be prompted to specify a name for your helm chart.
+ 8. Identity client name, configured in Identity SaaS for your new application.
+ 9. Identity scopes.
+ 10. Identity authority.
+ 11. Use rights. By default is set to false. This will also generate a `GET_USER_DATA` query that loads the users rights. (see the query below)
+ 12. Include multi-tenancy. By default is set to false.
+ 13. What package manager you wish to use to install the application dependencies. (npm or yarn).
  
 If you would like to start the application, simply run ``npm start`` in the newly created folder, otherwise you can begin editing and writing your application!
 
