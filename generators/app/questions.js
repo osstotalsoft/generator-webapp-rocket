@@ -45,7 +45,7 @@ module.exports = [
         type: "confirm",
         name: "addHelm",
         message: 'Would you like to generate the default helm files?',
-        default: true
+        default: false
     },
     {
         type: "input",

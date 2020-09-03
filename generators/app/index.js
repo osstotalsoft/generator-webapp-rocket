@@ -25,10 +25,10 @@ module.exports = class extends Generator {
     
     const { projectName, addHelm, withRights, withMultiTenancy, packageManager } = this.answers
 
-    const templatePath = this.templatePath(this.templatePath("infrastructure/**/*"))
+    const templatePath = this.templatePath("infrastructure/**/*")
     const destinationPath = this.destinationPath(projectName)
 
-    let ignoreFiles = ["**/.npmignore"]
+    let ignoreFiles = ["**/.npmignore", "**/.gitignore-template"]
     if (!addHelm) ignoreFiles = append("**/helm/**", ignoreFiles)
     if (!withRights) ignoreFiles = append("**/hooks/rights.js", ignoreFiles)
     if (withMultiTenancy)
@@ -45,6 +45,10 @@ module.exports = class extends Generator {
     this.fs.copyTpl(templatePath, destinationPath, { ...this.answers, packageManagerVersion }, {},
       { globOptions: { ignore: ignoreFiles, dot: true } }
     )
+
+    const gitignorePath = this.templatePath("infrastructure/.gitignore-template")
+    const gitignoreDestinationPath = this.destinationPath(`${projectName}/.gitignore`)
+    this.fs.copy(gitignorePath, gitignoreDestinationPath)
   }
 
   install() {
