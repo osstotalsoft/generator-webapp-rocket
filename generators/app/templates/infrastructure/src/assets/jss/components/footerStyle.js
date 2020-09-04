@@ -10,11 +10,11 @@ const footerStyle = (theme) => {
     container,
     containerFluid,
     primaryColor,
-    activeColor
+    activeColor,
+    whiteColor
   } = styles(theme);
 
   return {
-    block: {},
     left: {
       float: "left!important",
       display: "block"
@@ -38,10 +38,12 @@ const footerStyle = (theme) => {
       display: "block",
       marginLeft: "unset",
       marginRight: "unset",
-      width: "100%"
+      width: "100% !important",
+      backgroundColor: whiteColor,
+      minHeight: '10px'
     },
     content: {
-      padding: "20px 25px",
+      padding: "0px 25px",
     },
     containerFluid: {
       zIndex: 3,
@@ -69,7 +71,7 @@ const footerStyle = (theme) => {
       }
     },
     appBar: {
-      backgroundColor: "transparent",
+      backgroundColor: whiteColor,
       boxShadow: "none",
       borderBottom: "0",
       marginBottom: "0",
@@ -81,14 +83,16 @@ const footerStyle = (theme) => {
       borderRadius: "3px",
       padding: "10px 0",
       transition: "all 150ms ease 0s",
-      minHeight: "50px",
       display: "block",
       '@media (max-width: 480px)': {
-        position: "relative",
-        backgroundColor: theme.palette.sideMenu.bkColor + "!important",
+        backgroundColor: whiteColor + "!important",
         paddingTop: "10px",
         padding: 0
       },
+      bottom: 0,
+      left: 'auto',
+      right: 0,
+      position: 'sticky',
     },
     flex: {
       flex: 1

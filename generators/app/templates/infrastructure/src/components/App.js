@@ -12,8 +12,7 @@ import Header from './layout/Header';
 import Footer from './layout/Footer';
 
 import Main from './layout/Main';
-import appRoutes from 'routes/app';
-// import Notifier from './notifier/Notifier';
+import AppRoutes from 'routes/AppRoutes';
 
 import 'offline-js/offline.min.js';
 import 'utils/theme';
@@ -63,10 +62,11 @@ function App(props) {
           miniActive={miniActive}
           handleDrawerToggle={handleDrawerToggle}
         />
-        <Main routes={appRoutes} />
+        <Main>
+          <AppRoutes />
+        </Main>
         <Footer fluid />
       </div>
-      {/* <Notifier /> */}
       <ToastContainer
         position="top-center"
         transition={Slide}

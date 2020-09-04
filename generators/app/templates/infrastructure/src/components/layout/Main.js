@@ -5,20 +5,19 @@ import mainStyle from 'assets/jss/components/mainStyle'
 
 const useStyles = makeStyles(mainStyle);
 
-function Main(props) {
-    const { routes } = props;
+function Main({ children }) {
     const classes = useStyles();
     return (
         <div className={classes.content}>
             <div className={classes.container}>
-                {routes}
+                {children}
             </div>
         </div>
     );
 }
 
 Main.propTypes = {
-    routes: PropTypes.object.isRequired
+    children: PropTypes.node.isRequired
 };
 
 export default Main;

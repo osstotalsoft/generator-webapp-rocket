@@ -135,7 +135,7 @@ export const theme = {
         },
         tableHeader: {
             textAlign: "left",
-            backgroundColor: '#f0fbff',
+            backgroundColor: '#FFF4F0',
             padding: "10px",
             color: "#555555",
             borderBottom: '1px solid #ddd'
