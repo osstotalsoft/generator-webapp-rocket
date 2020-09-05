@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import { Dialog, DialogTitle, makeStyles, Typography, IconButton, DialogContent, DialogActions } from "@material-ui/core";
+import { Dialog, DialogTitle, makeStyles, IconButton, DialogContent, DialogActions } from "@material-ui/core";
 import CloseIcon from '@material-ui/icons/Close';
 import dialogStyle from 'assets/jss/components/common/dialogStyle';
 
@@ -15,10 +15,10 @@ const DialogDisplay = (props) => {
             open={open}
             onClose={onClose}
             aria-labelledby={`${id}-dialog-display-title`}
-            maxWidth="xl"
+            maxWidth="md"
         >
-            <DialogTitle id={`${id}-dialog-display-title`}>
-                <Typography className={classes.modalTitle}>{title}</Typography>
+            <DialogTitle id={`${id}-dialog-display-title`} className={classes.text}>
+                {title}
                 <IconButton size="small" className={classes.modalCloseButton} aria-label="Close" onClick={onClose}>
                     <CloseIcon fontSize="small" />
                 </IconButton>

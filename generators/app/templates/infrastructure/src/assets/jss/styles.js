@@ -136,7 +136,11 @@ const styles = (theme) => {
   const menuColor = theme.palette.sideMenu.color;
   const menuBkOpacity = theme.palette.sideMenu.bkOpacity;
   const topBarBkColor = theme.palette.topBar.bkColor;
-
+  
+  const snackSuccessBgColor = theme.palette.snackbar.successBgColor;
+  const snackSuccessColor = theme.palette.snackbar.successColor;
+  const snackWarningBgColor = theme.palette.snackbar.warningBgColor;
+  const snackWarningColor = theme.palette.snackbar.warningColor;
   const snackInfoBgColor = theme.palette.snackbar.infoBgColor;
   const snackInfoColor = theme.palette.snackbar.infoColor;
   const snackDangerBgColor = theme.palette.snackbar.dangerBgColor;
@@ -279,6 +283,38 @@ const styles = (theme) => {
           ", 0.42), 0 4px 23px 0px rgba(" +
           hexToRgb(primaryColor) +
           ", 0.2)"
+      }
+    },
+    theme: {
+      backgroundColor: theme.palette?.button?.theme,
+      boxShadow:
+        "0 2px 2px 0 rgba(0, 188, 212, 0.14), 0 3px 1px -2px rgba(0, 188, 212, 0.2), 0 1px 5px 0 rgba(0, 188, 212, 0.12)",
+      "&:hover": {
+        backgroundColor: whiteColor,
+        color: theme.palette?.button?.theme,
+        boxShadow:
+          "0 14px 26px -12px rgba(0, 188, 212, 0.42), 0 4px 23px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 188, 212, 0.2)"
+      }
+    },
+    themeNoBackground: {
+      backgroundColor: "transparent",
+      color: theme.palette?.button?.theme,
+      boxShadow: "none",
+      "&:hover": {
+        backgroundColor: "transparent",
+        color: theme.palette?.button?.theme,
+        boxShadow: "0 14px 26px -12px rgba(0, 188, 212, 0.42), 0 4px 23px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 188, 212, 0.2)"
+      }
+    },
+    themeWithBackground: {
+      backgroundColor: "transparent",
+      color: theme.palette?.button?.theme,
+      boxShadow: "0 2px 2px 0 rgba(0, 188, 212, 0.14), 0 3px 1px -2px rgba(0, 188, 212, 0.2), 0 1px 5px 0 rgba(0, 188, 212, 0.12)",
+      "&:hover": {
+        backgroundColor: theme.palette?.button?.theme,
+        color: whiteColor,
+        boxShadow:
+          "0 2px 2px 0 rgba(0, 188, 212, 0.14), 0 3px 1px -2px rgba(0, 188, 212, 0.2), 0 1px 5px 0 rgba(0, 188, 212, 0.12)"
       }
     },
     info: {
@@ -431,33 +467,33 @@ const styles = (theme) => {
         boxShadow: "none"
       }
     },
-    theme: {
-      backgroundColor: theme.palette.button.theme,
+    blue: {
+      backgroundColor: blueColor,
       boxShadow:
         "0 2px 2px 0 rgba(0, 188, 212, 0.14), 0 3px 1px -2px rgba(0, 188, 212, 0.2), 0 1px 5px 0 rgba(0, 188, 212, 0.12)",
       "&:hover": {
         backgroundColor: whiteColor,
-        color: theme.palette.button.theme,
+        color: blueColor,
         boxShadow:
           "0 14px 26px -12px rgba(0, 188, 212, 0.42), 0 4px 23px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 188, 212, 0.2)"
       }
     },
-    themeNoBackground: {
+    blueNoBackground: {
       backgroundColor: "transparent",
-      color: theme.palette.button.theme,
+      color: blueColor,
       boxShadow: "none",
       "&:hover": {
         backgroundColor: "transparent",
-        color: theme.palette.button.theme,
+        color: blueColor,
         boxShadow: "0 14px 26px -12px rgba(0, 188, 212, 0.42), 0 4px 23px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 188, 212, 0.2)"
       }
     },
-    themeWithBackground: {
+    blueWithBackground: {
       backgroundColor: "transparent",
-      color: theme.palette.button.theme,
+      color: blueColor,
       boxShadow: "0 2px 2px 0 rgba(0, 188, 212, 0.14), 0 3px 1px -2px rgba(0, 188, 212, 0.2), 0 1px 5px 0 rgba(0, 188, 212, 0.12)",
       "&:hover": {
-        backgroundColor: theme.palette.button.theme,
+        backgroundColor: blueColor,
         color: whiteColor,
         boxShadow:
           "0 2px 2px 0 rgba(0, 188, 212, 0.14), 0 3px 1px -2px rgba(0, 188, 212, 0.2), 0 1px 5px 0 rgba(0, 188, 212, 0.12)"
@@ -784,6 +820,10 @@ const styles = (theme) => {
     menuBkOpacity,
     primaryColorRGBA,
     capitalize,
+    snackWarningBgColor,
+    snackWarningColor,
+    snackSuccessBgColor,
+    snackSuccessColor,
     snackInfoBgColor,
     snackInfoColor,
     snackDangerBgColor,
