@@ -77,7 +77,8 @@ const palette = {
     },
     activeColor: '#00385F',
     button: {
-        theme: '#00497b'
+        theme: '#00497b',
+        themeShadow: "0 2px 2px 0 rgba(188, 228, 250, 0.14), 0 3px 1px -2px rgba(188, 228, 250, 0.2), 0 1px 5px 0 rgba(188, 228, 250, 0.12)"
     }
 }
 

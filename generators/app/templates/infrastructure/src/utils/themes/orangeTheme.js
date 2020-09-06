@@ -76,7 +76,8 @@ const palette = {
     },
     activeColor: '#555555',
     button: {
-        theme: '#FF6F00'
+        theme: '#FF6F00',
+        themeShadow: "0 2px 2px 0 rgba(255, 111, 0, 0.14), 0 3px 1px -2px rgba(255, 111, 0, 0.2), 0 1px 5px 0 rgba(255, 111, 0, 0.12)"
     }
 }
 
@@ -137,7 +138,7 @@ export const theme = {
         },
         tableHeader: {
             textAlign: "left",
-            backgroundColor: '#ffe0c6',
+            backgroundColor: '#f7e3d961',
             padding: "10px",
             color: "#555555",
             borderBottom: '1px solid #ddd'

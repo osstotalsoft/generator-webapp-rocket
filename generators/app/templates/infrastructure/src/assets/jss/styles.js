@@ -136,7 +136,7 @@ const styles = (theme) => {
   const menuColor = theme.palette.sideMenu.color;
   const menuBkOpacity = theme.palette.sideMenu.bkOpacity;
   const topBarBkColor = theme.palette.topBar.bkColor;
-  
+
   const snackSuccessBgColor = theme.palette.snackbar.successBgColor;
   const snackSuccessColor = theme.palette.snackbar.successColor;
   const snackWarningBgColor = theme.palette.snackbar.warningBgColor;
@@ -287,13 +287,11 @@ const styles = (theme) => {
     },
     theme: {
       backgroundColor: theme.palette?.button?.theme,
-      boxShadow:
-        "0 2px 2px 0 rgba(0, 188, 212, 0.14), 0 3px 1px -2px rgba(0, 188, 212, 0.2), 0 1px 5px 0 rgba(0, 188, 212, 0.12)",
+      boxShadow: theme.palette?.button?.themeShadow,
       "&:hover": {
         backgroundColor: whiteColor,
         color: theme.palette?.button?.theme,
-        boxShadow:
-          "0 14px 26px -12px rgba(0, 188, 212, 0.42), 0 4px 23px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 188, 212, 0.2)"
+        boxShadow: theme.palette?.button?.themeShadow
       }
     },
     themeNoBackground: {
@@ -303,18 +301,17 @@ const styles = (theme) => {
       "&:hover": {
         backgroundColor: "transparent",
         color: theme.palette?.button?.theme,
-        boxShadow: "0 14px 26px -12px rgba(0, 188, 212, 0.42), 0 4px 23px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 188, 212, 0.2)"
+        boxShadow: theme.palette?.button?.themeShadow
       }
     },
     themeWithBackground: {
       backgroundColor: "transparent",
       color: theme.palette?.button?.theme,
-      boxShadow: "0 2px 2px 0 rgba(0, 188, 212, 0.14), 0 3px 1px -2px rgba(0, 188, 212, 0.2), 0 1px 5px 0 rgba(0, 188, 212, 0.12)",
+      boxShadow: theme.palette?.button?.themeShadow,
       "&:hover": {
         backgroundColor: theme.palette?.button?.theme,
         color: whiteColor,
-        boxShadow:
-          "0 2px 2px 0 rgba(0, 188, 212, 0.14), 0 3px 1px -2px rgba(0, 188, 212, 0.2), 0 1px 5px 0 rgba(0, 188, 212, 0.12)"
+        boxShadow: theme.palette?.button?.themeShadow
       }
     },
     info: {
