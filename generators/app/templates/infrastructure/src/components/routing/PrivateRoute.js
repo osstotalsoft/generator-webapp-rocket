@@ -21,6 +21,7 @@ function PrivateRoute({ component: Component, <% if (withRights) { %>roles, righ
 
     if (loading) {
         return <LoadingFakeText lines={10} />
+    }
 
     let allow = false
     if (isEmpty(rights) && isEmpty(roles) && oidcUser) {
