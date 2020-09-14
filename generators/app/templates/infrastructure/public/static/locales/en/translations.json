@@ -17,7 +17,9 @@
     "Settings": "Settings"
   },
   "Tooltips": {
-    "Logout": "Logout"
+    "Logout": "Logout",
+    "HidePassword": "Hide password",
+    "ShowPassword": "Show password"
   },
   "Dialog": {
     "Yes": "Yes",
