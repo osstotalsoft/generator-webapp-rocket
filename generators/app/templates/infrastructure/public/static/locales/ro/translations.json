@@ -10,7 +10,9 @@
     "User": "Profil"
   },
   "Tooltips": {
-    "Logout": "Iesire"
+    "Logout": "Iesire",
+    "HidePassword": "Ascunde parola",
+    "ShowPassword": "Arata parola"
   },
   "Dialog": {
     "Yes": "Da",
