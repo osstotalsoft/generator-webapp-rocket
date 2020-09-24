@@ -39,7 +39,7 @@ const footerStyle = (theme) => {
       marginLeft: "unset",
       marginRight: "unset",
       width: "100% !important",
-      backgroundColor: whiteColor,
+      backgroundColor: "transparent",
       minHeight: '10px'
     },
     content: {
