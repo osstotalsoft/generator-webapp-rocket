@@ -39,7 +39,7 @@ const footerStyle = (theme) => {
       marginLeft: "unset",
       marginRight: "unset",
       width: "100% !important",
-      backgroundColor: whiteColor,
+      backgroundColor: "transparent",
       minHeight: '10px'
     },
     content: {
@@ -71,7 +71,7 @@ const footerStyle = (theme) => {
       }
     },
     appBar: {
-      backgroundColor: whiteColor,
+      backgroundColor: "transparent",
       boxShadow: "none",
       borderBottom: "0",
       marginBottom: "0",
