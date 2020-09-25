@@ -71,7 +71,7 @@ const footerStyle = (theme) => {
       }
     },
     appBar: {
-      backgroundColor: whiteColor,
+      backgroundColor: "transparent",
       boxShadow: "none",
       borderBottom: "0",
       marginBottom: "0",
