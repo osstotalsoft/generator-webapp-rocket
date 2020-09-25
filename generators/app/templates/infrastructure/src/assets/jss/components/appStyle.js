@@ -75,13 +75,12 @@ const appStyle = theme => {
       '@media (max-width: 480px)': {
         position: "inherit",
         zIndex: 1030
-      },
-      toastWrapper: {
-        borderRadius: '6px',
-        width: '500px',
-        overflowWrap: 'anywhere'
       }
-
+    },
+    toastWrapper: {
+      borderRadius: '6px',
+      width: '500px',
+      overflowWrap: 'anywhere'
     }
   }
 };
