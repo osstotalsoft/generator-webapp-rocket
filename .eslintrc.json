@@ -21,7 +21,7 @@
         "linebreak-style": 0,
         "no-console": 0,
         "prettier/prettier": "error",
-        "prettier/trailingComma": "none",
+        "prettier/trailingComma": "off",
         "node/exports-style": [
             "error",
             "module.exports"
