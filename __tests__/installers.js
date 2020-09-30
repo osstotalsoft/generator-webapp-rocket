@@ -3,6 +3,8 @@ const path = require('path')
 const assert = require('yeoman-assert')
 const helpers = require('yeoman-test')
 
+jest.setTimeout(30000);
+
 describe('test package installers', () => {
     const projectName = 'test'
     const gqlPort = '4000'
