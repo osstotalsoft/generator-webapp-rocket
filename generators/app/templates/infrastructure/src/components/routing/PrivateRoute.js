@@ -38,15 +38,18 @@ function PrivateRoute({ component: Component, <% if (withRights) { %>roles, righ
     <%_ } _%>
 }
 
+<%_ if (withRights) { _%>
 PrivateRoute.defaultProps = {
     roles: emptyArray,
     rights: emptyArray
 };
+<%_ } _%>
 
 PrivateRoute.propTypes = {
-    component: PropTypes.func,
+    component: PropTypes.func<% if (withRights) { %>,
     roles: PropTypes.array,
     rights: PropTypes.array
+    <%_ } _%>
 };
 
 export default PrivateRoute;
