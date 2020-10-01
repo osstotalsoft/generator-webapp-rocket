@@ -7,7 +7,7 @@ import { useHeader } from "providers/AreasProvider";
 // material-ui components
 import { makeStyles, AppBar, Toolbar, Hidden, Typography } from '@material-ui/core';
 
-import CustomIconButton from "components/common/buttons/IconButton";
+import { IconButton } from '@bit/totalsoft.react-mui.core';
 
 // material-ui icons
 import MoreVert from "@material-ui/icons/MoreVert";
@@ -49,13 +49,13 @@ function Header({ miniActive, sidebarMinimize, handleDrawerToggle }) {
                 <Hidden smDown>
                     <div className={classes.sidebarMinimize}>
                         {miniActive ? (
-                            <CustomIconButton color="primaryNoBackground" onClick={sidebarMinimize}>
+                            <IconButton color="primaryNoBackground" onClick={sidebarMinimize}>
                                 <ViewList fontSize="small" />
-                            </CustomIconButton >
+                            </IconButton >
                         ) : (
-                                <CustomIconButton color="primaryNoBackground" onClick={sidebarMinimize}>
+                                <IconButton color="primaryNoBackground" onClick={sidebarMinimize}>
                                     <MoreVert fontSize="small" />
-                                </CustomIconButton >
+                                </IconButton >
                             )}
                     </div>
                     {header || <Typography variant='subtitle1' className={classes.title} > {(pathName && t('NavBar.' + pathName))}</Typography>}
@@ -67,13 +67,13 @@ function Header({ miniActive, sidebarMinimize, handleDrawerToggle }) {
 
                 <Hidden mdUp>
                     <div className={classes.appResponsive}>
-                        <CustomIconButton
+                        <IconButton
                             color="themeWithBackground"
                             aria-label="open drawer"
                             onClick={handleDrawerToggle}
                         >
                             <Menu fontSize="small" />
-                        </CustomIconButton>
+                        </IconButton>
                     </div>
                 </Hidden>
             </Toolbar>

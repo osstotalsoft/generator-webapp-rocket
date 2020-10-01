@@ -5,7 +5,7 @@ import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';
 
 import { makeStyles, Drawer, Hidden } from '@material-ui/core';
-import Typography from 'components/common/inputs/Typography';
+import { Typography } from '@bit/totalsoft.react-mui.core';
 import { useTranslation } from 'react-i18next';
 import { env } from "utils/env";
 

@@ -6,7 +6,7 @@ import { Authenticating } from "components/login/Authenticating";
 import { CallbackPage } from "components/login/CallbackPage";
 import { NotAuthenticated } from "components/login/NotAuthenticated";
 import { SessionExpired } from "components/login/SessionExpired";
-import Forbidden from "components/common/Forbidden";
+import { Forbidden } from '@bit/totalsoft.react-mui.core';
 
 const AuthenticationProvider = props => {
     const { children } = props

@@ -7,7 +7,7 @@ import { emptyArray } from "utils/constants";
 import Forbidden from "../common/Forbidden";
 import { isEmpty } from "ramda";
 import { useUserData } from "hooks/rights";
-import LoadingFakeText from "components/common/fakeText/LoadingFakeText";
+import { LoadingFakeText } from '@bit/totalsoft.react-mui.core';
 import { intersect } from "utils/functions";
 <% } %>
 function PrivateRoute({ component: Component, <% if (withRights) { %>roles, rights, <%}%>...rest }) {
