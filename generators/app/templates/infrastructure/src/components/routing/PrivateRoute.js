@@ -10,7 +10,7 @@ import { useUserData } from "hooks/rights";
 import { LoadingFakeText } from '@bit/totalsoft.react-mui.core';
 import { intersect } from "utils/functions";
 <% } %>
-function PrivateRoute({ component: Component, <% if (withRights) { %>roles, rights, <%}%>...rest }) {
+function PrivateRoute({ component: Component, <% if (withRights) { %>roles, rights, <%}%>exact, path }) {
     const SecuredComponent = useMemo(() => withOidcSecure(Component), [Component]);
 
     <%_ if (withRights) { _%>
@@ -32,9 +32,9 @@ function PrivateRoute({ component: Component, <% if (withRights) { %>roles, righ
             : (intersect(userRights, rights) && intersect(userRoles, roles)) || !oidcUser
     }
     
-    return <Route {...rest} component={allow ? SecuredComponent : Forbidden} />;
+    return <Route exact={exact} path={path} component={allow ? SecuredComponent : Forbidden} />;
     <%_ } else { _%>
-    return <Route {...rest} component={SecuredComponent} />;
+    return <Route exact={exact} path={path} component={SecuredComponent} />;
     <%_ } _%>
 }
 
@@ -46,7 +46,9 @@ PrivateRoute.defaultProps = {
 PrivateRoute.propTypes = {
     component: PropTypes.func,
     roles: PropTypes.array,
-    rights: PropTypes.array
+    rights: PropTypes.array,
+    exact: PropTypes.bool,
+    path: PropTypes.string
 };
 
 export default PrivateRoute;
