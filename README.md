@@ -1,4 +1,5 @@
 
+
 # webapp-rocket [![NPM version][npm-image]][npm-url]  
 > React web application sample with GraphQL, Apollo Client and AxaGuilDEv Oidc Client integration.  
   
@@ -17,7 +18,22 @@ npm install -g @totalsoft/generator-webapp-rocket
   
 If you wand to use this generator to scaffold a new project navigate to section: [Generate new project](#generate-new-project)  
 To upgrade an existing project that was scaffold using this **WebApp Rocket Generator**, see section: [Upgrade existing project](#upgrade-existing-project)  
-  
+
+## Content
+1. [Generate new project](#generate-new-project)  
+2. [Upgrade existing project](#upgrade-existing-project)  
+3. [What is a Generator?](#what-is-a-generator)  
+4. [Code formatting](#code-formatting)  
+5. [Authentication](#authentication)  
+6. [Authorization](#authorization)  
+7. [Notifications](#notifications)  
+8. [Custom hooks](#custom-hooks)  
+9. [Internationalization](#internationalization)  
+10. [Multi-tenancy](#multi-tenancy) 
+11. [Deployment](#deployment)
+12. [Getting To Know Yeoman](#getting-to-know-yeoman)
+ 
+
 ## Generate new project  
  
 To scaffold your new project using our generator run:  
