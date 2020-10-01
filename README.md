@@ -68,7 +68,7 @@ Mainly you have to include all the options already included in your existing pro
 After answering all the questions, **Yeoman** will ask you for each file if you want to overwrite it with the lastest version. For those files you haven't edited, just say yes. For the other ones, type `d` to see the differences, then manually do the changes. 
 You can also type `a`, and this will automatically override all the files, and it's up to you to check all the changed files before you commit everything. 
 Or, hit **space** to see all your options (see below image).
-![OtsideProjectFolder](assets/img/upgrade_conflicts.png)  
+![FileConflicts](assets/img/upgrade_file_conflicts.png)  
 
 ## What is a Generator?  
 A Yeoman generator is a scaffolding tool. You can use Yeoman to install applications based on templates. This repository is an example of a template - an application with a build, code structure, and dependencies installed and organized for you!  
