@@ -6,7 +6,6 @@ import PrivateRoute from '../components/routing/PrivateRoute';
 
 import Dashboard from 'features/dashboard/Dashboard'
 import Settings from 'features/settings/Settings'
-import NotFound from 'components/common/NotFound';
 import { Forbidden, NotFound } from '@bit/totalsoft.react-mui.core';
 <%_ if (withRights) { _%>
 import identityUserRoles from 'constants/identityUserRoles';

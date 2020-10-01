@@ -25,6 +25,7 @@
     "apollo-upload-client": "^13.0.0",
     "attr-accept": "^2.1.0",
     "b64-to-blob": "^1.2.19",
+    "chart.js": "^2.9.3",
     "classnames": "^2.2.6",
     "date-fns": "^2.14.0",
     "eslint-plugin-react": "^7.17.0",
