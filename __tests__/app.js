@@ -4,6 +4,8 @@ const assert = require('yeoman-assert')
 const helpers = require('yeoman-test')
 const rimraf = require('rimraf')
 
+jest.setTimeout(30000);
+
 describe('generator-webapp-rocket:app', () => {
   const tempRoot = `../.tmp`
   const projectName = 'test'

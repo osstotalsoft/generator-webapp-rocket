@@ -49,6 +49,13 @@ We have included integrations with essential libraries, as well as pages, routes
 
 Included latest versions of the following libraries and technologies: <b>React, GraphQL,  [Apollo Client](https://github.com/apollographql/apollo-client), [AxaGuilDEv/react-oidc](https://github.com/AxaGuilDEv/react-oidc), [@totalsoft/jsbb](https://github.com/osstotalsoft/jsbb), Material-UI, </b> and many more, see generators/app/templates/infrastructure/package.json file.
 
+## Code formatting
+The generated code is formatted using the "Prettier" formatter. A file named ".prettierrc" containing the formatting settings is placed in the root of the project. 
+
+For maintainig unitary style, the ".prettierrc" configuration file is read by other tools that run "Prettier" such as scripts or IDE extensions. For example if using Visual Studio Code we recommend installing the following extension [Prettier formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+
+In case the ".prettierrc" file is customized, the new settings will be used when re-running the generator. The only condition is to answer "no" when asked to overwrite this file.
+
 ## Authentication 
 By default, the application uses <b>Identity SaaS</b>. See [AxaGuilDEv/react-oidc](https://github.com/AxaGuilDEv/react-oidc).
 The authentication is executed using a secure token which will also contain information about the logged user like: user data and roles. 
