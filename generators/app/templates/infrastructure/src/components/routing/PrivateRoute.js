@@ -32,9 +32,9 @@ function PrivateRoute({ component: Component, <% if (withRights) { %>roles, righ
             : (intersect(userRights, rights) && intersect(userRoles, roles)) || !oidcUser
     }
     
-    return <Route exact={exact} path={path} component={allow ? SecuredComponent : Forbidden} />;
+    return useMemo(() => <Route exact={exact} path={path} component={allow ? SecuredComponent : Forbidden} />, [exact, path, allow]);
     <%_ } else { _%>
-    return <Route exact={exact} path={path} component={SecuredComponent} />;
+    return useMemo(() => <Route exact={exact} path={path} component={SecuredComponent} />, [SecuredComponent, exact, path];
     <%_ } _%>
 }
 
