@@ -18,7 +18,7 @@ const wsLink = (token) => {
     options: {
       reconnect: token ? true : false,
       connectionParams: {
-        authToken: token
+        authorization: token ? `Bearer ${token}` : ""
       },
       connectionCallback: (error) => {
         if (!error)
@@ -64,7 +64,7 @@ const authLink = (token) => {
     return {
       headers: {
         ...headers,
-        authorization: token ? `Bearer ${token}` : "",
+        authorization: token ? `Bearer ${token}` : ""
       },
     }
   })
