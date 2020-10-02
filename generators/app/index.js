@@ -36,7 +36,7 @@ module.exports = class extends Generator {
 
     let ignoreFiles = ['**/.npmignore', '**/.gitignore-template']
     if (!addHelm) ignoreFiles = append('**/helm/**', ignoreFiles)
-    if (!withRights) ignoreFiles = append('**/hooks/rights.js', ignoreFiles)
+    if (!withRights) ignoreFiles = append('**/hooks/rights.js', '**/constants/permissions.js', '**/constants/identityUserRoles.js', ignoreFiles)
     if (withMultiTenancy) ignoreFiles = concat(['**/AuthenticationProvider.js'], ignoreFiles)
     else
       ignoreFiles = concat(
