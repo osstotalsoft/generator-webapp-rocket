@@ -17,8 +17,8 @@ import AppRoutes from 'routes/AppRoutes';
 import 'offline-js/offline.min.js';
 import 'utils/theme';
 import 'offline-js/themes/offline-language-english.css';
-import { ToastContainer, Slide } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { Slide } from 'react-toastify';
+import { ToastContainer } from '@bit/totalsoft.react-mui.core';
 
 const useStyles = makeStyles(appStyle);
 
@@ -67,20 +67,7 @@ function App(props) {
         </Main>
         <Footer fluid />
       </div>
-      <ToastContainer
-        position="top-center"
-        transition={Slide}
-        autoClose={3000}
-        hideProgressBar={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        newestOnTop
-        draggable
-        pauseOnHover
-        limit={5}
-        className={classes.toastWrapper}
-      />
+      <ToastContainer />
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import { useApolloClient, useQuery } from '@apollo/client';
 import { useCallback } from 'react';
 import { emptyFunction } from 'utils/constants';
-import { useToast } from './toasts';
+import { useToast } from '@bit/totalsoft.react-mui.core';
 
 export function useQueryWithErrorHandling(query, { onError = emptyFunction, ...props } = {}) {
   const showError = useError();
