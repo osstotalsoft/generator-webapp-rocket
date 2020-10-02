@@ -11,6 +11,8 @@ import { LoadingFakeText } from '@bit/totalsoft.react-mui.core';
 import { intersect } from "utils/functions";
 <% } %>
 function PrivateRoute({ component: Component, <% if (withRights) { %>roles, rights, <%}%>exact, path }) {
+    const SecuredComponent = useMemo(() => withOidcSecure(Component), [Component]);
+
     <%_ if (withRights) { _%>
     const { oidcUser } = useReactOidc();
     const userRoles = oidcUser?.profile?.role || emptyArray;
@@ -25,17 +27,16 @@ function PrivateRoute({ component: Component, <% if (withRights) { %>roles, righ
             ? intersect(userRoles, roles) || !oidcUser
             : (intersect(userRights, rights) && intersect(userRoles, roles)) || !oidcUser
     }
-
-    const SecuredComponent = useMemo(() => (allow ? withOidcSecure(Component) : Forbidden), [Component, allow]);
-
+    
     return useMemo(() => {
         if (loading) {
             return <LoadingFakeText lines={10} />
         }
 
-        return <Route exact={exact} path={path} component={SecuredComponent} />
-    }, [SecuredComponent, exact, loading, path]);
-    
+        return <Route exact={exact} path={path} component={allow ? SecuredComponent : Forbidden} />}, [exact, path, allow, SecuredComponent]);
+    <%_ } else { _%>
+    return useMemo(() => <Route exact={exact} path={path} component={SecuredComponent} />, [SecuredComponent, exact, path];
+    <%_ } _%>
 }
 
 <%_ if (withRights) { _%>
