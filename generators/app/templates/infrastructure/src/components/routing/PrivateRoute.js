@@ -10,7 +10,7 @@ import { useUserData } from "hooks/rights";
 import { LoadingFakeText } from '@bit/totalsoft.react-mui.core';
 import { intersect } from "utils/functions";
 <% } %>
-function PrivateRoute({ component: Component, <% if (withRights) { %>roles, rights, <%}%>...rest }) {
+function PrivateRoute({ component: Component, <% if (withRights) { %>roles, rights, <%}%>exact, path }) {
     const SecuredComponent = useMemo(() => withOidcSecure(Component), [Component]);
 
     <%_ if (withRights) { _%>
@@ -18,10 +18,6 @@ function PrivateRoute({ component: Component, <% if (withRights) { %>roles, righ
     const userRoles = oidcUser?.profile?.role || emptyArray;
     const { userData, loading } = useUserData();
     const userRights = userData?.rights || emptyArray
-
-    if (loading) {
-        return <LoadingFakeText lines={10} />
-    }
 
     let allow = false
     if (isEmpty(rights) && isEmpty(roles) && oidcUser) {
@@ -32,9 +28,14 @@ function PrivateRoute({ component: Component, <% if (withRights) { %>roles, righ
             : (intersect(userRights, rights) && intersect(userRoles, roles)) || !oidcUser
     }
     
-    return <Route {...rest} component={allow ? SecuredComponent : Forbidden} />;
+    return useMemo(() => {
+        if (loading) {
+            return <LoadingFakeText lines={10} />
+        }
+
+        return <Route exact={exact} path={path} component={allow ? SecuredComponent : Forbidden} />}, [exact, path, allow, SecuredComponent]);
     <%_ } else { _%>
-    return <Route {...rest} component={SecuredComponent} />;
+    return useMemo(() => <Route exact={exact} path={path} component={SecuredComponent} />, [SecuredComponent, exact, path];
     <%_ } _%>
 }
 
@@ -49,7 +50,9 @@ PrivateRoute.propTypes = {
     component: PropTypes.func<% if (withRights) { %>,
     roles: PropTypes.array,
     rights: PropTypes.array
-    <%_ } _%>
+    <%_ } _%>,
+    exact: PropTypes.bool,
+    path: PropTypes.string
 };
 
 export default PrivateRoute;
