@@ -22,7 +22,7 @@ export const extractExactAge = (birthday, referenceDate) => {
 };
 
 // valueOrDefault :: a -> a -> a
-export const valueOrDefault = curry(($default, value) => value || $default);
+export const valueOrDefault = curry(($default, value) => value ?? $default);
 
 // withoutItem :: a -> [a] -> [a]
 export const withoutItem = curry((x, xs) => xs |> without([x]));
