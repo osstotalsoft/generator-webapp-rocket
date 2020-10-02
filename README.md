@@ -77,7 +77,7 @@ Now you will be asked to answer the same questions explained in  [Generate new p
 
 > When prompted to enter the name of your project **make sure you enter the name of the project you want to upgrade** ( like shown in the above image ). If you enter a new name, it will generate a new project. 
 
-Mainly you have to include all the options already included in your existing project, or you can add new ones. 
+Mainly you have to choose all the options already included in your existing project, or you can add new ones. 
 
 > ⚠ If you decide not to include an option that was previously installed on your existing project (e.g. Authorization), **Yeoman** will not remove files or folders by its own, he just merges existing files or created new ones, and you would have to manually delete the unnecessary files or folders.
 
