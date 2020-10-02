@@ -6,7 +6,9 @@
 ![Building blocks](assets/img/appicon.png)  
   
 > We can also help you get started with your GraphQL server. Check out our [GraphQL Rocket Generator](https://github.com/osstotalsoft/generator-graphql-rocket).  
-  
+
+> This application uses [Rocket Webapp Components](https://github.com/osstotalsoft/rocket-webapp-components) library to allow you to create smart and friendly web application interfaces.
+
 ## Installation  
   
 First, install [Yeoman](http://yeoman.io) and @totalsoft/generator-webapp-rocket using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).  
@@ -124,11 +126,11 @@ If you answered with `true` to the "use rights" question prompted at the beginni
 ```  
 const GET_USER_DATA = gql`  
 query userData($externalId: ID!){  
-userData(externalId: $externalId){  
-id  
-userName  
-rights  
-}  
+  userData(externalId: $externalId){  
+    id  
+    userName  
+    rights  
+  }  
 }  
 `  
 ```  
@@ -169,19 +171,19 @@ This feature include a `TenantSelector` component, which allows a user to naviga
   
 ```  
 export const MY_TENANTS_QUERY = gql`  
-query {  
-myTenants {  
-externalId  
-name  
-code  
-tier  
-isActive  
-tenant {  
-id  
-name  
-code  
-}  
-}  
+  query {  
+    myTenants {  
+    externalId  
+    name  
+    code  
+    tier  
+    isActive  
+    tenant {  
+    id  
+    name  
+    code  
+    }  
+  }  
 }  
 `  
 ```  
