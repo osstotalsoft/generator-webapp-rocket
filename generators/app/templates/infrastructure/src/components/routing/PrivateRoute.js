@@ -4,10 +4,9 @@ import PropTypes from "prop-types";
 import { <% if (withRights) { %>useReactOidc, <% } %> withOidcSecure } from '@axa-fr/react-oidc-context';
 import { emptyArray } from "utils/constants";
 <%_ if (withRights) { _%>
-import Forbidden from "../common/Forbidden";
 import { isEmpty } from "ramda";
 import { useUserData } from "hooks/rights";
-import { LoadingFakeText } from '@bit/totalsoft.react-mui.core';
+import { LoadingFakeText, Forbidden } from '@bit/totalsoft.react-mui.core';
 import { intersect } from "utils/functions";
 <% } %>
 function PrivateRoute({ component: Component, <% if (withRights) { %>roles, rights, <%}%>exact, path }) {

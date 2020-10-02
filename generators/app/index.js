@@ -68,8 +68,8 @@ module.exports = class extends Generator {
     packageManager === 'npm'
       ? this.npmInstall(null, {}, { cwd: projectName })
       : packageManager === 'yarn'
-      ? this.yarnInstall(null, {}, { cwd: projectName })
-      : this.npmInstall(null, {}, { cwd: projectName })
+        ? this.yarnInstall(null, {}, { cwd: projectName })
+        : this.npmInstall(null, {}, { cwd: projectName })
   }
 
   end() {
