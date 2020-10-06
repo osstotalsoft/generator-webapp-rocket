@@ -14,10 +14,7 @@ import Footer from './layout/Footer';
 import Main from './layout/Main';
 import AppRoutes from 'routes/AppRoutes';
 
-import 'offline-js/offline.min.js';
-import 'utils/theme';
-import 'offline-js/themes/offline-language-english.css';
-import { ToastContainer } from '@bit/totalsoft.react-mui.core';
+import { ToastContainer, CheckInternetConnection } from '@bit/totalsoft.react-mui.core'
 
 const useStyles = makeStyles(appStyle);
 
@@ -67,6 +64,7 @@ function App(props) {
         <Footer fluid />
       </div>
       <ToastContainer />
+      <CheckInternetConnection />
     </div>
   );
 }
