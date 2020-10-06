@@ -32,7 +32,7 @@ function PrivateRoute({ component: Component, <% if (withRights) { %>roles, righ
             return <LoadingFakeText lines={10} />
         }
 
-        return <Route exact={exact} path={path} component={allow ? SecuredComponent : Forbidden} />}, [exact, path, allow, SecuredComponent]);
+        return <Route exact={exact} path={path} component={allow ? SecuredComponent : Forbidden} />}, [loading, exact, path, allow, SecuredComponent]);
     <%_ } else { _%>
     return useMemo(() => <Route exact={exact} path={path} component={SecuredComponent} />, [SecuredComponent, exact, path];
     <%_ } _%>

@@ -17,7 +17,6 @@ import AppRoutes from 'routes/AppRoutes';
 import 'offline-js/offline.min.js';
 import 'utils/theme';
 import 'offline-js/themes/offline-language-english.css';
-import { Slide } from 'react-toastify';
 import { ToastContainer } from '@bit/totalsoft.react-mui.core';
 
 const useStyles = makeStyles(appStyle);

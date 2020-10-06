@@ -1,45 +1,27 @@
 import { env } from './env'
-import { theme as defaultTheme } from './themes/defaultTheme';
-import { theme as greenTheme } from './themes/greenTheme';
-import { theme as blueTheme } from './themes/blueTheme';
-import { theme as orangeTheme } from './themes/orangeTheme';
-import { theme as redTheme } from './themes/redTheme';
+import { theme as defaultTheme } from '@bit/totalsoft.react-mui.themes.default-theme'
+import { theme as greenTheme } from '@bit/totalsoft.react-mui.themes.green-theme'
+import { theme as blueTheme } from '@bit/totalsoft.react-mui.themes.blue-theme'
+import { theme as orangeTheme } from '@bit/totalsoft.react-mui.themes.orange-theme'
+import { theme as redTheme } from '@bit/totalsoft.react-mui.themes.red-theme'
 
-import { createMuiTheme } from '@material-ui/core';
+import { createMuiTheme } from '@material-ui/core'
 
 const getTheme = () => {
-    const subDomain = env.REACT_APP_THEME
-    switch (subDomain) {
-        case 'green':
-            return greenTheme;
-        case 'blue':
-            return blueTheme;
-        case 'orange':
-            return orangeTheme;
-        case 'red':
-            return redTheme;
-        default:
-            return defaultTheme;
-    }
-}
+  const subDomain = env.REACT_APP_THEME
+  switch (subDomain) {
+    case 'green':
+      return greenTheme
+    case 'blue':
+      return blueTheme
+    case 'orange':
+      return orangeTheme
+    case 'red':
+      return redTheme
+    default:
+      return defaultTheme
+  }
 
-const getOfflineThemeCss = () => {
-    const subDomain = env.REACT_APP_THEME;
-    switch (subDomain) {
-        case 'green':
-            return require('./themes/css/greenOfflineTheme.css');
-        case 'blue':
-            return require('./themes/css/blueOfflineTheme.css');
-        case 'orange':
-            return require('./themes/css/orangeOfflineTheme.css');
-        case 'red':
-            return require('./themes/css/redOfflineTheme.css');
-        default:
-            return require('./themes/css/defaultOfflineTheme.css');
-    }
-}
-
-const themeData = getTheme();
-export const offlineThemeCss = getOfflineThemeCss();
-export const theme = createMuiTheme(themeData);
-export const logo = themeData.logo;
+const themeData = getTheme()
+export const theme = createMuiTheme(themeData)
+export const logo = themeData.logo

@@ -23,7 +23,7 @@ const { viewSettings } = permissions;
 export default function AppRoutes() {
     return (
         <Switch>
-            <PrivateRoute exact path="/dashboard" component={Dashboard} <%_ if (withRights) { _%> roles={[]} rights={[]} <%_}_%>/>
+            <Route exact path="/dashboard" component={Dashboard} <%_ if (withRights) { _%> roles={[]} rights={[]} <%_}_%>/>
             <PrivateRoute exact path="/settings" component={Settings} <%_ if (withRights) { _%> roles={[admin, user<%_ if (withRights && withMultiTenancy) { _%>, globalAdmin<%}%>]} rights={[viewSettings]} <%_}_%>/>
             <Redirect exact from="/" to="/dashboard" />
             <Route exact path="/forbidden" component={Forbidden} />
