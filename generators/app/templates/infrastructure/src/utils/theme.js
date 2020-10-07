@@ -21,6 +21,7 @@ const getTheme = () => {
     default:
       return defaultTheme
   }
+}
 
 const themeData = getTheme()
 export const theme = createMuiTheme(themeData)

@@ -26,7 +26,7 @@ function PrivateRoute({ component: Component, <% if (withRights) { %>roles, righ
             ? intersect(userRoles, roles) || !oidcUser
             : (intersect(userRights, rights) && intersect(userRoles, roles)) || !oidcUser
     }
-    
+
     return useMemo(() => {
         if (loading) {
             return <LoadingFakeText lines={10} />
@@ -34,7 +34,7 @@ function PrivateRoute({ component: Component, <% if (withRights) { %>roles, righ
 
         return <Route exact={exact} path={path} component={allow ? SecuredComponent : Forbidden} />}, [loading, exact, path, allow, SecuredComponent]);
     <%_ } else { _%>
-    return useMemo(() => <Route exact={exact} path={path} component={SecuredComponent} />, [SecuredComponent, exact, path];
+    return useMemo(() => <Route exact={exact} path={path} component={SecuredComponent} />, [SecuredComponent, exact, path]);
     <%_ } _%>
 }
 
