@@ -46,12 +46,14 @@ export const useError = () => {
       return
     }
 
-    (error?.graphQLErrors || []).forEach(err => {
+    const graphQLErrors = error?.graphQLErrors ?? []
+    graphQLErrors.forEach(err => {
       err?.extensions?.code
         ? addErrorToast(generateErrorMessage(err))
         : addErrorToast(generateSimpleErrorMessage(err.message));
     });
 
-    (error?.networkError?.result?.errors || []).forEach(err => addErrorToast(generateErrorMessage(err)));
+    const networkErrors = error?.networkError?.result?.errors ?? []
+    networkErrors.forEach(err => addErrorToast(generateErrorMessage(err)));
   }, [addErrorToast])
 }
