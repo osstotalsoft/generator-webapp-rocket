@@ -3,6 +3,7 @@ FROM node:12 as builder
 WORKDIR /app
 
 COPY package*.json ./
+COPY .npmrc ./
 RUN npm install
 
 ARG REACT_APP_VERSION=0.0.0.0
