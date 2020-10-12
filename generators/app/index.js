@@ -2,7 +2,7 @@
 const Generator = require('yeoman-generator')
 const chalk = require('chalk')
 const yosay = require('yosay')
-const { append, concat } = require('ramda')
+const { concat } = require('ramda')
 const questions = require('./questions')
 const { checkForLatestVersion } = require('../utils')
 const filter = require('gulp-filter')

@@ -10,6 +10,7 @@ module.exports = [
             if (pass) {
                 return true;
             }
+
             return `${chalk.red(
                 "Provide a valid project name, only use letters and '-', '_' or '.' separators! No digits, special characters and whitespace are allowed and do not start or end with a separator!"
             )}`;
@@ -57,6 +58,7 @@ module.exports = [
             if (pass) {
                 return true;
             }
+
             return `${chalk.red(
                 "Provide a valid chart name, only use lower case letters, digits and '-' or '_' separators! No special characters and whitespace are allowed and do not start or end with a separator!"
             )}`;
