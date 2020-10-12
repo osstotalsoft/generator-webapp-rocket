@@ -66,7 +66,7 @@ module.exports = [
     {
         type: 'input',
         name: 'identityClientId',
-        message: 'What is the your Identity client name?',
+        message: 'What is your Identity client name?',
         default: ""
     },
     {

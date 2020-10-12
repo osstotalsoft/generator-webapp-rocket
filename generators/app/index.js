@@ -40,7 +40,7 @@ module.exports = class extends Generator {
     if (withMultiTenancy) ignoreFiles = concat(['**/AuthenticationProvider.js'], ignoreFiles)
     else
       ignoreFiles = concat(
-        ['**/tenantSelectorStyle.jss', '**/TenantSelector.js', '**/TenantAuthenticationProvider.js'],
+        ['**/tenantSelectorStyle.js', '**/TenantSelector.js', '**/TenantAuthenticationProvider.js'],
         ignoreFiles
       )
 
