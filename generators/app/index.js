@@ -29,13 +29,12 @@ module.exports = class extends Generator {
   writing() {
     if (!this.isLatest) return
 
-    const { projectName, addHelm, withRights, withMultiTenancy, packageManager } = this.answers
+    const { projectName, addHelm, withRights, withMultiTenancy, packageManager, helmChartName } = this.answers
 
     const templatePath = this.templatePath('infrastructure/**/*')
     const destinationPath = this.destinationPath(projectName)
 
-    let ignoreFiles = ['**/.npmignore', '**/.gitignore-template']
-    if (!addHelm) ignoreFiles = append('**/helm/**', ignoreFiles)
+    let ignoreFiles = ['**/.npmignore', '**/.gitignore-template', '**/helm/**']
     if (!withRights) ignoreFiles = concat(['**/hooks/rights.js', '**/constants/permissions.js', '**/constants/identityUserRoles.js'], ignoreFiles)
     if (withMultiTenancy) ignoreFiles = concat(['**/AuthenticationProvider.js'], ignoreFiles)
     else
@@ -57,6 +56,12 @@ module.exports = class extends Generator {
     const gitignorePath = this.templatePath('infrastructure/.gitignore-template')
     const gitignoreDestinationPath = this.destinationPath(`${projectName}/.gitignore`)
     this.fs.copy(gitignorePath, gitignoreDestinationPath)
+
+    if (addHelm) {
+      const helmTemplatePath = this.templatePath('infrastructure/helm/frontend/**')
+      const helmDestinationPath = this.destinationPath(`${projectName}/helm/${helmChartName}`)
+      this.fs.copyTpl(helmTemplatePath, helmDestinationPath, { ...this.answers, packageManagerVersion }, {}, { globOptions: { dot: true } })
+    }
   }
 
   install() {

@@ -7,6 +7,8 @@ const defaultPrettierOptions = {
   singleQuote: true,
   jsxSingleQuote: true,
   semi: false,
+  trailingComma: "none",
+  arrowParens: "avoid"
 }
 
 const prettierTransform = function (defaultOptions) {

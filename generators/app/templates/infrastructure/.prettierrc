@@ -4,5 +4,6 @@
   "singleQuote": true,
   "semi": false,
   "jsxSingleQuote": true,
-  "trailingComma": "none"
+  "trailingComma": "none",
+  "arrowParens": "avoid"
 }
