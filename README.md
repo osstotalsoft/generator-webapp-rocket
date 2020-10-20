@@ -65,7 +65,18 @@ You will be prompted to introduce the following information:
 If you would like to start the application, simply run ``npm start`` in the newly created folder, otherwise you can begin editing and writing your application!  
   
 ## Upgrade existing project  
- > ⚠ First, make sure you have committed everything or have a backup of your existing project.
+⚠ **First, make sure you have committed everything or have a backup of your existing project.**
+
+⚠ **RECOMANDATION!** ⚠
+________
+To avoind having lots of differences, make sure you have **Prettier** formatter installed in your project. 
+``npm install prettier --dev``
+
+Also a file named **.prettierrc** containing the desired formatting settings is placed in the root of the project.  See [Code formatting](#code-formatting) section to see the generator's default config file. 
+
+Then apply your formatting rules to the existing files by executing:
+``prettier --write **/*.js``
+________
 
 To upgrade an existing project that was scaffold using this generator open a console outside of your project folder ( see image below )  and run:
 ```bash  
@@ -103,6 +114,8 @@ For maintaining unitary style, the **.prettierrc** configuration file is read by
   
 In case the **.prettierrc** file is customized, the new settings will be used when re-running the generator. The only condition is to answer **no** when asked to overwrite this file.  
   
+The default prettier config file can be found here: [.prettierrc](generators/app/templates/infrastructure/.prettierrc)
+
 ## Authentication  
 By default, the application uses <b>Identity SaaS</b>. See [AxaGuilDEv/react-oidc](https://github.com/AxaGuilDEv/react-oidc).  
 The authentication is executed using a secure token which will also contain information about the logged user like: user data and roles.  
