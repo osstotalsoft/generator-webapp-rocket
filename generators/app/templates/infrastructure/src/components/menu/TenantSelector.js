@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { Select, ListItem, makeStyles } from "@material-ui/core";
-import { Typography } from '@bit/totalsoft.react-mui.core';
+import { Typography } from '@bit/totalsoft_oss.react-mui.kit.core';
 import tenantSelectorStyle from 'assets/jss/components/tenantSelectorStyle'
 import { PersonOutline } from '@material-ui/icons';
 import { gql } from '@apollo/client';

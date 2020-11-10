@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Flag from "react-flags";
 import { Select, ListItem, makeStyles } from "@material-ui/core";
-import { Typography } from '@bit/totalsoft.react-mui.core';
+import { Typography } from '@bit/totalsoft_oss.react-mui.kit.core';
 import langSelectorStyle from 'assets/jss/components/langSelectorStyle'
 
 const useStyles = makeStyles(langSelectorStyle);

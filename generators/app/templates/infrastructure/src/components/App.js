@@ -14,7 +14,7 @@ import Footer from './layout/Footer';
 import Main from './layout/Main';
 import AppRoutes from 'routes/AppRoutes';
 
-import { ToastContainer, CheckInternetConnection } from '@bit/totalsoft.react-mui.core'
+import { ToastContainer, CheckInternetConnection } from '@bit/totalsoft_oss.react-mui.kit.core'
 
 const useStyles = makeStyles(appStyle);
 
