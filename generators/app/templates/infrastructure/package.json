@@ -9,7 +9,6 @@
   "dependencies": {
     "@apollo/client": "^3.2.5",
     "@axa-fr/react-oidc-context": "^3.1.6",
-    "@bit/totalsoft.react-mui.utils.styles": "0.0.3",
     "@bit/totalsoft_oss.react-mui.kit.core": "0.0.11",
     "@bit/totalsoft_oss.react-mui.styles": "0.0.2",
     "@bit/totalsoft_oss.react-mui.themes.blue-theme": "0.0.2",
