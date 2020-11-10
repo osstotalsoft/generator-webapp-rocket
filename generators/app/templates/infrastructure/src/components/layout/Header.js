@@ -7,7 +7,7 @@ import { useHeader } from "providers/AreasProvider";
 // material-ui components
 import { makeStyles, AppBar, Toolbar, Hidden, Typography } from '@material-ui/core';
 
-import { IconButton } from '@bit/totalsoft.react-mui.core';
+import { IconButton } from '@bit/totalsoft_oss.react-mui.kit.core';
 
 // material-ui icons
 import MoreVert from "@material-ui/icons/MoreVert";

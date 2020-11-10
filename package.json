@@ -1,6 +1,6 @@
 {
   "name": "@totalsoft/generator-webapp-rocket",
-  "version": "1.1.6",
+  "version": "1.2.0",
   "description": "React web application sample with GraphQL Apollo Client and Axa Oidc client integrations.",
   "homepage": "https://github.com/osstotalsoft/generator-webapp-rocket",
   "author": {
@@ -24,15 +24,14 @@
     "yeoman-test": "^3.0.0",
     "yeoman-assert": "^3.1.1",
     "coveralls": "^3.1.0",
-    "eslint": "^7.10.0",
-    "husky": "^4.3.0",
-    "lint-staged": "^10.4.0",
-    "eslint-config-prettier": "^6.12.0",
+    "eslint": "^7.13.0",
+    "lint-staged": "^10.5.1",
+    "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-jest": "^24.1.0",
-    "eslint-config-xo": "^0.32.1",
-    "jest": "^26.5.0"
+    "eslint-config-xo": "^0.33.1",
+    "jest": "^26.6.3"
   },
   "engines": {
     "npm": ">= 4.0.0",
@@ -42,12 +41,12 @@
     "boxen": "^4.2.0",
     "chalk": "^4.1.0",
     "gulp-filter": "^6.0.0",
-    "jest-cli": "^26.5.0",
+    "jest-cli": "^26.6.3",
     "ramda": "^0.27.1",
     "prettier": "^2.1.2",
     "rimraf": "^3.0.2",
     "through2": "^4.0.2",
-    "update-notifier": "^5.0.0",
+    "update-notifier": "^5.0.1",
     "yeoman-generator": "^4.12.0",
     "yo": "^3.1.1",
     "yosay": "^2.0.2"
