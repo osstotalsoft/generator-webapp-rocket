@@ -6,7 +6,7 @@ const chalk = require('chalk');
 const checkForLatestVersion = async () => {
     const notifier = new updateNotifier.UpdateNotifier({ pkg, updateCheckInterval: 0 });
     const updateInfo = await notifier.fetchInfo()
-    if (updateInfo && updateInfo.current < updateInfo.latest) {
+    if (updateInfo && updateInfo.current !== '0.0.0' && updateInfo.current < updateInfo.latest) {
         const current = chalk.redBright(updateInfo.current)
         const latest = chalk.greenBright(updateInfo.latest)
         console.log(boxen(`${chalk.redBright(`UPDATE AVAILABLE!`)}  

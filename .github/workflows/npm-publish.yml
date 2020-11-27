@@ -1,0 +1,37 @@
+# This workflow will run tests using node and then publish a package to NPM when a release is created
+# For more information see: https://help.github.com/actions/language-and-framework-guides/publishing-nodejs-packages
+
+name: npm-publish
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14.11.0
+      - run: npm ci
+      - run: npm test
+
+  bump-version:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14.11.0
+          registry-url: https://registry.npmjs.org/
+          scope: '@totalsoft'
+      - name: Bump version
+        run: npm version $(git describe --abbrev=0 --tags) --no-git-tag-version
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN }}
