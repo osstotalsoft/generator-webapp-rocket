@@ -2,6 +2,41 @@ import i18next from 'i18next';
 import { isCNP as validateCnp } from "@totalsoft/validations";
 import { Validator, Success, Failure, ValidationError } from "@totalsoft/pure-validations";
 import { any } from 'ramda';
+import moment from 'moment';
+
+export const defaultFormatDateTime = date => moment(date).format("DD-MM-YYYY")
+
+export function lessThanOrEqualDate(max) {
+    return Validator(function lessThanOrEqualDate(value) {
+        return value === null || value === undefined || moment(value).isSameOrBefore(max, "day")
+            ? Success
+            : Failure(ValidationError(i18next.t("Validations.Generic.LessOrEqual", { max: max |> defaultFormatDateTime })));
+    });
+}
+
+export function lessThanDate(max) {
+    return Validator(function lessThanDate(value) {
+        return value === null || value === undefined || moment(value).isBefore(max, "day")
+            ? Success
+            : Failure(ValidationError(i18next.t("Validations.Generic.Less", { max: max |> defaultFormatDateTime })));
+    });
+}
+
+export function greaterThanOrEqualDate(min) {
+    return Validator(function greaterThanOrEqualDate(value) {
+        return value === null || value === undefined || moment(value).isSameOrAfter(min, "day")
+            ? Success
+            : Failure(ValidationError(i18next.t("Validations.Generic.GreaterOrEqual", { min: min |> defaultFormatDateTime })));
+    });
+}
+
+export function greaterThanDate(min) {
+    return Validator(function greaterThanDate(value) {
+        return value === null || value === undefined || moment(value).isAfter(min, "day")
+            ? Success
+            : Failure(ValidationError(i18next.t("Validations.Generic.Greater", { min: min |> defaultFormatDateTime })));
+    });
+}
 
 export const isPhone = Validator(function isPhone(x) {
     const input = /^(07[2-8]{1}[0-9]{1}|02[0-9]{2}|03[0-9]{2}){1}?(\s|\.|)?([0-9]{3}(\s|\.|)){2}$/;
