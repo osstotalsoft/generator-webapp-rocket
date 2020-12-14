@@ -199,7 +199,7 @@ export const MY_TENANTS_QUERY = gql`
 }  
 `  
 ```  
-In addition, the default `AuthenticationProvider` will be replace with a specialized one who manages the multi-tenancy logic.  
+In addition, the default `AuthenticationProvider` will be replaced with a specialized one who manages the multi-tenancy logic.  
   
 ## Deployment  
 When you are ready you can deploy you application on any platform. This template also includes a pre-configured Dockerfile and optional Helm files.  

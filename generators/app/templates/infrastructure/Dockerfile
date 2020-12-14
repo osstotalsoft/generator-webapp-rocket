@@ -1,5 +1,5 @@
 # build environment
-FROM node:12 as builder
+FROM node:14 as builder
 WORKDIR /app
 
 COPY package*.json ./
@@ -13,7 +13,7 @@ COPY . ./
 RUN npm run build
 
 # production environment
-FROM node:12
+FROM node:14
 COPY --from=builder /app/build ./build
 COPY --from=builder /app/setenv.js ./setenv.js
 RUN npm install -g serve
