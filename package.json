@@ -35,7 +35,7 @@
   },
   "engines": {
     "npm": ">= 4.0.0",
-    "node": ">= 8.10.0"
+    "node": ">= 14.15.0"
   },
   "dependencies": {
     "boxen": "^4.2.0",
