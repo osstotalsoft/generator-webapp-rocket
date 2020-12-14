@@ -18,7 +18,7 @@ npm install -g yo
 npm install -g @totalsoft/generator-webapp-rocket  
 ```  
   
-If you wand to use this generator to scaffold a new project navigate to section: [Generate new project](#generate-new-project)  
+If you want to use this generator to scaffold a new project navigate to section: [Generate new project](#generate-new-project)  
 To upgrade an existing project that was scaffold using this **WebApp Rocket Generator**, see section: [Upgrade existing project](#upgrade-existing-project)  
 
 ## Content
@@ -69,7 +69,7 @@ If you would like to start the application, simply run ``npm start`` in the newl
 
 ⚠ **RECOMANDATION!** ⚠
 ________
-To avoind having lots of differences, make sure you have **Prettier** formatter installed in your project. 
+To avoid having lots of differences, make sure you have **Prettier** formatter installed in your project. 
 ``npm install prettier --dev``
 
 Also a file named **.prettierrc** containing the desired formatting settings is placed in the root of the project.  See [Code formatting](#code-formatting) section to see the generator's default config file. 
@@ -199,7 +199,7 @@ export const MY_TENANTS_QUERY = gql`
 }  
 `  
 ```  
-In addition, the default `AuthenticationProvider` will be replace with a specialized one who manages the multi-tenancy logic.  
+In addition, the default `AuthenticationProvider` will be replaced with a specialized one who manages the multi-tenancy logic.  
   
 ## Deployment  
 When you are ready you can deploy you application on any platform. This template also includes a pre-configured Dockerfile and optional Helm files.  
