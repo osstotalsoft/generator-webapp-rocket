@@ -39,7 +39,7 @@ module.exports = [
         type: "list",
         name: "theme",
         message: 'What theme would you like to install?',
-        choices: ['default', 'orange', 'blue', 'green', 'red'],
+        choices: ['default', 'orange', 'blue', 'green', 'red', 'vividOrange'],
         default: 'default'
     },
     {

@@ -4,6 +4,7 @@ import { theme as greenTheme } from '@bit/totalsoft_oss.react-mui.themes.green-t
 import { theme as blueTheme } from '@bit/totalsoft_oss.react-mui.themes.blue-theme'
 import { theme as orangeTheme } from '@bit/totalsoft_oss.react-mui.themes.orange-theme'
 import { theme as redTheme } from '@bit/totalsoft_oss.react-mui.themes.red-theme'
+import { theme as vividOrangeTheme } from '@bit/totalsoft_oss.react-mui.themes.vivid-orange-theme'
 
 import { createMuiTheme } from '@material-ui/core'
 
@@ -18,6 +19,8 @@ const getTheme = () => {
       return orangeTheme
     case 'red':
       return redTheme
+    case 'vividOrange':
+      return vividOrangeTheme
     default:
       return defaultTheme
   }
