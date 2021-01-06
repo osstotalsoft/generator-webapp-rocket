@@ -63,7 +63,7 @@ module.exports = [
                 "Provide a valid chart name, only use lower case letters, digits and '-' separators! No special characters and whitespace are allowed and do not start or end with a separator!"
             )}`;
         },
-        default: prompts => prompts.projectName.toLowerCase()
+        default: prompts => prompts.projectName.toLowerCase().replace("_","-")
     },
     {
         type: 'input',
