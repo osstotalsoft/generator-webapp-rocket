@@ -54,13 +54,13 @@ module.exports = [
         message: 'What is the name of your helm chart?',
         when: prompts => prompts.addHelm,
         validate: name => {
-            const pass = name.match(/^[a-z0-9]+(?:[_-]{1,2}[a-z0-9]+)*$/)
+            const pass = name.match(/[a-z0-9]([-a-z0-9]*[a-z0-9])?/)
             if (pass) {
                 return true;
             }
 
             return `${chalk.red(
-                "Provide a valid chart name, only use lower case letters, digits and '-' or '_' separators! No special characters and whitespace are allowed and do not start or end with a separator!"
+                "Provide a valid chart name, only use lower case letters, digits and '-' separators! No special characters and whitespace are allowed and do not start or end with a separator!"
             )}`;
         },
         default: prompts => prompts.projectName.toLowerCase()
