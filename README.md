@@ -226,7 +226,7 @@ In addition, the default `AuthenticationProvider` will be replaced with a specia
 ## Deployment
 
 When you are ready you can deploy you application on any platform. This template also includes a pre-configured Dockerfile and optional Helm files.
-
+For security reasons, the application isn't going to run as root in container. Once the project is generated, a user is created for your project. Default name is "appuser". You can change the name in Dockerfile. Also, the application will listen on 8080 port by default. This port can be change in Dockerfile and in helm/values.yaml.yaml. Because the application will no longer run as root, the port must be greater than 1024.
 ## Getting To Know Yeoman
 
 - Yeoman has a heart of gold.
