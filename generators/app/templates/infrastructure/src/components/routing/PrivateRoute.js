@@ -2,8 +2,8 @@ import React, { useMemo } from "react";
 import { Route } from "react-router-dom";
 import PropTypes from "prop-types";
 import { <% if (withRights) { %>useReactOidc, <% } %> withOidcSecure } from '@axa-fr/react-oidc-context';
-import { emptyArray } from "utils/constants";
 <%_ if (withRights) { _%>
+import { emptyArray } from "utils/constants";
 import { isEmpty } from "ramda";
 import { useUserData } from "hooks/rights";
 import { LoadingFakeText, Forbidden } from '@bit/totalsoft_oss.react-mui.kit.core';

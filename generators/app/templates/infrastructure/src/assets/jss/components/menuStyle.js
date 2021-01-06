@@ -46,9 +46,14 @@ const sidebarStyle = theme => {
       ...defaultFont,
       width: "auto",
       textDecoration: "unset",
-      "&:hover,&:focus": {
+      "&:hover": {
         outline: "none",
         backgroundColor: theme.palette.sideMenu.hoverBgColor,
+        boxShadow: "none"
+      },
+      "&:focus": {
+        outline: "none",
+        backgroundColor: theme.palette.sideMenu.focusBgColor,
         boxShadow: "none"
       },
       "&,&:hover,&:focus": {
