@@ -11,13 +11,13 @@ const AUTH = {
 
 const getAuthenticationConfiguration = (<% if (withMultiTenancy) { %>tenant<%}%>) => {
     <%_ if (withMultiTenancy) { _%>
-    const path = isNullOrWhitespace(tenant) ? "" : `/${tenant}` 
+    const acr_values = isNullOrWhitespace(tenant) ? undefined : `tenant:${tenant}` 
     <%_ } else { _%>
-    const path = "" 
+    const acr_values = undefined 
     <%_ } _%>
     return {
         client_id: env.REACT_APP_IDENTITY_CLIENT_ID,
-        authority: env.REACT_APP_IDENTITY_AUTHORITY + path,
+        authority: env.REACT_APP_IDENTITY_AUTHORITY,
         redirect_uri: `${root}${AUTH.CALLBACK}`,
         silent_redirect_uri: `${root}${AUTH.SILENT_CALLBACK}`,
         response_type: 'code',
@@ -28,6 +28,7 @@ const getAuthenticationConfiguration = (<% if (withMultiTenancy) { %>tenant<%}%>
         triggerAuthFlow: true,
         revokeAccessTokenOnSignout: true,
         register_uri: `${env.REACT_APP_IDENTITY_AUTHORITY}/${env.REACT_APP_REGISTER_REDIRECT_URL}?returnUrl=${root}/register&clientId=${env.REACT_APP_IDENTITY_CLIENT_ID}`,
+        acr_values,
     }
 }
 
