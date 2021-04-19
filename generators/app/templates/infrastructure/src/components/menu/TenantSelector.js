@@ -31,7 +31,7 @@ function EmptyElement() {
 const TenantSelector = ({ tenant, changeTenant, tenants, miniActive }) => {
     const classes = useStyles();
     const handleChange = useCallback(({ target: { value } }) => {
-        const newTenant = tenants.find(t => t.externalId.toUpperCase() === value.toUpperCase())
+        const newTenant = tenants.find(t => t.code.toUpperCase() === value.toUpperCase())
         changeTenant(newTenant)
     }, [changeTenant, tenants])
 
@@ -41,12 +41,12 @@ const TenantSelector = ({ tenant, changeTenant, tenants, miniActive }) => {
         <div className={classes.tenantSelectorContainer}>
             <Select className={classes.tenantSelector}
                 classes={{ selectMenu: classes.tenantSelectMenu }}
-                value={tenant?.externalId}
+                value={tenant?.code}
                 onChange={handleChange}
                 {...iconComponent}>
                 {
                     tenants.map(t =>
-                        (<ListItem button value={t.externalId} className={classes.tenantSelectorItem} key={t.externalId}>
+                        (<ListItem button value={t.code} className={classes.tenantSelectorItem} key={t.externalId}>
                             <span className={classes.collapseItemMini}>
                                 <PersonOutline />
                             </span>

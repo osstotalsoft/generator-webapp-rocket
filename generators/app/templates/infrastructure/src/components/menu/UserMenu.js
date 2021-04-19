@@ -74,7 +74,7 @@ function UserMenu({ miniActive, avatar, language, changeLanguage }) {
 
     const handleTenantChange = useCallback(e => {
         setTenant(e)
-        setContextTenant(e.externalId)
+        setContextTenant(e.code)
     }, [setContextTenant])
 
     const tenantName = tenant?.name ? ` - ${tenant.name}` : "" 
