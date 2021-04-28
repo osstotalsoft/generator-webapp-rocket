@@ -1,7 +1,7 @@
 import styles from "assets/jss/styles";
 
 const userMenuStyle = theme => {
-    const { boxShadow, defaultFont, } = styles(theme);
+    const { boxShadow, defaultFont, menuActiveBkColor, menuActiveColor } = styles(theme);
 
     return {
         collapseWrapper: {
@@ -104,6 +104,17 @@ const userMenuStyle = theme => {
                 paddingBottom: "0px"
             }
         },
+        userItemIcon: {
+          color: "inherit",
+          width: "30px",
+          height: "24px",
+          float: "left",
+          position: "inherit",
+          top: "3px",
+          textAlign: "center",
+          verticalAlign: "middle",
+          opacity: "0.8"
+        },
         itemLink: {
             paddingLeft: "10px",
             paddingRight: "10px",
@@ -118,25 +129,33 @@ const userMenuStyle = theme => {
             textDecoration: "unset",
             width: "auto",
             "&:hover": {
-                outline: "none",
-                backgroundColor: "rgba(200, 200, 200, 0.2)",
-                boxShadow: "none"
+              outline: "none",
+              backgroundColor: theme.palette.sideMenu.hoverBgColor,
+              color: theme.palette.sideMenu.hoverTextColor,
+              boxShadow: "none"
             },
-            "&,&:hover,&:focus": {
-                color: "inherit"
+            "&:focus": {
+              outline: "none",
+              backgroundColor: theme.palette.sideMenu.focusBgColor,
+              boxShadow: "none"
+            },
+            "&,&:focus": {
+              color: "inherit"
             }
         },
         userCollapseButton: {
             margin: "0",
             padding: "6px 15px",
             "&:hover": {
-                background: "none"
+              background: "none",
+              color: theme.palette.sideMenu.hoverTextColor
             }
         },
         userCollapseLinks: {
             marginTop: "-4px",
             "&:hover,&:focus": {
-                backgroundColor: "rgba(200, 200, 200, 0.2)"
+              backgroundColor: theme.palette.sideMenu.hoverBkColor,
+              color: theme.palette.sideMenu.hoverTextColor
             }
         },
         caret: {
@@ -196,12 +215,19 @@ const userMenuStyle = theme => {
             width: "auto",
             "&:hover": {
                 outline: "none",
-                backgroundColor: "rgba(200, 200, 200, 0.2)",
+                backgroundColor: theme.palette.sideMenu.hoverBkColor,
+                color: theme.palette.sideMenu.hoverTextColor,
                 boxShadow: "none"
             },
-            "&,&:hover,&:focus": {
+            "&,&:focus": {
                 color: "inherit"
             }
+        },
+        menuActiveColor: {
+          "&,&:hover,&:focus": {
+            color: menuActiveColor,
+            backgroundColor: menuActiveBkColor
+          }
         }
     };
 }

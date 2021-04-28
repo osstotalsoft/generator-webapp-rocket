@@ -2,21 +2,30 @@ import React, { useState, useCallback<% if (withMultiTenancy) { %>, useEffect, u
 import PropTypes from 'prop-types';
 import { NavLink } from "react-router-dom";
 
-import { List, ListItem, Collapse, ListItemText, makeStyles, Tooltip } from '@material-ui/core';
+import { List, ListItem, Collapse, ListItemText, ListItemIcon, makeStyles, Tooltip } from '@material-ui/core';
 
 import userMenuStyle from 'assets/jss/components/userMenuStyle'
 import cx from "classnames";
 import LanguageSelector from "./LanguageSelector"
-import Person from "@material-ui/icons/Person";
 import avatar_default from "assets/img/default-avatar.png";
 import { useTranslation } from 'react-i18next';
 import PowerSettingsNew from "@material-ui/icons/PowerSettingsNew";
 import { useReactOidc } from '@axa-fr/react-oidc-context';
+import userMenuConfig from 'constants/userMenuConfig'
+import UserMenuItem from "./UserMenuItem";
+import { useLocation } from 'react-router-dom';
 
 <%_ if (withMultiTenancy) { _%>
 import { useLazyQuery } from '@apollo/client';
 import { TenantContext } from 'providers/TenantAuthenticationProvider'
 import TenantSelector, { MY_TENANTS_QUERY } from './TenantSelector';
+<%_ } _%>
+
+<%_ if (withRights) { _%>
+import { isEmpty } from 'ramda';
+import { emptyArray } from 'utils/constants';
+import { useUserData } from 'hooks/rights';
+import { intersect } from 'utils/functions'; 
 <%_ } _%>
 
 const useStyles = makeStyles(userMenuStyle);
@@ -26,13 +35,30 @@ function UserMenu({ miniActive, avatar, language, changeLanguage }) {
     const [currentMiniActive] = useState(true);
     const classes = useStyles();
     const { t } = useTranslation();
+    const location = useLocation();
+    const { oidcUser, logout } = useReactOidc();
 
+    <%_ if (withRights){ _%>
+    const userRoles = oidcUser?.profile?.role || emptyArray;<%_ } _%>
+  
+    const activeRoute = useCallback(routeName => location.pathname.indexOf(routeName) > -1, [location.pathname]) 
+    <%_ if (withRights){ _%>
+    const { userData } = useUserData();
+    const userRights = userData?.rights || emptyArray
+    <%_ } _%>
+    <% if (withRights){ _%>
+    const userMenuItems = userMenuConfig.filter(item => isEmpty(item.rights)
+      ? intersect(userRoles, item.roles) || isEmpty(item.roles)
+      : (intersect(userRoles, item.roles) && intersect(userRights, item.rights)) || isEmpty(item.roles)
+    )<%_ } else { _%>
+    const userMenuItems = userMenuConfig
+    <%_ } _%>
+    
     const openCollapseAvatar = useCallback(e => {
         setOpenAvatar(!openAvatar);
         e.preventDefault();
     }, [openAvatar])
 
-    const { oidcUser, logout } = useReactOidc();
     <%_ if (withMultiTenancy) { _%>
     const setContextTenant = useContext(TenantContext)
 
@@ -115,27 +141,14 @@ function UserMenu({ miniActive, avatar, language, changeLanguage }) {
                     </NavLink>
                     <Collapse in={openAvatar} unmountOnExit classes={{ wrapper: classes.collapseWrapper }}>
                         <List className={classes.list + classes.collapseList}>
-                            <Tooltip disableHoverListener={!miniActive} title={t('MyProfile')}>
-                                <ListItem className={classes.collapseItem}>
-                                    <NavLink to="/myProfile" className={classes.itemLink}>
-                                        <span className={classes.collapseItemMini}>
-                                            <Person />
-                                        </span>
-                                        <ListItemText
-                                            primary={t('MyProfile')}
-                                            disableTypography={true}
-                                            className={itemText}
-                                        />
-                                    </NavLink>
-                                </ListItem>
-                            </Tooltip>
+                            {userMenuItems.map((userMenu, key) => {
+                                return <UserMenuItem key={key} userMenu={userMenu} miniActive={miniActive} activeRoute={activeRoute} />
+                            })}
                             {oidcUser &&
                                 <Tooltip disableHoverListener={!miniActive} title={t('Tooltips.Logout')}>
-                                    <ListItem className={classes.item}>
+                                    <ListItem className={classes.collapseItem}>
                                         <NavLink to={"/"} className={classes.itemLink} onClick={logoutAction}>
-                                            <span className={classes.collapseItemMini}>
-                                                <PowerSettingsNew />
-                                            </span>
+                                        <ListItemIcon className={classes.userItemIcon}><PowerSettingsNew /></ListItemIcon>
                                             <ListItemText
                                                 primary={t('Tooltips.Logout')}
                                                 disableTypography={true}
