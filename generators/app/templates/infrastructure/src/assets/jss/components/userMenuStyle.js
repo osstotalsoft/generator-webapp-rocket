@@ -134,11 +134,6 @@ const userMenuStyle = theme => {
               color: theme.palette.sideMenu.hoverTextColor,
               boxShadow: "none"
             },
-            "&:focus": {
-              outline: "none",
-              backgroundColor: theme.palette.sideMenu.focusBgColor,
-              boxShadow: "none"
-            },
             "&,&:focus": {
               color: "inherit"
             }
