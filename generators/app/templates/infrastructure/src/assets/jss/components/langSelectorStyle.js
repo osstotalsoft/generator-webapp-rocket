@@ -16,12 +16,6 @@ const langSelectorStyle = theme => {
             verticalAlign: "middle",
             "&:before,&:after": {
                 display: "none !important"
-            },
-            "&:hover": {
-              outline: "none",
-              backgroundColor: theme.palette.sideMenu.hoverBgColor,
-              color: theme.palette.sideMenu.hoverTextColor,
-              boxShadow: "none"
             }
         },
         langSelectorText: {
@@ -36,17 +30,27 @@ const langSelectorStyle = theme => {
             transition: "transform 300ms ease 0s, opacity 300ms ease 0s",
             fontSize: "15px",
             fontWeight: "bold",
-            paddingLeft: "23px",
+            paddingLeft: "25px",
         },
         langSelectorItem: {
             padding: "2px 16px",
             "&:hover": {
-              backgroundColor: theme.autoComplete.hoverBgColor,
-              color: theme.autoComplete.hoverTextColor
+                backgroundColor: theme.autoComplete.hoverBgColor,
+                color: theme.autoComplete.hoverTextColor
+            },
+            "&:focus": {
+                backgroundColor: 'inherit'
             }
         },
         langSelectMenu: {
-            textOverflow: "unset"
+            textOverflow: "unset",
+            "&:focus": {
+                backgroundColor: 'transparent'
+            },
+            "&:hover": {
+                backgroundColor: theme.palette.sideMenu.hoverBgColor,
+                color: theme.palette.sideMenu.hoverTextColor
+            }
         }
     };
 }

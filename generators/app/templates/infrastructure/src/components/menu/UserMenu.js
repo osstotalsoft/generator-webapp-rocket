@@ -114,9 +114,9 @@ function UserMenu({ miniActive, avatar, language, changeLanguage }) {
     <% if (!withMultiTenancy) { %> const displayName = userName <% } %>
     return (
         <div className={classes.user}>
-            <div className={classes.photo}>
-                <img src={avatar ? avatar : avatar_default} className={classes.avatarImg} alt="..." />
-            </div>
+            <ListItemIcon className={classes.photo}>
+                <img src={avatar ? avatar : avatar_default} className={classes.avatarImg} alt='...' />
+            </ListItemIcon>
             <List className={classes.list}>
                 <ListItem className={classes.item + " " + classes.userItem}>
                     <NavLink

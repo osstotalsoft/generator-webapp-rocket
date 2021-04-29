@@ -65,9 +65,10 @@ const userMenuStyle = theme => {
             overflow: "hidden",
             float: "left",
             zIndex: "5",
-            marginRight: "11px",
+            marginRight: "24px",
             borderRadius: "50%",
             marginLeft: "23px",
+            minWidth: "34px",
             ...boxShadow
         },
         avatarImg: {
@@ -207,6 +208,7 @@ const userMenuStyle = theme => {
             backgroundColor: "transparent",
             ...defaultFont,
             textDecoration: "unset",
+            marginLeft: '13px',
             width: "auto",
             "&:hover": {
                 outline: "none",
