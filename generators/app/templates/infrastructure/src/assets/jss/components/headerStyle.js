@@ -36,7 +36,7 @@ const headerStyle = (theme) => {
       display: "block",
       '@media (max-width: 80px)': {
         position: "relative",
-        backgroundColor: theme.palette.sideMenu.primaryColor + "!important",
+        backgroundColor: theme.palette.sideMenu.bkColor + "!important",
         padding: 0,
       },
     },

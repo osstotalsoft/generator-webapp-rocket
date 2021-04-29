@@ -49,6 +49,7 @@ const sidebarStyle = theme => {
       "&:hover": {
         outline: "none",
         backgroundColor: theme.palette.sideMenu.hoverBgColor,
+        color: theme.palette.sideMenu.hoverTextColor,
         boxShadow: "none"
       },
       "&:focus": {
@@ -56,7 +57,7 @@ const sidebarStyle = theme => {
         backgroundColor: theme.palette.sideMenu.focusBgColor,
         boxShadow: "none"
       },
-      "&,&:hover,&:focus": {
+      "&,&:focus": {
         color: "inherit"
       }
     },
