@@ -10,6 +10,7 @@ import { MuiThemeProvider } from '@material-ui/core/styles';
 import 'utils/i18n';
 import './assets/css/index.css';
 import "moment/locale/ro";
+import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css'
 import { AreasWrapper } from './providers/AreasProvider';
 
 import AuthApolloProvider from 'apollo/AuthApolloProvider';
