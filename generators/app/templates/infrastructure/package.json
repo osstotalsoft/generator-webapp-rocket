@@ -98,14 +98,15 @@
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-preset-es2015": "^6.24.1",
+    "cross-env": "^7.0.3",
     "customize-cra": "^1.0.0",
     "eslint-plugin-jest": "^24.1.3",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^6.0.0",
     "jest-junit": "12.0.0",
+    "prettier": "^2.2.1",
     "react-app-rewired": "^2.1.8",
-    "react-test-renderer": "^17.0.1",
-    "cross-env": "^7.0.3",
-    "prettier": "^2.2.1"
+    "react-test-renderer": "^17.0.1"
   },
   "jest": {
     "moduleDirectories": [
@@ -115,6 +116,11 @@
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/src/__mocks__/fileMock.js",
       "\\.(css|less)$": "identity-obj-proxy"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test && npm prettier && git add -A"
     }
   },
   "babel": {
