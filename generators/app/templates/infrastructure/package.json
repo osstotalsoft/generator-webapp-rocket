@@ -76,7 +76,11 @@
     "test:ci": "cross-env CI=true npm test -- --reporters=default --reporters=jest-junit --coverage --coverageReporters=cobertura --coverageReporters=lcov --coverageReporters=html",
     "eject": "react-scripts eject",
     "eslint:report": "eslint --fix --ext .js .",
-    "prettier": "prettier --write **/*.js"
+    "prettier": "prettier --write **/*.js",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "**/*.+(js|md|css|graphql|json)": "prettier --write"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -117,9 +121,6 @@
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/src/__mocks__/fileMock.js",
       "\\.(css|less)$": "identity-obj-proxy"
     }
-  },
-  "lint-staged": {
-    "**/*": "prettier --write"
   },
   "babel": {
     "presets": [
