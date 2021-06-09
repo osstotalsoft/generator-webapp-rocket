@@ -43,7 +43,7 @@ module.exports = class extends Generator {
         ignoreFiles
       )
 
-    const packageManagerVersion = packageManager === 'npm' ? '10.0.0' : packageManager === 'yarn' ? '1.22.4' : '10.0.0'
+    const packageManagerVersion = packageManager === 'npm' ? '7.16.0' : packageManager === 'yarn' ? '1.22.4' : '7.16.0'
 
     this.fs.copyTpl(
       templatePath,
