@@ -118,10 +118,8 @@
       "\\.(css|less)$": "identity-obj-proxy"
     }
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm test && npm prettier && git add -A"
-    }
+  "lint-staged": {
+    "**/*": "prettier --write"
   },
   "babel": {
     "presets": [
