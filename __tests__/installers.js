@@ -10,7 +10,7 @@ describe('test package installers', () => {
     const gqlPort = '4000'
     const tempRoot = `../.tmp`
 
-    const npm = '>= 10.0.0';
+    const npm = '>= 7.16.0';
     const yarn = '>= 1.22.4';
 
     it('installs packages with npm', () => {

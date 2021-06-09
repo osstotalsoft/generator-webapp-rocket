@@ -76,7 +76,11 @@
     "test:ci": "cross-env CI=true npm test -- --reporters=default --reporters=jest-junit --coverage --coverageReporters=cobertura --coverageReporters=lcov --coverageReporters=html",
     "eject": "react-scripts eject",
     "eslint:report": "eslint --fix --ext .js .",
-    "prettier": "prettier --write **/*.js"
+    "prettier": "prettier --write **/*.js",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "**/*.+(js|md|css|graphql|json)": "prettier --write"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -98,14 +102,15 @@
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-preset-es2015": "^6.24.1",
+    "cross-env": "^7.0.3",
     "customize-cra": "^1.0.0",
     "eslint-plugin-jest": "^24.1.3",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^6.0.0",
     "jest-junit": "12.0.0",
+    "prettier": "^2.2.1",
     "react-app-rewired": "^2.1.8",
-    "react-test-renderer": "^17.0.1",
-    "cross-env": "^7.0.3",
-    "prettier": "^2.2.1"
+    "react-test-renderer": "^17.0.1"
   },
   "jest": {
     "moduleDirectories": [
