@@ -55,8 +55,7 @@
   "scripts": {
     "test": "jest --runInBand --collectCoverage",
     "test:coverage": "jest --collectCoverage",
-    "eslint:report": "eslint --fix --ext .js .",
-    "prepare": "husky install"
+    "eslint:report": "eslint --fix --ext .js ."
   },
   "jest": {
     "testEnvironment": "node",
