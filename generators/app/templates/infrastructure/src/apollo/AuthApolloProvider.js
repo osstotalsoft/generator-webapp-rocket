@@ -13,7 +13,7 @@ export function AuthApolloProvider({ children }) {
     }
 
     return (
-        <ApolloProvider client={client(oidc.oidcUser)}>
+        <ApolloProvider client={client}>
             {children}
         </ApolloProvider>)
 }

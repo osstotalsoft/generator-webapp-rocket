@@ -9,41 +9,43 @@ import { setContext } from "@apollo/client/link/context"
 import { env } from "../utils/env"
 import { createUploadLink } from 'apollo-upload-client'
 import omitDeep from 'omit-deep-lodash'
+import { getUserManager } from "@axa-fr/react-oidc-core";
 
 <%_ if (withSubscription) { _%>
 // Create a WebSocket link:
-const wsLink = (token) => {
-  const link = new WebSocketLink({
-    uri: `${env.REACT_APP_GQL_WS_PROTOCOL}://${env.REACT_APP_GQL}/graphql`,
-    options: {
-      reconnect: token ? true : false,
-      connectionParams: {
-        authorization: token ? `Bearer ${token}` : ""
-      },
-      connectionCallback: (error) => {
-        if (!error)
-          return;
+const wsLink = new WebSocketLink({
+  uri: `${env.REACT_APP_GQL_WS_PROTOCOL}://${env.REACT_APP_GQL}/graphql`,
+  options: {
+    reconnect: true,
+    connectionParams: async () => {
+      const userManager = getUserManager()
+      const { access_token } = await userManager.getUser()
 
-        console.log(`[Subscription error]: ${error.message}`)
-        if (error.message === 'jwt expired') {
-          // Close old websocket because a new one was created when the token expired
-          link.subscriptionClient.close(true, false)
-        }
+      return {
+        authorization: access_token ? `Bearer ${access_token}` : ""
       }
     },
-    onError: onError(({ graphQLErrors, networkError }) => {
-      if (graphQLErrors)
-        graphQLErrors.map(({ message, locations, path }) =>
-          console.log(
-            `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-          )
-        )
-      if (networkError) console.log(`[Network error]: ${networkError}`)
-    }),
-  })
+    connectionCallback: (error) => {
+      if (!error)
+        return;
 
-  return link;
-}
+      console.log(`[Subscription error]: ${error.message}`)
+      if (error.message === 'jwt expired') {
+        // Close old websocket because a new one was created when the token expired
+        link.subscriptionClient.close(true, false)
+      }
+    }
+  },
+  onError: onError(({ graphQLErrors, networkError }) => {
+    if (graphQLErrors)
+      graphQLErrors.map(({ message, locations, path }) =>
+        console.log(
+          `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+        )
+      )
+    if (networkError) console.log(`[Network error]: ${networkError}`)
+  }),
+})
 <%_ } _%>
 
 const httpLink = createUploadLink({
@@ -59,16 +61,17 @@ const httpLink = createUploadLink({
   }),
 })
 
-const authLink = (token) => {
-  return setContext((_, { headers }) => {
-    return {
-      headers: {
-        ...headers,
-        authorization: token ? `Bearer ${token}` : ""
-      },
-    }
-  })
-}
+const authLink = setContext(async (_, { headers }) => {
+  const userManager = getUserManager();
+  const { access_token } = await userManager.getUser();
+  
+  return {
+    headers: {
+      ...headers,
+      authorization: access_token ? `Bearer ${access_token}` : ""
+    },
+  }
+})
 
 const omitTypenameLink = new ApolloLink((operation, forward) => {
   if (operation.variables) {
@@ -78,17 +81,15 @@ const omitTypenameLink = new ApolloLink((operation, forward) => {
 })
 
 <%_ if (withSubscription) { _%>
-const link = (token) => {
-  return split(
-    // split based on operation type
-    ({ query }) => {
-      const { kind, operation } = getMainDefinition(query)
-      return kind === "OperationDefinition" && operation === "subscription"
-    },
-    wsLink(token),
-    httpLink
-  );
-}
+const link = split(
+  // split based on operation type
+  ({ query }) => {
+    const { kind, operation } = getMainDefinition(query)
+    return kind === "OperationDefinition" && operation === "subscription"
+  },
+  wsLink,
+  httpLink
+)
 <%_ } _%>
 
 const retryLink = new RetryLink({
@@ -102,9 +103,7 @@ const retryLink = new RetryLink({
   }
 });
 
-const myAppLink = (token) => {
-  return ApolloLink.from([omitTypenameLink, retryLink, authLink(token).concat(<% if (withSubscription) { %> link(token) <% } else { %> httpLink <%} %>)])
-}
+const myAppLink = ApolloLink.from([omitTypenameLink, retryLink, authLink.concat(<% if (withSubscription) { %> link <% } else { %> httpLink <%} %>)])
 
 const cache = new InMemoryCache({
   typePolicies: {
@@ -115,10 +114,7 @@ const cache = new InMemoryCache({
   }
 })
 
-export const client = (oidcUser) => {
-  const token = oidcUser?.access_token || '';
-  return new ApolloClient({
-    link: myAppLink(token),
-    cache
-  })
-}
+export const client = new ApolloClient({
+  link: myAppLink,
+  cache
+})
