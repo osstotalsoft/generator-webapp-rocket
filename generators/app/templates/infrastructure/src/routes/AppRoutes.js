@@ -1,8 +1,8 @@
 /* eslint-disable react/jsx-no-bind */
 import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch,  Redirect } from 'react-router-dom';
 
-import PrivateRoute from '../components/routing/PrivateRoute';
+import CustomRoute from '../components/routing/CustomRoute';
 
 import Dashboard from 'features/dashboard/Dashboard'
 import Settings from 'features/settings/Settings'
@@ -23,11 +23,11 @@ const { viewSettings } = permissions;
 export default function AppRoutes() {
     return (
         <Switch>
-            <Route exact path="/dashboard" component={Dashboard} <%_ if (withRights) { _%> roles={[]} rights={[]} <%_}_%>/>
-            <PrivateRoute exact path="/settings" component={Settings} <%_ if (withRights) { _%> roles={[admin, user<%_ if (withRights && withMultiTenancy) { _%>, globalAdmin<%}%>]} rights={[viewSettings]} <%_}_%>/>
+            <CustomRoute isPrivate={false} exact path="/dashboard" component={Dashboard} />
+            <CustomRoute exact path="/settings" component={Settings} <%_ if (withRights) { _%> roles={[admin, user<%_ if (withRights && withMultiTenancy) { _%>, globalAdmin<%}%>]} rights={[viewSettings]} <%_}_%>/>
             <Redirect exact from="/" to="/dashboard" />
-            <Route exact path="/forbidden" component={Forbidden} />
-            <Route render={() => <NotFound title="PageNotFound"></NotFound>} />
+            <CustomRoute isPrivate={false} exact path="/forbidden" component={Forbidden} />
+            <CustomRoute isPrivate={false} render={() => <NotFound title="PageNotFound"></NotFound>} />
         </Switch>
     )
 };
