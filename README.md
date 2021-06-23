@@ -69,7 +69,7 @@ If you would like to start the application, simply run `npm start` in the newly 
 
 ⚠ **First, make sure you have committed everything or have a backup of your existing project.**
 
-⚠ **RECOMANDATION!** ⚠
+⚠ **RECOMMENDATION!** ⚠
 
 ---
 
@@ -142,7 +142,15 @@ If you want to use another authentication service, the following files must be m
 - `src/index.js`
 - `src/utils/auth`
 - `src/providers/AuthenticationProvider.js`
-- `src/components/routing/PrivateRoute.js`
+- `src/components/routing/CustomRoute.js`
+
+⚠ **RECOMMENDATION!** ⚠
+It is HIGHLY recommended to use `<CustomRoute />` component when defining a new route. This is an enhanced version of the basic `react-router-dom`'s `<Route />` component. In addition, it allows a more deeper customization of a route and by default it comes with the following configuration parameters:
+
+- <b>isPrivate</b>: if set to True, allows only the logged in users to access the route. 
+- <b>roles<b/>: a list of predefined roles. For more details see [Authorization](#authorization);
+- <b>rights<b/>: a list of predefined rights. For more details see [Authorization](#authorization);
+- <b>fullWidth</b>: if set to True, it removes the margins and paddings of the main content of the application screen
 
 ## Authorization
 
@@ -229,6 +237,7 @@ When you are ready you can deploy you application on any platform. This template
 Application (or non-system) containers security can be enhanced by running as a non-root user. This can reduce the damage done by a malicious actor that gains access to the application and the underlying system, because it will have only the rights assigned to that user (for example it will not be able to install arbitrary software). Once the project is generated, a user is created for your project. Default name is "appuser". You can change the name in Dockerfile. Also, the application will listen on 8080 port by default. This port can be change in Dockerfile and in helm/values.yaml.yaml. Because the application will no longer run as root, the port must be greater than 1024.
 
 More info: https://opensource.com/article/18/3/just-say-no-root-containers
+
 ## Getting To Know Yeoman
 
 - Yeoman has a heart of gold.
