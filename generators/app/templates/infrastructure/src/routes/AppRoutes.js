@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-bind */
 import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch,  Redirect } from 'react-router-dom';
 
 import CustomRoute from '../components/routing/CustomRoute';
 

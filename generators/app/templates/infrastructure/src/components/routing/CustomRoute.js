@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react'
+import React, { useMemo } from 'react'
 import { Route } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { useReactOidc, withOidcSecure } from '@axa-fr/react-oidc-context'
