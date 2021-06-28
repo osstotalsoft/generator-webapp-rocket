@@ -256,12 +256,10 @@ const sidebarStyle = theme => {
     },
     appVersion: {
       ...defaultFont,
-      padding: "5px 5px 5px 5px",
-      margin: "0",
-      display: "block",
-      zIndex: "4",
-      color: theme.palette.text.darkGrey,
-      bottom: "0px",
+      padding: '0px 10px',
+      margin: '0',
+      display: 'block',
+      zIndex: '4'
     }
   };
 }
