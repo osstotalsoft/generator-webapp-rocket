@@ -1,7 +1,7 @@
 import styles from 'assets/jss/styles'
 
 const userMenuStyle = theme => {
-  const { boxShadow, defaultFont } = styles(theme)
+  const { boxShadow, defaultFont, menuActiveColor, menuActiveBkColor } = styles(theme)
 
   return {
     collapseWrapper: {
@@ -131,6 +131,7 @@ const userMenuStyle = theme => {
     caret: {
       position: 'relative',
       float: 'right',
+      // right: '-9px',
       transition: 'all 150ms ease-in',
       verticalAlign: 'middle'
     },
@@ -179,6 +180,12 @@ const userMenuStyle = theme => {
       },
       '&,&:hover,&:focus': {
         color: 'inherit'
+      }
+    },
+    menuActiveColor: {
+      '&,&:hover,&:focus': {
+        color: menuActiveColor,
+        backgroundColor: menuActiveBkColor
       }
     }
   }
