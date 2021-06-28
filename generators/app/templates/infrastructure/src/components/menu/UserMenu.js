@@ -30,9 +30,8 @@ import { intersect } from 'utils/functions';
 
 const useStyles = makeStyles(userMenuStyle);
 
-function UserMenu({ miniActive, avatar, language, changeLanguage }) {
+function UserMenu({ drawerOpen, avatar, language, changeLanguage }) {
     const [openAvatar, setOpenAvatar] = useState(false);
-    const [currentMiniActive] = useState(true);
     const classes = useStyles();
     const { t } = useTranslation();
     const location = useLocation();
@@ -108,7 +107,7 @@ function UserMenu({ miniActive, avatar, language, changeLanguage }) {
     const itemText = classes.itemText +
         " " +
         cx({
-            [classes.itemTextMini]: miniActive && currentMiniActive
+            [classes.itemTextMini]: !drawerOpen
         });
     <% if (withMultiTenancy) { %> const displayName = `${userName}${tenantName}` <% } %>
     <% if (!withMultiTenancy) { %> const displayName = userName <% } %>
@@ -142,10 +141,10 @@ function UserMenu({ miniActive, avatar, language, changeLanguage }) {
                     <Collapse in={openAvatar} unmountOnExit classes={{ wrapper: classes.collapseWrapper }}>
                         <List className={classes.list + classes.collapseList}>
                             {userMenuItems.map((userMenu, key) => {
-                                return <UserMenuItem key={key} userMenu={userMenu} miniActive={miniActive} activeRoute={activeRoute} />
+                                return <UserMenuItem key={key} userMenu={userMenu} drawerOpen={drawerOpen} activeRoute={activeRoute} />
                             })}
                             {oidcUser &&
-                                <Tooltip disableHoverListener={!miniActive} title={t('Tooltips.Logout')}>
+                                <Tooltip disableHoverListener={drawerOpen} title={t('Tooltips.Logout')}>
                                     <ListItem className={classes.collapseItem}>
                                         <NavLink to={"/"} className={classes.itemLink} onClick={logoutAction}>
                                         <ListItemIcon className={classes.userItemIcon}><PowerSettingsNew /></ListItemIcon>
@@ -162,17 +161,17 @@ function UserMenu({ miniActive, avatar, language, changeLanguage }) {
                                 <LanguageSelector
                                     language={language}
                                     changeLanguage={changeLanguage}
-                                    miniActive={miniActive}
+                                    drawerOpen={drawerOpen}
                                 />
                             </ListItem>
                             <% if (withMultiTenancy) { %> {!tenantsLoading && myTenants?.length > 1 &&
-                            <Tooltip disableHoverListener={!miniActive} title={t('Tooltips.TenantList')}>
+                            <Tooltip disableHoverListener={drawerOpen} title={t('Tooltips.TenantList')}>
                                 <ListItem className={classes.selectorItem}>
                                     <TenantSelector
                                         tenant={tenant}
                                         tenants={myTenants}
                                         changeTenant={handleTenantChange}
-                                        miniActive={miniActive}
+                                        drawerOpen={drawerOpen}
                                     />
                                 </ListItem>
                             </Tooltip>
@@ -187,7 +186,7 @@ function UserMenu({ miniActive, avatar, language, changeLanguage }) {
 
 UserMenu.propTypes = {
     avatar: PropTypes.string,
-    miniActive: PropTypes.bool.isRequired,
+    drawerOpen: PropTypes.bool.isRequired,
     changeLanguage: PropTypes.func.isRequired,
     language: PropTypes.string.isRequired
 };

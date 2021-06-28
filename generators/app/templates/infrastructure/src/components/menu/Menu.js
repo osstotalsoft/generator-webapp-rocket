@@ -15,7 +15,7 @@ import { intersect } from 'utils/functions';
 
 const useStyles = makeStyles(menuStyle);
 
-function Menu({ miniActive }) {
+function Menu({ drawerOpen }) {
   const classes = useStyles();
   const location = useLocation();
   <%_ if (withRights){ _%>
@@ -41,14 +41,14 @@ function Menu({ miniActive }) {
   return menuItems && <nav>
     <List className={classes.menuList}>
       {menuItems.map((menu, key) => {
-        return <MenuItem key={key} menu={menu} miniActive={miniActive} activeRoute={activeRoute} />;
+        return <MenuItem key={key} menu={menu} drawerOpen={drawerOpen} activeRoute={activeRoute} />;
       })}
     </List>
   </nav>
 }
 
 Menu.propTypes = {
-  miniActive: PropTypes.bool.isRequired
+  drawerOpen: PropTypes.bool.isRequired
 }
 
 export default Menu;

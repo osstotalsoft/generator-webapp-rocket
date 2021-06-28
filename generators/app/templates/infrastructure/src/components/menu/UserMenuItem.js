@@ -8,10 +8,9 @@ import { useTranslation } from 'react-i18next'
 
 const useStyles = makeStyles(userMenuStyle)
 
-const UserMenuItem = ({ userMenu, miniActive, activeRoute }) => {
+const UserMenuItem = ({ userMenu, drawerOpen, activeRoute }) => {
   const classes = useStyles()
   const { t } = useTranslation()
-  const [currentMiniActive] = useState(true);
 
   const navLinkClasses =
     classes.itemLink +
@@ -23,13 +22,13 @@ const UserMenuItem = ({ userMenu, miniActive, activeRoute }) => {
     classes.itemText +
     ' ' +
     cx({
-      [classes.itemTextMini]: miniActive && currentMiniActive
+      [classes.itemTextMini]: !drawerOpen
     })
 
   const text = t(userMenu.text)
 
   return (
-    <Tooltip disableHoverListener={!miniActive} title={text}>
+    <Tooltip disableHoverListener={drawerOpen} title={text}>
       <ListItem className={classes.collapseItem}>
         <NavLink to={userMenu.path} className={navLinkClasses}>
           <ListItemIcon className={classes.userItemIcon}>{userMenu.icon}</ListItemIcon>
@@ -42,7 +41,7 @@ const UserMenuItem = ({ userMenu, miniActive, activeRoute }) => {
 
 UserMenuItem.propTypes = {
   userMenu: PropTypes.object.isRequired,
-  miniActive: PropTypes.bool.isRequired,
+  drawerOpen: PropTypes.bool.isRequired,
   activeRoute: PropTypes.func.isRequired
 }
 
