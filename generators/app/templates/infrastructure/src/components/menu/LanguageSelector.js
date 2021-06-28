@@ -16,24 +16,22 @@ const LanguageSelector = ({ language, changeLanguage, drawerOpen }) => {
     const iconComponent = !drawerOpen ? { IconComponent: EmptyElement } : {}
 
     return (
-        <div className={classes.langSelectorContainer}>
-            <Select
-                className={classes.langSelector}
-                classes={{ selectMenu: classes.langSelectMenu }}
-                value={language}
-                onChange={changeLanguage}
-                {...iconComponent}
-            >
-                <ListItem button value='ro' className={classes.langSelectorItem}>
-                    <Flag name='RO' format='png' pngSize={32} shiny={true} basePath='/static/flags' />
-                    {drawerOpen && <Typography className={classes.langSelectorText}>{'Romana'}</Typography>}
-                </ListItem>
-                <ListItem button value='en' className={classes.langSelectorItem}>
-                    <Flag name='GB' format='png' pngSize={32} shiny={true} basePath='/static/flags' />
-                    {drawerOpen && <Typography className={classes.langSelectorText}>{'English'}</Typography>}
-                </ListItem>
-            </Select>
-        </div>
+        <Select
+            className={classes.langSelectorContainer}
+            classes={{ selectMenu: classes.langSelectMenu, icon: classes.langSelectCaret }}
+            value={language}
+            onChange={changeLanguage}
+            {...iconComponent}
+        >
+            <ListItem button value='ro' className={classes.langSelectorItem}>
+                <Flag name='RO' format='png' pngSize={32} shiny={true} basePath='/static/flags' />
+                {drawerOpen && <Typography className={classes.langSelectorText}>{'Romana'}</Typography>}
+            </ListItem>
+            <ListItem button value='en' className={classes.langSelectorItem}>
+                <Flag name='GB' format='png' pngSize={32} shiny={true} basePath='/static/flags' />
+                {drawerOpen && <Typography className={classes.langSelectorText}>{'English'}</Typography>}
+            </ListItem>
+        </Select>
     )
 }
 

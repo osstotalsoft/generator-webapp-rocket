@@ -14,6 +14,7 @@ import { useReactOidc } from '@axa-fr/react-oidc-context';
 import userMenuConfig from 'constants/userMenuConfig'
 import UserMenuItem from "./UserMenuItem";
 import { useLocation } from 'react-router-dom';
+import { ArrowDropDown, ArrowDropUp } from '@material-ui/icons'
 
 <%_ if (withMultiTenancy) { _%>
 import { useLazyQuery } from '@apollo/client';
@@ -112,75 +113,63 @@ function UserMenu({ drawerOpen, avatar, language, changeLanguage }) {
     <% if (withMultiTenancy) { %> const displayName = `${userName}${tenantName}` <% } %>
     <% if (!withMultiTenancy) { %> const displayName = userName <% } %>
     return (
-        <div className={classes.user}>
-            <ListItemIcon className={classes.photo}>
-                <img src={avatar ? avatar : avatar_default} className={classes.avatarImg} alt='...' />
-            </ListItemIcon>
-            <List className={classes.list}>
-                <ListItem className={classes.item + " " + classes.userItem}>
-                    <NavLink
-                        to={"/"}
-                        className={classes.itemLink + " " + classes.userCollapseButton}
-                        onClick={openCollapseAvatar}
-                    >
-                        <ListItemText
-                            primary={displayName}
-                            secondary={
-                                <b
-                                    className={
-                                        classes.caret + " " + classes.userCaret +
-                                        " " +
-                                        (openAvatar ? classes.caretActive : "")
-                                    }
-                                />
-                            }
-                            disableTypography={true}
-                            className={itemText + " " + classes.userItemText}
-                        />
-                    </NavLink>
-                    <Collapse in={openAvatar} unmountOnExit classes={{ wrapper: classes.collapseWrapper }}>
-                        <List className={classes.list + classes.collapseList}>
-                            {userMenuItems.map((userMenu, key) => {
-                                return <UserMenuItem key={key} userMenu={userMenu} drawerOpen={drawerOpen} activeRoute={activeRoute} />
-                            })}
-                            {oidcUser &&
-                                <Tooltip disableHoverListener={drawerOpen} title={t('Tooltips.Logout')}>
-                                    <ListItem className={classes.collapseItem}>
-                                        <NavLink to={"/"} className={classes.itemLink} onClick={logoutAction}>
-                                        <ListItemIcon className={classes.userItemIcon}><PowerSettingsNew /></ListItemIcon>
-                                            <ListItemText
-                                                primary={t('Tooltips.Logout')}
-                                                disableTypography={true}
-                                                className={itemText}
-                                            />
-                                        </NavLink>
-                                    </ListItem>
-                                </Tooltip>
-                            }
+        <List className={classes.userMenuContainer}>
+            <ListItem className={classes.item + " " + classes.userItem}>
+                <NavLink to={'/'} className={classes.itemLink} onClick={openCollapseAvatar}>
+                    <ListItemIcon className={classes.itemIcon}>
+                        <img src={avatar ? avatar : avatar_default} className={classes.photo} alt='...' />
+                    </ListItemIcon>
+                    <ListItemText
+                        primary={displayName}
+                        secondary={openAvatar ? <ArrowDropUp className={classes.caret} /> : <ArrowDropDown className={classes.caret} />}
+                        disableTypography={true}
+                        className={itemText}
+                    />
+                </NavLink>
+                <Collapse in={openAvatar} unmountOnExit classes={{ wrapper: classes.collapseWrapper }}>
+                    <List className={classes.list + classes.collapseList}>
+                        {userMenuItems.map((userMenu, key) => {
+                            return <UserMenuItem key={key} userMenu={userMenu} drawerOpen={drawerOpen} activeRoute={activeRoute} />
+                        })}
+                        {oidcUser &&
+                            <Tooltip disableHoverListener={drawerOpen} title={t('Tooltips.Logout')}>
+                                <ListItem className={classes.collapseItem}>
+                                    <NavLink to={"/"} className={classes.itemLink} onClick={logoutAction}>
+                                    <ListItemIcon className={classes.itemIcon}>
+                                        <PowerSettingsNew />
+                                    </ListItemIcon>
+                                    <ListItemText
+                                        primary={t('Tooltips.Logout')}
+                                        disableTypography={true}
+                                        className={itemText}
+                                    />
+                                    </NavLink>
+                                </ListItem>
+                            </Tooltip>
+                        }
+                        <ListItem className={classes.selectorItem}>
+                            <LanguageSelector
+                                language={language}
+                                changeLanguage={changeLanguage}
+                                drawerOpen={drawerOpen}
+                            />
+                        </ListItem>
+                        <% if (withMultiTenancy) { %> {!tenantsLoading && myTenants?.length > 1 &&
+                        <Tooltip disableHoverListener={drawerOpen} title={t('Tooltips.TenantList')}>
                             <ListItem className={classes.selectorItem}>
-                                <LanguageSelector
-                                    language={language}
-                                    changeLanguage={changeLanguage}
+                                <TenantSelector
+                                    tenant={tenant}
+                                    tenants={myTenants}
+                                    changeTenant={handleTenantChange}
                                     drawerOpen={drawerOpen}
                                 />
                             </ListItem>
-                            <% if (withMultiTenancy) { %> {!tenantsLoading && myTenants?.length > 1 &&
-                            <Tooltip disableHoverListener={drawerOpen} title={t('Tooltips.TenantList')}>
-                                <ListItem className={classes.selectorItem}>
-                                    <TenantSelector
-                                        tenant={tenant}
-                                        tenants={myTenants}
-                                        changeTenant={handleTenantChange}
-                                        drawerOpen={drawerOpen}
-                                    />
-                                </ListItem>
-                            </Tooltip>
-                            }<% } -%>
-                        </List>
-                    </Collapse>
-                </ListItem>
-            </List>
-        </div >
+                        </Tooltip>
+                        }<% } -%>
+                    </List>
+                </Collapse>
+            </ListItem>
+        </List>
     );
 }
 

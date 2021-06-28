@@ -19,7 +19,7 @@ const MenuItem = ({ menu, drawerOpen, activeRoute }) => {
   const itemText = classes.menuItemText +
     " " +
     cx({
-      [classes.menuItemTextMini]: drawerOpen
+      [classes.menuItemTextMini]: !drawerOpen
     });
 
   const text = t(menu.text)

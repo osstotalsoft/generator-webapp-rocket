@@ -11,7 +11,6 @@ import Sidebar from './layout/Sidebar'
 import Header from './layout/Header'
 import Footer from './layout/Footer'
 
-import Main from './layout/Main'
 import AppRoutes from 'routes/AppRoutes'
 
 import { ToastContainer, CheckInternetConnection } from '@bit/totalsoft_oss.react-mui.kit.core'
