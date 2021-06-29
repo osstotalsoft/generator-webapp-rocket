@@ -11,22 +11,20 @@ describe('generator-webapp-rocket:app', () => {
   const projectName = 'test'
   const gqlAddress = 'localhost:4000'
 
-  beforeAll(() => {
-    return helpers
-      .run(path.join(__dirname, '../generators/app'))
-      .inDir(path.join(__dirname, tempRoot))
-      .withPrompts({
-        projectName,
-        projectDescriptionName: 'test description',
-        gqlAddress,
-        theme: 'default',
-        addHelm: true,
-        identityClientId: 'id',
-        identityScope: '',
-        identityAuthority: 'localhost:5000',
-        packageManager: 'npm'
-      })
-  })
+  beforeAll(() => helpers
+    .run(path.join(__dirname, '../generators/app'))
+    .inDir(path.join(__dirname, tempRoot))
+    .withPrompts({
+      projectName,
+      projectDescriptionName: 'test description',
+      gqlAddress,
+      theme: 'default',
+      addHelm: true,
+      identityClientId: 'id',
+      identityScope: '',
+      identityAuthority: 'localhost:5000',
+      packageManager: 'npm'
+    }))
 
   afterAll(() => {
     rimraf.sync(path.join(__dirname, tempRoot))
