@@ -46,12 +46,12 @@ const TenantSelector = ({ tenant, changeTenant, tenants, miniActive }) => {
                 {...iconComponent}>
                 {
                     tenants.map(t =>
-                        (<ListItem button value={t.code} className={classes.tenantSelectorItem} key={t.externalId}>
-                            <span className={classes.collapseItemMini}>
-                                <PersonOutline />
-                            </span>
-                            <Typography className={classes.tenantSelectorText}>{t.name}</Typography>
-                        </ListItem>))
+                    (<ListItem button value={t.code} className={classes.tenantSelectorItem} key={t.externalId}>
+                        <span className={classes.collapseItemMini}>
+                            <PersonOutline />
+                        </span>
+                        <Typography className={classes.tenantSelectorText}>{t.name}</Typography>
+                    </ListItem>))
                 }
             </Select>
         </div >
