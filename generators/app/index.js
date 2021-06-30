@@ -1,5 +1,6 @@
 'use strict'
 const Generator = require('yeoman-generator')
+require('lodash').extend(Generator.prototype, require('yeoman-generator/lib/actions/install'))
 const chalk = require('chalk')
 const yosay = require('yosay')
 const { concat } = require('ramda')
@@ -69,6 +70,7 @@ module.exports = class extends Generator {
 
     const { packageManager, projectName } = this.answers
 
+    this.log(chalk.greenBright(`All the dependencies will be installed shortly using "${packageManager}" package manager...`))
     // eslint-disable-next-line no-unused-expressions
     packageManager === 'npm'
       ? this.npmInstall(null, {}, { cwd: projectName })
@@ -90,6 +92,6 @@ module.exports = class extends Generator {
   registerClientTransforms() {
     const jsFilter = filter(['**/*.{js,jsx,json,css,html}'], { restore: true })
 
-    this.registerTransformStream([jsFilter, prettierTransform(defaultPrettierOptions), jsFilter.restore])
+    this.queueTransformStream([jsFilter, prettierTransform(defaultPrettierOptions), jsFilter.restore])
   }
 }
