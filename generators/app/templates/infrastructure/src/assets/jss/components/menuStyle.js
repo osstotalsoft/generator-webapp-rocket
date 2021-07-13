@@ -8,7 +8,6 @@ const sidebarStyle = theme => {
   const { defaultFont, menuActiveColor, menuActiveBkColor } = styles(theme);
 
   return {
-
     menuList: {
       marginTop: "15px",
       paddingLeft: "0",
@@ -40,7 +39,7 @@ const sidebarStyle = theme => {
       margin: "10px 15px 0",
       borderRadius: "3px",
       position: "relative",
-      display: "block",
+      display: "flex",
       padding: "10px 15px",
       backgroundColor: "transparent",
       ...defaultFont,
