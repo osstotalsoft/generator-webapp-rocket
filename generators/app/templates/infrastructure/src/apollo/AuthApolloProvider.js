@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { AuthenticationContext } from '@axa-fr/react-oidc-context';
 
-import { client } from './client';
+import { getApolloClient } from './client';
 
 export function AuthApolloProvider({ children }) {
     const oidc = useContext(AuthenticationContext);
@@ -13,7 +13,7 @@ export function AuthApolloProvider({ children }) {
     }
 
     return (
-        <ApolloProvider client={client}>
+        <ApolloProvider client={getApolloClient()}>
             {children}
         </ApolloProvider>)
 }

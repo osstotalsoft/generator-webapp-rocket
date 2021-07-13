@@ -107,7 +107,7 @@ const userMenuStyle = theme => {
       margin: '0px 15px',
       borderRadius: '3px',
       position: 'relative',
-      display: 'block',
+      display: 'flex',
       padding: '10px 15px',
       backgroundColor: 'transparent',
       ...defaultFont,
