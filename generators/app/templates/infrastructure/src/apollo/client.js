@@ -10,6 +10,7 @@ import { env } from "../utils/env"
 import { createUploadLink } from 'apollo-upload-client'
 import omitDeep from 'omit-deep-lodash'
 import { getUserManager } from "@axa-fr/react-oidc-core";
+import { emptyObject } from 'utils/constants'
 
 <%_ if (withSubscription) { _%>
 // Create a WebSocket link:
@@ -22,7 +23,7 @@ const getWsLink = ()=> {
         reconnect: true,
         connectionParams: async () => {
           const userManager = getUserManager()
-          const { access_token } = await userManager.getUser()
+          const { access_token } = await userManager.getUser() ?? emptyObject
 
           return {
             authorization: access_token ? `Bearer ${access_token}` : ""
