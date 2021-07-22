@@ -10,9 +10,9 @@ import { env } from "../utils/env"
 import { createUploadLink } from 'apollo-upload-client'
 import omitDeep from 'omit-deep-lodash'
 import { getUserManager } from "@axa-fr/react-oidc-core";
-import { emptyObject } from 'utils/constants'
 
 <%_ if (withSubscription) { _%>
+import { emptyObject } from 'utils/constants'
 // Create a WebSocket link:
 let wsLink
 const getWsLink = ()=> {  
@@ -51,6 +51,7 @@ const getWsLink = ()=> {
       }),
     })
   }
+  return wsLink
 }
 <%_ } _%>
 
