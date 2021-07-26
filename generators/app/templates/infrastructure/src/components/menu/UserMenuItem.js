@@ -31,7 +31,7 @@ const UserMenuItem = ({ userMenu, drawerOpen, activeRoute }) => {
     <Tooltip disableHoverListener={drawerOpen} title={text}>
       <ListItem className={classes.collapseItem}>
         <NavLink to={userMenu.path} className={navLinkClasses}>
-          <ListItemIcon className={classes.userItemIcon}>{userMenu.icon}</ListItemIcon>
+          <ListItemIcon className={classes.itemIcon}>{userMenu.icon}</ListItemIcon>
           <ListItemText primary={text} disableTypography={true} className={itemText} />
         </NavLink>
       </ListItem>
