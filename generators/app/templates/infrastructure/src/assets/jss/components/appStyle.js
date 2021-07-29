@@ -14,7 +14,7 @@ const appStyle = theme => {
       color: theme.palette.activeColor,
       position: "relative",
       top: "0",
-      minHeight: "100vh",
+      height: "100vh",
       "&:after": {
         display: "table",
         clear: "both",
