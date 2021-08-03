@@ -47,7 +47,7 @@
     "lodash.get": "^4.4.2",
     "moment": "2.29.1",
     "offline-js": "^0.7.19",
-    "oidc-client": "1.11.5",
+    "oidc-client": "1.11.6-beta.1",
     "omit-deep-lodash": "^1.1.5",
     "ramda": "^0.27.1",
     "react": "^17.0.2",
