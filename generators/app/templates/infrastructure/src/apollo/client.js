@@ -70,7 +70,7 @@ const httpLink = createUploadLink({
 
 const authLink = setContext(async (_, { headers }) => {
   const userManager = getUserManager();
-  const { access_token } = await userManager.getUser();
+  const { access_token } = await userManager.getUser() ?? emptyObject
   
   return {
     headers: {
