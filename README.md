@@ -231,6 +231,46 @@ export const MY_TENANTS_QUERY = gql`
 
 In addition, the default `AuthenticationProvider` will be replaced with a specialized one who manages the multi-tenancy logic.
 
+## Husky
+
+[Husky](https://typicode.github.io/husky/#/) is a JavaScript package that allows you to run some code during various parts of your git workflow. Husky leverages git hooks to allow you to hook into various git events such as pre-commit and pre-push.
+
+This application uses husky to trigger lint-staged during the pre-commit hook to automate the tedious part of your workflows, such as formatting with Prettier and/or linting with ESLint. Your code gets fixed before it ever leaves your machine, so you don’t have to wait for your CI to inform you that you forgot to run the formatter or linter.
+
+By design, `husky install` must be run in the same directory as `.git`. If your project is a monorepo, or a single repo contains both the Server and Client in separate folders, husky will expects your `package.json` to be at the root of your project. 
+If you don't want to have anothor package.json in the root, you have to make some changes in both your Server and Client folders:
+
+* Change directory during prepare script and pass a subdirectory
+```
+// clientProject/package.json
+"scripts": {
+    "prepare": "cd .. && husky install clientProject/.husky"
+}
+```
+```
+// serverProject/package.json
+"scripts": {
+    "prepare": "cd .. && husky install serverProject/.husky"
+}
+```
+
+* You'll also need to change directory in one of Client or Server hooks and write for both projects  
+```
+// clientProject/.husky/pre-commit
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+cd serverProject
+npx lint-staged
+npm run test:ci
+
+cd ../clientProject
+npx lint-staged
+npm run test:ci
+```
+
+* Run `npm install` in both projects and that’s it! Now if you try to make a commit, you will see that eslint and prettier will run and fix themselves as you would expect.
+
 ## Deployment
 
 When you are ready you can deploy you application on any platform. This template also includes a pre-configured Dockerfile and optional Helm files.
