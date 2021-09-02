@@ -32,8 +32,9 @@ To upgrade an existing project that was scaffold using this **WebApp Rocket Gene
 8. [Custom hooks](#custom-hooks)
 9. [Internationalization](#internationalization)
 10. [Multi-tenancy](#multi-tenancy)
-11. [Deployment](#deployment)
-12. [Getting To Know Yeoman](#getting-to-know-yeoman)
+11. [Enforcing Coding Conventions](#enforcing-coding-conventions)
+12. [Deployment](#deployment)
+13. [Getting To Know Yeoman](#getting-to-know-yeoman)
 
 ## Generate new project
 
@@ -231,9 +232,9 @@ export const MY_TENANTS_QUERY = gql`
 
 In addition, the default `AuthenticationProvider` will be replaced with a specialized one who manages the multi-tenancy logic.
 
-## Husky
+## Enforcing Coding Conventions
 
-[Husky](https://typicode.github.io/husky/#/) is a JavaScript package that allows you to run some code during various parts of your git workflow. Husky leverages git hooks to allow you to hook into various git events such as pre-commit and pre-push.
+**[Husky](https://typicode.github.io/husky/#/)** is a JavaScript package that allows you to run some code during various parts of your git workflow. Husky leverages git hooks to allow you to hook into various git events such as pre-commit and pre-push.
 
 This application uses husky to trigger lint-staged during the pre-commit hook to automate the tedious part of your workflows, such as formatting with Prettier and/or linting with ESLint. Your code gets fixed before it ever leaves your machine, so you don’t have to wait for your CI to inform you that you forgot to run the formatter or linter.
 
