@@ -1,12 +1,11 @@
 import { gql } from "@apollo/client";
 import { useCallback } from "react";
-import { emptyObject } from "utils/constants";
 import { defaults } from "apollo/defaultCacheData";
 import { useQueryWithErrorHandling } from "./errorHandling";
 
 const getLocalStorageQuery = (key) => gql(`{${key} @client}`);
 
-const safeRead = (data, key) => !data || !data[key] || /^\s*$/.test(data[key]) ? defaults[key] : JSON.parse(data[key]);
+const safeRead = (data, key) => (!data || !data[key] || /^\s*$/.test(data[key]) ? defaults[key] : JSON.parse(data[key])?.value);
 
 const useApolloLocalStorage = (key) => {
     const query = getLocalStorageQuery(key)
@@ -17,9 +16,9 @@ const useApolloLocalStorage = (key) => {
         const objValue = typeof newValue === "function" ? newValue(value) : newValue;
         client.writeQuery({
             query,
-            data: { [key]: JSON.stringify(objValue || emptyObject) }
+            data: { [key]: JSON.stringify({ value : objValue }) }
         })
-    }, [data, client, key]); // eslint-disable-line react-hooks/exhaustive-deps
+    }, [value, data, client, key]);
 
     return [value, handleSetData];
 };
