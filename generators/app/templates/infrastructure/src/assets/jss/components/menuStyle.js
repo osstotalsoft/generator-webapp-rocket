@@ -53,7 +53,7 @@ const sidebarStyle = theme => {
       },
       "&:focus": {
         outline: "none",
-        backgroundColor: theme.palette.sideMenu.focusBgColor,
+        backgroundColor: props => (props.isSubMenu ? "transparent" : theme.palette.sideMenu.focusBgColor),
         boxShadow: "none"
       },
       "&,&:focus": {
@@ -95,6 +95,15 @@ const sidebarStyle = theme => {
         color: menuActiveColor,
         backgroundColor: menuActiveBkColor
       }
+    },
+    paddingLeft: {
+      paddingLeft: "18px"
+    },
+    caret: {
+      position: "relative",
+      float: "right",
+      transition: "all 150ms ease-in",
+      verticalAlign: "middle"
     }
   };
 }
