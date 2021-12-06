@@ -15,7 +15,7 @@ import { intersect } from 'utils/functions';
 
 const useStyles = makeStyles(menuStyle);
 
-function Menu({ drawerOpen }) {
+function Menu({ drawerOpen, withGradient }) {
   const classes = useStyles();
   const location = useLocation();
   <%_ if (withRights){ _%>
@@ -41,14 +41,15 @@ function Menu({ drawerOpen }) {
   return menuItems && <nav>
     <List className={classes.menuList}>
       {menuItems.map((menu, key) => {
-        return <MenuItem key={key} menu={menu} drawerOpen={drawerOpen} activeRoute={activeRoute} />;
+        return <MenuItem key={key} menu={menu} drawerOpen={drawerOpen} activeRoute={activeRoute} withGradient={withGradient} />;
       })}
     </List>
   </nav>
 }
 
 Menu.propTypes = {
-  drawerOpen: PropTypes.bool.isRequired
+  drawerOpen: PropTypes.bool.isRequired,
+  withGradient: PropTypes.bool.isRequired
 }
 
 export default Menu;
