@@ -93,7 +93,7 @@ const sidebarStyle = theme => {
     menuActiveColor: {
       "&,&:hover,&:focus": {
         color: menuActiveColor,
-        background: props => (props.withGradient ? menuActiveBk : menuActiveBkColor)
+        background: ({withGradient}) => withGradient ? menuActiveBk : menuActiveBkColor
       }
     },
     paddingLeft: {
