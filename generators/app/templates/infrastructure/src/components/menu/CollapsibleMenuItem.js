@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Collapse, List } from "@material-ui/core";
 import MenuItem from "./MenuItem";
 
-const CollapsibleMenuItem = ({ menu, drawerOpen, activeRoute }) => {
+const CollapsibleMenuItem = ({ menu, drawerOpen, activeRoute, withGradient }) => {
   const [open, setOpen] = useState(false)
   const toggleSubMenu = useCallback(() => setOpen(current => !current), [])
 
@@ -13,7 +13,7 @@ const CollapsibleMenuItem = ({ menu, drawerOpen, activeRoute }) => {
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List disablePadding>
           {menu?.children?.map((subMenu, key) => (
-            <MenuItem key={key} menu={subMenu} drawerOpen={drawerOpen} activeRoute={activeRoute} isSubMenuItem={true} />
+            <MenuItem key={key} menu={subMenu} drawerOpen={drawerOpen} activeRoute={activeRoute} isSubMenuItem={true} withGradient={withGradient} />
           ))}
         </List>
       </Collapse>
@@ -24,7 +24,8 @@ const CollapsibleMenuItem = ({ menu, drawerOpen, activeRoute }) => {
 CollapsibleMenuItem.propTypes = {
   menu: PropTypes.object.isRequired,
   drawerOpen: PropTypes.bool.isRequired,
-  activeRoute: PropTypes.func.isRequired
+  activeRoute: PropTypes.func.isRequired,
+  withGradient: PropTypes.bool.isRequired
 };
 
 export default CollapsibleMenuItem;

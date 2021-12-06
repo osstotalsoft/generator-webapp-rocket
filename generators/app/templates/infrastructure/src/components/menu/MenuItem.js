@@ -9,11 +9,11 @@ import { useTranslation } from 'react-i18next'
 
 const useStyles = makeStyles(menuStyle);
 
-const MenuItem = ({ menu, drawerOpen, activeRoute, isSubMenuItem, subMenuOpen, onToggleSubMenu }) => {
+const MenuItem = ({ menu, drawerOpen, activeRoute, isSubMenuItem, subMenuOpen, onToggleSubMenu, withGradient }) => {
   const { children, path, icon, text } = menu;
   const isSubMenu = Boolean(children);
 
-  const classes = useStyles({ isSubMenu });
+  const classes = useStyles({ isSubMenu, withGradient });
   const { t } = useTranslation();
 
   const navLinkClasses = classes.menuItemLink +
@@ -61,7 +61,8 @@ MenuItem.propTypes = {
   activeRoute: PropTypes.func,
   isSubMenuItem: PropTypes.bool,
   subMenuOpen: PropTypes.bool,
-  onToggleSubMenu: PropTypes.func
+  onToggleSubMenu: PropTypes.func,
+  withGradient: PropTypes.bool.isRequired
 };
 
 export default MenuItem;

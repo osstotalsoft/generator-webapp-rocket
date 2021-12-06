@@ -61,6 +61,7 @@ function App(props) {
         closeDrawer={handleCloseDrawer}
         changeLanguage={changeLanguage}
         drawerOpen={drawerOpen}
+        withGradient={false}
       />
       <div className={mainPanel} ref={mainPanelRef}>
         <Header drawerOpen={drawerOpen} handleDrawerToggle={handleDrawerToggle} />

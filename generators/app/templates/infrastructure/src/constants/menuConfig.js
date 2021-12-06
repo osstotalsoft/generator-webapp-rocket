@@ -1,6 +1,5 @@
 import React from 'react';
-import Dashboard from '@material-ui/icons/Dashboard';
-import Settings from '@material-ui/icons/Settings';
+import {Dashboard,Settings, Security, Lock } from '@material-ui/icons'
 <%_ if (withRights) { _%>
 import identityUserRoles from 'constants/identityUserRoles';
 import permissions from 'constants/permissions';

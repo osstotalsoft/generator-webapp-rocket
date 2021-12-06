@@ -16,7 +16,7 @@ import { intersect } from 'utils/functions';
 
 const useStyles = makeStyles(menuStyle);
 
-function Menu({ drawerOpen }) {
+function Menu({ drawerOpen, withGradient }) {
   const classes = useStyles();
   const location = useLocation();
   <%_ if (withRights){ _%>
@@ -42,7 +42,7 @@ function Menu({ drawerOpen }) {
   return menuItems && <nav>
     <List className={classes.menuList}>
       {menuItems.map((menu, key) => {
-        const menuItemProps = { key, menu, drawerOpen, activeRoute };
+        const menuItemProps = { key, menu, drawerOpen, activeRoute, withGradient };
         return menu.children ? <CollapsibleMenuItem {...menuItemProps} /> : <MenuItem {...menuItemProps} />;
       })}
     </List>
@@ -50,7 +50,8 @@ function Menu({ drawerOpen }) {
 }
 
 Menu.propTypes = {
-  drawerOpen: PropTypes.bool.isRequired
+  drawerOpen: PropTypes.bool.isRequired,
+  withGradient: PropTypes.bool.isRequired
 }
 
 export default Menu;

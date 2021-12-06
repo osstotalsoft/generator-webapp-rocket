@@ -5,7 +5,7 @@
 import styles from "assets/jss/styles";
 
 const menuStyle = theme => {
-  const { defaultFont, menuActiveColor, menuActiveBkColor } = styles(theme);
+  const { defaultFont, menuActiveColor, menuActiveBkColor, menuActiveBk } = styles(theme);
 
   return {
     menuList: {
@@ -93,7 +93,7 @@ const menuStyle = theme => {
     menuActiveColor: {
       "&,&:hover,&:focus": {
         color: menuActiveColor,
-        backgroundColor: menuActiveBkColor
+        background: ({withGradient}) => withGradient ? menuActiveBk : menuActiveBkColor
       }
     },
     paddingLeft: {

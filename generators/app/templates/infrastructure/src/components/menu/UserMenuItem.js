@@ -8,8 +8,8 @@ import { useTranslation } from 'react-i18next'
 
 const useStyles = makeStyles(userMenuStyle)
 
-const UserMenuItem = ({ userMenu, drawerOpen, activeRoute }) => {
-  const classes = useStyles()
+const UserMenuItem = ({ userMenu, drawerOpen, activeRoute, withGradient }) => {
+  const classes = useStyles({withGradient})
   const { t } = useTranslation()
 
   const navLinkClasses =
@@ -42,7 +42,8 @@ const UserMenuItem = ({ userMenu, drawerOpen, activeRoute }) => {
 UserMenuItem.propTypes = {
   userMenu: PropTypes.object.isRequired,
   drawerOpen: PropTypes.bool.isRequired,
-  activeRoute: PropTypes.func.isRequired
+  activeRoute: PropTypes.func.isRequired,
+  withGradient: PropTypes.bool.isRequired
 }
 
 export default UserMenuItem

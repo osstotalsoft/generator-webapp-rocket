@@ -1,7 +1,7 @@
 import styles from 'assets/jss/styles'
 
 const userMenuStyle = theme => {
-  const { boxShadow, defaultFont, menuActiveColor, menuActiveBkColor } = styles(theme)
+  const { boxShadow, defaultFont, menuActiveColor, menuActiveBkColor, menuActiveBk } = styles(theme)
 
   return {
     collapseWrapper: {
@@ -185,7 +185,7 @@ const userMenuStyle = theme => {
     menuActiveColor: {
       '&,&:hover,&:focus': {
         color: menuActiveColor,
-        backgroundColor: menuActiveBkColor
+        background: ({withGradient}) => withGradient ? menuActiveBk : menuActiveBkColor
       }
     }
   }

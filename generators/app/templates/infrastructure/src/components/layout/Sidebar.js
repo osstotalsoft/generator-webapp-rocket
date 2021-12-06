@@ -37,7 +37,7 @@ SidebarWrapper.propTypes = {
   children: PropTypes.array.isRequired
 }
 
-function Sidebar({ logo, logoText, drawerOpen, changeLanguage, closeDrawer }) {
+function Sidebar({ logo, logoText, drawerOpen, changeLanguage, closeDrawer, withGradient }) {
   const classes = useStyles()
   const { i18n, t } = useTranslation()
 
@@ -97,8 +97,8 @@ function Sidebar({ logo, logoText, drawerOpen, changeLanguage, closeDrawer }) {
         >
           {brand}
           <SidebarWrapper className={sidebarWrapper}>
-            <UserMenu drawerOpen={drawerOpen} changeLanguage={changeLanguage} language={i18n.language} />
-            <Menu drawerOpen={drawerOpen} />
+            <UserMenu drawerOpen={drawerOpen} changeLanguage={changeLanguage} language={i18n.language} withGradient={withGradient} />
+            <Menu drawerOpen={drawerOpen} withGradient={withGradient} />
           </SidebarWrapper>
           {appVersion}
         </Drawer>
@@ -114,8 +114,8 @@ function Sidebar({ logo, logoText, drawerOpen, changeLanguage, closeDrawer }) {
         >
           {brand}
           <SidebarWrapper className={sidebarWrapper}>
-            <UserMenu drawerOpen={drawerOpen} changeLanguage={changeLanguage} language={i18n.language} />
-            <Menu drawerOpen={drawerOpen} />
+            <UserMenu drawerOpen={drawerOpen} changeLanguage={changeLanguage} language={i18n.language} withGradient={withGradient} />
+            <Menu drawerOpen={drawerOpen} withGradient={withGradient} />
           </SidebarWrapper>
           {appVersion}
         </Drawer>
@@ -129,7 +129,8 @@ Sidebar.propTypes = {
   closeDrawer: PropTypes.func.isRequired,
   changeLanguage: PropTypes.func.isRequired,
   logo: PropTypes.string,
-  logoText: PropTypes.string
+  logoText: PropTypes.string,
+  withGradient: PropTypes.bool.isRequired
 }
 
 //router is needed for re-rendering
