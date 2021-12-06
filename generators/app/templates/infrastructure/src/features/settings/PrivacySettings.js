@@ -1,13 +1,13 @@
 import React, { Fragment } from 'react'
 import { Typography, Grid } from '@material-ui/core'
 
-function Settings() {
+function PrivacySettings() {
   return (
     <Fragment>
-      <Typography>This is my settings page...</Typography>
+      <Typography>Here you can configure your privacy settings...</Typography>
       <Grid>Only certain users can see this page</Grid>
     </Fragment>
   )
 }
 
-export default Settings
+export default PrivacySettings
