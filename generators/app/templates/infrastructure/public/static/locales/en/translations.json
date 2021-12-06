@@ -14,7 +14,9 @@
   "Forbidden": "Not allowed to see this page!",
   "NavBar": {
     "Dashboard": "Dashboard",
-    "Settings": "Settings"
+    "Settings": "Settings",
+    "Privacy": "Privacy",
+    "Security": "Security"
   },
   "Tooltips": {
     "Logout": "Logout",

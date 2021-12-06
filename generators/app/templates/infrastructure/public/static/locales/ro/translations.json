@@ -7,7 +7,8 @@
   "NavBar": {
     "Dashboard": "Panou central",
     "Settings": "Setari",
-    "User": "Profil"
+    "Privacy": "Confidentialitate",
+    "Security": "Securitate"
   },
   "Tooltips": {
     "Logout": "Iesire",
