@@ -1,6 +1,6 @@
 import styles from "assets/jss/styles";
 
-const langSelectorStyle = theme => {
+const tenantSelectorStyle = theme => {
     const { defaultFont } = styles(theme);
 
     return {
@@ -53,4 +53,4 @@ const langSelectorStyle = theme => {
         }
     };
 }
-export default langSelectorStyle;
+export default tenantSelectorStyle;
