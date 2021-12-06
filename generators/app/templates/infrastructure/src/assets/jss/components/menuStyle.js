@@ -4,7 +4,7 @@
 
 import styles from "assets/jss/styles";
 
-const sidebarStyle = theme => {
+const menuStyle = theme => {
   const { defaultFont, menuActiveColor, menuActiveBkColor } = styles(theme);
 
   return {
@@ -108,4 +108,4 @@ const sidebarStyle = theme => {
   };
 }
 
-export default sidebarStyle;
+export default menuStyle;
