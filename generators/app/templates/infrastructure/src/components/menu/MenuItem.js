@@ -62,7 +62,7 @@ MenuItem.propTypes = {
   isSubMenuItem: PropTypes.bool,
   subMenuOpen: PropTypes.bool,
   onToggleSubMenu: PropTypes.func,
-  withGradient: PropTypes.bool
+  withGradient: PropTypes.bool.isRequired
 };
 
 export default MenuItem;
