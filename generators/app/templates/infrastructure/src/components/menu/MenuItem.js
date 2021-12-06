@@ -11,7 +11,7 @@ const useStyles = makeStyles(menuStyle);
 
 const MenuItem = ({ menu, drawerOpen, activeRoute, isSubMenuItem, subMenuOpen, onToggleSubMenu }) => {
   const { children, path, icon, text } = menu;
-  const isSubMenu = children ? true : false;
+  const isSubMenu = Boolean(children);
 
   const classes = useStyles({ isSubMenu });
   const { t } = useTranslation();
