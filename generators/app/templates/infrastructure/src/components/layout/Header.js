@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import menuConfig from 'constants/menuConfig'
 import { reduce } from 'ramda'
+import { emptyArray } from 'utils/constants'
 import { useHeader } from 'providers/AreasProvider'
 // material-ui components
 import { makeStyles, AppBar, Toolbar, Hidden, Typography } from '@material-ui/core'
@@ -20,8 +21,8 @@ import headerStyle from 'assets/jss/components/headerStyle'
 
 const useStyles = makeStyles(headerStyle)
 
-const flatten = (arr, value) => arr.concat(value).concat(value.children ? flattenConfig(value.children) : [])
-const flattenConfig = config =>  reduce(flatten, [], config)
+const flatten = (arr, value) => arr.concat(value).concat(value.children ? flattenConfig(value.children) : emptyArray)
+const flattenConfig = config =>  reduce(flatten, emptyArray, config)
 
 function Header({ drawerOpen, handleDrawerToggle }) {
     const { t } = useTranslation()
