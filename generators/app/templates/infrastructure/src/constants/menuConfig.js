@@ -22,11 +22,11 @@ const menuItems = [
         <%_ if (withRights) { _%>roles:[admin, user<%_ if (withRights && withMultiTenancy) { _%>, globalAdmin<%}%>], 
         rights:[viewSettings], <%_}_%>
         children: [
-          { icon: <Security />, text: 'NavBar.Security', path: '/security', name: 'Security' },
+          { icon: <Security />, text: 'NavBar.Security', path: '/settings/security', name: 'Security' },
           {
             icon: <Lock />,
             text: 'NavBar.Privacy',
-            path: '/privacy',
+            path: '/settings/privacy',
             name: 'Privacy'
           }
         ]
