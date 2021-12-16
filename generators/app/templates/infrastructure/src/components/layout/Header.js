@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import menuConfig from 'constants/menuConfig'
+import { reduce } from 'ramda'
 import { useHeader } from 'providers/AreasProvider'
 // material-ui components
 import { makeStyles, AppBar, Toolbar, Hidden, Typography } from '@material-ui/core'
@@ -19,6 +20,9 @@ import headerStyle from 'assets/jss/components/headerStyle'
 
 const useStyles = makeStyles(headerStyle)
 
+const flatten = (arr, value) => arr.concat(value).concat(value.children ? flattenConfig(value.children) : [])
+const flattenConfig = config =>  reduce(flatten, [], config)
+
 function Header({ drawerOpen, handleDrawerToggle }) {
     const { t } = useTranslation()
     const location = useLocation()
@@ -27,7 +31,7 @@ function Header({ drawerOpen, handleDrawerToggle }) {
 
     const makeBrand = pathname => {
         var name
-        menuConfig.map(menu => {
+        flattenConfig(menuConfig).map(menu => {
             if (menu.path === pathname) {
                 name = menu.name
             }
