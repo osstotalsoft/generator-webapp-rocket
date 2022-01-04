@@ -54,12 +54,11 @@
     "react-dom": "16.14.0",
     "react-flags": "^0.1.18",
     "react-i18next": "^11.15.3",
-    "react-router-dom": "^6.2.1",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "^5.0.0",
     "react-super-responsive-table": "^5.2.0",
     "simplebar-react": "^2.3.6",
     "subscriptions-transport-ws": "^0.11.0",
-    "svgo": "^2.8.0",
     "url-search-params-polyfill": "^8.1.1",
     "uuidv4": "^6.2.12"
   },
@@ -76,7 +75,8 @@
     "husky": "^7.0.4",
     "jest-junit": "^13.0.0",
     "prettier": "^2.5.1",
-    "react-app-rewired": "^2.1.11"
+    "react-app-rewired": "^2.1.11",
+    "svgo": "^2.8.0"
   },
   "lint-staged": {
     "**/*.+(js|md|css|graphql|json)": "prettier --write"
