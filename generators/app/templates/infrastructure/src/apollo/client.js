@@ -1,7 +1,7 @@
 import { ApolloClient, ApolloLink,<% if (withSubscription) { %>split, <% } %> InMemoryCache } from "@apollo/client"
 <%_ if (withSubscription) { _%>
 import { WebSocketLink } from "@apollo/client/link/ws"
-import { getMainDefinition } from "apollo-utilities"
+import { getMainDefinition } from "@apollo/client/utilities"
 <%_ } _%>
 import { onError } from "@apollo/client/link/error"
 import { RetryLink } from '@apollo/client/link/retry';

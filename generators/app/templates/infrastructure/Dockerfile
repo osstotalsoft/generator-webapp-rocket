@@ -13,7 +13,7 @@ COPY . ./
 RUN npm run build
 
 # production environment
-FROM node:14
+FROM node:14-slim
 
 ARG imageUser=appuser
 ARG imageUserGroup=appgroup

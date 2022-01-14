@@ -12,12 +12,9 @@
 
 First, install [Yeoman](http://yeoman.io) and @totalsoft/generator-graphql-rocket using [npm](https://www.npmjs.com/) (we assume you have pre-installed [NodeJS Latest LTS Version](https://nodejs.org/). Old versions of NodeJS are also supported.)
 
-> ⚠⚠ For now, this generator only works with **npm version 6.14.13**. Use the following command to install it:
->
->`npm install -g npm@6.14.13`
-> 
-> We are working to fix this as soon as possible.
+> ⚠ Use the npm version supported by your installed NodeJS version.
 
+> e.g. NodeJS Latest LTS Version: 14.17.1 (includes npm 6.14.13)
 
 ```bash
 npm install -g yo
@@ -136,26 +133,29 @@ The default prettier config file can be found here: [.prettierrc](generators/app
 
 ## Enforcing Coding Conventions
 
-  Ensuring code quality is very important for a maintainable and scalable application. As a default, this generator automatically will install and configure ESLint and Prettier in your project, for a consistent code formatting. ( Read more about this in [Code formatting](#code-formatting) section. ).
-  
-  To help you enforce this standards, the generator also comes with this great library called **Husky** ( 🐶 woof! ).
-  
+Ensuring code quality is very important for a maintainable and scalable application. As a default, this generator automatically will install and configure ESLint and Prettier in your project, for a consistent code formatting. ( Read more about this in [Code formatting](#code-formatting) section. ).
+
+To help you enforce this standards, the generator also comes with this great library called **Husky** ( 🐶 woof! ).
+
 **[Husky](https://typicode.github.io/husky/#/)** is a JavaScript package that allows you to run some code during various parts of your git workflow. Husky leverages git hooks to allow you to hook into various git events such as pre-commit and pre-push.
 
 This application uses husky to trigger lint-staged during the pre-commit hook to automate the tedious part of your workflows, such as formatting with Prettier and/or linting with ESLint. Your code gets fixed before it ever leaves your machine, so you don’t have to wait for your CI to inform you that you forgot to run the formatter or linter.
 
-  ### ⚠ Configuring a monorepo with multiple packages
+### ⚠ Configuring a monorepo with multiple packages
+
 By design, `husky install` must be run in the same directory as `.git`. If your project is a monorepo containing multiple packages, for example a Server and Client sub-folders, husky will expects your `package.json` to be at the root of your project.
 
 If you don't want to add a separate `package.json` in your root just for this, you need to change the husky configurations in your Server and Client projects as follows:
 
-* Change directory during prepare script and pass a subdirectory
+- Change directory during prepare script and pass a subdirectory
+
 ```
 // clientProject/package.json
 "scripts": {
     "prepare": "cd .. && husky install clientProject/.husky"
 }
 ```
+
 ```
 // serverProject/package.json
 "scripts": {
@@ -163,7 +163,8 @@ If you don't want to add a separate `package.json` in your root just for this, y
 }
 ```
 
-* You'll also need to change directory in one of Client or Server hooks and write for both projects  
+- You'll also need to change directory in one of Client or Server hooks and write for both projects
+
 ```
 // clientProject/.husky/pre-commit
 #!/bin/sh
@@ -178,7 +179,7 @@ npx lint-staged
 npm run test:ci
 ```
 
-* Run `npm install` in both projects and that’s it! Now if you try to make a commit, you will see that eslint and prettier will run and fix themselves as you would expect.
+- Run `npm install` in both projects and that’s it! Now if you try to make a commit, you will see that eslint and prettier will run and fix themselves as you would expect.
 
 ## Authentication
 
@@ -201,7 +202,7 @@ If you want to use another authentication service, the following files must be m
 ⚠ **RECOMMENDATION!** ⚠
 It is HIGHLY recommended to use `<CustomRoute />` component when defining a new route. This is an enhanced version of the basic `react-router-dom`'s `<Route />` component. In addition, it allows a more deeper customization of a route and by default it comes with the following configuration parameters:
 
-- <b>isPrivate</b>: if set to True, allows only the logged in users to access the route. 
+- <b>isPrivate</b>: if set to True, allows only the logged in users to access the route.
 - <b>roles<b/>: a list of predefined roles. For more details see [Authorization](#authorization);
 - <b>rights<b/>: a list of predefined rights. For more details see [Authorization](#authorization);
 - <b>fullWidth</b>: if set to True, it removes the margins and paddings of the main content of the application screen
