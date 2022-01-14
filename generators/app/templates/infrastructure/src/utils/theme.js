@@ -5,6 +5,7 @@ import { theme as blueTheme } from '@bit/totalsoft_oss.react-mui.themes.blue-the
 import { theme as orangeTheme } from '@bit/totalsoft_oss.react-mui.themes.orange-theme'
 import { theme as redTheme } from '@bit/totalsoft_oss.react-mui.themes.red-theme'
 import { theme as vividOrangeTheme } from '@bit/totalsoft_oss.react-mui.themes.vivid-orange-theme'
+import { theme as lightBlueTheme } from '@bit/totalsoft_oss.react-mui.themes.light-blue-theme'
 
 import { createTheme } from '@material-ui/core'
 
@@ -21,6 +22,8 @@ const getTheme = () => {
       return redTheme
     case 'vividOrange':
       return vividOrangeTheme
+    case 'lightBlue':
+      return lightBlueTheme
     default:
       return defaultTheme
   }

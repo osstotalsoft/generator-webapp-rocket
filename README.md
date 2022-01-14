@@ -12,9 +12,12 @@
 
 First, install [Yeoman](http://yeoman.io) and @totalsoft/generator-graphql-rocket using [npm](https://www.npmjs.com/) (we assume you have pre-installed [NodeJS Latest LTS Version](https://nodejs.org/). Old versions of NodeJS are also supported.)
 
->⚠ Use the npm version supported by your installed NodeJS version. 
+> ⚠⚠ For now, this generator only works with **npm version 6.14.13**. Use the following command to install it:
+>
+>`npm install -g npm@6.14.13`
+> 
+> We are working to fix this as soon as possible.
 
->e.g. NodeJS Latest LTS Version: 14.17.1 (includes npm 6.14.13)
 
 ```bash
 npm install -g yo

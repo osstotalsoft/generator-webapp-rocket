@@ -38,6 +38,7 @@ const menuStyle = theme => {
       transition: "all 300ms linear",
       margin: "10px 15px 0",
       borderRadius: "3px",
+      alignItems: 'flex-start',
       position: "relative",
       display: "flex",
       padding: "10px 15px",
