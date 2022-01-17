@@ -5,9 +5,12 @@
     "node": true
   },
   "extends": ["eslint:recommended", "plugin:react/recommended", "plugin:jest/recommended"],
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
   "parserOptions": {
     "requireConfigFile": false,
+    "babelOptions": {
+      "presets": ["@babel/preset-react"]
+    },
     "ecmaFeatures": {
       "experimentalObjectRestSpread": true,
       "jsx": true
