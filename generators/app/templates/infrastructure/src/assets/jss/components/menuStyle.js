@@ -38,9 +38,9 @@ const menuStyle = theme => {
       transition: "all 300ms linear",
       margin: "10px 15px 0",
       borderRadius: "3px",
-      alignItems: 'flex-start',
       position: "relative",
       display: "flex",
+      alignItems: "center",
       padding: "10px 15px",
       backgroundColor: "transparent",
       ...defaultFont,
@@ -67,7 +67,6 @@ const menuStyle = theme => {
       height: "24px",
       float: "left",
       position: "inherit",
-      top: "3px",
       textAlign: "center",
       verticalAlign: "middle",
       opacity: "0.8"
@@ -84,7 +83,10 @@ const menuStyle = theme => {
       display: "block",
       height: "auto",
       whiteSpace: "nowrap",
-      fontWeight: "bold"
+      fontWeight: "bold",
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+      width: "100%"
     },
     menuItemTextMini: {
       transform: "translate3d(-25px, 0, 0)",
