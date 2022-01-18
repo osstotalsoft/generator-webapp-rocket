@@ -75,6 +75,7 @@
     "eslint-plugin-react-hooks": "^4.3.0",
     "husky": "^7.0.4",
     "jest-junit": "^13.0.0",
+    "mini-css-extract-plugin": "2.4.5",
     "prettier": "^2.5.1",
     "react-app-rewired": "^2.1.11",
     "react-error-overlay": "6.0.9"
