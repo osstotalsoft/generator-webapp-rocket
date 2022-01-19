@@ -28,14 +28,14 @@ function EmptyElement() {
     return <span></span>
 }
 
-const TenantSelector = ({ tenant, changeTenant, tenants, miniActive }) => {
+const TenantSelector = ({ tenant, changeTenant, tenants, drawerOpen }) => {
     const classes = useStyles();
     const handleChange = useCallback(({ target: { value } }) => {
         const newTenant = tenants.find(t => t.code.toUpperCase() === value.toUpperCase())
         changeTenant(newTenant)
     }, [changeTenant, tenants])
 
-    const iconComponent = miniActive ? { IconComponent: EmptyElement } : {}
+    const iconComponent = !drawerOpen ? { IconComponent: EmptyElement } : {}
 
     return (
         <div className={classes.tenantSelectorContainer}>
@@ -62,7 +62,7 @@ TenantSelector.propTypes = {
     changeTenant: PropTypes.func.isRequired,
     tenant: PropTypes.object,
     tenants: PropTypes.array.isRequired,
-    miniActive: PropTypes.bool.isRequired
+    drawerOpen: PropTypes.bool.isRequired
 }
 
 export default TenantSelector;
