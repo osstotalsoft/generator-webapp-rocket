@@ -20,9 +20,6 @@ describe('generator-webapp-rocket:app', () => {
       gqlAddress,
       theme: 'default',
       addHelm: true,
-      identityClientId: 'id',
-      identityScope: '',
-      identityAuthority: 'localhost:5000',
       packageManager: 'npm'
     }))
 

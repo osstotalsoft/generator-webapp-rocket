@@ -30,19 +30,18 @@ module.exports = class extends Generator {
   writing() {
     if (!this.isLatest) return
 
-    const { projectName, addHelm, withRights, withMultiTenancy, packageManager, helmChartName } = this.answers
+    const { projectName, addHelm, withRights, withMultiTenancy, packageManager, helmChartName, addQuickStart } = this.answers
 
     const templatePath = this.templatePath('infrastructure/**/*')
     const destinationPath = this.destinationPath(projectName)
 
     let ignoreFiles = ['**/.npmignore', '**/.gitignore-template', '**/helm/**']
-    if (!withRights) ignoreFiles = concat(['**/hooks/rights.js', '**/constants/permissions.js', '**/constants/identityUserRoles.js'], ignoreFiles)
+    if (!withRights)
+      ignoreFiles = concat(['**/hooks/rights.js', '**/constants/permissions.js', '**/constants/identityUserRoles.js'], ignoreFiles)
     if (withMultiTenancy) ignoreFiles = concat(['**/AuthenticationProvider.js'], ignoreFiles)
-    else
-      ignoreFiles = concat(
-        ['**/tenantSelectorStyle.js', '**/TenantSelector.js', '**/TenantAuthenticationProvider.js'],
-        ignoreFiles
-      )
+    else ignoreFiles = concat(['**/tenantSelectorStyle.js', '**/TenantSelector.js', '**/TenantAuthenticationProvider.js'], ignoreFiles)
+
+    if (!addQuickStart) ignoreFiles = concat(['**/features/**', '**/README.md'], ignoreFiles)
 
     const packageManagerVersion = packageManager === 'npm' ? '7.16.0' : packageManager === 'yarn' ? '1.22.4' : '7.16.0'
 
@@ -75,8 +74,8 @@ module.exports = class extends Generator {
     packageManager === 'npm'
       ? this.npmInstall(null, {}, { cwd: projectName })
       : packageManager === 'yarn'
-        ? this.yarnInstall(null, {}, { cwd: projectName })
-        : this.npmInstall(null, {}, { cwd: projectName })
+      ? this.yarnInstall(null, {}, { cwd: projectName })
+      : this.npmInstall(null, {}, { cwd: projectName })
   }
 
   end() {
