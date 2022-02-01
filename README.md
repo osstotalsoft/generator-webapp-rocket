@@ -61,12 +61,10 @@ You will be prompted to introduce the following information:
 5. Application theme. There is a list of available themes you can choose from.
 6. Whether to generate default helm files or not.
 7. If you choose to include default helm files you would also be prompted to specify a name for your helm chart. A valid helm chart name, only includes lower case letters, digits and '-' separators! No special characters and whitespace are allowed and do not start or end with a separator!
-8. Identity client name, configured in Identity SaaS for your new application.
-9. Identity scopes.
-10. Identity authority.
-11. Use rights. By default is set to false. This will also generate a `GET_USER_DATA` query that loads the users rights. (see the query below)
-12. Include multi-tenancy. By default is set to false.
-13. What package manager you wish to use to install the application dependencies. (npm or yarn).
+8. Use rights. By default is set to false. This will also generate a `GET_USER_DATA` query that loads the users rights. (see the query below)
+9. Include multi-tenancy. By default is set to false.
+10. Would you like to include quick start examples? If so, some end to end examples will be included in your new generated project to help you get started.
+11. What package manager you wish to use to install the application dependencies. (npm or yarn).
 
 If you would like to start the application, simply run `npm start` in the newly created folder, otherwise you can begin editing and writing your application!
 
@@ -185,6 +183,15 @@ npm run test:ci
 
 By default, the application uses <b>Identity SaaS</b>. See [AxaGuilDEv/react-oidc](https://github.com/AxaGuilDEv/react-oidc).  
 The authentication is executed using a secure token which will also contain information about the logged user like: user data and roles.
+
+In order to connect your new application to an identity server, the following configuration variables must be filled in `.env` file:
+```
+IDENTITY_API_URL -> Identity API url, your Identity server API url 
+
+IDENTITY_AUTHORITY -> Identity authority
+
+IDENTITY_OPENID_CONFIGURATION -> Identity openId configuration
+```
 
 A user can have one or more roles from the following list:
 
