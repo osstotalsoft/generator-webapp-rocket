@@ -66,24 +66,6 @@ module.exports = [
     default: prompts => prompts.projectName.toLowerCase().replace('_', '-')
   },
   {
-    type: 'input',
-    name: 'identityClientId',
-    message: 'What is your Identity client name?',
-    default: ''
-  },
-  {
-    type: 'input',
-    name: 'identityScope',
-    message: 'What identity scopes?',
-    default: ''
-  },
-  {
-    type: 'input',
-    name: 'identityAuthority',
-    message: 'And the identity authority link?',
-    default: ''
-  },
-  {
     type: 'confirm',
     name: 'withRights',
     message: 'Would you like to use and implement rights?',
@@ -93,6 +75,12 @@ module.exports = [
     type: 'confirm',
     name: 'withMultiTenancy',
     message: 'Would you like to use and implement multi-tenancy?',
+    default: false
+  },
+  {
+    type: 'confirm',
+    name: 'addQuickStart',
+    message: 'Would you like to include quick start examples?',
     default: false
   },
   {
