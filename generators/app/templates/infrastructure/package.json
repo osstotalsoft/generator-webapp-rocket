@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.5.6",
-    "@axa-fr/react-oidc-context": "^3.1.7",
+    "@axa-fr/react-oidc-context": "3.1.6",
     "@bit/totalsoft_oss.react-mui.kit.core": "^2.9.55",
     "@bit/totalsoft_oss.react-mui.styles": "^2.9.55",
     "@bit/totalsoft_oss.react-mui.themes.blue-theme": "^2.9.55",
