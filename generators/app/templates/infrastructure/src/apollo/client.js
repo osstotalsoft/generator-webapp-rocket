@@ -1,6 +1,7 @@
 import { ApolloClient, ApolloLink,<% if (withSubscription) { %>split, <% } %> InMemoryCache } from "@apollo/client"
 <%_ if (withSubscription) { _%>
-import { WebSocketLink } from "@apollo/client/link/ws"
+import { GraphQLWsLink } from "@apollo/client/link/subscriptions";
+import { createClient } from "graphql-ws";
 import { getMainDefinition } from "@apollo/client/utilities"
 <%_ } _%>
 import { onError } from "@apollo/client/link/error"
@@ -17,39 +18,32 @@ import { emptyObject } from 'utils/constants'
 let wsLink
 const getWsLink = ()=> {  
   if (!wsLink) {
-    wsLink = new WebSocketLink({
-      uri: `${env.REACT_APP_GQL_WS_PROTOCOL}://${env.REACT_APP_GQL}/graphql`,
-      options: {
-        reconnect: true,
-        connectionParams: async () => {
-          const userManager = getUserManager()
-          const { access_token } = await userManager.getUser() ?? emptyObject
-
-          return {
-            authorization: access_token ? `Bearer ${access_token}` : ""
-          }
-        },
-        connectionCallback: (error) => {
-          if (!error)
-            return;
-
-          console.log(`[Subscription error]: ${error.message}`)
-          if (error.message === 'jwt expired') {
-            // Close old websocket because a new one was created when the token expired
-            link.subscriptionClient.close(true, false)
-          }
+    const wsClient = createClient({
+      url: `${env.REACT_APP_GQL_WS_PROTOCOL}://${env.REACT_APP_GQL}/graphql`,
+      connectionParams: async () => {
+        const userManager = getUserManager()
+        const { access_token } = await userManager.getUser() ?? emptyObject
+        return {
+          authorization: access_token ? `Bearer ${access_token}` : ""
         }
       },
-      onError: onError(({ graphQLErrors, networkError }) => {
-        if (graphQLErrors)
-          graphQLErrors.map(({ message, locations, path }) =>
-            console.log(
-              `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-            )
-          )
-        if (networkError) console.log(`[Network error]: ${networkError}`)
-      }),
+      on: {
+        closed: event => {
+          console.log(`GraphQL WebSocket closed!: ${event.code} Reason: ${event.reason}`)
+        } 
+      }
     })
+    wsLink = new GraphQLWsLink(wsClient)
+    wsLink.setOnError(
+      onError(({ graphQLErrors, networkError }) => {
+      if (graphQLErrors)
+        graphQLErrors.map(({ message, locations, path }) =>
+          console.log(
+            `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+          )
+        )
+      if (networkError) console.log(`[Network error]: ${networkError}`)
+    }))
   }
   return wsLink
 }
