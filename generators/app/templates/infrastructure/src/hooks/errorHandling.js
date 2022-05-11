@@ -36,13 +36,13 @@ export function useClientQueryWithErrorHandling() {
 
 export const useError = () => {
   const addToast = useToast();
-  const generateErrorMessage = (error) => `${error.extensions.code} - ${error.message}`;
+  const generateErrorMessage = (error) => `${error?.extensions?.code} - ${error?.message}`;
   const generateSimpleErrorMessage = (message) => `There is a problem communicating with the server. ${message}`;
-  const addErrorToast = useCallback((message) => addToast(generateSimpleErrorMessage(message), 'error', false), [addToast]);
+  const addErrorToast = useCallback((errorMessage) => addToast(generateSimpleErrorMessage(errorMessage), 'error', false), [addToast]);
 
   return useCallback(error => {
     if (!error?.graphQLErrors && !error?.networkError?.result?.errors) {
-      addErrorToast(generateSimpleErrorMessage(error.message));
+      addErrorToast(error?.message);
       return
     }
 
@@ -50,7 +50,7 @@ export const useError = () => {
     graphQLErrors.forEach(err => {
       err?.extensions?.code
         ? addErrorToast(generateErrorMessage(err))
-        : addErrorToast(generateSimpleErrorMessage(err.message));
+        : addErrorToast(err?.message);
     });
 
     const networkErrors = error?.networkError?.result?.errors ?? []
