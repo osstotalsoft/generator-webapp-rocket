@@ -17,17 +17,33 @@ import { emptyObject } from 'utils/constants'
 // Create a WebSocket link:
 let wsLink
 const getWsLink = ()=> {  
+  let activeSocket, currentAccessToken
   if (!wsLink) {
     const wsClient = createClient({
       url: `${env.REACT_APP_GQL_WS_PROTOCOL}://${env.REACT_APP_GQL}/graphql`,
+      keepAlive: 10000, // ping server every 10 seconds,
       connectionParams: async () => {
         const userManager = getUserManager()
         const { access_token } = await userManager.getUser() ?? emptyObject
+        currentAccessToken = access_token;
+
         return {
           authorization: access_token ? `Bearer ${access_token}` : ""
         }
       },
       on: {
+        connected: socket => (activeSocket = socket),
+        ping: async received => {
+          if (!received) {
+            const userManager = getUserManager()
+            const { access_token } = (await userManager.getUser()) ?? emptyObject
+            if (activeSocket.readyState === WebSocket.OPEN && currentAccessToken !== access_token) {
+              setTimeout(() => {
+                activeSocket.close(1000, "Access token silent renew")
+              }, 1000) // wait 1 second for the pong and then close the connection
+            }
+          }
+        },
         closed: event => {
           console.log(`GraphQL WebSocket closed!: ${event.code} Reason: ${event.reason}`)
         } 
