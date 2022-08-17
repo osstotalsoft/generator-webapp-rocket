@@ -18,7 +18,7 @@
     "eject": "react-scripts eject",
     "eslint:report": "eslint --fix --ext .js .",
     "prettier": "prettier --write **/*.js",
-    "prepare": "husky install"
+    "prepack": "husky install"
   },
   "dependencies": {
     "@apollo/client": "^3.5.6",
