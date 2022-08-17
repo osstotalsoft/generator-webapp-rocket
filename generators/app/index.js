@@ -3,15 +3,17 @@ const Generator = require('yeoman-generator')
 require('lodash').extend(Generator.prototype, require('yeoman-generator/lib/actions/install'))
 const chalk = require('chalk')
 const yosay = require('yosay')
-const { concat } = require('ramda')
-const questions = require('./questions')
-const { checkForLatestVersion } = require('../utils')
+const path = require('path')
+const { concat, mergeLeft } = require('ramda')
+const { projectNameQ, getQuestions, usePrevConfigsQ } = require('./questions')
+const { checkForLatestVersion, getCurrentVersion } = require('../utils')
 const filter = require('gulp-filter')
 const { prettierTransform, defaultPrettierOptions } = require('../generator-transforms')
+const { NPM_MIN_VERSION, YARN_MIN_VERSION, YO_RC_FILE } = require('./constants')
 
 module.exports = class extends Generator {
   constructor(args, opts) {
-    super(args, opts)
+    super(args, { ...opts, skipRegenerate: true, ignoreWhitespace: true, force: true, skipLocalCache: false })
     this.registerClientTransforms()
   }
 
@@ -24,16 +26,33 @@ module.exports = class extends Generator {
       yosay(`Welcome to the fantabulous ${chalk.red('TotalSoft React App')} generator! (⌐■_■)
      Out of the box I include Material-UI, React, Apollo Client and AxaGuilDEv Oidc Client to build your app.`)
     )
-    this.answers = await this.prompt(questions)
+
+    this.answers = await this.prompt(projectNameQ)
+    const { projectName } = this.answers
+    this.destinationRoot(path.join(this.contextRoot, `/${projectName}`))
+
+    if (this.fs.exists(path.join(this.destinationPath(), `/${YO_RC_FILE}`)))
+      this.answers = mergeLeft(this.answers, await this.prompt(usePrevConfigsQ))
+
+    this.config.set('__TIMESTAMP__', new Date().toLocaleString())
+    this.config.set('__VERSION__', await getCurrentVersion())
+
+    const questions = getQuestions(projectName)
+    const { usePrevConfigs } = this.answers
+    this.answers = usePrevConfigs
+      ? mergeLeft(this.answers, await this.prompt(questions, this.config))
+      : mergeLeft(this.answers, await this.prompt(questions))
+
+    questions.forEach(q => this.config.set(q.name, this.answers[q.name]))
   }
 
   writing() {
     if (!this.isLatest) return
 
-    const { projectName, addHelm, withRights, withMultiTenancy, packageManager, helmChartName, addQuickStart } = this.answers
+    const { addHelm, withRights, withMultiTenancy, packageManager, helmChartName, addQuickStart } = this.answers
 
     const templatePath = this.templatePath('infrastructure/**/*')
-    const destinationPath = this.destinationPath(projectName)
+    const destinationPath = this.destinationPath()
 
     let ignoreFiles = ['**/.npmignore', '**/.gitignore-template', '**/helm/**']
     if (!withRights)
@@ -43,7 +62,8 @@ module.exports = class extends Generator {
 
     if (!addQuickStart) ignoreFiles = concat(['**/features/**', '**/README.md'], ignoreFiles)
 
-    const packageManagerVersion = packageManager === 'npm' ? '7.16.0' : packageManager === 'yarn' ? '1.22.4' : '7.16.0'
+    const packageManagerVersion =
+      packageManager === 'npm' ? NPM_MIN_VERSION : packageManager === 'yarn' ? YARN_MIN_VERSION : NPM_MIN_VERSION
 
     this.fs.copyTpl(
       templatePath,
@@ -54,12 +74,12 @@ module.exports = class extends Generator {
     )
 
     const gitignorePath = this.templatePath('infrastructure/.gitignore-template')
-    const gitignoreDestinationPath = this.destinationPath(`${projectName}/.gitignore`)
+    const gitignoreDestinationPath = path.join(destinationPath, `/.gitignore`)
     this.fs.copy(gitignorePath, gitignoreDestinationPath)
 
     if (addHelm) {
       const helmTemplatePath = this.templatePath('infrastructure/helm/frontend/**')
-      const helmDestinationPath = this.destinationPath(`${projectName}/helm/${helmChartName}`)
+      const helmDestinationPath = path.join(destinationPath, `/helm/${helmChartName}`)
       this.fs.copyTpl(helmTemplatePath, helmDestinationPath, { ...this.answers, packageManagerVersion }, {}, { globOptions: { dot: true } })
     }
   }
