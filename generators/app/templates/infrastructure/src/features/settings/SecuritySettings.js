@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { Typography, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@mui/material'
 
 function SecuritySettings() {
   return (

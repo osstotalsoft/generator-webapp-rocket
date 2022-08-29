@@ -4,7 +4,7 @@ import { Switch,  Redirect } from 'react-router-dom';
 
 import CustomRoute from '../components/routing/CustomRoute';
 
-import { Forbidden, NotFound } from '@bit/totalsoft_oss.react-mui.kit.core';
+import { Forbidden, NotFound } from '@totalsoft_oss/rocket-ui.components.feedback.toast';
 <%_if(addQuickStart){ _%>
 import Dashboard from 'features/dashboard/Dashboard'
 import SecuritySettings from 'features/settings/SecuritySettings'

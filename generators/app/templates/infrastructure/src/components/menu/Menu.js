@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { List, makeStyles } from '@material-ui/core';
+import { List } from '@mui/material';
+import { makeStyles} from 'tss-react/mui'
 import { useLocation } from 'react-router-dom';
 import menuConfig from 'constants/menuConfig';
 import menuStyle from 'assets/jss/components/menuStyle';
@@ -14,10 +15,10 @@ import { useUserData } from 'hooks/rights';
 import { intersect } from 'utils/functions'; 
 <%_ } _%>
 
-const useStyles = makeStyles(menuStyle);
+const useStyles = makeStyles()(menuStyle);
 
 function Menu({ drawerOpen, withGradient }) {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const location = useLocation();
   <%_ if (withRights){ _%>
   const { oidcUser } = useReactOidc();

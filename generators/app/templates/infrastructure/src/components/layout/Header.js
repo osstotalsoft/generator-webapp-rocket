@@ -7,19 +7,18 @@ import { reduce } from 'ramda'
 import { emptyArray } from 'utils/constants'
 import { useHeader } from 'providers/AreasProvider'
 // material-ui components
-import { makeStyles, AppBar, Toolbar, Hidden, Typography } from '@material-ui/core'
+import { AppBar, Toolbar, Hidden, Typography } from '@mui/material';
+import { makeStyles} from 'tss-react/mui'
 
-import { IconButton } from '@bit/totalsoft_oss.react-mui.kit.core'
+import { IconButton } from '@totalsoft_oss/rocket-ui.core'
 
 // material-ui icons
-import MoreVert from '@material-ui/icons/MoreVert'
-import ViewList from '@material-ui/icons/ViewList'
-import Menu from '@material-ui/icons/Menu'
+import {MoreVert, ViewList, Menu} from '@mui/icons-material'
 
 // core components
 import headerStyle from 'assets/jss/components/headerStyle'
 
-const useStyles = makeStyles(headerStyle)
+const useStyles = makeStyles()(headerStyle)
 
 const flatten = (arr, value) => arr.concat(value).concat(value.children ? flattenConfig(value.children) : emptyArray)
 const flattenConfig = config =>  reduce(flatten, emptyArray, config)
@@ -28,7 +27,7 @@ function Header({ drawerOpen, handleDrawerToggle }) {
     const { t } = useTranslation()
     const location = useLocation()
     const [header] = useHeader()
-    const classes = useStyles()
+    const { classes } = useStyles()
 
     const makeBrand = pathname => {
         var name
@@ -49,19 +48,19 @@ function Header({ drawerOpen, handleDrawerToggle }) {
     const headerRef = useRef()
 
     return (
-        <AppBar position='sticky' className={classes.appBar + ' ' + classes.theme}>
+        <AppBar position='sticky' className={classes.appBar}>
             <Toolbar className={classes.container}>
                 <Hidden smDown>
                     <div className={classes.sidebarMinimize}>
-                        {!drawerOpen ? (
-                            <IconButton color='primaryNoBackground' onClick={handleDrawerToggle}>
-                                <ViewList fontSize='small' />
-                            </IconButton>
-                        ) : (
-                            <IconButton color='primaryNoBackground' onClick={handleDrawerToggle}>
-                                <MoreVert fontSize='small' />
-                            </IconButton>
-                        )}
+                     { drawerOpen ? (
+                        <IconButton color='white' onClick={handleDrawerToggle} size='medium'>
+                            <MoreVert fontSize='small' />
+                        </IconButton>
+                    ) : (
+                        <IconButton color='white' onClick={handleDrawerToggle} size='medium'>
+                            <ViewList fontSize='small' />
+                        </IconButton>
+                    )}
                     </div>
                     {header || (
                         <Typography variant='subtitle1' className={classes.title}>
@@ -77,7 +76,7 @@ function Header({ drawerOpen, handleDrawerToggle }) {
                     )}
                     <div className={classes.w100} ref={headerRef}></div>
                     <div className={classes.appResponsive}>
-                        <IconButton color='themeWithBackground' aria-label='open drawer' onClick={handleDrawerToggle}>
+                        <IconButton color='secondary' aria-label='open drawer' onClick={handleDrawerToggle}>
                             <Menu fontSize='small' />
                         </IconButton>
                     </div>

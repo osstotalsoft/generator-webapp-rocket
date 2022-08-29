@@ -12,13 +12,6 @@ const sidebarStyle = theme => {
     transition,
     boxShadow,
     defaultFont,
-    primaryColor,
-    primaryBoxShadow,
-    infoColor,
-    successColor,
-    warningColor,
-    dangerColor,
-    roseColor,
     menuBkColor,
     menuColor,
     menuBkOpacity
@@ -43,7 +36,7 @@ const sidebarStyle = theme => {
         position: 'fixed',
         height: '100%'
       },
-      [theme.breakpoints.down('sm')]: {
+      [theme.breakpoints.down('md')]: {
         width: drawerWidth,
         ...boxShadow,
         position: 'fixed',
@@ -71,37 +64,11 @@ const sidebarStyle = theme => {
         top: '0'
       }
     },
-    blackBackground: {
-      color: '#FFFFFF',
-      '&:after': {
-        background: '#000',
-        opacity: '.8'
-      }
-    },
     themeBackground: {
       color: menuColor,
       '&:after': {
         background: menuBkColor,
         opacity: menuBkOpacity
-      }
-    },
-    blueBackground: {
-      color: '#FFFFFF',
-      '&:after': {
-        background: '#00acc1',
-        opacity: '.93'
-      }
-    },
-    whiteBackground: {
-      color: '#3C4858',
-      '&:after': {
-        background: '#FFFFFF',
-        opacity: '.93'
-      }
-    },
-    whiteAfter: {
-      '&:after': {
-        backgroundColor: 'hsla(0,0%,71%,.3) !important'
       }
     },
     drawerPaperMini: {
@@ -161,18 +128,6 @@ const sidebarStyle = theme => {
       verticalAlign: 'middle',
       border: '0'
     },
-    background: {
-      position: 'absolute',
-      zIndex: '1',
-      height: '100%',
-      width: '100%',
-      display: 'block',
-      top: '0',
-      left: '0',
-      backgroundSize: 'cover',
-      backgroundPosition: 'center center',
-      transition: 'all 300ms linear'
-    },
     itemIcon: {
       color: 'inherit',
       width: '30px',
@@ -184,55 +139,6 @@ const sidebarStyle = theme => {
       textAlign: 'center',
       verticalAlign: 'middle',
       opacity: '0.8'
-    },
-    purple: {
-      '&,&:hover,&:focus': {
-        color: '#FFFFFF',
-        backgroundColor: primaryColor,
-        ...primaryBoxShadow
-      }
-    },
-    blue: {
-      '&,&:hover,&:focus': {
-        color: '#bce4fa',
-        backgroundColor: infoColor,
-        boxShadow: '0 12px 20px -10px rgba(0,188,212,.28), 0 4px 20px 0 rgba(0,0,0,.12), 0 7px 8px -5px rgba(0,188,212,.2)'
-      }
-    },
-    green: {
-      '&,&:hover,&:focus': {
-        color: '#FFFFFF',
-        backgroundColor: successColor,
-        boxShadow: '0 12px 20px -10px rgba(76,175,80,.28), 0 4px 20px 0 rgba(0,0,0,.12), 0 7px 8px -5px rgba(76,175,80,.2)'
-      }
-    },
-    orange: {
-      '&,&:hover,&:focus': {
-        color: '#FFFFFF',
-        backgroundColor: warningColor,
-        boxShadow: '0 12px 20px -10px rgba(255,152,0,.28), 0 4px 20px 0 rgba(0,0,0,.12), 0 7px 8px -5px rgba(255,152,0,.2)'
-      }
-    },
-    red: {
-      '&,&:hover,&:focus': {
-        color: '#FFFFFF',
-        backgroundColor: dangerColor,
-        boxShadow: '0 12px 20px -10px rgba(244,67,54,.28), 0 4px 20px 0 rgba(0,0,0,.12), 0 7px 8px -5px rgba(244,67,54,.2)'
-      }
-    },
-    white: {
-      '&,&:hover,&:focus': {
-        color: '#3C4858',
-        backgroundColor: '#FFFFFF',
-        boxShadow: '0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgba(60,72,88,.4)'
-      }
-    },
-    rose: {
-      '&,&:hover,&:focus': {
-        color: '#FFFFFF',
-        backgroundColor: roseColor,
-        boxShadow: '0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgba(233,30,99,.4)'
-      }
     },
     sidebarWrapper: {
       position: 'relative',

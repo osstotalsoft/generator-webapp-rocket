@@ -4,8 +4,9 @@ import PropTypes from 'prop-types'
 import SimpleBar from 'simplebar-react'
 import 'simplebar/dist/simplebar.min.css'
 
-import { makeStyles, Drawer, Hidden } from '@material-ui/core'
-import { Typography } from '@bit/totalsoft_oss.react-mui.kit.core'
+import { Drawer, Hidden } from '@mui/material';
+import { makeStyles} from 'tss-react/mui'
+import { Typography } from '@totalsoft_oss/rocket-ui.core'
 import { useTranslation } from 'react-i18next'
 import { env } from 'utils/env'
 
@@ -16,7 +17,7 @@ import cx from 'classnames'
 import { withRouter } from 'react-router-dom'
 import { sidebarWrapperHeight } from 'utils/constants'
 
-const useStyles = makeStyles(sidebarStyle)
+const useStyles = makeStyles()(sidebarStyle)
 
 // We've created this component so we can have a ref to the wrapper of the links that appears in our sidebar.
 // This was necessary so that we could initialize PerfectScrollbar on the links.
@@ -38,7 +39,7 @@ SidebarWrapper.propTypes = {
 }
 
 function Sidebar({ logo, logoText, drawerOpen, changeLanguage, closeDrawer, withGradient }) {
-  const classes = useStyles()
+  const { classes}  = useStyles()
   const { i18n, t } = useTranslation()
 
   const logoNormal =

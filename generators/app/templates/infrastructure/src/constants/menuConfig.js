@@ -1,6 +1,6 @@
 <%_if(addQuickStart){ _%>
   import React from 'react';
-  import {Dashboard,Settings, Security, Lock } from '@material-ui/icons'
+  import { Dashboard,Settings, Security, Lock } from '@mui/icons-material'
   <%_ if (withRights) { _%>
   import identityUserRoles from 'constants/identityUserRoles';
   import permissions from 'constants/permissions';

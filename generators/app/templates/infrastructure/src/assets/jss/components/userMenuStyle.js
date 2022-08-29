@@ -1,7 +1,9 @@
 import styles from 'assets/jss/styles'
+import { emptyObject } from 'utils/constants'
 
-const userMenuStyle = theme => {
-  const { boxShadow, defaultFont, menuActiveColor, menuActiveBkColor, menuActiveBk } = styles(theme)
+const userMenuStyle = (theme, props) => {
+  const { isActive, withGradient } = props || emptyObject
+  const { boxShadow, defaultFont, menuActiveColor, menuActiveBk, menuActiveBkColor } = styles(theme)
 
   return {
     collapseWrapper: {
@@ -25,22 +27,6 @@ const userMenuStyle = theme => {
       transform: 'translate3d(-25px, 0, 0)',
       opacity: '0'
     },
-    collapseItemText: {
-      ...defaultFont,
-      color: 'inherit',
-      margin: '0',
-      position: 'relative',
-      transform: 'translateX(0px)',
-      opacity: '1',
-      whiteSpace: 'nowrap',
-      display: 'block',
-      transition: 'transform 300ms ease 0s, opacity 300ms ease 0s',
-      fontWeight: 'bold'
-    },
-    collapseItemTextMini: {
-      transform: 'translate3d(-25px, 0, 0)',
-      opacity: '0'
-    },
     itemIcon: {
       color: 'inherit',
       width: '34px',
@@ -49,6 +35,9 @@ const userMenuStyle = theme => {
       position: 'inherit',
       verticalAlign: 'middle',
       opacity: '0.8'
+    },
+    myProfileIcon: {
+      alignItems: 'center'
     },
     userMenuContainer: {
       '&:after': {
@@ -101,42 +90,28 @@ const userMenuStyle = theme => {
       }
     },
     itemLink: {
-      paddingLeft: '10px',
-      paddingRight: '10px',
       transition: 'all 300ms linear',
       margin: '0px 15px',
       borderRadius: '3px',
       position: 'relative',
       display: 'flex',
       padding: '10px 15px',
-      backgroundColor: 'transparent',
       ...defaultFont,
       textDecoration: 'unset',
       width: 'auto',
-      '&:hover': {
-        outline: 'none',
-        backgroundColor: 'rgba(200, 200, 200, 0.2)',
-        boxShadow: 'none'
-      },
-      '&,&:hover,&:focus': {
-        color: 'inherit'
-      }
-    },
-    userCollapseLinks: {
-      marginTop: '-4px',
       '&:hover,&:focus': {
-        backgroundColor: 'rgba(200, 200, 200, 0.2)'
-      }
+        color: isActive ? menuActiveColor : 'inherit',
+        backgroundColor: isActive ? menuActiveBkColor : 'transparent'
+      },
+      color: isActive ? menuActiveColor : 'inherit',
+      backgroundColor: isActive ? menuActiveBkColor : 'transparent',
+      background: isActive && withGradient ? menuActiveBk : null
     },
     caret: {
       position: 'relative',
       float: 'right',
-      // right: '-9px',
       transition: 'all 150ms ease-in',
       verticalAlign: 'middle'
-    },
-    caretActive: {
-      transform: 'rotate(180deg)'
     },
     collapseList: {
       marginTop: '0'
@@ -147,19 +122,6 @@ const userMenuStyle = theme => {
       textDecoration: 'none',
       margin: 0,
       padding: 0
-    },
-    collapseItemMini: {
-      ...defaultFont,
-      color: 'inherit',
-      textTransform: 'uppercase',
-      width: '30px',
-      marginRight: '15px',
-      textAlign: 'center',
-      letterSpacing: '1px',
-      position: 'relative',
-      float: 'left',
-      display: 'inherit',
-      transition: 'transform 300ms ease 0s, opacity 300ms ease 0s'
     },
     selectorItem: {
       color: 'inherit',
@@ -180,12 +142,6 @@ const userMenuStyle = theme => {
       },
       '&,&:hover,&:focus': {
         color: 'inherit'
-      }
-    },
-    menuActiveColor: {
-      '&,&:hover,&:focus': {
-        color: menuActiveColor,
-        background: ({withGradient}) => withGradient ? menuActiveBk : menuActiveBkColor
       }
     }
   }

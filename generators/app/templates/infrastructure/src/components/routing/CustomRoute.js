@@ -6,7 +6,7 @@ import { <% if (withRights) { %>useReactOidc, <% } %> withOidcSecure } from '@ax
 import { emptyArray } from "utils/constants";
 import { isEmpty } from "ramda";
 import { useUserData } from "hooks/rights";
-import { LoadingFakeText, Forbidden } from '@bit/totalsoft_oss.react-mui.kit.core';
+import { LoadingFakeText, Forbidden } from '@totalsoft_oss/rocket-ui.core';
 import { intersect } from "utils/functions";
 <% } %>
 function PrivateRoute({ component: Component, <% if (withRights) { %>roles, rights, <%}%>exact, path }) {
@@ -55,13 +55,13 @@ PrivateRoute.propTypes = {
 };
 
 
-import { makeStyles } from '@material-ui/core'
+import { makeStyles} from 'tss-react/mui'
 import mainStyle from 'assets/jss/components/mainStyle'
 
-const useStyles = makeStyles(mainStyle)
+const useStyles = makeStyles()(mainStyle)
 
 function CustomRoute({ isPrivate, fullWidth, ...props }) {
-  const classes = useStyles({ fullWidth })
+  const { classes } = useStyles({ fullWidth })
   return <div className={classes.container}>{isPrivate ? <PrivateRoute {...props} /> : <Route {...props} />}</div>
 }
 

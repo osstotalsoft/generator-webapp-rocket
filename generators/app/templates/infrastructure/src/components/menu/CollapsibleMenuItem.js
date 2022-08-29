@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 import PropTypes from "prop-types";
-import { Collapse, List } from "@material-ui/core";
+import { Collapse, List } from "@mui/material";
 import MenuItem from "./MenuItem";
 
 const CollapsibleMenuItem = ({ menu, ...rest }) => {

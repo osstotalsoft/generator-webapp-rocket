@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
-import { Typography, Grid } from '@material-ui/core'
-import { useToast } from '@bit/totalsoft_oss.react-mui.kit.core';
+import { Typography, Grid } from '@mui/material'
+import { useToast } from '@totalsoft_oss/rocket-ui.components.feedback.toast';
 
 function Dashboard() {
   const addToast = useToast();

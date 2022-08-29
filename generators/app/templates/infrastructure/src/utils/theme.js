@@ -1,17 +1,8 @@
 import { env } from './env'
-import { theme as defaultTheme } from '@bit/totalsoft_oss.react-mui.themes.default-theme'
-import { theme as greenTheme } from '@bit/totalsoft_oss.react-mui.themes.green-theme'
-import { theme as blueTheme } from '@bit/totalsoft_oss.react-mui.themes.blue-theme'
-import { theme as orangeTheme } from '@bit/totalsoft_oss.react-mui.themes.orange-theme'
-import { theme as redTheme } from '@bit/totalsoft_oss.react-mui.themes.red-theme'
-import { theme as vividOrangeTheme } from '@bit/totalsoft_oss.react-mui.themes.vivid-orange-theme'
-import { theme as lightBlueTheme } from '@bit/totalsoft_oss.react-mui.themes.light-blue-theme'
-
-import { createTheme } from '@material-ui/core'
+import { defaultTheme, greenTheme, blueTheme, orangeTheme, redTheme, vividOrangeTheme, lightBlueTheme } from '@totalsoft_oss/rocket-ui.themes'
 
 const getTheme = () => {
-  const subDomain = env.REACT_APP_THEME
-  switch (subDomain) {
+  switch (env.REACT_APP_THEME) {
     case 'green':
       return greenTheme
     case 'blue':
@@ -29,6 +20,4 @@ const getTheme = () => {
   }
 }
 
-const themeData = getTheme()
-export const theme = createTheme(themeData)
-export const logo = themeData.logo
+export default getTheme

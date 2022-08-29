@@ -1,9 +1,10 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { Select, ListItem, makeStyles } from "@material-ui/core";
-import { Typography } from '@bit/totalsoft_oss.react-mui.kit.core';
+import { Select, ListItem, } from '@mui/material';
+import { makeStyles} from 'tss-react/mui'
+import { Typography } from '@totalsoft_oss/rocket-ui.core';
 import tenantSelectorStyle from 'assets/jss/components/tenantSelectorStyle'
-import { PersonOutline } from '@material-ui/icons';
+import { PersonOutline } from '@mui/icons-material';
 import { gql } from '@apollo/client';
 
 export const MY_TENANTS_QUERY = gql`
@@ -22,14 +23,14 @@ query {
     }
 }
 `
-const useStyles = makeStyles(tenantSelectorStyle);
+const useStyles = makeStyles()(tenantSelectorStyle);
 
 function EmptyElement() {
     return <span></span>
 }
 
 const TenantSelector = ({ tenant, changeTenant, tenants, drawerOpen }) => {
-    const classes = useStyles();
+    const { classes } = useStyles();
     const handleChange = useCallback(({ target: { value } }) => {
         const newTenant = tenants.find(t => t.code.toUpperCase() === value.toUpperCase())
         changeTenant(newTenant)

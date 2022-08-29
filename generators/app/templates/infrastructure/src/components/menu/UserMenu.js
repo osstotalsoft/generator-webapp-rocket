@@ -2,19 +2,19 @@ import React, { useState, useCallback<% if (withMultiTenancy) { %>, useEffect, u
 import PropTypes from 'prop-types';
 import { NavLink } from "react-router-dom";
 
-import { List, ListItem, Collapse, ListItemText, ListItemIcon, makeStyles, Tooltip } from '@material-ui/core';
+import { List, ListItem, Collapse, ListItemText, ListItemIcon, Tooltip } from '@mui/material';
+import { makeStyles} from 'tss-react/mui'
 
 import userMenuStyle from 'assets/jss/components/userMenuStyle'
 import cx from "classnames";
 import LanguageSelector from "./LanguageSelector"
 import avatar_default from "assets/img/default-avatar.png";
 import { useTranslation } from 'react-i18next';
-import PowerSettingsNew from "@material-ui/icons/PowerSettingsNew";
 import { useReactOidc } from '@axa-fr/react-oidc-context';
 import userMenuConfig from 'constants/userMenuConfig'
 import UserMenuItem from "./UserMenuItem";
 import { useLocation } from 'react-router-dom';
-import { ArrowDropDown, ArrowDropUp } from '@material-ui/icons'
+import { ArrowDropDown, ArrowDropUp, PowerSettingsNew } from '@mui/icons-material'
 
 <%_ if (withMultiTenancy) { _%>
 import { useLazyQuery } from '@apollo/client';
@@ -29,11 +29,11 @@ import { useUserData } from 'hooks/rights';
 import { intersect } from 'utils/functions'; 
 <%_ } _%>
 
-const useStyles = makeStyles(userMenuStyle);
+const useStyles = makeStyles()(userMenuStyle);
 
 function UserMenu({ drawerOpen, avatar, language, changeLanguage, withGradient }) {
     const [openAvatar, setOpenAvatar] = useState(false);
-    const classes = useStyles();
+    const { classes } = useStyles();
     const { t } = useTranslation();
     const location = useLocation();
     const { oidcUser, logout } = useReactOidc();
