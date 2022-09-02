@@ -23,7 +23,6 @@
   "dependencies": {
     "@apollo/client": "^3.5.6",
     "@axa-fr/react-oidc-context": "3.1.6",
-    "@emotion/cache": "11.9.3",
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
     "@mui/material": "^5.8.6",
@@ -37,8 +36,8 @@
     "@totalsoft/pure-validations-react": "^5.0.22",
     "@totalsoft/rules-algebra-react": "^5.0.22",
     "@totalsoft/validations": "^1.0.4",
-    "@totalsoft_oss/rocket-ui.core": "^0.0.2",
-    "@totalsoft_oss/rocket-ui.themes": "^0.0.12",
+    "@totalsoft_oss/rocket-ui.core": "^0.0.8",
+    "@totalsoft_oss/rocket-ui.themes": "^0.0.15",
     "apollo-link-mock": "^1.0.1",
     "apollo-upload-client": "^17.0.0",
     "chart.js": "3.8.0",

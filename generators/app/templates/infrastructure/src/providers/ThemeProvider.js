@@ -2,22 +2,15 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { ThemeProvider as MUIThemeProvider } from '@mui/material'
 import getTheme from 'utils/theme'
-
-import createCache from '@emotion/cache'
-import { CacheProvider } from '@emotion/react'
-
-const muiCache = createCache({
-  key: 'mui',
-  prepend: true
-})
+import { StyledEngineProvider } from '@mui/material/styles'
 
 const theme = getTheme()
 
 const ThemeProvider = ({ children }) => {
   return (
-    <CacheProvider value={muiCache}>
+    <StyledEngineProvider injectFirst>
       <MUIThemeProvider theme={theme}>{children}</MUIThemeProvider>
-    </CacheProvider>
+    </StyledEngineProvider>
   )
 }
 
