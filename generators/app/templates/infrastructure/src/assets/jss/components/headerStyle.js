@@ -1,7 +1,3 @@
-// ##############################
-// // // Header styles
-// #############################
-
 import styles from 'assets/jss/styles'
 
 const headerStyle = theme => {

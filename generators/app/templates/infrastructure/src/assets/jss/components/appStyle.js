@@ -1,7 +1,3 @@
-// ##############################
-// // // App styles
-// #############################
-
 import styles from 'assets/jss/styles'
 
 const appStyle = theme => {

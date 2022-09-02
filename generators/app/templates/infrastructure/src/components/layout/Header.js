@@ -6,16 +6,14 @@ import menuConfig from 'constants/menuConfig'
 import { reduce } from 'ramda'
 import { emptyArray } from 'utils/constants'
 import { useHeader } from 'providers/AreasProvider'
-// material-ui components
+
 import { AppBar, Toolbar, Hidden, Typography } from '@mui/material';
 import { makeStyles} from 'tss-react/mui'
 
 import { IconButton } from '@totalsoft_oss/rocket-ui.core'
 
-// material-ui icons
 import {MoreVert, ViewList, Menu} from '@mui/icons-material'
 
-// core components
 import headerStyle from 'assets/jss/components/headerStyle'
 
 const useStyles = makeStyles()(headerStyle)

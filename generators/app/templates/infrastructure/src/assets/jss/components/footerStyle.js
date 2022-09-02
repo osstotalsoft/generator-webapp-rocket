@@ -1,7 +1,3 @@
-// ##############################
-// // // Footer styles
-// #############################
-
 import styles from 'assets/jss/styles'
 
 const footerStyle = theme => {
