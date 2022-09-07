@@ -4,12 +4,10 @@ import { ThemeProvider as MUIThemeProvider } from '@mui/material'
 import getTheme from 'utils/theme'
 import { StyledEngineProvider } from '@mui/material/styles'
 
-const theme = getTheme()
-
 const ThemeProvider = ({ children }) => {
   return (
     <StyledEngineProvider injectFirst>
-      <MUIThemeProvider theme={theme}>{children}</MUIThemeProvider>
+      <MUIThemeProvider theme={getTheme()}>{children}</MUIThemeProvider>
     </StyledEngineProvider>
   )
 }
