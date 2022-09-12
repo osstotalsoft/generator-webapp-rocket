@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types'
-import { makeStyles } from '@material-ui/core'
+import { makeStyles } from 'tss-react/mui'
 import { useTranslation } from 'react-i18next'
 import appStyle from 'assets/jss/components/appStyle'
 import logo from 'assets/img/logo.png'
@@ -13,14 +13,14 @@ import Footer from './layout/Footer'
 
 import AppRoutes from 'routes/AppRoutes'
 
-import { ToastContainer, CheckInternetConnection } from '@bit/totalsoft_oss.react-mui.kit.core'
+import { ToastContainer } from '@totalsoft_oss/rocket-ui.core'
 
-const useStyles = makeStyles(appStyle)
+const useStyles = makeStyles()(appStyle)
 const isWeb = () => window.matchMedia('(min-width: 480px)')?.matches
 
 function App(props) {
   const mainPanelRef = useRef()
-  const classes = useStyles()
+  const { classes } = useStyles()
   const { location } = props
   const { i18n } = useTranslation()
 
@@ -68,8 +68,7 @@ function App(props) {
         <AppRoutes />
         <Footer fluid />
       </div>
-      <ToastContainer />
-      <CheckInternetConnection />
+      <ToastContainer theme='colored'/>
     </div>
   )
 }

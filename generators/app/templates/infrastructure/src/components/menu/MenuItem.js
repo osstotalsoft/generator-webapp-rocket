@@ -1,26 +1,23 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
-import { ListItem, ListItemIcon, ListItemText, makeStyles, Tooltip } from '@material-ui/core'
-import { ArrowDropDown, ArrowDropUp } from "@material-ui/icons";
+import { ListItem, ListItemIcon, ListItemText, Tooltip } from '@mui/material';
+import { makeStyles} from 'tss-react/mui'
+import { ArrowDropDown, ArrowDropUp } from "@mui/icons-material";
 import { NavLink } from 'react-router-dom'
 import menuStyle from 'assets/jss/components/menuStyle'
 import { useTranslation } from 'react-i18next'
 
-const useStyles = makeStyles(menuStyle);
+const useStyles = makeStyles()(menuStyle);
 
 const MenuItem = ({ menu, drawerOpen, activeRoute, isSubMenuItem, subMenuOpen, onToggleSubMenu, withGradient }) => {
   const { children, path, icon, text } = menu;
   const isSubMenu = Boolean(children);
+  const isActive = activeRoute && activeRoute(path)
 
-  const classes = useStyles({ isSubMenu, withGradient });
+  const { classes } = useStyles({ isSubMenu, isActive, withGradient })
   const { t } = useTranslation();
 
-  const navLinkClasses = classes.menuItemLink +
-    " " +
-    cx({
-      [classes.menuActiveColor]: !isSubMenu && activeRoute(path)
-    });
   const itemTextClasses = classes.menuItemText +
     " " +
     cx({
@@ -39,7 +36,7 @@ const MenuItem = ({ menu, drawerOpen, activeRoute, isSubMenuItem, subMenuOpen, o
   return (
     <Tooltip disableHoverListener={!drawerOpen} title={translatedText}>
       <ListItem className={classes.menuItem}>
-        <Item {...itemProps} className={navLinkClasses}>
+        <Item {...itemProps} className={classes.menuItemLink}>
           <ListItemIcon className={menuItemIconClasses}>
             {icon}
           </ListItemIcon>

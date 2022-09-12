@@ -5,8 +5,7 @@ import ReactDOM from 'react-dom';
 import routes from "./routes";
 import { BrowserRouter } from "react-router-dom";
 import * as serviceWorker from './serviceWorker';
-import { theme } from 'utils/theme';
-import { MuiThemeProvider } from '@material-ui/core/styles';
+import ThemeProvider from 'providers/ThemeProvider'
 import 'utils/i18n';
 import './assets/css/index.css';
 import "moment/locale/ro";
@@ -24,11 +23,9 @@ ReactDOM.render(
     <AreasWrapper>
         <AuthProvider>
             <AuthApolloProvider>
-                <MuiThemeProvider theme={theme}>
-                    <BrowserRouter>
-                        {routes}
-                    </BrowserRouter>
-                </MuiThemeProvider>
+                <ThemeProvider>
+                    <BrowserRouter>{routes}</BrowserRouter>
+                </ThemeProvider>
             </AuthApolloProvider>
         </AuthProvider>
     </AreasWrapper>,

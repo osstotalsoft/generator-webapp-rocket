@@ -1,23 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
-import { ListItem, ListItemIcon, ListItemText, makeStyles, Tooltip } from '@material-ui/core'
+import { ListItem, ListItemIcon, ListItemText, Tooltip } from '@mui/material'
+import { makeStyles} from 'tss-react/mui'
 import { NavLink } from 'react-router-dom'
 import userMenuStyle from 'assets/jss/components/userMenuStyle'
 import { useTranslation } from 'react-i18next'
 
-const useStyles = makeStyles(userMenuStyle)
+const useStyles = makeStyles()(userMenuStyle)
 
 const UserMenuItem = ({ userMenu, drawerOpen, activeRoute, withGradient }) => {
-  const classes = useStyles({withGradient})
+  const isActive = activeRoute && activeRoute(userMenu.path)
+  const { classes } = useStyles({ isActive, withGradient })
   const { t } = useTranslation()
 
-  const navLinkClasses =
-    classes.itemLink +
-    ' ' +
-    cx({
-      [' ' + classes.menuActiveColor]: activeRoute(userMenu.path)
-    })
   const itemText =
     classes.itemText +
     ' ' +
@@ -30,8 +26,8 @@ const UserMenuItem = ({ userMenu, drawerOpen, activeRoute, withGradient }) => {
   return (
     <Tooltip disableHoverListener={drawerOpen} title={text}>
       <ListItem className={classes.collapseItem}>
-        <NavLink to={userMenu.path} className={navLinkClasses}>
-          <ListItemIcon className={classes.itemIcon}>{userMenu.icon}</ListItemIcon>
+        <NavLink to={userMenu.path} className={classes.itemLink}>
+          <ListItemIcon className={classes.itemIcon + ' ' + classes.myProfileIcon}>{userMenu.icon}</ListItemIcon>
           <ListItemText primary={text} disableTypography={true} className={itemText} />
         </NavLink>
       </ListItem>
