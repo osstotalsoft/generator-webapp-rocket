@@ -2,21 +2,15 @@ import React, { useRef } from 'react'
 import PropTypes from 'prop-types'
 import { useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import menuConfig from 'constants/menuConfig'
+import { Hidden } from '@mui/material'
+import { MoreVert, ViewList, Menu } from '@mui/icons-material'
+import { IconButton } from '@totalsoft_oss/rocket-ui.core'
 import { reduce } from 'ramda'
+
+import menuConfig from 'constants/menuConfig'
 import { emptyArray } from 'utils/constants'
 import { useHeader } from 'providers/AreasProvider'
-
-import { AppBar, Toolbar, Hidden, Typography } from '@mui/material';
-import { makeStyles} from 'tss-react/mui'
-
-import { IconButton } from '@totalsoft_oss/rocket-ui.core'
-
-import {MoreVert, ViewList, Menu} from '@mui/icons-material'
-
-import headerStyle from 'assets/jss/components/headerStyle'
-
-const useStyles = makeStyles()(headerStyle)
+import { AppBar, Toolbar, MinimizeSidebar, StyledTitle, StyledMobileTitle, HeaderRef, HeaderResponsive } from './HeaderStyle'
 
 const flatten = (arr, value) => arr.concat(value).concat(value.children ? flattenConfig(value.children) : emptyArray)
 const flattenConfig = config =>  reduce(flatten, emptyArray, config)
@@ -25,7 +19,7 @@ function Header({ drawerOpen, handleDrawerToggle }) {
     const { t } = useTranslation()
     const location = useLocation()
     const [header] = useHeader()
-    const { classes } = useStyles()
+    const headerRef = useRef()
 
     const makeBrand = pathname => {
         var name
@@ -43,13 +37,12 @@ function Header({ drawerOpen, handleDrawerToggle }) {
     }
 
     const pathName = makeBrand(location.pathname)
-    const headerRef = useRef()
 
     return (
-        <AppBar position='sticky' className={classes.appBar}>
-            <Toolbar className={classes.container}>
+        <AppBar position='sticky'>
+            <Toolbar>
                 <Hidden smDown>
-                    <div className={classes.sidebarMinimize}>
+                    <MinimizeSidebar>
                      { drawerOpen ? (
                         <IconButton color='white' onClick={handleDrawerToggle} size='medium'>
                             <MoreVert fontSize='small' />
@@ -59,25 +52,25 @@ function Header({ drawerOpen, handleDrawerToggle }) {
                             <ViewList fontSize='small' />
                         </IconButton>
                     )}
-                    </div>
+                    </MinimizeSidebar>
                     {header || (
-                        <Typography variant='subtitle1' className={classes.title}>
+                        <StyledTitle variant='subtitle1'>
                             {pathName && t('NavBar.' + pathName)}
-                        </Typography>
+                        </StyledTitle>
                     )}
                 </Hidden>
                 <Hidden mdUp>
                     {header || (
-                        <Typography variant='subtitle1' className={classes.titleMobile}>
+                        <StyledMobileTitle variant='subtitle1'>
                             {pathName && t('NavBar.' + pathName)}
-                        </Typography>
+                        </StyledMobileTitle>
                     )}
-                    <div className={classes.w100} ref={headerRef}></div>
-                    <div className={classes.appResponsive}>
+                    <HeaderRef ref={headerRef}></HeaderRef>
+                    <HeaderResponsive>
                         <IconButton color='secondary' aria-label='open drawer' onClick={handleDrawerToggle}>
                             <Menu fontSize='small' />
                         </IconButton>
-                    </div>
+                    </HeaderResponsive>
                 </Hidden>
             </Toolbar>
         </AppBar>

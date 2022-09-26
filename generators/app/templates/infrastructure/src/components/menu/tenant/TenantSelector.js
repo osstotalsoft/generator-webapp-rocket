@@ -1,11 +1,8 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { Select, ListItem, } from '@mui/material';
-import { makeStyles} from 'tss-react/mui'
-import { Typography } from '@totalsoft_oss/rocket-ui.core';
-import tenantSelectorStyle from 'assets/jss/components/tenantSelectorStyle'
 import { PersonOutline } from '@mui/icons-material';
 import { gql } from '@apollo/client';
+import { CollapseItem, ListItem, Select, TenantContainer, Typography } from './TenantStyle';
 
 export const MY_TENANTS_QUERY = gql`
 query {
@@ -23,14 +20,12 @@ query {
     }
 }
 `
-const useStyles = makeStyles()(tenantSelectorStyle);
 
 function EmptyElement() {
     return <span></span>
 }
 
 const TenantSelector = ({ tenant, changeTenant, tenants, drawerOpen }) => {
-    const { classes } = useStyles();
     const handleChange = useCallback(({ target: { value } }) => {
         const newTenant = tenants.find(t => t.code.toUpperCase() === value.toUpperCase())
         changeTenant(newTenant)
@@ -39,23 +34,22 @@ const TenantSelector = ({ tenant, changeTenant, tenants, drawerOpen }) => {
     const iconComponent = !drawerOpen ? { IconComponent: EmptyElement } : {}
 
     return (
-        <div className={classes.tenantSelectorContainer}>
-            <Select className={classes.tenantSelector}
-                classes={{ selectMenu: classes.tenantSelectMenu }}
+        <TenantContainer>
+            <Select
                 value={tenant?.code}
                 onChange={handleChange}
                 {...iconComponent}>
                 {
                     tenants.map(t =>
-                    (<ListItem button value={t.code} className={classes.tenantSelectorItem} key={t.externalId}>
-                        <span className={classes.collapseItemMini}>
+                    (<ListItem button value={t.code} key={t.externalId}>
+                        <CollapseItem>
                             <PersonOutline />
-                        </span>
-                        <Typography className={classes.tenantSelectorText}>{t.name}</Typography>
+                        </CollapseItem>
+                        <Typography>{t.name}</Typography>
                     </ListItem>))
                 }
             </Select>
-        </div >
+        </TenantContainer >
     )
 }
 

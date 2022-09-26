@@ -1,37 +1,29 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import ReactCountryFlag from 'react-country-flag'
-import { Select, ListItem } from '@mui/material'
-import { makeStyles } from 'tss-react/mui'
-import { Typography } from '@totalsoft_oss/rocket-ui.core'
-import langSelectorStyle from 'assets/jss/components/langSelectorStyle'
-
-const useStyles = makeStyles()(langSelectorStyle)
+import { ListItem, Select, Typography } from './LanguageStyle'
 
 function EmptyElement() {
   return <span></span>
 }
 
 const LanguageSelector = ({ language, changeLanguage, drawerOpen }) => {
-  const { classes } = useStyles()
   const iconComponent = !drawerOpen ? { IconComponent: EmptyElement } : {}
 
   return (
     <Select
-      className={classes.langSelectorContainer}
-      classes={{ select: classes.langSelectMenu, icon: classes.langSelectCaret }}
       value={language}
       onChange={changeLanguage}
       {...iconComponent}
       variant='standard'
     >
-      <ListItem button value='ro' className={classes.langSelectorItem}>
+      <ListItem button value='ro'>
         <ReactCountryFlag countryCode='RO' svg style={{ margin: '0px 10px' }} />
-        {drawerOpen && <Typography className={classes.langSelectorText}>{'Romana'}</Typography>}
+        {drawerOpen && <Typography>{'Romana'}</Typography>}
       </ListItem>
-      <ListItem button value='en' className={classes.langSelectorItem}>
+      <ListItem button value='en'>
         <ReactCountryFlag countryCode='GB' svg style={{ margin: '0px 10px' }} />
-        {drawerOpen && <Typography className={classes.langSelectorText}>{'English'}</Typography>}
+        {drawerOpen && <Typography>{'English'}</Typography>}
       </ListItem>
     </Select>
   )

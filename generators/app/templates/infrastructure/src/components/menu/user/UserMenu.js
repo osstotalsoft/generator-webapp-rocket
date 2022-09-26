@@ -1,25 +1,35 @@
 import React, { useState, useCallback<% if (withMultiTenancy) { %>, useEffect, useContext<% } %> } from 'react';
-import PropTypes from 'prop-types';
-import { NavLink } from "react-router-dom";
+import PropTypes from 'prop-types'
+import { useLocation } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
+import { useReactOidc } from '@axa-fr/react-oidc-context'
 
-import { List, ListItem, Collapse, ListItemText, ListItemIcon, Tooltip } from '@mui/material';
-import { makeStyles} from 'tss-react/mui'
+import { Tooltip } from '@mui/material'
+import { PowerSettingsNew } from '@mui/icons-material'
 
-import userMenuStyle from 'assets/jss/components/userMenuStyle'
-import cx from "classnames";
-import LanguageSelector from "./LanguageSelector"
-import avatar_default from "assets/img/default-avatar.png";
-import { useTranslation } from 'react-i18next';
-import { useReactOidc } from '@axa-fr/react-oidc-context';
+import LanguageSelector from '../languageSelector/LanguageSelector'
+import avatar_default from 'assets/img/default-avatar.png'
 import userMenuConfig from 'constants/userMenuConfig'
-import UserMenuItem from "./UserMenuItem";
-import { useLocation } from 'react-router-dom';
-import { ArrowDropDown, ArrowDropUp, PowerSettingsNew } from '@mui/icons-material'
+import {
+  Avatar,
+  Collapse,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  MenuList,
+  StyledArrowDropDown,
+  StyledArrowDropUp,
+  StyledMenuItem,
+  StyledNavLink,
+  StyledSelector
+} from './UserMenuStyle'
+import UserMenuItem from './UserMenuItem'
 
 <%_ if (withMultiTenancy) { _%>
 import { useLazyQuery } from '@apollo/client';
 import { TenantContext } from 'providers/TenantAuthenticationProvider'
-import TenantSelector, { MY_TENANTS_QUERY } from './TenantSelector';
+import TenantSelector, { MY_TENANTS_QUERY } from '../tenant/TenantSelector'
 <%_ } _%>
 
 <%_ if (withRights) { _%>
@@ -29,11 +39,8 @@ import { useUserData } from 'hooks/rights';
 import { intersect } from 'utils/functions'; 
 <%_ } _%>
 
-const useStyles = makeStyles()(userMenuStyle);
-
 function UserMenu({ drawerOpen, avatar, language, changeLanguage, withGradient }) {
     const [openAvatar, setOpenAvatar] = useState(false);
-    const { classes } = useStyles();
     const { t } = useTranslation();
     const location = useLocation();
     const { oidcUser, logout } = useReactOidc();
@@ -105,68 +112,63 @@ function UserMenu({ drawerOpen, avatar, language, changeLanguage, withGradient }
 
     const tenantName = tenant?.name ? ` - ${tenant.name}` : "" 
     <%_}_%>
-    const itemText = classes.itemText +
-        " " +
-        cx({
-            [classes.itemTextMini]: !drawerOpen
-        });
     <% if (withMultiTenancy) { %> const displayName = `${userName}${tenantName}` <% } %>
     <% if (!withMultiTenancy) { %> const displayName = userName <% } %>
     return (
-        <List className={classes.userMenuContainer}>
-            <ListItem className={classes.item + " " + classes.userItem}>
-                <NavLink to={'/'} className={classes.itemLink} onClick={openCollapseAvatar}>
-                    <ListItemIcon className={classes.itemIcon}>
-                        <img src={avatar ? avatar : avatar_default} className={classes.photo} alt='...' />
+        <List>
+            <ListItem>
+                <StyledNavLink to={'/'} withGradient={withGradient} onClick={openCollapseAvatar}>
+                    <ListItemIcon>
+                        <Avatar src={avatar ? avatar : avatar_default} alt='...' />
                     </ListItemIcon>
                     <ListItemText
                         primary={displayName}
-                        secondary={openAvatar ? <ArrowDropUp className={classes.caret} /> : <ArrowDropDown className={classes.caret} />}
+                        secondary={openAvatar ? <StyledArrowDropUp/> : <StyledArrowDropDown/>}
                         disableTypography={true}
-                        className={itemText}
+                        drawerOpen={drawerOpen}
                     />
-                </NavLink>
-                <Collapse in={openAvatar} unmountOnExit classes={{ wrapper: classes.collapseWrapper }}>
-                    <List className={classes.list + classes.collapseList}>
+                </StyledNavLink>
+                <Collapse in={openAvatar} unmountOnExit>
+                    <MenuList>
                         {userMenuItems.map((userMenu, key) => {
                             return <UserMenuItem key={key} userMenu={userMenu} drawerOpen={drawerOpen} activeRoute={activeRoute} withGradient={withGradient} />
                         })}
                         {oidcUser &&
                             <Tooltip disableHoverListener={drawerOpen} title={t('Tooltips.Logout')}>
-                                <ListItem className={classes.collapseItem}>
-                                    <NavLink to={"/"} className={classes.itemLink} onClick={logoutAction}>
-                                    <ListItemIcon className={classes.itemIcon}>
+                                <StyledMenuItem>
+                                    <StyledNavLink to={"/"} withGradient={withGradient} onClick={logoutAction}>
+                                    <ListItemIcon>
                                         <PowerSettingsNew />
                                     </ListItemIcon>
                                     <ListItemText
                                         primary={t('Tooltips.Logout')}
                                         disableTypography={true}
-                                        className={itemText}
+                                        drawerOpen={drawerOpen}
                                     />
-                                    </NavLink>
-                                </ListItem>
+                                    </StyledNavLink>
+                                </StyledMenuItem>
                             </Tooltip>
                         }
-                        <ListItem className={classes.selectorItem}>
+                        <StyledSelector>
                             <LanguageSelector
                                 language={language}
                                 changeLanguage={changeLanguage}
                                 drawerOpen={drawerOpen}
                             />
-                        </ListItem>
+                        </StyledSelector>
                         <% if (withMultiTenancy) { %> {!tenantsLoading && myTenants?.length > 1 &&
                         <Tooltip disableHoverListener={drawerOpen} title={t('Tooltips.TenantList')}>
-                            <ListItem className={classes.selectorItem}>
+                            <StyledSelector>
                                 <TenantSelector
                                     tenant={tenant}
                                     tenants={myTenants}
                                     changeTenant={handleTenantChange}
                                     drawerOpen={drawerOpen}
                                 />
-                            </ListItem>
+                            </StyledSelector>
                         </Tooltip>
                         }<% } -%>
-                    </List>
+                    </MenuList>
                 </Collapse>
             </ListItem>
         </List>

@@ -1,27 +1,21 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types'
-import { makeStyles } from 'tss-react/mui'
 import { useTranslation } from 'react-i18next'
-import appStyle from 'assets/jss/components/appStyle'
-import logo from 'assets/img/logo.png'
-import miniLogo from 'assets/img/miniLogo.png'
-import cx from 'classnames'
-
-import Sidebar from './layout/Sidebar'
-import Header from './layout/Header'
-import Footer from './layout/Footer'
-
-import AppRoutes from 'routes/AppRoutes'
-
 import { ToastContainer } from '@totalsoft_oss/rocket-ui.core'
 
-const useStyles = makeStyles()(appStyle)
+import logo from 'assets/img/logo.png'
+import miniLogo from 'assets/img/miniLogo.png'
+import { Container, Content } from 'assets/jss/components/AppStyle'
+
+import Sidebar from './layout/sidebar/Sidebar'
+import Header from './layout/header/Header'
+import Footer from './layout/footer/Footer'
+import AppRoutes from 'routes/AppRoutes'
+
 const isWeb = () => window.matchMedia('(min-width: 480px)')?.matches
 
-function App(props) {
+function App({ location }) {
   const mainPanelRef = useRef()
-  const { classes } = useStyles()
-  const { location } = props
   const { i18n } = useTranslation()
 
   const [drawerOpen, setDrawerOpen] = useState(isWeb())
@@ -47,15 +41,8 @@ function App(props) {
     mainPanelRef.current.scrollTop = 0
   }, [location.pathname])
 
-  const mainPanel =
-    classes.mainPanel +
-    ' ' +
-    cx({
-      [classes.mainPanelSidebarMini]: !drawerOpen
-    })
-
   return (
-    <div className={classes.wrapper}>
+    <Container>
       <Sidebar
         logo={drawerOpen ? logo : miniLogo}
         closeDrawer={handleCloseDrawer}
@@ -63,13 +50,13 @@ function App(props) {
         drawerOpen={drawerOpen}
         withGradient={false}
       />
-      <div className={mainPanel} ref={mainPanelRef}>
+      <Content ref={mainPanelRef} drawerOpen={drawerOpen}>
         <Header drawerOpen={drawerOpen} handleDrawerToggle={handleDrawerToggle} />
         <AppRoutes />
         <Footer fluid />
-      </div>
+      </Content>
       <ToastContainer theme='colored'/>
-    </div>
+    </Container>
   )
 }
 

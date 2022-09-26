@@ -40,7 +40,6 @@
     "@totalsoft_oss/rocket-ui.themes": "^1.0.0",
     "apollo-link-mock": "^1.0.1",
     "apollo-upload-client": "^17.0.0",
-    "classnames": "^2.3.1",
     "file-saver": "^2.0.5",
     "graphql": "^16.2.0",
 <%_ if (withSubscription) { _%>
@@ -62,7 +61,6 @@
     "react-scripts": "^5.0.0",
     "react-super-responsive-table": "^5.2.0",
     "simplebar-react": "^2.3.6",
-    "tss-react": "^3.7.0",
     "url-search-params-polyfill": "^8.1.1",
     "uuidv4": "^6.2.12"
   },

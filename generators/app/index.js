@@ -58,7 +58,7 @@ module.exports = class extends Generator {
     if (!withRights)
       ignoreFiles = concat(['**/hooks/rights.js', '**/constants/permissions.js', '**/constants/identityUserRoles.js'], ignoreFiles)
     if (withMultiTenancy) ignoreFiles = concat(['**/AuthenticationProvider.js'], ignoreFiles)
-    else ignoreFiles = concat(['**/tenantSelectorStyle.js', '**/TenantSelector.js', '**/TenantAuthenticationProvider.js'], ignoreFiles)
+    else ignoreFiles = concat(['**/tenantSelectorStyle.js', '**/tenant', '**/TenantAuthenticationProvider.js'], ignoreFiles)
 
     if (!addQuickStart) ignoreFiles = concat(['**/features/**', '**/README.md'], ignoreFiles)
 

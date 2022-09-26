@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import { Route } from "react-router-dom";
 import PropTypes from "prop-types";
+import { Container } from "./CustomRouteStyle";
 import { <% if (withRights) { %>useReactOidc, <% } %> withOidcSecure } from '@axa-fr/react-oidc-context';
 <%_ if (withRights) { _%>
 import { emptyArray } from "utils/constants";
@@ -54,15 +55,8 @@ PrivateRoute.propTypes = {
     path: PropTypes.string
 };
 
-
-import { makeStyles} from 'tss-react/mui'
-import mainStyle from 'assets/jss/components/mainStyle'
-
-const useStyles = makeStyles()(mainStyle)
-
 function CustomRoute({ isPrivate, fullWidth, ...props }) {
-  const { classes } = useStyles({ fullWidth })
-  return <div className={classes.container}>{isPrivate ? <PrivateRoute {...props} /> : <Route {...props} />}</div>
+  return <Container fullWidth={fullWidth}>{isPrivate ? <PrivateRoute {...props} /> : <Route {...props} />}</Container>
 }
 
 CustomRoute.defaultProps = {
