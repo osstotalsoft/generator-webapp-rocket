@@ -21,7 +21,7 @@ import {
   StyledArrowDropDown,
   StyledArrowDropUp,
   StyledMenuItem,
-  StyledNavLink,
+  StyledNavLinkMenu,
   StyledSelector
 } from './UserMenuStyle'
 import UserMenuItem from './UserMenuItem'
@@ -117,17 +117,17 @@ function UserMenu({ drawerOpen, avatar, language, changeLanguage, withGradient }
     return (
         <List>
             <ListItem>
-                <StyledNavLink to={'/'} withGradient={withGradient} onClick={openCollapseAvatar}>
+                <StyledNavLinkMenu to={'/'} withGradient={withGradient} onClick={openCollapseAvatar}>
                     <ListItemIcon>
                         <Avatar src={avatar ? avatar : avatar_default} alt='...' />
                     </ListItemIcon>
                     <ListItemText
                         primary={displayName}
-                        secondary={openAvatar ? <StyledArrowDropUp/> : <StyledArrowDropDown/>}
+                        secondary={openAvatar ? <StyledArrowDropUp drawerOpen={drawerOpen} /> : <StyledArrowDropDown drawerOpen={drawerOpen} />}
                         disableTypography={true}
                         drawerOpen={drawerOpen}
                     />
-                </StyledNavLink>
+                </StyledNavLinkMenu>
                 <Collapse in={openAvatar} unmountOnExit>
                     <MenuList>
                         {userMenuItems.map((userMenu, key) => {
@@ -136,7 +136,7 @@ function UserMenu({ drawerOpen, avatar, language, changeLanguage, withGradient }
                         {oidcUser &&
                             <Tooltip disableHoverListener={drawerOpen} title={t('Tooltips.Logout')}>
                                 <StyledMenuItem>
-                                    <StyledNavLink to={"/"} withGradient={withGradient} onClick={logoutAction}>
+                                    <StyledNavLinkMenu to={"/"} withGradient={withGradient} onClick={logoutAction}>
                                     <ListItemIcon>
                                         <PowerSettingsNew />
                                     </ListItemIcon>
@@ -145,7 +145,7 @@ function UserMenu({ drawerOpen, avatar, language, changeLanguage, withGradient }
                                         disableTypography={true}
                                         drawerOpen={drawerOpen}
                                     />
-                                    </StyledNavLink>
+                                    </StyledNavLinkMenu>
                                 </StyledMenuItem>
                             </Tooltip>
                         }

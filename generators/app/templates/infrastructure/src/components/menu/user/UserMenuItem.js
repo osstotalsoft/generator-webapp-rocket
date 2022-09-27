@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Tooltip } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import { ListItemIcon, ListItemText, StyledMenuItem, StyledNavLink } from './UserMenuStyle'
+import { ListItemIcon, ListItemText, StyledMenuItem, StyledNavLinkMenuItem } from './UserMenuStyle'
 
 const UserMenuItem = ({ userMenu, drawerOpen, activeRoute, withGradient }) => {
   const isActive = activeRoute && activeRoute(userMenu.path)
@@ -13,10 +13,10 @@ const UserMenuItem = ({ userMenu, drawerOpen, activeRoute, withGradient }) => {
   return (
     <Tooltip disableHoverListener={drawerOpen} title={text}>
     <StyledMenuItem>
-      <StyledNavLink isActive={isActive} withGradient={withGradient} to={userMenu.path}>
+      <StyledNavLinkMenuItem isActive={isActive} withGradient={withGradient} to={userMenu.path}>
         <ListItemIcon>{userMenu.icon}</ListItemIcon>
         <ListItemText primary={text} disableTypography={true} drawerOpen={drawerOpen} />
-      </StyledNavLink>
+      </StyledNavLinkMenuItem>
     </StyledMenuItem>
   </Tooltip>
   )

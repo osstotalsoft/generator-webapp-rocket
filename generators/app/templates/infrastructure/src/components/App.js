@@ -5,7 +5,7 @@ import { ToastContainer } from '@totalsoft_oss/rocket-ui.core'
 
 import logo from 'assets/img/logo.png'
 import miniLogo from 'assets/img/miniLogo.png'
-import { Container, Content } from 'assets/jss/components/AppStyle'
+import { Container, Content } from './AppStyle'
 
 import Sidebar from './layout/sidebar/Sidebar'
 import Header from './layout/header/Header'

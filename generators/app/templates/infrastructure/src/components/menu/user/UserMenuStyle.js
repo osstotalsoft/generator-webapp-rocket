@@ -35,7 +35,28 @@ export const ListItem = styled(MuiListItem)(() => ({
   }
 }))
 
-export const StyledNavLink = styled(NavLink, {
+export const StyledNavLinkMenu = styled(NavLink, {
+  shouldForwardProp: prop => !includes(prop, ['withGradient'])
+})(({ theme, withGradient }) => ({
+  transition: 'all 300ms linear',
+  margin: '5px 10px',
+  borderRadius: '3px',
+  position: 'relative',
+  display: 'flex',
+  padding: '10px 15px',
+  ...styles(theme)?.defaultFont,
+  textDecoration: 'unset',
+  width: 'auto',
+  '&:hover': {
+    outline: 'none',
+    color: styles(theme)?.menuActiveColor,
+    backgroundColor: withGradient ? styles(theme)?.menuActiveBk : styles(theme)?.menuActiveBkColor,
+    boxShadow: 'none'
+  },
+  color: 'inherit'
+}))
+
+export const StyledNavLinkMenuItem = styled(NavLink, {
   shouldForwardProp: prop => !includes(prop, ['isActive', 'withGradient'])
 })(({ theme, isActive, withGradient }) => ({
   transition: 'all 300ms linear',
@@ -49,11 +70,13 @@ export const StyledNavLink = styled(NavLink, {
   width: 'auto',
   '&:hover': {
     outline: 'none',
-    backgroundColor: 'rgba(200, 200, 200, 0.2)',
+    color: styles(theme)?.menuActiveColor,
+    backgroundColor: styles(theme)?.menuActiveBkColor,
     boxShadow: 'none'
   },
-  '&,&:hover,&:focus': {
-    color: 'inherit'
+  '&:hover,&:focus': {
+    color: styles(theme)?.menuActiveColor,
+    backgroundColor: styles(theme)?.menuActiveBkColor
   },
   color: isActive ? styles(theme)?.menuActiveColor : 'inherit',
   backgroundColor: isActive ? styles(theme)?.menuActiveBkColor : 'transparent',
@@ -165,12 +188,8 @@ export const StyledSelector = styled(MuiListItem)(({ theme }) => ({
   ...styles(theme)?.defaultFont,
   textDecoration: 'unset',
   width: 'auto',
-  '&:hover': {
-    outline: 'none',
-    backgroundColor: 'rgba(200, 200, 200, 0.2)',
-    boxShadow: 'none'
-  },
-  '&,&:hover,&:focus': {
-    color: 'inherit'
+  '&:hover,&:focus': {
+    color: 'inherit',
+    backgroundColor: 'transparent'
   }
 }))
