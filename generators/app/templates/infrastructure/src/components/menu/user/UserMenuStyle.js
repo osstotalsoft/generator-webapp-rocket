@@ -39,7 +39,7 @@ export const StyledNavLink = styled(NavLink, {
   shouldForwardProp: prop => !includes(prop, ['isActive', 'withGradient'])
 })(({ theme, isActive, withGradient }) => ({
   transition: 'all 300ms linear',
-  margin: '0px 15px',
+  margin: '5px 10px',
   borderRadius: '3px',
   position: 'relative',
   display: 'flex',
@@ -98,18 +98,28 @@ export const ListItemText = styled(MuiListItemText, {
   fontWeight: 'bold'
 }))
 
-export const StyledArrowDropUp = styled(ArrowDropUp)(() => ({
+export const StyledArrowDropUp = styled(ArrowDropUp, {
+  shouldForwardProp: prop => !includes(prop, ['drawerOpen'])
+})(({ drawerOpen }) => ({
   position: 'relative',
   float: 'right',
   transition: 'all 150ms ease-in',
-  verticalAlign: 'middle'
+  verticalAlign: 'middle',
+  ...(!drawerOpen && {
+    display: 'none'
+  })
 }))
 
-export const StyledArrowDropDown = styled(ArrowDropDown)(() => ({
+export const StyledArrowDropDown = styled(ArrowDropDown, {
+  shouldForwardProp: prop => !includes(prop, ['drawerOpen'])
+})(({ drawerOpen }) => ({
   position: 'relative',
   float: 'right',
   transition: 'all 150ms ease-in',
-  verticalAlign: 'middle'
+  verticalAlign: 'middle',
+  ...(!drawerOpen && {
+    display: 'none'
+  })
 }))
 
 export const Collapse = styled(MuiCollapse)(() => ({

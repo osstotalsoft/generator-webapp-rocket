@@ -40,22 +40,19 @@ export const ListItemIcon = styled(MuiListItemIcon, {
   shouldForwardProp: prop => !includes(prop, ['isSubMenuItem', 'drawerOpen'])
 })(({ isSubMenuItem, drawerOpen }) => ({
   color: 'inherit',
-  width: '30px',
-  height: '24px',
-  float: 'left',
-  position: 'inherit',
   textAlign: 'center',
   verticalAlign: 'middle',
   opacity: '0.8',
-  ...(isSubMenuItem &&
-    drawerOpen && {
-      paddingLeft: '18px'
-    })
+  minWidth: '2rem',
+  minHeight: '2rem',
+  display: 'grid',
+  placeItems: 'center',
+  ...(isSubMenuItem && drawerOpen && { paddingLeft: '15px' })
 }))
 
 export const ListItemText = styled(MuiListItemText, {
-  shouldForwardProp: prop => !includes(prop, ['drawerOpen', 'isSubMenuItem'])
-})(({ theme, drawerOpen, isSubMenuItem }) => ({
+  shouldForwardProp: prop => !includes(prop, ['drawerOpen'])
+})(({ theme, drawerOpen }) => ({
   ...styles(theme)?.defaultFont,
   color: 'inherit',
   margin: '0',
@@ -71,28 +68,38 @@ export const ListItemText = styled(MuiListItemText, {
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   width: '100%',
-  paddingLeft: isSubMenuItem ? '18px' : null
+  paddingLeft: '18px'
 }))
 
-export const StyledArrowDropUp = styled(ArrowDropUp)(() => ({
+export const StyledArrowDropUp = styled(ArrowDropUp, {
+  shouldForwardProp: prop => !includes(prop, ['isSubMenuItem'])
+})(({ isSubMenuItem }) => ({
   position: 'relative',
   float: 'right',
   transition: 'all 150ms ease-in',
-  verticalAlign: 'middle'
+  verticalAlign: 'middle',
+  ...(isSubMenuItem && {
+    display: 'none'
+  })
 }))
 
-export const StyledArrowDropDown = styled(ArrowDropDown)(() => ({
+export const StyledArrowDropDown = styled(ArrowDropDown, {
+  shouldForwardProp: prop => !includes(prop, ['isSubMenuItem'])
+})(({ isSubMenuItem }) => ({
   position: 'relative',
   float: 'right',
   transition: 'all 150ms ease-in',
-  verticalAlign: 'middle'
+  verticalAlign: 'middle',
+  ...(isSubMenuItem && {
+    display: 'none'
+  })
 }))
 
 export const ListItemLink = styled(MuiListItem, {
   shouldForwardProp: prop => !includes(prop, ['isActive', 'isSubMenu', 'withGradient'])
 })(({ theme, isActive, isSubMenu, withGradient }) => ({
   transition: 'all 300ms linear',
-  margin: '10px 15px 0',
+  margin: '5px 10px',
   borderRadius: '3px',
   position: 'relative',
   display: 'flex',
@@ -114,7 +121,7 @@ export const StyledNavLink = styled(NavLink, {
   shouldForwardProp: prop => !includes(prop, ['isActive', 'isSubMenu', 'withGradient'])
 })(({ theme, isActive, isSubMenu, withGradient }) => ({
   transition: 'all 300ms linear',
-  margin: '10px 15px 0',
+  margin: '5px 10px',
   borderRadius: '3px',
   position: 'relative',
   display: 'flex',

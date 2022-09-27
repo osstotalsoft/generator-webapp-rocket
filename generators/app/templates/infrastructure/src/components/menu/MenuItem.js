@@ -15,20 +15,24 @@ const MenuItem = ({ menu, drawerOpen, activeRoute, isSubMenuItem, subMenuOpen, o
   const itemProps = isSubMenu ? { onClick: onToggleSubMenu, button: true } : { to: path }
 
   return (
-    <Tooltip disableHoverListener={!drawerOpen} title={translatedText}>
-      <ListItem>
-        <Item {...itemProps} isSubMenu={isSubMenu} isActive={isActive} withGradient={withGradient}>
-          <ListItemIcon isSubMenuItem={isSubMenuItem}>{icon}</ListItemIcon>
-          <ListItemText
-            primary={translatedText}
-            secondary={isSubMenu && (subMenuOpen ? <StyledArrowDropUp /> : <StyledArrowDropDown />)}
-            disableTypography={true}
-            drawerOpen={drawerOpen}
-            isSubMenuItem={isSubMenuItem}
-          />
-        </Item>
-      </ListItem>
-    </Tooltip>
+    <Tooltip disableHoverListener={drawerOpen} title={translatedText}>
+    <ListItem>
+      <Item {...itemProps} isSubMenu={isSubMenu} isActive={isActive} withGradient={withGradient}>
+        <ListItemIcon isSubMenuItem={isSubMenuItem} drawerOpen={drawerOpen}>
+          {icon}
+        </ListItemIcon>
+        <ListItemText
+          primary={translatedText}
+          secondary={
+            isSubMenu &&
+            (subMenuOpen ? <StyledArrowDropUp isSubMenuItem={isSubMenuItem} /> : <StyledArrowDropDown isSubMenuItem={isSubMenuItem} />)
+          }
+          disableTypography={true}
+          drawerOpen={drawerOpen}
+        />
+      </Item>
+    </ListItem>
+  </Tooltip>
   )
 }
 

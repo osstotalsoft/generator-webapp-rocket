@@ -18,11 +18,11 @@ const LanguageSelector = ({ language, changeLanguage, drawerOpen }) => {
       variant='standard'
     >
       <ListItem button value='ro'>
-        <ReactCountryFlag countryCode='RO' svg style={{ margin: '0px 10px' }} />
+        <ReactCountryFlag countryCode='RO' svg style={{ margin: '0px 7px' }} />
         {drawerOpen && <Typography>{'Romana'}</Typography>}
       </ListItem>
       <ListItem button value='en'>
-        <ReactCountryFlag countryCode='GB' svg style={{ margin: '0px 10px' }} />
+        <ReactCountryFlag countryCode='GB' svg style={{ margin: '0px 7px' }} />
         {drawerOpen && <Typography>{'English'}</Typography>}
       </ListItem>
     </Select>

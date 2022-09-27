@@ -12,13 +12,13 @@ const UserMenuItem = ({ userMenu, drawerOpen, activeRoute, withGradient }) => {
 
   return (
     <Tooltip disableHoverListener={drawerOpen} title={text}>
-      <StyledMenuItem>
-        <StyledNavLink isActive={isActive} withGradient={withGradient} to={userMenu.path}>
-          <ListItemIcon>{userMenu.icon}</ListItemIcon>
-          <ListItemText primary={text} disableTypography={true} drawerOpen={drawerOpen} />
-        </StyledNavLink>
-      </StyledMenuItem>
-    </Tooltip>
+    <StyledMenuItem>
+      <StyledNavLink isActive={isActive} withGradient={withGradient} to={userMenu.path}>
+        <ListItemIcon>{userMenu.icon}</ListItemIcon>
+        <ListItemText primary={text} disableTypography={true} drawerOpen={drawerOpen} />
+      </StyledNavLink>
+    </StyledMenuItem>
+  </Tooltip>
   )
 }
 
