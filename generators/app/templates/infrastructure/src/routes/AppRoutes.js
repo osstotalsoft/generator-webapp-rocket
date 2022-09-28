@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-bind */
 import React from 'react';
-import { Switch,  Redirect } from 'react-router-dom';
+import { <% if (addQuickStart) { %>Redirect, <% } %> Switch } from 'react-router-dom';
 
 import CustomRoute from '../components/routing/CustomRoute';
 

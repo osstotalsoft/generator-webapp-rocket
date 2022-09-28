@@ -1,56 +1,40 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import cx from 'classnames'
-import { ListItem, ListItemIcon, ListItemText, Tooltip } from '@mui/material';
-import { makeStyles} from 'tss-react/mui'
-import { ArrowDropDown, ArrowDropUp } from "@mui/icons-material";
-import { NavLink } from 'react-router-dom'
-import menuStyle from 'assets/jss/components/menuStyle'
+import { Tooltip } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-
-const useStyles = makeStyles()(menuStyle);
+import { ListItem, ListItemIcon, ListItemLink, ListItemText, StyledArrowDropDown, StyledArrowDropUp, StyledNavLink } from './MenuStyle'
 
 const MenuItem = ({ menu, drawerOpen, activeRoute, isSubMenuItem, subMenuOpen, onToggleSubMenu, withGradient }) => {
-  const { children, path, icon, text } = menu;
-  const isSubMenu = Boolean(children);
+  const { t } = useTranslation()
+  const { children, path, icon, text } = menu
+  const isSubMenu = Boolean(children)
   const isActive = activeRoute && activeRoute(path)
 
-  const { classes } = useStyles({ isSubMenu, isActive, withGradient })
-  const { t } = useTranslation();
-
-  const itemTextClasses = classes.menuItemText +
-    " " +
-    cx({
-      [classes.menuItemTextMini]: !drawerOpen
-    }) +
-    " " +
-    cx({ 
-      [classes.paddingLeft]: isSubMenuItem 
-    });
-  const menuItemIconClasses = classes.menuItemIcon + ' ' + cx({ [classes.paddingLeft]: isSubMenuItem });
-
   const translatedText = t(text)
-  const Item = isSubMenu ? ListItem : NavLink;
-  const itemProps = isSubMenu ? { onClick: onToggleSubMenu, button: true } : { to: path };
+  const Item = isSubMenu ? ListItemLink : StyledNavLink
+  const itemProps = isSubMenu ? { onClick: onToggleSubMenu, button: true } : { to: path }
 
   return (
-    <Tooltip disableHoverListener={!drawerOpen} title={translatedText}>
-      <ListItem className={classes.menuItem}>
-        <Item {...itemProps} className={classes.menuItemLink}>
-          <ListItemIcon className={menuItemIconClasses}>
-            {icon}
-          </ListItemIcon>
-          <ListItemText
-            primary={translatedText}
-            secondary={isSubMenu && (subMenuOpen ? <ArrowDropUp className={classes.caret} /> : <ArrowDropDown className={classes.caret} />)}
-            disableTypography={true}
-            className={itemTextClasses}
-          />
-        </Item>
-      </ListItem>
-    </Tooltip>
-  );
-};
+    <Tooltip disableHoverListener={drawerOpen} title={translatedText}>
+    <ListItem>
+      <Item {...itemProps} isSubMenu={isSubMenu} isActive={isActive} withGradient={withGradient}>
+        <ListItemIcon isSubMenuItem={isSubMenuItem} drawerOpen={drawerOpen}>
+          {icon}
+        </ListItemIcon>
+        <ListItemText
+          primary={translatedText}
+          secondary={
+            isSubMenu &&
+            (subMenuOpen ? <StyledArrowDropUp isSubMenuItem={isSubMenuItem} /> : <StyledArrowDropDown isSubMenuItem={isSubMenuItem} />)
+          }
+          disableTypography={true}
+          drawerOpen={drawerOpen}
+        />
+      </Item>
+    </ListItem>
+  </Tooltip>
+  )
+}
 
 MenuItem.propTypes = {
   menu: PropTypes.object.isRequired,
@@ -60,6 +44,6 @@ MenuItem.propTypes = {
   subMenuOpen: PropTypes.bool,
   onToggleSubMenu: PropTypes.func,
   withGradient: PropTypes.bool.isRequired
-};
+}
 
-export default MenuItem;
+export default MenuItem

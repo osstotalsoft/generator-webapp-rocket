@@ -1,12 +1,10 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { List } from '@mui/material';
-import { makeStyles} from 'tss-react/mui'
 import { useLocation } from 'react-router-dom';
 import menuConfig from 'constants/menuConfig';
-import menuStyle from 'assets/jss/components/menuStyle';
 import MenuItem from './MenuItem';
 import CollapsibleMenuItem from './CollapsibleMenuItem';
+import { List } from './MenuStyle';
 <%_ if (withRights) { _%>
 import { isEmpty } from 'ramda';
 import { emptyArray } from 'utils/constants';
@@ -15,10 +13,7 @@ import { useUserData } from 'hooks/rights';
 import { intersect } from 'utils/functions'; 
 <%_ } _%>
 
-const useStyles = makeStyles()(menuStyle);
-
 function Menu({ drawerOpen, withGradient }) {
-  const { classes } = useStyles();
   const location = useLocation();
   <%_ if (withRights){ _%>
   const { oidcUser } = useReactOidc();
@@ -41,7 +36,7 @@ function Menu({ drawerOpen, withGradient }) {
   <%_ } _%>
 
   return menuItems && <nav>
-    <List className={classes.menuList}>
+    <List>
       {menuItems.map((menu, key) => {
         const menuItemProps = { key, menu, drawerOpen, activeRoute, withGradient };
         return menu.children ? <CollapsibleMenuItem {...menuItemProps} /> : <MenuItem {...menuItemProps} />;
