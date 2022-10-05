@@ -128,6 +128,7 @@ export const StyledArrowDropUp = styled(ArrowDropUp, {
   float: 'right',
   transition: 'all 150ms ease-in',
   verticalAlign: 'middle',
+  marginTop: '5px',
   ...(!drawerOpen && {
     display: 'none'
   })
@@ -140,6 +141,7 @@ export const StyledArrowDropDown = styled(ArrowDropDown, {
   float: 'right',
   transition: 'all 150ms ease-in',
   verticalAlign: 'middle',
+  marginTop: '5px',
   ...(!drawerOpen && {
     display: 'none'
   })
