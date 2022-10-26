@@ -55,20 +55,23 @@ module.exports = class extends Generator {
     const templatePath = this.templatePath('infrastructure/**/*')
     const destinationPath = this.destinationPath()
 
-    this.ignoreFiles = ['.npmignore', '.gitignore-template']
+    this.ignoreFiles = ['**/.npmignore', '**/.gitignore-template']
     if (!withRights)
       this.ignoreFiles = concat(
-        ['src/hooks/rights.js', 'src/constants/permissions.js', 'src/constants/identityUserRoles.js'],
+        ['**/src/hooks/rights.js', '**/src/constants/permissions.js', '**/src/constants/identityUserRoles.js'],
         this.ignoreFiles
       )
-    if (withMultiTenancy) this.ignoreFiles = concat(['src/**/AuthenticationProvider.js'], this.ignoreFiles)
+    if (withMultiTenancy) this.ignoreFiles = concat(['**/src/**/AuthenticationProvider.js'], this.ignoreFiles)
     else
-      this.ignoreFiles = concat(['src/**/tenantSelectorStyle.js', 'src/tenant', 'src/**/TenantAuthenticationProvider.js'], this.ignoreFiles)
+      this.ignoreFiles = concat(
+        ['**/src/**/tenantSelectorStyle.js', '**/src/tenant', '**/src/**/TenantAuthenticationProvider.js'],
+        this.ignoreFiles
+      )
 
-    if (!addQuickStart) this.ignoreFiles = concat(['src/features/**', 'README.md'], this.ignoreFiles)
+    if (!addQuickStart) this.ignoreFiles = concat(['**/src/features/**', '**/README.md'], this.ignoreFiles)
 
-    if (addHelm) this.ignoreFiles = concat(['helm/frontend/**'], this.ignoreFiles)
-    else this.ignoreFiles = concat(['helm/**'], this.ignoreFiles)
+    if (addHelm) this.ignoreFiles = concat(['**/helm/frontend/**'], this.ignoreFiles)
+    else this.ignoreFiles = concat(['**/helm/**'], this.ignoreFiles)
 
     const packageManagerVersion =
       packageManager === 'npm' ? NPM_MIN_VERSION : packageManager === 'yarn' ? YARN_MIN_VERSION : NPM_MIN_VERSION
@@ -78,7 +81,7 @@ module.exports = class extends Generator {
       destinationPath,
       { ...this.answers, packageManagerVersion },
       {},
-      { globOptions: { ignore: this.ignoreFiles.map(f => this.templatePath(`infrastructure/${f}`).replaceAll('\\', '/')), dot: true } }
+      { globOptions: { ignore: this.ignoreFiles, dot: true } }
     )
 
     const gitignorePath = this.templatePath('infrastructure/.gitignore-template')
@@ -94,7 +97,16 @@ module.exports = class extends Generator {
 
   conflicts() {
     if (!this.isLatest) return
-    this.ignoreFiles.map(f => this.deleteDestination(f, { globOptions: { onlyFiles: true, dot: true, silent: true } }))
+    this.ignoreFiles.map(f =>
+      this.deleteDestination(f.startsWith('**/') ? f.substring(3, f.length) : f, {
+        globOptions: { onlyFiles: true, dot: true, silent: true }
+      })
+    )
+    this.ignoreFiles.map(f =>
+      this.deleteDestination(f, {
+        globOptions: { onlyDirectories: true, dot: true, silent: true }
+      })
+    )
   }
 
   install() {
