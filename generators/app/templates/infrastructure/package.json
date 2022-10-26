@@ -36,7 +36,7 @@
     "@totalsoft/pure-validations-react": "^5.0.22",
     "@totalsoft/rules-algebra-react": "^5.0.22",
     "@totalsoft/validations": "^1.0.4",
-    "@totalsoft_oss/rocket-ui.core": "^1.0.0",
+    "@totalsoft_oss/rocket-ui.core": "^1.0.6",
     "@totalsoft_oss/rocket-ui.themes": "^1.0.0",
     "apollo-link-mock": "^1.0.1",
     "apollo-upload-client": "^17.0.0",
