@@ -15,7 +15,6 @@ module.exports = class extends Generator {
   constructor(args, opts) {
     super(args, { ...opts, skipRegenerate: true, ignoreWhitespace: true, force: true, skipLocalCache: false })
     this.registerClientTransforms()
-    this.ignoreFiles = []
   }
 
   async prompting() {
@@ -55,23 +54,13 @@ module.exports = class extends Generator {
     const templatePath = this.templatePath('infrastructure/**/*')
     const destinationPath = this.destinationPath()
 
-    this.ignoreFiles = ['**/.npmignore', '**/.gitignore-template']
+    let ignoreFiles = ['**/.npmignore', '**/.gitignore-template', '**/helm/**']
     if (!withRights)
-      this.ignoreFiles = concat(
-        ['**/src/hooks/rights.js', '**/src/constants/permissions.js', '**/src/constants/identityUserRoles.js'],
-        this.ignoreFiles
-      )
-    if (withMultiTenancy) this.ignoreFiles = concat(['**/src/**/AuthenticationProvider.js'], this.ignoreFiles)
-    else
-      this.ignoreFiles = concat(
-        ['**/src/**/tenantSelectorStyle.js', '**/src/tenant', '**/src/**/TenantAuthenticationProvider.js'],
-        this.ignoreFiles
-      )
+      ignoreFiles = concat(['**/hooks/rights.js', '**/constants/permissions.js', '**/constants/identityUserRoles.js'], ignoreFiles)
+    if (withMultiTenancy) ignoreFiles = concat(['**/AuthenticationProvider.js'], ignoreFiles)
+    else ignoreFiles = concat(['**/tenantSelectorStyle.js', '**/tenant', '**/TenantAuthenticationProvider.js'], ignoreFiles)
 
-    if (!addQuickStart) this.ignoreFiles = concat(['**/src/features/**', '**/README.md'], this.ignoreFiles)
-
-    if (addHelm) this.ignoreFiles = concat(['**/helm/frontend/**'], this.ignoreFiles)
-    else this.ignoreFiles = concat(['**/helm/**'], this.ignoreFiles)
+    if (!addQuickStart) ignoreFiles = concat(['**/features/**', '**/README.md'], ignoreFiles)
 
     const packageManagerVersion =
       packageManager === 'npm' ? NPM_MIN_VERSION : packageManager === 'yarn' ? YARN_MIN_VERSION : NPM_MIN_VERSION
@@ -81,7 +70,7 @@ module.exports = class extends Generator {
       destinationPath,
       { ...this.answers, packageManagerVersion },
       {},
-      { globOptions: { ignore: this.ignoreFiles, dot: true } }
+      { globOptions: { ignore: ignoreFiles, dot: true } }
     )
 
     const gitignorePath = this.templatePath('infrastructure/.gitignore-template')
@@ -93,20 +82,6 @@ module.exports = class extends Generator {
       const helmDestinationPath = path.join(destinationPath, `/helm/${helmChartName}`)
       this.fs.copyTpl(helmTemplatePath, helmDestinationPath, { ...this.answers, packageManagerVersion }, {}, { globOptions: { dot: true } })
     }
-  }
-
-  conflicts() {
-    if (!this.isLatest) return
-    this.ignoreFiles.map(f =>
-      this.deleteDestination(f.startsWith('**/') ? f.substring(3, f.length) : f, {
-        globOptions: { onlyFiles: true, dot: true, silent: true }
-      })
-    )
-    this.ignoreFiles.map(f =>
-      this.deleteDestination(f, {
-        globOptions: { onlyDirectories: true, dot: true, silent: true }
-      })
-    )
   }
 
   install() {
