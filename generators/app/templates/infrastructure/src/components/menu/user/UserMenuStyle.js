@@ -50,7 +50,8 @@ export const StyledNavLinkMenu = styled(NavLink, {
   '&:hover': {
     outline: 'none',
     color: styles(theme)?.menuActiveColor,
-    backgroundColor: withGradient ? styles(theme)?.menuActiveBk : styles(theme)?.menuActiveBkColor,
+    background: withGradient ? styles(theme)?.menuActiveBk : null,
+    backgroundColor: styles(theme)?.menuActiveBkColor,
     boxShadow: 'none'
   },
   color: 'inherit'
