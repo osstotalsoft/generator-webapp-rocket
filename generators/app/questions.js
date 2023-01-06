@@ -5,7 +5,7 @@ module.exports.projectNameQ = {
   name: 'projectName',
   message: 'What is the name of your project?',
   validate: appName => {
-    const pass = appName.match(/^((?!-)[A-Za-z-._]{1,63}(?<!-))+$/)
+    const pass = appName.match(/^((?!-)[A-Za-z-._\d]{1,63}(?<!-))+$/)
     if (pass) {
       return true
     }
