@@ -1,10 +1,9 @@
 import React, { useRef } from 'react'
-import { withRouter } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import PropTypes from 'prop-types'
 import { Hidden } from '@mui/material'
 import SimpleBar from 'simplebar-react'
-import 'simplebar/dist/simplebar.min.css'
+import 'simplebar-react/dist/simplebar.min.css'
 
 import { env } from 'utils/env'
 import UserMenu from 'components/menu/user/UserMenu'
@@ -93,5 +92,4 @@ Sidebar.propTypes = {
   withGradient: PropTypes.bool.isRequired
 }
 
-//router is needed for re-rendering
-export default withRouter(Sidebar)
+export default Sidebar

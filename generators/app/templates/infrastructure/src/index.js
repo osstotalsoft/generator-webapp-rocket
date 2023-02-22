@@ -1,7 +1,7 @@
 import 'url-search-params-polyfill';
 
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client'
 import routes from "./routes";
 import { BrowserRouter } from "react-router-dom";
 import * as serviceWorker from './serviceWorker';
@@ -19,7 +19,10 @@ import AuthProvider from 'providers/TenantAuthenticationProvider';
 import AuthProvider from 'providers/AuthenticationProvider'; 
 <%_}_%>
 
-ReactDOM.render(
+const container = document.getElementById('root')
+const root = createRoot(container)
+
+root.render(
     <AreasWrapper>
         <AuthProvider>
             <AuthApolloProvider>
@@ -28,8 +31,7 @@ ReactDOM.render(
                 </ThemeProvider>
             </AuthApolloProvider>
         </AuthProvider>
-    </AreasWrapper>,
-    document.getElementById("root")
+    </AreasWrapper>
 );
 
 // If you want your app to work offline and load faster, you can change
