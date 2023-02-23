@@ -20,8 +20,6 @@ module.exports = class extends Generator {
   async prompting() {
     this.isLatest = await checkForLatestVersion()
 
-    if (!this.isLatest) return
-
     this.log(
       yosay(`Welcome to the fantabulous ${chalk.red('TotalSoft React App')} generator! (⌐■_■)
      Out of the box I include Material-UI, React, Apollo Client and AxaGuilDEv Oidc Client to build your app.`)
