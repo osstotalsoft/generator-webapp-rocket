@@ -1,18 +1,18 @@
-import React, { Suspense } from "react";
-import { Switch, Route } from "react-router-dom";
-import App from "components/App";
+import React, { Suspense } from 'react'
+import { Routes, Route } from 'react-router-dom'
+import App from 'components/App'
 
-function WaitingComponent(Component) {
+const WaitingComponent = () => {
   // eslint-disable-next-line react/display-name
-  return props => (
+  return (
     <Suspense fallback={<div>Loading...</div>}>
-      <Component {...props} />
+      <App />
     </Suspense>
-  );
+  )
 }
 
 export default (
-  <Switch>
-    <Route path={`/`} component={WaitingComponent(App)} />
-  </Switch>
-);
+  <Routes>
+    <Route path={`*`} element={<WaitingComponent />} />
+  </Routes>
+)

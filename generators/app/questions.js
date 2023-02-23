@@ -62,7 +62,7 @@ module.exports.getQuestions = projectName => [
     message: 'What is the name of your helm chart?',
     when: prompts => prompts.addHelm,
     validate: name => {
-      const pass = name.match(/[a-z0-9]([-a-z0-9]*[a-z0-9])?/)
+      const pass = name.match(/^((?!-)[A-Za-z-._\d]{1,63}(?<!-))+$/)
       if (pass) {
         return true
       }
