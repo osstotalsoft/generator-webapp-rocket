@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react'
-import PropTypes from 'prop-types'
+import { useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { ToastContainer } from '@totalsoft_oss/rocket-ui.core'
 
@@ -14,7 +14,8 @@ import AppRoutes from 'routes/AppRoutes'
 
 const isWeb = () => window.matchMedia('(min-width: 480px)')?.matches
 
-function App({ location }) {
+export default function App() {
+  const location = useLocation()
   const mainPanelRef = useRef()
   const { i18n } = useTranslation()
 
@@ -59,9 +60,3 @@ function App({ location }) {
     </Container>
   )
 }
-
-App.propTypes = {
-  location: PropTypes.object.isRequired
-}
-
-export default App

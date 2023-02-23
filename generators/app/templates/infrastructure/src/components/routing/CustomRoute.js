@@ -1,5 +1,4 @@
 import React, { useMemo } from "react";
-import { Route } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Container } from "./CustomRouteStyle";
 import { <% if (withRights) { %>useReactOidc, <% } %> withOidcSecure } from '@axa-fr/react-oidc-context';
@@ -10,7 +9,7 @@ import { useUserData } from "hooks/rights";
 import { LoadingFakeText, Forbidden } from '@totalsoft_oss/rocket-ui.core';
 import { intersect } from "utils/functions";
 <% } %>
-function PrivateRoute({ component: Component, <% if (withRights) { %>roles, rights, <%}%>exact, path }) {
+function PrivateRoute({ component: Component, <% if (withRights) { %>roles, rights, <%}%> }) {
     const SecuredComponent = useMemo(() => withOidcSecure(Component), [Component]);
 
     <%_ if (withRights) { _%>
@@ -33,9 +32,11 @@ function PrivateRoute({ component: Component, <% if (withRights) { %>roles, righ
             return <LoadingFakeText lines={10} />
         }
 
-        return <Route exact={exact} path={path} component={allow ? SecuredComponent : Forbidden} />}, [loading, exact, path, allow, SecuredComponent]);
+        return allow ? <SecuredComponent /> : <Forbidden />
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        }, [loading, allow, SecuredComponent]);
     <%_ } else { _%>
-    return useMemo(() => <Route exact={exact} path={path} component={SecuredComponent} />, [SecuredComponent, exact, path]);
+    return <SecuredComponent />
     <%_ } _%>
 }
 
@@ -50,14 +51,12 @@ PrivateRoute.propTypes = {
     component: PropTypes.func<% if (withRights) { %>,
     roles: PropTypes.array,
     rights: PropTypes.array
-    <%_ } _%>,
-    exact: PropTypes.bool,
-    path: PropTypes.string
+    <%_ } _%>
 };
 
-function CustomRoute({ isPrivate, fullWidth, ...props }) {
-  return <Container fullWidth={fullWidth}>{isPrivate ? <PrivateRoute {...props} /> : <Route {...props} />}</Container>
-}
+function CustomRoute({ isPrivate, component: Component, ...props }) {
+    return <Container>{isPrivate ? <PrivateRoute component={Component} {...props} /> : <Component />}</Container>
+  }
 
 CustomRoute.defaultProps = {
   <% if (withRights) { %>
@@ -74,10 +73,8 @@ CustomRoute.propTypes = {
   roles: PropTypes.array,
   rights: PropTypes.array,
   <%_ } _%>
-  exact: PropTypes.bool,
   isPrivate: PropTypes.bool,
-  fullWidth: PropTypes.bool,
-  path: PropTypes.string
+  fullWidth: PropTypes.bool
 }
 
 export default CustomRoute

@@ -1,7 +1,6 @@
 /* eslint-disable react/jsx-no-bind */
 import React from 'react';
-import { <% if (addQuickStart) { %>Redirect, <% } %> Switch } from 'react-router-dom';
-
+import {<% if (addQuickStart) { %> Navigate, <% } %> Route, Routes } from 'react-router-dom'
 import CustomRoute from '../components/routing/CustomRoute';
 
 import { Forbidden, NotFound } from '@totalsoft_oss/rocket-ui.core';
@@ -25,15 +24,29 @@ const { viewSettings } = permissions;
 
 export default function AppRoutes() {
     return (
-        <Switch>
-<%_if(addQuickStart){ _%>
-            <CustomRoute isPrivate={false} exact path="/dashboard" component={Dashboard} />
-            <CustomRoute exact path="/settings/security" component={SecuritySettings} <%_ if (withRights) { _%> roles={[admin, user<%_ if (withRights && withMultiTenancy) { _%>, globalAdmin<%}%>]} rights={[viewSettings]} <%_}_%>/>
-            <CustomRoute exact path="/settings/privacy" component={PrivacySettings} <%_ if (withRights) { _%> roles={[admin, user<%_ if (withRights && withMultiTenancy) { _%>, globalAdmin<%}%>]} rights={[viewSettings]} <%_}_%>/>
-            <Redirect exact from="/" to="/dashboard" />
-<%_ } _%>
-            <CustomRoute isPrivate={false} exact path="/forbidden" component={Forbidden} />
-            <CustomRoute isPrivate={false} render={() => <NotFound title="PageNotFound"></NotFound>} />
-        </Switch>
+    <Routes>
+        <%_if(addQuickStart){ _%>
+        <Route path='/dashboard' element={<CustomRoute isPrivate={false} component={Dashboard} />} />
+        <Route path='/' element={<Navigate replace to='/dashboard' />} />
+        <Route path='/settings/security' element={
+            <CustomRoute component={SecuritySettings} 
+            <%_ if (withRights) { _%> 
+                roles={[admin, user<%_ if (withRights && withMultiTenancy) { _%>, globalAdmin<%}%>]} 
+                rights={[viewSettings]} 
+            <%_}_%> 
+            />} 
+        />
+        <Route path='/settings/privacy' element={
+            <CustomRoute component={PrivacySettings} 
+            <%_ if (withRights) { _%> 
+                roles={[admin, user<%_ if (withRights && withMultiTenancy) { _%>, globalAdmin<%}%>]} 
+                rights={[]} 
+            <%_}_%> 
+            />} 
+        />
+        <%_ } _%>
+        <Route path='/forbidden' element={<Forbidden />} />
+        <Route path='*' element={<NotFound title='PageNotFound' />} />
+      </Routes>
     )
 };
