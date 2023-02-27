@@ -29,8 +29,8 @@
     "ejslint": "ejslint generators/app/templates/infrastructure"
   },
   "dependencies": {
-    "boxen": "^5.1.2",
-    "chalk": "^4.1.2",
+    "boxen": "5.1.2",
+    "chalk": "4.1.2",
     "ejs-lint": "^1.2.2",
     "gulp-filter": "^7.0.0",
     "jest-cli": "^27.4.5",
