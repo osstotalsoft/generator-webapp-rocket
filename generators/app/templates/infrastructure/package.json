@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": ">=14.15.0",
+    "node": ">=16.x",
     "<%=packageManager%>": ">= <%= packageManagerVersion %>"
   },
   "description": "•\tVisual Studio Code: https://code.visualstudio.com/download<br> •\tGit: https://git-scm.com/download/win <br> •\tGit Extensions: https://github.com/gitextensions/gitextensions/releases <br> •\tNode.js: https://nodejs.org/en/download/",

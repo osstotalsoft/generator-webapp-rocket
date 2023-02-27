@@ -3,14 +3,15 @@ const path = require('path')
 const rimraf = require('rimraf')
 const assert = require('yeoman-assert')
 const helpers = require('yeoman-test')
+const { NPM_MIN_VERSION, YARN_MIN_VERSION } = require('../generators/app/constants')
 
 describe('test package installers', () => {
   jest.setTimeout(10 * 1000)
   const projectName = 'test-graphql'
   const gqlPort = '4000'
   const tempRoot = `../.tmp`
-  const npm = '>= 7.16.0'
-  const yarn = '>= 1.22.4'
+  const npm = `>= ${NPM_MIN_VERSION}`
+  const yarn = `>= ${YARN_MIN_VERSION}`
 
   beforeAll(() => {
     rimraf.sync(path.join(__dirname, tempRoot))
