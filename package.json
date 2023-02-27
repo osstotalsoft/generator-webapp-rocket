@@ -19,8 +19,8 @@
     "yeoman-generator"
   ],
   "engines": {
-    "npm": ">= 4.0.0",
-    "node": ">= 14.15.0"
+    "npm": ">= 6.x",
+    "node": ">= 16.x"
   },
   "scripts": {
     "test": "jest --runInBand --collectCoverage",

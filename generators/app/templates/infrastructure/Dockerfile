@@ -1,5 +1,5 @@
 # build environment
-FROM node:14 as builder
+FROM node:18-slim as builder
 WORKDIR /app
 
 COPY package*.json ./
@@ -16,7 +16,7 @@ COPY . ./
 RUN <%=packageManager%> run build
 
 # production environment
-FROM node:14-slim
+FROM node:18-slim
 
 ARG imageUser=appuser
 ARG imageUserGroup=appgroup
