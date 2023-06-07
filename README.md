@@ -6,7 +6,7 @@
 
 > We can also help you get started with your GraphQL server. Check out our [GraphQL Rocket Generator](https://github.com/osstotalsoft/generator-graphql-rocket).
 
-> This application uses [Rocket-UI](https://github.com/osstotalsoft/rocket-ui) library to allow you to create smart and friendly web application interfaces.
+> This application uses [Rocket-UI](https://github.com/osstotalsoft/rocket-ui-ts) library to allow you to create smart and friendly web application interfaces.
 
 ## See [DOCUMENTATION](https://totalsoft.gitbook.io/web-app-rocket-generator/).
 - [Quick-start guide](https://totalsoft.gitbook.io/web-app-rocket-generator/quick-start)
