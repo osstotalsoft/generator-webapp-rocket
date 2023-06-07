@@ -6,7 +6,7 @@ import { <% if (withRights) { %>useReactOidc, <% } %> withOidcSecure } from '@ax
 import { emptyArray } from "utils/constants";
 import { isEmpty } from "ramda";
 import { useUserData } from "hooks/rights";
-import { LoadingFakeText, Forbidden } from '@totalsoft_oss/rocket-ui.core';
+import { FakeText, Forbidden } from '@totalsoft/rocket-ui';
 import { intersect } from "utils/functions";
 <% } %>
 function PrivateRoute({ component: Component, <% if (withRights) { %>roles, rights, <%}%> }) {
@@ -29,7 +29,7 @@ function PrivateRoute({ component: Component, <% if (withRights) { %>roles, righ
 
     return useMemo(() => {
         if (loading) {
-            return <LoadingFakeText lines={10} />
+            return <FakeText lines={10} />
         }
 
         return allow ? <SecuredComponent /> : <Forbidden />

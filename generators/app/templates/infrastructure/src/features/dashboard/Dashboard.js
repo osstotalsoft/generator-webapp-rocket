@@ -1,6 +1,6 @@
 import React from 'react'
 import { Typography, Grid } from '@mui/material'
-import { useToast } from '@totalsoft_oss/rocket-ui.core';
+import { useToast } from '@totalsoft/rocket-ui';
 
 function Dashboard() {
   const addToast = useToast();
