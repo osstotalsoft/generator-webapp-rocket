@@ -3,7 +3,7 @@ import React from 'react';
 import {<% if (addQuickStart) { %> Navigate, <% } %> Route, Routes } from 'react-router-dom'
 import CustomRoute from '../components/routing/CustomRoute';
 
-import { Forbidden, NotFound } from '@totalsoft_oss/rocket-ui.core';
+import { Forbidden, NotFound } from '@totalsoft/rocket-ui';
 <%_if(addQuickStart){ _%>
 import Dashboard from 'features/dashboard/Dashboard'
 import SecuritySettings from 'features/settings/SecuritySettings'

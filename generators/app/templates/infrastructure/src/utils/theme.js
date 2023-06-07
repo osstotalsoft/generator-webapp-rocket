@@ -1,5 +1,5 @@
 import { env } from './env'
-import { defaultTheme, greenTheme, blueTheme, orangeTheme, redTheme, vividOrangeTheme, lightBlueTheme } from '@totalsoft_oss/rocket-ui.themes'
+import { defaultTheme, greenTheme, blueTheme, orangeTheme, redTheme, vividOrangeTheme, lightBlueTheme } from '@totalsoft/rocket-ui'
 
 const getTheme = () => {
   switch (env.REACT_APP_THEME) {

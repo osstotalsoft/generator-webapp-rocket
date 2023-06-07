@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Hidden } from '@mui/material'
 import { MoreVert, ViewList, Menu } from '@mui/icons-material'
-import { IconButton } from '@totalsoft_oss/rocket-ui.core'
+import { IconButton } from '@totalsoft/rocket-ui'
 import { reduce } from 'ramda'
 
 import menuConfig from 'constants/menuConfig'

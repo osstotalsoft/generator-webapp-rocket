@@ -6,7 +6,7 @@ import { Authenticating } from 'components/login/Authenticating'
 import { CallbackPage } from 'components/login/CallbackPage'
 import { NotAuthenticated } from 'components/login/NotAuthenticated'
 import { SessionExpired } from 'components/login/SessionExpired'
-import { Forbidden } from '@totalsoft_oss/rocket-ui.core'
+import { Forbidden } from '@totalsoft/rocket-ui'
 
 const AuthenticationProvider = props => {
   const { children } = props

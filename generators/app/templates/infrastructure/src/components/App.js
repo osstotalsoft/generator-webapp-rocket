@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { ToastContainer } from '@totalsoft_oss/rocket-ui.core'
+import { ToastContainer } from '@totalsoft/rocket-ui'
 
 import logo from 'assets/img/logo.png'
 import miniLogo from 'assets/img/miniLogo.png'

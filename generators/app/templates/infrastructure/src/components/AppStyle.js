@@ -4,7 +4,7 @@ import { includes } from 'ramda'
 
 export const Container = styled('div')(({ theme }) => ({
   ...styles(theme)?.defaultFont,
-  backgroundColor: theme.palette.background.main,
+  backgroundColor: theme.palette.background.default,
   color: theme.palette.primary.main,
   position: 'relative',
   top: '0',
