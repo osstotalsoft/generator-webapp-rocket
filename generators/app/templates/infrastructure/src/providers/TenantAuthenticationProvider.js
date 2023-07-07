@@ -32,7 +32,7 @@ const TenantAuthenticationProvider = props => {
     <TenantContext.Provider value={setTenantCallback}>
       <OidcProvider
         configuration={configuration}
-        configurationName={tenant || getOidcConfigName()}
+        configurationName={getOidcConfigName()}
         authenticatingComponent={Authenticating}
         callbackSuccessComponent={CallbackPage}
         loadingComponent={NotAuthenticated}
