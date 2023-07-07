@@ -1,25 +1,28 @@
-import { ApolloProvider } from '@apollo/client';
-import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
-import { AuthenticationContext } from '@axa-fr/react-oidc-context';
+import React, { useEffect } from 'react'
+import PropTypes from 'prop-types'
+import { ApolloProvider } from '@apollo/client'
+import { useOidcUser, OidcUserStatus, useOidcAccessToken } from '@axa-fr/react-oidc'
 
-import { getApolloClient } from './client';
+import { getApolloClient, getAccessToken } from './client'
+import { getOidcConfigName } from "utils/functions"
 
 export function AuthApolloProvider({ children }) {
-    const oidc = useContext(AuthenticationContext);
+  const { oidcUserLoadingState } = useOidcUser(getOidcConfigName())
+  const { accessToken } = useOidcAccessToken(getOidcConfigName())
 
-    if (oidc.isLoading) {
-        return (<>auth loading</>)
-    }
+  useEffect(() => {
+    setAccessToken(accessToken)
+  }, [accessToken])
 
-    return (
-        <ApolloProvider client={getApolloClient()}>
-            {children}
-        </ApolloProvider>)
+  if (oidcUserLoadingState === OidcUserStatus.Loading) {
+    return <>auth loading</>
+  }
+
+  return <ApolloProvider client={getApolloClient()}>{children}</ApolloProvider>
 }
 
 AuthApolloProvider.propTypes = {
-    children: PropTypes.element.isRequired
+  children: PropTypes.element.isRequired
 }
 
-export default AuthApolloProvider;
+export default AuthApolloProvider

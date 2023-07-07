@@ -2,7 +2,7 @@ import React, { useState, useCallback<% if (withMultiTenancy) { %>, useEffect, u
 import PropTypes from 'prop-types'
 import { useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { useReactOidc } from '@axa-fr/react-oidc-context'
+import { useOidcUser, useOidc } from '@axa-fr/react-oidc'
 
 import { Tooltip } from '@mui/material'
 import { PowerSettingsNew } from '@mui/icons-material'
@@ -25,7 +25,7 @@ import {
   StyledSelector
 } from './UserMenuStyle'
 import UserMenuItem from './UserMenuItem'
-
+import { getOidcConfigName } from "utils/functions"
 <%_ if (withMultiTenancy) { _%>
 import { useLazyQuery } from '@apollo/client';
 import { TenantContext } from 'providers/TenantAuthenticationProvider'
@@ -43,8 +43,9 @@ function UserMenu({ drawerOpen, avatar, language, changeLanguage, withGradient }
     const [openAvatar, setOpenAvatar] = useState(false);
     const { t } = useTranslation();
     const location = useLocation();
-    const { oidcUser, logout } = useReactOidc();
-
+    const { oidcUser } = useOidcUser(getOidcConfigName());
+    const { logout } = useOidc(getOidcConfigName());
+    
     <%_ if (withRights){ _%>
     const userRoles = oidcUser?.profile?.role || emptyArray;<%_ } _%>
   

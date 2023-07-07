@@ -8,15 +8,17 @@ import { List } from './MenuStyle';
 <%_ if (withRights) { _%>
 import { isEmpty } from 'ramda';
 import { emptyArray } from 'utils/constants';
-import { useReactOidc } from '@axa-fr/react-oidc-context';
+import { useOidcUser } from '@axa-fr/react-oidc';
 import { useUserData } from 'hooks/rights';
-import { intersect } from 'utils/functions'; 
+import { intersect } from 'utils/functions';
+import { getOidcConfigName } from "utils/functions" 
 <%_ } _%>
 
 function Menu({ drawerOpen, withGradient }) {
   const location = useLocation();
   <%_ if (withRights){ _%>
-  const { oidcUser } = useReactOidc();
+  const { oidcUser } = useOidcUser(getOidcConfigName());
+
   const userRoles = oidcUser?.profile?.role || emptyArray;<%_ } _%>
 
   const activeRoute = useCallback(routeName => location.pathname.indexOf(routeName) > -1, [location.pathname]) 

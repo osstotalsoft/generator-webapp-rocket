@@ -49,3 +49,8 @@ export const addMilliseconds = curry((milliseconds, date) => new Date(date.getTi
 
 // subtractOneMillisecond :: Date -> Date
 export const subtractOneMillisecond = addMilliseconds(-1)
+
+export const getOidcConfigName = () => {
+    const tid = <% if (withMultiTenancy){ _%> sessionStorage.getItem("tenant") || <%_ } _%> 'config_show_access_token';
+    return tid
+}

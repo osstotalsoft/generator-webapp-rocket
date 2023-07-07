@@ -74,7 +74,7 @@ i18n
       },
 
       react: {
-        wait: true,
+        useSuspense: true,
         usePureComponent: true
       },
 

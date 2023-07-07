@@ -1,7 +1,8 @@
 import React, { useMemo } from "react";
 import PropTypes from "prop-types";
 import { Container } from "./CustomRouteStyle";
-import { <% if (withRights) { %>useReactOidc, <% } %> withOidcSecure } from '@axa-fr/react-oidc-context';
+import {  getOidcConfigName } from "utils/functions";
+import { <% if (withRights) { %>useOidcUser, <% } %> withOidcSecure } from '@axa-fr/react-oidc';
 <%_ if (withRights) { _%>
 import { emptyArray } from "utils/constants";
 import { isEmpty } from "ramda";
@@ -9,11 +10,12 @@ import { useUserData } from "hooks/rights";
 import { FakeText, Forbidden } from '@totalsoft/rocket-ui';
 import { intersect } from "utils/functions";
 <% } %>
-function PrivateRoute({ component: Component, <% if (withRights) { %>roles, rights, <%}%> }) {
-    const SecuredComponent = useMemo(() => withOidcSecure(Component), [Component]);
+
+function PrivateRoute({ component: Component, <% if (withRights) { %>roles, rights, <%}%> }) { 
+    const SecuredComponent = useMemo(() => withOidcSecure(Component, undefined, undefined, getOidcConfigName()), [Component]);
 
     <%_ if (withRights) { _%>
-    const { oidcUser } = useReactOidc();
+    const { oidcUser } = useOidcUser(getOidcConfigName());
     const userRoles = oidcUser?.profile?.role || emptyArray;
     const { userData, loading } = useUserData();
     const userRights = userData?.rights || emptyArray
