@@ -11,7 +11,7 @@ export function AuthApolloProvider({ children }) {
   const { accessToken } = useOidcAccessToken(getOidcConfigName())
 
   useEffect(() => {
-    getAccessToken(accessToken)
+    setAccessToken(accessToken)
   }, [accessToken])
 
   if (oidcUserLoadingState === OidcUserStatus.Loading) {

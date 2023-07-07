@@ -11,6 +11,8 @@ import { env } from "../utils/env"
 import { createUploadLink } from 'apollo-upload-client'
 import omitDeep from 'omit-deep-lodash'
 
+let access_token
+
 <%_ if (withSubscription) { _%>
 // Create a WebSocket link:
 let wsLink
@@ -121,8 +123,7 @@ const cache = new InMemoryCache({
   }
 })
 
-let access_token
-export function getAccessToken(accessToken) {
+export function setAccessToken(accessToken) {
   access_token = accessToken
 }
 
