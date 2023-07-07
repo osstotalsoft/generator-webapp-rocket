@@ -4,6 +4,7 @@ const crypto = require('crypto')
 const path = require('path')
 
 const envFileRegEx = /env.([a-z0-9]*.)?js/g
+const injectedObjectRegEx = /(const oidc = {[^}]*})/
 const buildDir = './build'
 
 // Generate the configuration script from environment variables
@@ -28,6 +29,34 @@ function saveConfigScript(scriptContents, scriptName) {
         console.log('The file was saved!')
     })
 }
+
+function setOidcDomains(scriptContents, trustedDomainsFile) {
+    const scriptPath = path.join(buildDir, trustedDomainsFile)
+    fs.readFile(scriptPath, 'utf8', function (err, data) {
+      if (err) {
+        console.error(err)
+        return
+      }
+      const { REACT_APP_IDENTITY_AUTHORITY, REACT_APP_GQL_HTTP_PROTOCOL, REACT_APP_GQL } = process.env
+  
+      const injectedValue =
+        'const oidc = ' +
+        JSON.stringify({
+          REACT_APP_IDENTITY_AUTHORITY,
+          REACT_APP_GQL_HTTP_PROTOCOL,
+          REACT_APP_GQL
+        })
+  
+      data = data.replace(injectedObjectRegEx, injectedValue)
+  
+      console.log('Saving file to: ' + scriptPath)
+      fs.writeFile(scriptPath, data, 'utf8', function (err) {
+        if (err) throw err
+  
+        console.log('The file was saved!')
+      })
+    })
+  }
 
 // Update configuration script name in index.html
 function updateIndex(scriptName) {
@@ -78,7 +107,9 @@ console.log('Setting runtime envoronment..')
 let scriptContents = generateConfigScript()
 let scriptHash = crypto.createHash('sha256').update(scriptContents).digest('hex')
 let scriptName = `env.${scriptHash}.js`
+const trustedDomainsFile = 'OidcTrustedDomains.js'
 
 saveConfigScript(scriptContents, scriptName)
+setOidcDomains(scriptContents, trustedDomainsFile)
 updateIndex(scriptName)
 deleteOldScript(scriptName)

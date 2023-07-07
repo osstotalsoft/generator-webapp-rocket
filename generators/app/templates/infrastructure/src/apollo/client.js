@@ -10,33 +10,26 @@ import { setContext } from "@apollo/client/link/context"
 import { env } from "../utils/env"
 import { createUploadLink } from 'apollo-upload-client'
 import omitDeep from 'omit-deep-lodash'
-import { getUserManager } from "@axa-fr/react-oidc-core";
-import { emptyObject } from 'utils/constants'
 
 <%_ if (withSubscription) { _%>
 // Create a WebSocket link:
 let wsLink
-const getWsLink = ()=> {  
+const getWsLink = () => {  
   let activeSocket, currentAccessToken
   if (!wsLink) {
     const wsClient = createClient({
       url: `${env.REACT_APP_GQL_WS_PROTOCOL}://${env.REACT_APP_GQL}/graphql`,
       keepAlive: 10000, // ping server every 10 seconds,
       connectionParams: async () => {
-        const userManager = getUserManager()
-        const { access_token } = await userManager.getUser() ?? emptyObject
         currentAccessToken = access_token;
-
         return {
-          authorization: access_token ? `Bearer ${access_token}` : ""
+          authorization: access_token ? `Bearer ${access_token}` : ''
         }
       },
       on: {
         connected: socket => (activeSocket = socket),
         ping: async received => {
           if (!received) {
-            const userManager = getUserManager()
-            const { access_token } = (await userManager.getUser()) ?? emptyObject
             if (activeSocket.readyState === WebSocket.OPEN && currentAccessToken !== access_token) {
               setTimeout(() => {
                 activeSocket.close(1000, "Access token silent renew")
@@ -79,14 +72,11 @@ const httpLink = createUploadLink({
 })
 
 const authLink = setContext(async (_, { headers }) => {
-  const userManager = getUserManager();
-  const { access_token } = await userManager.getUser() ?? emptyObject
-  
   return {
     headers: {
       ...headers,
-      authorization: access_token ? `Bearer ${access_token}` : ""
-    },
+      authorization: access_token ? `Bearer ${access_token}` : ''
+    }
   }
 })
 
@@ -131,13 +121,18 @@ const cache = new InMemoryCache({
   }
 })
 
+let access_token
+export function getAccessToken(accessToken) {
+  access_token = accessToken
+}
+
 let apolloClient
 export const getApolloClient = () => {
   if (!apolloClient) {
     apolloClient = new ApolloClient({
       link: myAppLink(),
       cache
-    });
+    })
   }
   return apolloClient
 }

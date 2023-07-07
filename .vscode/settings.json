@@ -3,6 +3,7 @@
   "javascript.format.enable": true,
   "typescript.format.enable": false,
   "cSpell.words": [
+    "Oidc",
     "totalsoft"
   ],
 }

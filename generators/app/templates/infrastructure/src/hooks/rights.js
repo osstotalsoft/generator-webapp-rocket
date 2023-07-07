@@ -1,8 +1,9 @@
 import permissions from 'constants/permissions'
 import { gql } from '@apollo/client'
 import { useQueryWithErrorHandling } from './errorHandling'
-import { useReactOidc } from '@axa-fr/react-oidc-context';
+import { useOidcUser } from '@axa-fr/react-oidc'
 import { includes } from 'ramda';
+import { getOidcConfigName } from "utils/functions";
 
 const { viewSettings} = permissions
 const GET_USER_DATA = gql`
@@ -16,7 +17,8 @@ const GET_USER_DATA = gql`
 `
 
 export function useUserData() {
-    const { oidcUser } = useReactOidc();
+    const { oidcUser } = useOidcUser(getOidcConfigName());
+
     const externalUserId = oidcUser?.profile?.sub;
 
     const { data, ...res } = useQueryWithErrorHandling(GET_USER_DATA, {
@@ -29,7 +31,8 @@ export function useUserData() {
 }
 
 export const useRights = () => {
-    const { oidcUser } = useReactOidc();
+    const { oidcUser } = useOidcUser(getOidcConfigName());
+
     const externalUserId = oidcUser?.profile?.sub;
 
     const { data } = useQueryWithErrorHandling(GET_USER_DATA, {

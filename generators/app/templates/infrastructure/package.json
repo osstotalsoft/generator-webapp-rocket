@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "scripts": {
+    "prestart": "node setOidcDomains.js",
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
@@ -22,7 +23,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.7.15",
-    "@axa-fr/react-oidc-context": "3.1.6",
+    "@axa-fr/react-oidc": "6.19.2",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.11.16",
