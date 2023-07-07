@@ -73,15 +73,6 @@ const httpLink = createUploadLink({
   }),
 })
 
-const authLink = setContext(async (_, { headers }) => {
-  return {
-    headers: {
-      ...headers,
-      authorization: access_token ? `Bearer ${access_token}` : ''
-    }
-  }
-})
-
 const omitTypenameLink = new ApolloLink((operation, forward) => {
   if (operation.variables) {
     operation.variables = omitDeep(operation.variables, ['__typename'])
@@ -112,7 +103,7 @@ const retryLink = new RetryLink({
   }
 });
 
-const myAppLink = () => ApolloLink.from([omitTypenameLink, retryLink, authLink.concat(<% if (withSubscription) { %> link() <% } else { %> httpLink <%} %>)])
+const myAppLink = () => ApolloLink.from([omitTypenameLink, retryLink, <% if (withSubscription) { %> link() <% } else { %> httpLink <%} %>])
 
 const cache = new InMemoryCache({
   typePolicies: {
