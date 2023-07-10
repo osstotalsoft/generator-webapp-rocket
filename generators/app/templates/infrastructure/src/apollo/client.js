@@ -6,7 +6,6 @@ import { getMainDefinition } from "@apollo/client/utilities"
 <%_ } _%>
 import { onError } from "@apollo/client/link/error"
 import { RetryLink } from '@apollo/client/link/retry';
-import { setContext } from "@apollo/client/link/context"
 import { env } from "../utils/env"
 import { createUploadLink } from 'apollo-upload-client'
 import omitDeep from 'omit-deep-lodash'
