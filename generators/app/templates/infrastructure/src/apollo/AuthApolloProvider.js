@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { ApolloProvider } from '@apollo/client'
 import { useOidcUser, OidcUserStatus, useOidcAccessToken } from '@axa-fr/react-oidc'
 
-import { getApolloClient, getAccessToken } from './client'
+import { getApolloClient, setAccessToken } from './client'
 import { getOidcConfigName } from "utils/functions"
 
 export function AuthApolloProvider({ children }) {
