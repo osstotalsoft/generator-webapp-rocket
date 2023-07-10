@@ -26,6 +26,7 @@ import {
 } from './UserMenuStyle'
 import UserMenuItem from './UserMenuItem'
 import { getOidcConfigName } from "utils/functions"
+import { root } from 'utils/auth/authConfig'
 <%_ if (withMultiTenancy) { _%>
 import { useLazyQuery } from '@apollo/client';
 import { TenantContext } from 'providers/TenantAuthenticationProvider'
@@ -83,13 +84,13 @@ function UserMenu({ drawerOpen, avatar, language, changeLanguage, withGradient }
     <%_ if (withMultiTenancy) { _%>
     const logoutAction = useCallback(e => {
         e.preventDefault();
-        logout();
+        logout(root);
         setContextTenant();
     }, [logout, setContextTenant])
     <%_} else { _%>
     const logoutAction = useCallback(e => {
         e.preventDefault();
-        logout();
+        logout(root);
     }, [logout]) 
     <%_}_%>
 

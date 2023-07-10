@@ -22,8 +22,9 @@ const getAuthenticationConfiguration = (<% if (withMultiTenancy) { %>tenant<%}%>
         redirect_uri: `${root}${AUTH.CALLBACK}`,
         silent_redirect_uri: `${root}${AUTH.SILENT_CALLBACK}`,
         scope: 'openid profile ' + env.REACT_APP_IDENTITY_SCOPE,
+        refresh_time_before_tokens_expiration_in_second: 40,
         token_renew_mode: TokenRenewMode.access_token_invalid,
-        post_logout_redirect_uri: `${root}`,
+        service_worker_relative_url: '/OidcServiceWorker.js'
         acr_values,
     }
 }
