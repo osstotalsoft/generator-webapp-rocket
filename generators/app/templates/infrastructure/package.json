@@ -59,7 +59,7 @@
     "simplebar-react": "^3.2.4",
     "tss-react": "^4.8.6",
     "url-search-params-polyfill": "^8.2.3",
-    "uuidv4": "^6.2.13"
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.21.0",
