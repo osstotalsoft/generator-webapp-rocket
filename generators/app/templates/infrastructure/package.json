@@ -43,7 +43,6 @@
     "i18next": "^22.5.1",
     "i18next-browser-languagedetector": "^7.0.2",
     "i18next-http-backend": "^2.2.1",
-    "lodash.curry": "^4.1.1",
     "moment": "2.29.4",
     "oidc-client": "^1.11.5",
     "omit-deep-lodash": "^1.1.7",

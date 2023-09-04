@@ -5,20 +5,20 @@ import {  getOidcConfigName } from "utils/functions";
 import { <% if (withRights) { %>useOidcUser, <% } %> withOidcSecure } from '@axa-fr/react-oidc';
 <%_ if (withRights) { _%>
 import { emptyArray } from "utils/constants";
-import { isEmpty } from "ramda";
+import { isEmpty, defaultTo } from "ramda";
 import { useUserData } from "hooks/rights";
 import { FakeText, Forbidden } from '@totalsoft/rocket-ui';
 import { intersect } from "utils/functions";
 <% } %>
 
-function PrivateRoute({ component: Component, <% if (withRights) { %>roles, rights, <%}%> }) { 
+function PrivateRoute({ component: Component, <% if (withRights) { %>roles = emptyArray, rights = emptyArray <%}%> }) { 
     const SecuredComponent = useMemo(() => withOidcSecure(Component, undefined, undefined, getOidcConfigName()), [Component]);
 
     <%_ if (withRights) { _%>
     const { oidcUser } = useOidcUser(getOidcConfigName());
-    const userRoles = oidcUser?.profile?.role || emptyArray;
+    const userRoles = defaultTo(emptyArray, userData?.roles)
     const { userData, loading } = useUserData();
-    const userRights = userData?.rights || emptyArray
+    const userRights = defaultTo(emptyArray, userData?.rights)
 
     let allow = false
     if (isEmpty(rights) && isEmpty(roles) && oidcUser) {
@@ -42,13 +42,6 @@ function PrivateRoute({ component: Component, <% if (withRights) { %>roles, righ
     <%_ } _%>
 }
 
-<%_ if (withRights) { _%>
-PrivateRoute.defaultProps = {
-    roles: emptyArray,
-    rights: emptyArray
-};
-<%_ } _%>
-
 PrivateRoute.propTypes = {
     component: PropTypes.func<% if (withRights) { %>,
     roles: PropTypes.array,
@@ -56,25 +49,12 @@ PrivateRoute.propTypes = {
     <%_ } _%>
 };
 
-function CustomRoute({ isPrivate, component: Component, ...props }) {
+function CustomRoute({ isPrivate = true, component: Component, fullWidth= false, ...props }) {
     return <Container>{isPrivate ? <PrivateRoute component={Component} {...props} /> : <Component />}</Container>
   }
 
-CustomRoute.defaultProps = {
-  <% if (withRights) { %>
-  roles: emptyArray,
-  rights: emptyArray,
-  <%_ } _%>
-  isPrivate: true,
-  fullWidth: false
-}
-
 CustomRoute.propTypes = {
   component: PropTypes.func,
-  <% if (withRights) { %>
-  roles: PropTypes.array,
-  rights: PropTypes.array,
-  <%_ } _%>
   isPrivate: PropTypes.bool,
   fullWidth: PropTypes.bool
 }

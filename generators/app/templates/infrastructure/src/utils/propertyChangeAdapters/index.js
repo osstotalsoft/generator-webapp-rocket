@@ -1,4 +1,4 @@
-import curry from 'lodash.curry';
+import { curry } from 'ramda'
 
 export const addPropertyPrefix = curry((prefix, fn, prop) => fn(`${prefix}.${prop}`))
 
