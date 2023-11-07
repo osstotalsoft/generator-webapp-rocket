@@ -10,9 +10,9 @@ import { env } from "../utils/env"
 import { createUploadLink } from 'apollo-upload-client'
 import omitDeep from 'omit-deep-lodash'
 
+<%_ if (withSubscription) { _%>
 let access_token
 
-<%_ if (withSubscription) { _%>
 // Create a WebSocket link:
 let wsLink
 const getWsLink = () => {  
@@ -112,10 +112,11 @@ const cache = new InMemoryCache({
     ExternalTenant: { keyFields: ["externalId"] }<% } %>
   }
 })
-
+<%_ if (withSubscription) { _%>
 export function setAccessToken(accessToken) {
   access_token = accessToken
 }
+<%_ } _%>
 
 let apolloClient
 export const getApolloClient = () => {

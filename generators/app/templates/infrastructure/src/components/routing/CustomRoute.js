@@ -6,7 +6,7 @@ import { <% if (withRights) { %>useOidcUser, <% } %> withOidcSecure } from '@axa
 <%_ if (withRights) { _%>
 import { emptyArray } from "utils/constants";
 import { isEmpty, defaultTo } from "ramda";
-import { useUserData } from "hooks/rights";
+import { useUserDataWithRights } from "hooks/rights";
 import { FakeText, Forbidden } from '@totalsoft/rocket-ui';
 import { intersect } from "utils/functions";
 <% } %>
@@ -17,7 +17,7 @@ function PrivateRoute({ component: Component, <% if (withRights) { %>roles = emp
     <%_ if (withRights) { _%>
     const { oidcUser } = useOidcUser(getOidcConfigName());
     const userRoles = defaultTo(emptyArray, userData?.roles)
-    const { userData, loading } = useUserData();
+    const { userData, loading } = useUserDataWithRights();
     const userRights = defaultTo(emptyArray, userData?.rights)
 
     let allow = false
@@ -26,7 +26,7 @@ function PrivateRoute({ component: Component, <% if (withRights) { %>roles = emp
     } else {
         allow = isEmpty(rights)
             ? intersect(userRoles, roles) || !oidcUser
-            : (intersect(userRights, rights) && intersect(userRoles, roles)) || !oidcUser
+            : (intersect(userRights, rights) && (isEmpty(roles) || intersect(userRoles, roles))) || !oidcUser
     }
 
     return useMemo(() => {
@@ -49,7 +49,7 @@ PrivateRoute.propTypes = {
     <%_ } _%>
 };
 
-function CustomRoute({ isPrivate = true, component: Component, fullWidth= false, ...props }) {
+function CustomRoute({ isPrivate = true, component: Component, ...props }) {
     return <Container>{isPrivate ? <PrivateRoute component={Component} {...props} /> : <Component />}</Container>
   }
 

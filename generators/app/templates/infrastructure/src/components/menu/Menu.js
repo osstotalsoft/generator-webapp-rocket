@@ -9,7 +9,7 @@ import { List } from './MenuStyle';
 import { isEmpty } from 'ramda';
 import { emptyArray } from 'utils/constants';
 import { useOidcUser } from '@axa-fr/react-oidc';
-import { useUserData } from 'hooks/rights';
+import { useUserDataWithRights } from 'hooks/rights';
 import { intersect } from 'utils/functions';
 import { getOidcConfigName } from "utils/functions" 
 <%_ } _%>
@@ -23,16 +23,16 @@ function Menu({ drawerOpen, withGradient }) {
 
   const activeRoute = useCallback(routeName => location.pathname.indexOf(routeName) > -1, [location.pathname]) 
   <%_ if (withRights){ _%>
-  const { userData, loading } = useUserData();
+  const { userData, loading } = useUserDataWithRights();
   const userRights = userData?.rights || emptyArray
   
   if (loading) {
     return null
   }<%_ } _%>
   <% if (withRights){ _%>
-  const menuItems = menuConfig.filter(item => isEmpty(item.rights)
-    ? intersect(userRoles, item.roles) || isEmpty(item.roles)
-    : (intersect(userRoles, item.roles) && intersect(userRights, item.rights)) || isEmpty(item.roles)
+  const menuItems = menuConfig.filter(item => isEmpty(item?.rights)
+    ? intersect(userRoles, item?.roles) || isEmpty(item?.roles)
+    : (intersect(userRights, item?.rights) && (isEmpty(userRoles) || intersect(userRoles, item?.roles))) || isEmpty(item.roles)
   )<%_ } else { _%>
   const menuItems = menuConfig
   <%_ } _%>

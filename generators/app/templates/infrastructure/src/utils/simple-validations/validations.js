@@ -2,13 +2,13 @@ import i18next from 'i18next';
 import { isCNP as validateCnp } from "@totalsoft/validations";
 import { Validator, Success, Failure, ValidationError } from "@totalsoft/pure-validations";
 import { any } from 'ramda';
-import moment from 'moment';
+import { format, isAfter, isBefore, isEqual } from 'date-fns'
 
-export const defaultFormatDateTime = date => moment(date).format("DD-MM-YYYY")
+export const defaultFormatDateTime = date => format(date, 'DD-MM-YYYY')
 
 export function lessThanOrEqualDate(max) {
     return Validator(function lessThanOrEqualDate(value) {
-        return value === null || value === undefined || moment(value).isSameOrBefore(max, "day")
+        return value === null || value === undefined || isEqual(value, max) || isBefore(value, max)
             ? Success
             : Failure(ValidationError(i18next.t("Validations.Generic.LessOrEqual", { max: max |> defaultFormatDateTime })));
     });
@@ -16,7 +16,7 @@ export function lessThanOrEqualDate(max) {
 
 export function lessThanDate(max) {
     return Validator(function lessThanDate(value) {
-        return value === null || value === undefined || moment(value).isBefore(max, "day")
+        return value === null || value === undefined || isEqual(value, max) || isBefore(value, max)
             ? Success
             : Failure(ValidationError(i18next.t("Validations.Generic.Less", { max: max |> defaultFormatDateTime })));
     });
@@ -24,7 +24,7 @@ export function lessThanDate(max) {
 
 export function greaterThanOrEqualDate(min) {
     return Validator(function greaterThanOrEqualDate(value) {
-        return value === null || value === undefined || moment(value).isSameOrAfter(min, "day")
+        return value === null || value === undefined || isEqual(value, min) || isAfter(value, min)
             ? Success
             : Failure(ValidationError(i18next.t("Validations.Generic.GreaterOrEqual", { min: min |> defaultFormatDateTime })));
     });
@@ -32,7 +32,7 @@ export function greaterThanOrEqualDate(min) {
 
 export function greaterThanDate(min) {
     return Validator(function greaterThanDate(value) {
-        return value === null || value === undefined || moment(value).isAfter(min, "day")
+        return value === null || value === undefined || isAfter(value, min)
             ? Success
             : Failure(ValidationError(i18next.t("Validations.Generic.Greater", { min: min |> defaultFormatDateTime })));
     });
