@@ -9,7 +9,7 @@ import { List } from './MenuStyle';
 import { isEmpty } from 'ramda';
 import { emptyArray } from 'utils/constants';
 import { useOidcUser } from '@axa-fr/react-oidc';
-import { useUserDataWithRights } from 'hooks/rights';
+import { useUserData } from 'hooks/rights';
 import { intersect } from 'utils/functions';
 import { getOidcConfigName } from "utils/functions" 
 <%_ } _%>
@@ -23,7 +23,7 @@ function Menu({ drawerOpen, withGradient }) {
 
   const activeRoute = useCallback(routeName => location.pathname.indexOf(routeName) > -1, [location.pathname]) 
   <%_ if (withRights){ _%>
-  const { userData, loading } = useUserDataWithRights();
+  const { userData, loading } = useUserData({ withRights: true });
   const userRights = userData?.rights || emptyArray
   
   if (loading) {

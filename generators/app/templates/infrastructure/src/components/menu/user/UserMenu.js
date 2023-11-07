@@ -36,7 +36,7 @@ import TenantSelector, { MY_TENANTS_QUERY } from '../tenant/TenantSelector'
 <%_ if (withRights) { _%>
 import { isEmpty } from 'ramda';
 import { emptyArray } from 'utils/constants';
-import { useUserDataWithRights } from 'hooks/rights';
+import { useUserData } from 'hooks/rights';
 import { intersect } from 'utils/functions'; 
 <%_ } _%>
 
@@ -52,7 +52,7 @@ function UserMenu({ drawerOpen, avatar, language, changeLanguage, withGradient }
   
     const activeRoute = useCallback(routeName => location.pathname.indexOf(routeName) > -1, [location.pathname]) 
     <%_ if (withRights){ _%>
-    const { userData } = useUserDataWithRights();
+    const { userData } = useUserData({ withRights: true });
     const userRights = userData?.rights || emptyArray
     <%_ } _%>
     <% if (withRights){ _%>

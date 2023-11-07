@@ -6,7 +6,7 @@ import { <% if (withRights) { %>useOidcUser, <% } %> withOidcSecure } from '@axa
 <%_ if (withRights) { _%>
 import { emptyArray } from "utils/constants";
 import { isEmpty, defaultTo } from "ramda";
-import { useUserDataWithRights } from "hooks/rights";
+import { useUserData } from "hooks/rights";
 import { FakeText, Forbidden } from '@totalsoft/rocket-ui';
 import { intersect } from "utils/functions";
 <% } %>
@@ -17,7 +17,7 @@ function PrivateRoute({ component: Component, <% if (withRights) { %>roles = emp
     <%_ if (withRights) { _%>
     const { oidcUser } = useOidcUser(getOidcConfigName());
     const userRoles = defaultTo(emptyArray, userData?.roles)
-    const { userData, loading } = useUserDataWithRights();
+    const { userData, loading } = useUserData({ withRights: true });
     const userRights = defaultTo(emptyArray, userData?.rights)
 
     let allow = false

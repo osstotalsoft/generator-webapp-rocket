@@ -17,7 +17,7 @@ const GET_USER_DATA = gql`
     }
 `
 
-export function useUserDataWithRights(withRights = true) {
+export function useUserData({ withRights= false }) {
   const { oidcUser } = useOidcUser(getOidcConfigName())
 
   const externalUserId = oidcUser?.profile?.sub
