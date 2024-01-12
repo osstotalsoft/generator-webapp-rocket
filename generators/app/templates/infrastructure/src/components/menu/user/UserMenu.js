@@ -52,13 +52,13 @@ function UserMenu({ drawerOpen, avatar, language, changeLanguage, withGradient }
   
     const activeRoute = useCallback(routeName => location.pathname.indexOf(routeName) > -1, [location.pathname]) 
     <%_ if (withRights){ _%>
-    const { userData } = useUserData();
+    const { userData } = useUserData({ withRights: true });
     const userRights = userData?.rights || emptyArray
     <%_ } _%>
     <% if (withRights){ _%>
-    const userMenuItems = userMenuConfig.filter(item => isEmpty(item.rights)
-      ? intersect(userRoles, item.roles) || isEmpty(item.roles)
-      : (intersect(userRoles, item.roles) && intersect(userRights, item.rights)) || isEmpty(item.roles)
+    const userMenuItems = userMenuConfig.filter(item => isEmpty(item?.rights)
+      ? intersect(userRoles, item?.roles) || isEmpty(item?.roles)
+      : (intersect(userRights, item?.rights) && (isEmpty(userRoles) || intersect(userRoles, item?.roles))) || isEmpty(item.roles)
     )<%_ } else { _%>
     const userMenuItems = userMenuConfig
     <%_ } _%>

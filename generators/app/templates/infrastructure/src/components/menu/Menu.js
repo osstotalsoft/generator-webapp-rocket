@@ -23,16 +23,16 @@ function Menu({ drawerOpen, withGradient }) {
 
   const activeRoute = useCallback(routeName => location.pathname.indexOf(routeName) > -1, [location.pathname]) 
   <%_ if (withRights){ _%>
-  const { userData, loading } = useUserData();
+  const { userData, loading } = useUserData({ withRights: true });
   const userRights = userData?.rights || emptyArray
   
   if (loading) {
     return null
   }<%_ } _%>
   <% if (withRights){ _%>
-  const menuItems = menuConfig.filter(item => isEmpty(item.rights)
-    ? intersect(userRoles, item.roles) || isEmpty(item.roles)
-    : (intersect(userRoles, item.roles) && intersect(userRights, item.rights)) || isEmpty(item.roles)
+  const menuItems = menuConfig.filter(item => isEmpty(item?.rights)
+    ? intersect(userRoles, item?.roles) || isEmpty(item?.roles)
+    : (intersect(userRights, item?.rights) && (isEmpty(userRoles) || intersect(userRoles, item?.roles))) || isEmpty(item.roles)
   )<%_ } else { _%>
   const menuItems = menuConfig
   <%_ } _%>
