@@ -41,7 +41,7 @@
     "through2": "^4.0.2",
     "update-notifier": "^5.1.0",
     "yeoman-generator": "^5.7.0",
-    "yo": "^4.3.0",
+    "yo": "^5.0.0",
     "yosay": "^2.0.2"
   },
   "devDependencies": {
