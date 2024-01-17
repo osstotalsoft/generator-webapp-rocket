@@ -7,7 +7,7 @@ import { CollapseItem, ListItem, Select, TenantContainer, Typography } from './T
 export const MY_TENANTS_QUERY = gql`
 query {
     myTenants {
-        externalId
+        id
         name
         code
         tier
@@ -41,7 +41,7 @@ const TenantSelector = ({ tenant, changeTenant, tenants, drawerOpen }) => {
                 {...iconComponent}>
                 {
                     tenants.map(t =>
-                    (<ListItem button value={t.code} key={t.externalId}>
+                    (<ListItem button value={t.code} key={t.id}>
                         <CollapseItem>
                             <PersonOutline />
                         </CollapseItem>

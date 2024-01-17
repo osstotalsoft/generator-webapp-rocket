@@ -8,8 +8,8 @@ import { emptyObject } from 'utils/constants'
 
 const { viewSettings} = permissions
 const GET_USER_DATA = gql`
-    query userData($externalId: ID!, $withRights: Boolean!){
-        userData(externalId: $externalId){
+    query userData($id: ID!, $withRights: Boolean!){
+        userData(id: $id){
             id
             userName
             rights @include(if: $withRights)
@@ -20,14 +20,14 @@ const GET_USER_DATA = gql`
 export function useUserData({ withRights= false }) {
   const { oidcUser } = useOidcUser(getOidcConfigName())
 
-  const externalUserId = oidcUser?.profile?.sub
+  const userId = oidcUser?.sub
 
   const { data, ...rest } = useQueryWithErrorHandling(GET_USER_DATA, {
     variables: {
-      externalId: externalUserId,
+      id: userId,
       withRights
     },
-    skip: !externalUserId
+    skip: !userId
   })
   const { user } = defaultTo(emptyObject, data)
   const rights = data?.userData?.rights

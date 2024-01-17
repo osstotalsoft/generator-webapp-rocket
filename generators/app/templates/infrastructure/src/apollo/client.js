@@ -108,8 +108,7 @@ const cache = new InMemoryCache({
   typePolicies: {
     Page: {
       keyFields: ["afterId", "sortBy", "direction", "pageSize"]
-    }<% if (withMultiTenancy) { %>,
-    ExternalTenant: { keyFields: ["externalId"] }<% } %>
+    }
   }
 })
 <%_ if (withSubscription) { _%>

@@ -100,9 +100,9 @@ function UserMenu({ drawerOpen, avatar, language, changeLanguage, withGradient }
             ? oidcUser.profile.name.split('@')[0]
             : "User";
     <%_ if (withMultiTenancy) { _%>
-    const [tenant, setTenant] = useState(myTenants && oidcUser?.profile?.tid && myTenants.find(t => t.externalId.toUpperCase() === oidcUser?.profile?.tid.toUpperCase()))
+    const [tenant, setTenant] = useState(myTenants && oidcUser?.profile?.tid && myTenants.find(t => t.id.toUpperCase() === oidcUser?.profile?.tid.toUpperCase()))
     useEffect(() => {
-        const localTenant = myTenants && oidcUser?.profile?.tid && myTenants.find(t => t.externalId.toUpperCase() === oidcUser?.profile?.tid.toUpperCase())
+        const localTenant = myTenants && oidcUser?.profile?.tid && myTenants.find(t => t.id.toUpperCase() === oidcUser?.profile?.tid.toUpperCase())
         if (!localTenant || tenant) { return }
         setTenant(localTenant)
     }, [myTenants, oidcUser, tenant])
