@@ -3,7 +3,6 @@ FROM node:18-slim as builder
 WORKDIR /app
 
 COPY package*.json ./
-COPY .npmrc ./
 <%_ if(packageManager === 'yarn'){ _%>
 COPY yarn.lock ./
 <%_}_%>

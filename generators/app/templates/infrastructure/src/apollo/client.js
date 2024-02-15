@@ -70,6 +70,9 @@ const httpLink = createUploadLink({
       )
     if (networkError) console.log(`[Network error]: ${networkError}`)
   }),
+  headers: {
+    'Apollo-Require-Preflight': 'true'
+  }
 })
 
 const omitTypenameLink = new ApolloLink((operation, forward) => {
