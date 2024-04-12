@@ -12,9 +12,7 @@ const AUTH = {
 
 const getAuthenticationConfiguration = (<% if (withMultiTenancy) { %>tenant<%}%>) => {
     <%_ if (withMultiTenancy) { _%>
-    const acr_values = isNullOrWhitespace(tenant) ? undefined : `tenant:${tenant}` 
-    <%_ } else { _%>
-    const acr_values = undefined 
+    const extras = isNullOrWhitespace(tenant) ? undefined : { acr_values: `tenant:${tenant}` }
     <%_ } _%>
     return {
         client_id: env.REACT_APP_IDENTITY_CLIENT_ID,
@@ -24,8 +22,8 @@ const getAuthenticationConfiguration = (<% if (withMultiTenancy) { %>tenant<%}%>
         scope: 'openid profile ' + env.REACT_APP_IDENTITY_SCOPE,
         refresh_time_before_tokens_expiration_in_second: 40,
         token_renew_mode: TokenRenewMode.access_token_invalid,
-        service_worker_relative_url: '/OidcServiceWorker.js',
-        acr_values
+        service_worker_relative_url: '/OidcServiceWorker.js'<%_ if (withMultiTenancy) { _%>,
+        extras<%_ } _%>
     }
 }
 
