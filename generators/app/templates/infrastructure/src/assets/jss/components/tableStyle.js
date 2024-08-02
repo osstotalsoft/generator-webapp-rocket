@@ -1,7 +1,7 @@
 
 const tableStyles = theme => ({
     table: {
-        ...theme.table.main,
+        ...theme?.table?.main,
         width: '-webkit-fill-available',
         "&.responsiveTable ": {
             "@media (max-width: 40em)": {

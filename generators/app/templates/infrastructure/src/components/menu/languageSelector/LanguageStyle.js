@@ -4,7 +4,7 @@ import styles from 'assets/jss/styles'
 export const Select = styled(MuiSelect)(({ theme }) => ({
   width: '100%',
   verticalAlign: 'middle',
-  color: 'inherit',
+  color: theme?.palette?.sideMenu?.color,
   '&:before,&:after': {
     display: 'none !important'
   },

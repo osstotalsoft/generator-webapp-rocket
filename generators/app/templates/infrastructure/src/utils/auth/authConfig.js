@@ -23,6 +23,7 @@ const getAuthenticationConfiguration = (<% if (withMultiTenancy) { %>tenant<%}%>
         refresh_time_before_tokens_expiration_in_second: 40,
         token_renew_mode: TokenRenewMode.access_token_invalid,
         service_worker_relative_url: '/OidcServiceWorker.js'<%_ if (withMultiTenancy) { _%>,
+        monitor_session: true,
         extras<%_ } _%>
     }
 }

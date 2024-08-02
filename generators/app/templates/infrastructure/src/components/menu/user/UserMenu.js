@@ -1,4 +1,4 @@
-import React, { useState, useCallback<% if (withMultiTenancy) { %>, useEffect, useContext<% } %> } from 'react';
+import React, { useState, useCallback<% if (withMultiTenancy) { %>, useEffect, useContext<% } %>,<% if (withRights) { %>, useMemo<% } %> } from 'react';
 import PropTypes from 'prop-types'
 import { useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
@@ -9,7 +9,6 @@ import { PowerSettingsNew } from '@mui/icons-material'
 
 import LanguageSelector from '../languageSelector/LanguageSelector'
 import avatar_default from 'assets/img/default-avatar.png'
-import userMenuConfig from 'constants/userMenuConfig'
 import {
   Avatar,
   Collapse,
@@ -25,8 +24,8 @@ import {
   StyledSelector
 } from './UserMenuStyle'
 import UserMenuItem from './UserMenuItem'
-import { getOidcConfigName } from "utils/functions"
 import { root } from 'utils/auth/authConfig'
+import { getOidcConfigName } from 'utils/functions'
 <%_ if (withMultiTenancy) { _%>
 import { useLazyQuery } from '@apollo/client';
 import { TenantContext } from 'providers/TenantAuthenticationProvider'
@@ -34,10 +33,12 @@ import TenantSelector, { MY_TENANTS_QUERY } from '../tenant/TenantSelector'
 <%_ } _%>
 
 <%_ if (withRights) { _%>
-import { isEmpty } from 'ramda';
-import { emptyArray } from 'utils/constants';
-import { useUserData } from 'hooks/rights';
-import { intersect } from 'utils/functions'; 
+    import userMenuConfig from 'constants/userMenuConfig'
+    import { emptyArray } from 'utils/constants';
+    import { useUserData } from 'hooks/rights';
+    import { filterMenuItems } from '../Menu'
+<%_ }else{ _%>
+    import userMenuItems from 'constants/userMenuConfig'
 <%_ } _%>
 
 function UserMenu({ drawerOpen, avatar, language, changeLanguage, withGradient }) {
@@ -56,11 +57,7 @@ function UserMenu({ drawerOpen, avatar, language, changeLanguage, withGradient }
     const userRights = userData?.rights || emptyArray
     <%_ } _%>
     <% if (withRights){ _%>
-    const userMenuItems = userMenuConfig.filter(item => isEmpty(item?.rights)
-      ? intersect(userRoles, item?.roles) || isEmpty(item?.roles)
-      : (intersect(userRights, item?.rights) && (isEmpty(userRoles) || intersect(userRoles, item?.roles))) || isEmpty(item.roles)
-    )<%_ } else { _%>
-    const userMenuItems = userMenuConfig
+    const userMenuItems = useMemo(() => filterMenuItems(userMenuConfig, userRoles, userRights), [userRights, userRoles])
     <%_ } _%>
     
     const openCollapseAvatar = useCallback(e => {
@@ -95,10 +92,10 @@ function UserMenu({ drawerOpen, avatar, language, changeLanguage, withGradient }
     <%_}_%>
 
     const userName = oidcUser?.profile?.firstName
-        ? `${oidcUser.profile.name} ${oidcUser.profile.lastName}`
-        : oidcUser?.profile
-            ? oidcUser.profile.name.split('@')[0]
-            : "User";
+    ? `${oidcUser.profile.name} ${oidcUser.profile.lastName}`
+    : oidcUser?.name
+    ? oidcUser.name.split('@')[0]
+    : 'User'
     <%_ if (withMultiTenancy) { _%>
     const [tenant, setTenant] = useState(myTenants && oidcUser?.profile?.tid && myTenants.find(t => t.externalId.toUpperCase() === oidcUser?.profile?.tid.toUpperCase()))
     useEffect(() => {

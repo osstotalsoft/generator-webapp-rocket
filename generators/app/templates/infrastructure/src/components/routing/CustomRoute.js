@@ -16,8 +16,8 @@ function PrivateRoute({ component: Component, <% if (withRights) { %>roles = emp
 
     <%_ if (withRights) { _%>
     const { oidcUser } = useOidcUser(getOidcConfigName());
-    const userRoles = defaultTo(emptyArray, userData?.roles)
     const { userData, loading } = useUserData({ withRights: true });
+    const userRoles = defaultTo(emptyArray, userData?.roles)
     const userRights = defaultTo(emptyArray, userData?.rights)
 
     let allow = false

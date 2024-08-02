@@ -45,6 +45,7 @@
     "yosay": "^2.0.2"
   },
   "devDependencies": {
+    "@microsoft/generator-sharepoint": "^1.19.0",
     "coveralls": "^3.1.1",
     "eslint": "^8.6.0",
     "eslint-config-prettier": "^8.3.0",

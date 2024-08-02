@@ -1,4 +1,5 @@
 import { ApolloClient, ApolloLink,<% if (withSubscription) { %>split, <% } %> InMemoryCache } from "@apollo/client"
+import { HttpLink } from '@apollo/client/core'
 <%_ if (withSubscription) { _%>
 import { GraphQLWsLink } from "@apollo/client/link/subscriptions";
 import { createClient } from "graphql-ws";
@@ -7,7 +8,6 @@ import { getMainDefinition } from "@apollo/client/utilities"
 import { onError } from "@apollo/client/link/error"
 import { RetryLink } from '@apollo/client/link/retry';
 import { env } from "../utils/env"
-import { createUploadLink } from 'apollo-upload-client'
 import omitDeep from 'omit-deep-lodash'
 
 <%_ if (withSubscription) { _%>
@@ -15,14 +15,14 @@ let access_token
 
 // Create a WebSocket link:
 let wsLink
-const getWsLink = () => {  
+const getWsLink = () => {
   let activeSocket, currentAccessToken
   if (!wsLink) {
     const wsClient = createClient({
       url: `${env.REACT_APP_GQL_WS_PROTOCOL}://${env.REACT_APP_GQL}/graphql`,
       keepAlive: 10000, // ping server every 10 seconds,
       connectionParams: async () => {
-        currentAccessToken = access_token;
+        currentAccessToken = access_token
         return {
           authorization: access_token ? `Bearer ${access_token}` : ''
         }
@@ -33,33 +33,32 @@ const getWsLink = () => {
           if (!received) {
             if (activeSocket.readyState === WebSocket.OPEN && currentAccessToken !== access_token) {
               setTimeout(() => {
-                activeSocket.close(1000, "Access token silent renew")
+                activeSocket.close(1000, 'Access token silent renew')
               }, 1000) // wait 1 second for the pong and then close the connection
             }
           }
         },
         closed: event => {
           console.log(`GraphQL WebSocket closed!: ${event.code} Reason: ${event.reason}`)
-        } 
+        }
       }
     })
     wsLink = new GraphQLWsLink(wsClient)
     wsLink.setOnError(
       onError(({ graphQLErrors, networkError }) => {
-      if (graphQLErrors)
-        graphQLErrors.map(({ message, locations, path }) =>
-          console.log(
-            `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+        if (graphQLErrors)
+          graphQLErrors.map(({ message, locations, path }) =>
+            console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`)
           )
-        )
-      if (networkError) console.log(`[Network error]: ${networkError}`)
-    }))
+        if (networkError) console.log(`[Network error]: ${networkError}`)
+      })
+    )
   }
   return wsLink
 }
 <%_ } _%>
 
-const httpLink = createUploadLink({
+const httpLink = new HttpLink({
   uri: `${env.REACT_APP_GQL_HTTP_PROTOCOL}://${env.REACT_APP_GQL}/graphql`,
   onError: onError(({ graphQLErrors, networkError }) => {
     if (graphQLErrors)
@@ -69,10 +68,7 @@ const httpLink = createUploadLink({
         )
       )
     if (networkError) console.log(`[Network error]: ${networkError}`)
-  }),
-  headers: {
-    'Apollo-Require-Preflight': 'true'
-  }
+  })
 })
 
 const omitTypenameLink = new ApolloLink((operation, forward) => {
@@ -115,6 +111,7 @@ const cache = new InMemoryCache({
     ExternalTenant: { keyFields: ["externalId"] }<% } %>
   }
 })
+
 <%_ if (withSubscription) { _%>
 export function setAccessToken(accessToken) {
   access_token = accessToken

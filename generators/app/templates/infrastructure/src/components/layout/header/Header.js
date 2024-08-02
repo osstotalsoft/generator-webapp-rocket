@@ -27,6 +27,7 @@ function Header({ drawerOpen, handleDrawerToggle }) {
             if (menu.path === pathname) {
                 name = menu.name
             }
+            if (menu.children) flattenConfig(menu.children)
             return null
         })
         if (pathname === '/user') {
