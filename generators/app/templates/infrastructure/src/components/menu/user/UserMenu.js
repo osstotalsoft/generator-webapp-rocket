@@ -1,4 +1,4 @@
-import React, { useState, useCallback<% if (withMultiTenancy) { %>, useEffect, useContext<% } %>,<% if (withRights) { %>, useMemo<% } %> } from 'react';
+import React, { useState, useCallback<% if (withMultiTenancy) { %>, useEffect, useContext<% } %><% if (withRights) { %>, useMemo<% } %> } from 'react';
 import PropTypes from 'prop-types'
 import { useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
