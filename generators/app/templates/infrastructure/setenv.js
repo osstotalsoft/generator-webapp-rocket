@@ -69,27 +69,10 @@ function updateIndex(scriptName) {
 
         fs.writeFile(indexPath, result, 'utf8', function (err) {
             if (err) throw err
-
-            var indexHash = crypto.createHash('sha256').update(result).digest('hex')
-            updateIndexInServiceWorker(indexHash)
         })
     })
 }
 
-// Update index hash in service-worker.js
-function updateIndexInServiceWorker(indexHash) {
-    const swPath = path.join(buildDir, 'service-worker.js')
-
-    fs.readFile(swPath, 'utf8', function (err, data) {
-        if (err) throw err
-
-        let result = data.replace(/"\/index.html","(.*?)"/, `"/index.html","${indexHash}"`)
-
-        fs.writeFile(swPath, result, 'utf8', function (err) {
-            if (err) throw err
-        })
-    })
-}
 
 // Delete old configuration scripts from disk
 function deleteOldScript(currentScriptName) {
