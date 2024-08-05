@@ -4,11 +4,15 @@ import { Tooltip } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { ListItem, ListItemIcon, ListItemLink, ListItemText, StyledArrowDropDown, StyledArrowDropUp, StyledNavLink } from './MenuStyle'
 
+const getActiveChild = (children, activeRoute) => {
+  if (!children) return false
+  return children.some(child => activeRoute(child.path) || getActiveChild(child.children, activeRoute))
+}
 const MenuItem = ({ menu, drawerOpen, activeRoute, isSubMenuItem, subMenuOpen, onToggleSubMenu, withGradient }) => {
   const { t } = useTranslation()
   const { children, path, icon, text } = menu
   const isSubMenu = Boolean(children)
-  const isActive = activeRoute && activeRoute(path)
+  const isActive = activeRoute && (activeRoute(path) || (!isSubMenuItem && getActiveChild(children, activeRoute)))
 
   const translatedText = t(text)
   const Item = isSubMenu ? ListItemLink : StyledNavLink
@@ -17,10 +21,12 @@ const MenuItem = ({ menu, drawerOpen, activeRoute, isSubMenuItem, subMenuOpen, o
   return (
     <Tooltip disableHoverListener={drawerOpen} title={translatedText}>
     <ListItem>
-      <Item {...itemProps} isSubMenu={isSubMenu} isActive={isActive} withGradient={withGradient}>
-        <ListItemIcon isSubMenuItem={isSubMenuItem} drawerOpen={drawerOpen}>
+      <Item {...itemProps}  isSubMenuItem={isSubMenuItem} isActive={isActive} withGradient={withGradient} hasIcon={icon}>
+        {icon && (
+        <ListItemIcon isSubMenuItem={isSubMenuItem} drawerOpen={drawerOpen} isActive={isActive}>
           {icon}
         </ListItemIcon>
+        )}
         <ListItemText
           primary={translatedText}
           secondary={

@@ -4,8 +4,9 @@
 replicaCount: 1
 
 image:
-  repository: "[ORGANIZATION].azurecr.io/<%= helmChartName %>"
-  tag: stable
+  repository: "[ORGANIZATION].azurecr.io"
+  name: <%= helmChartName %>
+  tag: 
   pullPolicy: IfNotPresent
 
 imagePullSecrets:

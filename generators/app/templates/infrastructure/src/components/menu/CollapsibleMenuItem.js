@@ -7,16 +7,28 @@ const CollapsibleMenuItem = ({ menu, ...rest }) => {
   const [open, setOpen] = useState(false)
   const toggleSubMenu = useCallback(() => setOpen(current => !current), [])
 
+  const renderSubMenu = useCallback(
+    menu => {
+      if (menu?.children?.length > 0) 
+        return (
+          <Collapse in={open} timeout='auto' unmountOnExit>
+            <List disablePadding sx={{ paddingLeft: '20px' }}>
+              {menu.children.map((subMenu, key) => (
+                <CollapsibleMenuItem key={key} menu={subMenu} isSubMenuItem={true} {...rest} />
+              ))}
+            </List>
+          </Collapse>
+        )
+      
+      return null
+    },
+    [open, rest]
+  )
+
   return (
     <>
       <MenuItem menu={menu} subMenuOpen={open} onToggleSubMenu={toggleSubMenu} {...rest} />
-      <Collapse in={open} timeout="auto" unmountOnExit>
-        <List disablePadding>
-          {menu?.children?.map((subMenu, key) => (
-            <MenuItem key={key} menu={subMenu} isSubMenuItem={true} {...rest} />
-          ))}
-        </List>
-      </Collapse>
+      {renderSubMenu(menu)}
     </>
   )
 };

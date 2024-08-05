@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react'
-import { useLocation } from 'react-router-dom'
+import React, { useState, useRef, useEffect, useCallback, Suspense } from 'react'
+import { Outlet, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { ToastContainer } from '@totalsoft/rocket-ui'
 
@@ -10,7 +10,6 @@ import { Container, Content } from './AppStyle'
 import Sidebar from './layout/sidebar/Sidebar'
 import Header from './layout/header/Header'
 import Footer from './layout/footer/Footer'
-import AppRoutes from 'routes/AppRoutes'
 
 const isWeb = () => window.matchMedia('(min-width: 480px)')?.matches
 
@@ -39,24 +38,25 @@ export default function App() {
   )
 
   useEffect(() => {
-    mainPanelRef.current.scrollTop = 0
+    if (mainPanelRef?.current?.scrollTop) mainPanelRef.current.scrollTop = 0
   }, [location.pathname])
 
   return (
-    <Container>
-      <Sidebar
-        logo={drawerOpen ? logo : miniLogo}
-        closeDrawer={handleCloseDrawer}
-        changeLanguage={changeLanguage}
-        drawerOpen={drawerOpen}
-        withGradient={false}
-      />
-      <Content ref={mainPanelRef} drawerOpen={drawerOpen}>
-        <Header drawerOpen={drawerOpen} handleDrawerToggle={handleDrawerToggle} />
-        <AppRoutes />
-        <Footer fluid />
-      </Content>
-      <ToastContainer theme='colored'/>
-    </Container>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Container>
+        <Sidebar
+          logo={drawerOpen ? logo : miniLogo}
+          closeDrawer={handleCloseDrawer}
+          changeLanguage={changeLanguage}
+          drawerOpen={drawerOpen}
+        />
+        <Content ref={mainPanelRef} drawerOpen={drawerOpen}>
+          <Header drawerOpen={drawerOpen} handleDrawerToggle={handleDrawerToggle} />
+          <Outlet />
+          <Footer fluid />
+        </Content>
+        <ToastContainer theme='colored' />
+      </Container>
+    </Suspense>
   )
 }
