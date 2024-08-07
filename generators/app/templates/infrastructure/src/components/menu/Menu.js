@@ -4,16 +4,15 @@ import { useLocation } from 'react-router-dom'
 import MenuItem from './MenuItem'
 import CollapsibleMenuItem from './CollapsibleMenuItem'
 import { List } from './MenuStyle'
-import { emptyArray } from 'utils/constants'
-import { useOidcUser } from '@axa-fr/react-oidc'
-import { useUserData } from 'hooks/rights'
 <%_ if (withRights) { _%>
+  import { emptyArray } from 'utils/constants'
+  import { useOidcUser } from '@axa-fr/react-oidc'
+  import { useUserData } from 'hooks/rights'
   import menuConfig from 'constants/menuConfig'
   import { clone, filter, forEach, isEmpty, map } from 'ramda'
   import { intersect, getOidcConfigName } from 'utils/functions'
 <%_ }else{ _%>
   import menuItems from 'constants/menuConfig'
-  import { getOidcConfigName } from 'utils/functions'
   <%_ } _%>
 
 <%_ if (withRights) { _%>

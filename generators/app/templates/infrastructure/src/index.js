@@ -11,7 +11,11 @@ import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css'
 import { AreasWrapper } from './providers/AreasProvider'
 
 import AuthApolloProvider from 'apollo/AuthApolloProvider'
-import AuthProvider from 'providers/TenantAuthenticationProvider'
+<%_ if (withMultiTenancy) { _%>
+import AuthProvider from 'providers/TenantAuthenticationProvider'; 
+<%_} else {_%>
+import AuthProvider from 'providers/AuthenticationProvider'; 
+<%_}_%>
 
 const container = document.getElementById('root')
 const root = createRoot(container)
