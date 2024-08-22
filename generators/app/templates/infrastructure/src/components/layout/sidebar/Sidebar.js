@@ -1,37 +1,16 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import PropTypes from 'prop-types'
-import { Hidden } from '@mui/material'
-import SimpleBar from 'simplebar-react'
-import 'simplebar-react/dist/simplebar.min.css'
-
 import { env } from 'utils/env'
-import UserMenu from 'components/menu/user/UserMenu'
-import Menu from 'components/menu/Menu'
-import { sidebarWrapperHeight } from 'utils/constants'
-import { Drawer, SidebarRef, StyledImage, StyledLogo, StyledLogoDefault, StyledLogoMini, Typography } from './SidebarStyle'
-
-// We've created this component so we can have a ref to the wrapper of the links that appears in our sidebar.
-// This was necessary so that we could initialize PerfectScrollbar on the links.
-// There might be something with the Hidden component from material-ui, and we didn't have access to
-// the links, and couldn't initialize the plugin.
-function SidebarWrapper({ children, drawerOpen }) {
-  const sidebarWrapperRef = useRef()
-
-  return (
-    <SidebarRef ref={sidebarWrapperRef} drawerOpen={drawerOpen}>
-      <SimpleBar style={{ height: sidebarWrapperHeight, overflowX: 'hidden' }}>{children}</SimpleBar>
-    </SidebarRef>
-  )
-}
-
-SidebarWrapper.propTypes = {
-  children: PropTypes.array.isRequired,
-  drawerOpen: PropTypes.bool.isRequired
-}
+import { StyledImage, StyledLogo, StyledLogoDefault, StyledLogoMini, Typography } from './SidebarStyle'
+import WebSidebar from './WebSidebar'
+import MobileSidebar from './MobileSidebar'
+import { useMediaQuery } from 'react-responsive'
+import { mobileWidth } from 'utils/constants'
 
 function Sidebar({ logo, logoText, drawerOpen, changeLanguage, closeDrawer, withGradient }) {
-  const { i18n, t } = useTranslation()
+  const { t } = useTranslation()
+  const isMobile = useMediaQuery({ query: mobileWidth })
 
   const brand = (
     <StyledLogo>
@@ -48,38 +27,17 @@ function Sidebar({ logo, logoText, drawerOpen, changeLanguage, closeDrawer, with
 
   const appVersion = <Typography variant={'caption'}>{`${t('BuildVersion')} ${env.REACT_APP_VERSION}`}</Typography>
 
-  return (
-    <div>
-      <Hidden mdUp>
-        <Drawer
-          variant='temporary'
-          anchor='right'
-          open={drawerOpen}
-          onClose={closeDrawer}
-          ModalProps={{
-            keepMounted: true // Better open performance on mobile.
-          }}
-          drawerOpen={drawerOpen}
-        >
-          {brand}
-          <SidebarWrapper drawerOpen={drawerOpen}>
-            <UserMenu drawerOpen={drawerOpen} changeLanguage={changeLanguage} language={i18n.language} withGradient={withGradient} />
-            <Menu drawerOpen={drawerOpen} withGradient={withGradient} />
-          </SidebarWrapper>
-          {appVersion}
-        </Drawer>
-      </Hidden>
-      <Hidden smDown>
-        <Drawer anchor='left' variant='permanent' open={drawerOpen} drawerOpen={drawerOpen}>
-          {brand}
-          <SidebarWrapper drawerOpen={drawerOpen}>
-            <UserMenu drawerOpen={drawerOpen} changeLanguage={changeLanguage} language={i18n.language} withGradient={withGradient} />
-            <Menu drawerOpen={drawerOpen} withGradient={withGradient} />
-          </SidebarWrapper>
-          {appVersion}
-        </Drawer>
-      </Hidden>
-    </div>
+  return isMobile ? (
+    <MobileSidebar
+      drawerOpen={drawerOpen}
+      closeDrawer={closeDrawer}
+      brand={brand}
+      changeLanguage={changeLanguage}
+      withGradient={withGradient}
+      appVersion={appVersion}
+    />
+  ) : (
+    <WebSidebar drawerOpen={drawerOpen} brand={brand} changeLanguage={changeLanguage} withGradient={withGradient} appVersion={appVersion} />
   )
 }
 
