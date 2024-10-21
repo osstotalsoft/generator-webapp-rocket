@@ -8,7 +8,15 @@ import { Forbidden, NotFound } from '@totalsoft/rocket-ui'
   import Dashboard from 'features/dashboard/Dashboard'
   import SecuritySettings from 'features/settings/SecuritySettings'
   import PrivacySettings from 'features/settings/PrivacySettings'
+
+  <%_ if (withRights) { _%>
+  import roles from 'constants/identityUserRoles'
+  const { admin, user } = roles
+  import permissions from 'constants/permissions'
+  const { viewSettings } = permissions
+  <%_ } _%>
 <%_ } _%>
+
 
 const routes = [
   <%_if(addQuickStart){ _%>
