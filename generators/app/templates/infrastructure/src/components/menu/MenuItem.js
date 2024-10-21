@@ -21,9 +21,9 @@ const MenuItem = ({ menu, drawerOpen, activeRoute, isSubMenuItem, subMenuOpen, o
   return (
     <Tooltip disableHoverListener={drawerOpen} title={translatedText}>
     <ListItem>
-      <Item {...itemProps}  isSubMenuItem={isSubMenuItem} isActive={isActive} withGradient={withGradient} hasIcon={icon}>
+      <Item {...itemProps} isActive={isActive} withGradient={withGradient} hasIcon={icon}>
         {icon && (
-        <ListItemIcon isSubMenuItem={isSubMenuItem} drawerOpen={drawerOpen} isActive={isActive}>
+        <ListItemIcon isSubMenuItem={isSubMenuItem} drawerOpen={drawerOpen}>
           {icon}
         </ListItemIcon>
         )}

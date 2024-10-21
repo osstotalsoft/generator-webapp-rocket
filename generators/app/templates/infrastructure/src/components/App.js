@@ -49,6 +49,7 @@ export default function App() {
           closeDrawer={handleCloseDrawer}
           changeLanguage={changeLanguage}
           drawerOpen={drawerOpen}
+          withGradient={false}
         />
         <Content ref={mainPanelRef} drawerOpen={drawerOpen}>
           <Header drawerOpen={drawerOpen} handleDrawerToggle={handleDrawerToggle} />
