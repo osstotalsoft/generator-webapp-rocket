@@ -1,34 +1,29 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import PropTypes from 'prop-types'
-import { useHeader } from 'providers/AreasProvider'
 import { useTranslation } from 'react-i18next'
-import { MinimizeSidebar, StyledTitle } from './HeaderStyle'
+import { useHeader } from 'providers/AreasProvider'
+import { HeaderRef, HeaderResponsive, StyledMobileTitle } from './HeaderStyle'
 import { IconButton } from '@totalsoft/rocket-ui'
-import { MoreVert, ViewList } from '@mui/icons-material'
+import Menu from '@mui/icons-material/Menu'
 
-const MobileHeader = ({ drawerOpen, handleDrawerToggle, pathName }) => {
+const MobileHeader = ({ handleDrawerToggle, pathName }) => {
   const { t } = useTranslation()
   const [header] = useHeader()
+  const headerRef = useRef()
   return (
     <>
-      <MinimizeSidebar>
-        {drawerOpen ? (
-          <IconButton color='white' onClick={handleDrawerToggle} size='medium'>
-            <MoreVert fontSize='small' />
-          </IconButton>
-        ) : (
-          <IconButton color='white' onClick={handleDrawerToggle} size='medium'>
-            <ViewList fontSize='small' />
-          </IconButton>
-        )}
-      </MinimizeSidebar>
-      {header || <StyledTitle variant='subtitle1'>{pathName && t('NavBar.' + pathName)}</StyledTitle>}
+      {header || <StyledMobileTitle variant='subtitle1'>{pathName && t('NavBar.' + pathName)}</StyledMobileTitle>}
+      <HeaderRef ref={headerRef}></HeaderRef>
+      <HeaderResponsive>
+        <IconButton color='secondary' aria-label='open drawer' onClick={handleDrawerToggle}>
+          <Menu fontSize='small' />
+        </IconButton>
+      </HeaderResponsive>
     </>
   )
 }
 
 MobileHeader.propTypes = {
-  drawerOpen: PropTypes.bool.isRequired,
   handleDrawerToggle: PropTypes.func,
   pathName: PropTypes.string
 }

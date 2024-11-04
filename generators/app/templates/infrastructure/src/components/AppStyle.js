@@ -34,5 +34,6 @@ export const Content = styled('div', {
     [theme.breakpoints.up('md')]: {
       width: `calc(100% - ${styles(theme)?.drawerMiniWidth}px)`
     }
-  })
+  }),
+  ...styles(theme)?.transition
 }))
