@@ -38,9 +38,9 @@ function Header({ drawerOpen, handleDrawerToggle }) {
     <AppBar position='sticky'>
       <Toolbar>
         {isMobile ? (
-          <MobileHeader drawerOpen={drawerOpen} handleDrawerToggle={handleDrawerToggle} pathName={pathName} />
+          <MobileHeader handleDrawerToggle={handleDrawerToggle} pathName={pathName} />
         ) : (
-          <WebHeader handleDrawerToggle={handleDrawerToggle} pathName={pathName} />
+          <WebHeader drawerOpen={drawerOpen} handleDrawerToggle={handleDrawerToggle} pathName={pathName} />
         )}
       </Toolbar>
     </AppBar>
