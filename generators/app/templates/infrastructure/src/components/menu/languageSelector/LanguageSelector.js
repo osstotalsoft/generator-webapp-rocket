@@ -1,4 +1,3 @@
-import React from 'react'
 import PropTypes from 'prop-types'
 import ReactCountryFlag from 'react-country-flag'
 import { ListItem, Select, Typography } from './LanguageStyle'

@@ -1,4 +1,4 @@
-import React, { useCallback<%_ if (withRights){ _%>, useMemo <%_ } _%>} from 'react'
+import { useCallback<%_ if (withRights){ _%>, useMemo <%_ } _%>} from 'react'
 import PropTypes from 'prop-types'
 import { useLocation } from 'react-router-dom'
 import MenuItem from './MenuItem'

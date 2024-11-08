@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback, Suspense } from 'react'
+import { useState, useRef, useEffect, useCallback, Suspense } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { ToastContainer } from '@totalsoft/rocket-ui'
@@ -49,6 +49,7 @@ export default function App() {
           closeDrawer={handleCloseDrawer}
           changeLanguage={changeLanguage}
           drawerOpen={drawerOpen}
+          withGradient={false}
         />
         <Content ref={mainPanelRef} drawerOpen={drawerOpen}>
           <Header drawerOpen={drawerOpen} handleDrawerToggle={handleDrawerToggle} />

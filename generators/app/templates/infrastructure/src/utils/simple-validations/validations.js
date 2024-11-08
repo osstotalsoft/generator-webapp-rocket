@@ -10,7 +10,7 @@ export function lessThanOrEqualDate(max) {
     return Validator(function lessThanOrEqualDate(value) {
         return value === null || value === undefined || isEqual(value, max) || isBefore(value, max)
             ? Success
-            : Failure(ValidationError(i18next.t("Validations.Generic.LessOrEqual", { max: max |> defaultFormatDateTime })));
+            : Failure(ValidationError(i18next.t('Validations.Generic.LessOrEqual', { max: defaultFormatDateTime(max) })))
     });
 }
 
@@ -18,7 +18,7 @@ export function lessThanDate(max) {
     return Validator(function lessThanDate(value) {
         return value === null || value === undefined || isEqual(value, max) || isBefore(value, max)
             ? Success
-            : Failure(ValidationError(i18next.t("Validations.Generic.Less", { max: max |> defaultFormatDateTime })));
+            : Failure(ValidationError(i18next.t('Validations.Generic.Less', { max: defaultFormatDateTime(max) })))
     });
 }
 
@@ -26,7 +26,7 @@ export function greaterThanOrEqualDate(min) {
     return Validator(function greaterThanOrEqualDate(value) {
         return value === null || value === undefined || isEqual(value, min) || isAfter(value, min)
             ? Success
-            : Failure(ValidationError(i18next.t("Validations.Generic.GreaterOrEqual", { min: min |> defaultFormatDateTime })));
+            : Failure(ValidationError(i18next.t('Validations.Generic.GreaterOrEqual', { min: defaultFormatDateTime(min) })))
     });
 }
 
@@ -34,7 +34,7 @@ export function greaterThanDate(min) {
     return Validator(function greaterThanDate(value) {
         return value === null || value === undefined || isAfter(value, min)
             ? Success
-            : Failure(ValidationError(i18next.t("Validations.Generic.Greater", { min: min |> defaultFormatDateTime })));
+            : Failure(ValidationError(i18next.t('Validations.Generic.Greater', { min: defaultFormatDateTime(min) })))
     });
 }
 
@@ -88,13 +88,13 @@ export const singleSelectionValidator = Validator((list) => {
 export const requiredFile = Validator(x =>
     x && x.fileId && x.fileName
         ? Success
-        : "Validations.FileIsMandatory" |> i18next.t |> ValidationError |> Failure
+        : Failure(ValidationError(i18next.t('Validations.FileIsMandatory')))
 )
 
 export const integer = Validator(x =>
     Number.isInteger(x)
         ? Success
-        : "Validations.Integer" |> i18next.t |> ValidationError |> Failure
+        : Failure(ValidationError(i18next.t('Validations.Integer')))
 )
 
 export const numberOfFiles = Validator(list =>
@@ -102,9 +102,13 @@ export const numberOfFiles = Validator(list =>
 );
 
 export const isCnpUnique = (list, personId) => Validator(function isCnpUnique(cnp) {
-    return list |> any((item) => item.cnp === cnp && item.id !== personId) ? Failure(ValidationError(i18next.t("Validations.UniqueCnp"))) : Success
+    return any(item => item.cnp === cnp && item.id !== personId, list)
+    ? Failure(ValidationError(i18next.t('Validations.UniqueCnp')))
+    : Success
 })
 
 export const isFlowNameUnique = (list, flowId) => Validator(function isFlowNameUnique(name) {
-    return list |> any((item) => item.name === name && item.id !== flowId) ? Failure(ValidationError(i18next.t("Validations.UniqueFlowName"))) : Success
+    return any(item => item.name === name && item.id !== flowId, list)
+      ? Failure(ValidationError(i18next.t('Validations.UniqueFlowName')))
+      : Success
 })

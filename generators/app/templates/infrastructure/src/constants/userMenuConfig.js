@@ -1,9 +1,8 @@
 <%_if(addQuickStart){ _%>
-import React from 'react';
-import { Person } from '@mui/icons-material';
+import PersonIcon from '@mui/icons-material/Person'
 
 const userMenuItems = [
-    { icon: <Person />, text: 'MyProfile', path: '/myProfile', name: 'MyProfile' <%_ if (withRights) { _%>, roles:[], rights:[] <%_}_%>}
+    { icon: <PersonIcon />, text: 'MyProfile', path: '/myProfile', name: 'MyProfile' <%_ if (withRights) { _%>, roles:[], rights:[] <%_}_%>}
 ]
 <%_}else{_%>
 const userMenuItems = []

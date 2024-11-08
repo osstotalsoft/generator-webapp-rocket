@@ -1,6 +1,5 @@
 import 'url-search-params-polyfill'
 
-import React from 'react'
 import { createRoot } from 'react-dom/client'
 import Root from './routes/root'
 import ThemeProvider from 'providers/ThemeProvider'
