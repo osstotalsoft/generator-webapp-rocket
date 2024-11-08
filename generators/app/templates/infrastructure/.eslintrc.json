@@ -17,6 +17,7 @@
     },
     "sourceType": "module"
   },
+  "settings": { "react": { "version": "18.3" } },
   "plugins": ["react", "react-hooks", "jest"],
   "ignorePatterns": ["**/public"],
   "rules": {
@@ -29,6 +30,8 @@
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "no-unused-vars": [1, { "args": "after-used", "argsIgnorePattern": "^_" }],
-    "react/jsx-no-bind": ["error", { "ignoreRefs": true }]
+    "react/jsx-no-bind": ["error", { "ignoreRefs": true }],
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off"
   }
 }

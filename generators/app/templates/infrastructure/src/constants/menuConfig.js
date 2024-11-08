@@ -1,8 +1,10 @@
 <%_if(addQuickStart){ _%>
-  import React from 'react';
-  import { Dashboard,Settings, Security, Lock } from '@mui/icons-material'
+  import DashboardIcon from '@mui/icons-material/Dashboard'
+  import SettingsIcon from '@mui/icons-material/Settings'
+  import SecurityIcon from '@mui/icons-material/Security'
+  import LockIcon from '@mui/icons-material/Lock'
   <%_ if (withRights) { _%>
-  import identityUserRoles from 'constants/identityUserRoles';
+  import identityUserRoles from 'constants/identityUserRoles'
   import permissions from 'constants/permissions';
   <%_}_%>
   <%_ if (withRights && withMultiTenancy) { _%>
@@ -15,17 +17,17 @@
 <%_}_%>
 
 const menuItems = [
-  { icon: <Dashboard />, text: 'NavBar.Dashboard', path: '/dashboard', name: 'Dashboard' <%_ if (withRights) { _%>, roles:[], rights:[] <%_}_%>},
+  { icon: <DashboardIcon />, text: 'NavBar.Dashboard', path: '/dashboard', name: 'Dashboard' <%_ if (withRights) { _%>, roles:[], rights:[] <%_}_%>},
     {
-        icon: <Settings />,
+        icon: <SettingsIcon />,
         text: 'NavBar.Settings',
         name: 'Settings',
         <%_ if (withRights) { _%>roles:[admin, user<%_ if (withRights && withMultiTenancy) { _%>, globalAdmin<%}%>], 
         rights:[viewSettings], <%_}_%>
         children: [
-          { icon: <Security />, text: 'NavBar.Security', path: '/settings/security', name: 'Security' },
+          { icon: <SecurityIcon />, text: 'NavBar.Security', path: '/settings/security', name: 'Security' },
           {
-            icon: <Lock />,
+            icon: <LockIcon />,
             text: 'NavBar.Privacy',
             path: '/settings/privacy',
             name: 'Privacy'

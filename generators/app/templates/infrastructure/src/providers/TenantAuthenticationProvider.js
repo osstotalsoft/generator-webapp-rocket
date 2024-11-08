@@ -1,4 +1,4 @@
-import React, { createContext, useCallback } from 'react'
+import { createContext, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import getAuthenticationConfiguration from 'utils/auth/authConfig'
 import { Authenticating } from 'components/login/Authenticating'

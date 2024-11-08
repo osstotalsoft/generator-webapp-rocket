@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import { useRef } from 'react'
 import { useFooter } from 'providers/AreasProvider'
 import { AppBar, Toolbar, FooterRef, Content } from './FooterStyle'
 

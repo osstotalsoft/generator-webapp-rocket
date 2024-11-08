@@ -1,4 +1,3 @@
-import React from 'react'
 import PropTypes from 'prop-types'
 import { useHeader } from 'providers/AreasProvider'
 import { useTranslation } from 'react-i18next'
