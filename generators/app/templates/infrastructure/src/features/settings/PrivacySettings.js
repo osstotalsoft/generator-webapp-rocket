@@ -1,4 +1,5 @@
-import { Typography, Grid } from '@mui/material'
+import { Grid2 as Grid } from '@mui/material'
+import { Typography } from '@totalsoft/rocket-ui';
 
 function PrivacySettings() {
   return (

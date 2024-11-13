@@ -19,7 +19,7 @@ function SidebarWrapper({ children, drawerOpen }) {
 }
 
 SidebarWrapper.propTypes = {
-  children: PropTypes.array.isRequired,
+  children: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
   drawerOpen: PropTypes.bool.isRequired
 }
 
