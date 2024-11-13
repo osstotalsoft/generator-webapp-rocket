@@ -22,12 +22,12 @@
     "postinstall": "node ./node_modules/@axa-fr/oidc-client/bin/copy-service-worker-files.mjs public"
   },
   "dependencies": {
-    "@apollo/client": "^3.11.9",
+    "@apollo/client": "^3.11.10",
     "@axa-fr/react-oidc": "7.22.32",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
-    "@mui/icons-material": "^5.16.6",
-    "@mui/material": "^5.16.6",
+    "@mui/icons-material": "^6.1.6",
+    "@mui/material": "^6.1.6",
     "@totalsoft/rocket-ui": "^0.1.63",
     "@totalsoft/change-tracking-react": "^5.0.37",
     "@totalsoft/pure-validations-react": "^5.0.37",

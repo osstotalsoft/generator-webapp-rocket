@@ -34,8 +34,8 @@ function Header({ drawerOpen, handleDrawerToggle }) {
   const pathName = makeBrand(location.pathname)
 
   return (
-    <AppBar position='sticky'>
-      <Toolbar>
+    <AppBar position='sticky' color='transparent'>
+      <Toolbar color='transparent'>
         {isMobile ? (
           <MobileHeader handleDrawerToggle={handleDrawerToggle} pathName={pathName} />
         ) : (

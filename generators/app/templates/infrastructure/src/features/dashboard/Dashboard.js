@@ -1,5 +1,5 @@
-import { Typography, Grid } from '@mui/material'
-import { useToast } from '@totalsoft/rocket-ui';
+import { Grid2 as Grid } from '@mui/material'
+import { Typography, useToast } from '@totalsoft/rocket-ui';
 
 function Dashboard() {
   const addToast = useToast();
