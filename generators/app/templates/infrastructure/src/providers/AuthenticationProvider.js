@@ -1,4 +1,3 @@
-import React from 'react'
 import PropTypes from 'prop-types'
 import getAuthenticationConfiguration from 'utils/auth/authConfig'
 import { OidcProvider } from '@axa-fr/react-oidc'

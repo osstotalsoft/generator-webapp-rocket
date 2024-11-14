@@ -1,17 +1,14 @@
-import React, { useRef } from 'react'
 import { useFooter } from 'providers/AreasProvider'
-import { AppBar, Toolbar, FooterRef, Content } from './FooterStyle'
+import { AppBar, Toolbar } from './FooterStyle'
 
 function Footer() {
-  const footerRef = useRef()
   const [footer] = useFooter()
 
+  if (!footer) return null
+
   return (
-    <AppBar position='sticky'>
-      <Toolbar>
-        <FooterRef ref={footerRef}></FooterRef>
-        <Content>{footer}</Content>
-      </Toolbar>
+    <AppBar position='sticky' color='transparent'>
+      <Toolbar color='transparent'>{footer}</Toolbar>
     </AppBar>
   )
 }

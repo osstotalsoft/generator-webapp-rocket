@@ -54,12 +54,14 @@ export const ListItemText = styled(MuiListItemText, {
   shouldForwardProp: prop => !includes(prop, ['drawerOpen'])
 })(({ theme, drawerOpen }) => ({
   ...styles(theme)?.defaultFont,
+  [theme.breakpoints.up('md')]: {
+    ...styles(theme)?.transition
+  },
   color: 'inherit',
   margin: '0',
   lineHeight: '30px',
   transform: drawerOpen ? 'translate3d(0px, 0, 0)' : 'translate3d(-25px, 0, 0)',
   opacity: drawerOpen ? '1' : '0',
-  transition: 'transform 300ms ease 0s, opacity 300ms ease 0s',
   position: 'relative',
   display: 'block',
   height: 'auto',

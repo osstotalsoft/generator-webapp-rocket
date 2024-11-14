@@ -1,6 +1,5 @@
 import 'url-search-params-polyfill'
 
-import React from 'react'
 import { createRoot } from 'react-dom/client'
 import Root from './routes/root'
 import ThemeProvider from 'providers/ThemeProvider'
@@ -21,13 +20,13 @@ const container = document.getElementById('root')
 const root = createRoot(container)
 
 root.render(
-  <AreasWrapper>
-    <AuthProvider>
-      <AuthApolloProvider>
-        <ThemeProvider>
-          <Root />
-        </ThemeProvider>
-      </AuthApolloProvider>
-    </AuthProvider>
-  </AreasWrapper>
+  <ThemeProvider>
+    <AreasWrapper>
+      <AuthProvider>
+        <AuthApolloProvider>
+            <Root />
+        </AuthApolloProvider>
+      </AuthProvider>
+    </AreasWrapper>
+  </ThemeProvider>
 )

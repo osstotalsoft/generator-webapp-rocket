@@ -1,4 +1,3 @@
-import React from 'react'
 import { Navigate } from 'react-router-dom'
 import CustomRoute from 'components/routing/CustomRoute'
 
@@ -11,7 +10,7 @@ import { Forbidden, NotFound } from '@totalsoft/rocket-ui'
 
   <%_ if (withRights) { _%>
   import roles from 'constants/identityUserRoles'
-  const { admin, user } = roles
+  const { admin, user<%_ if (withMultiTenancy) { _%>, globalAdmin<%}%> } = roles
   import permissions from 'constants/permissions'
   const { viewSettings } = permissions
   <%_ } _%>

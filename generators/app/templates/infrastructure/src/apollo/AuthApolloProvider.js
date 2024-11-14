@@ -1,4 +1,4 @@
-import React <% if (withSubscription) { %>, { useEffect } <% } %> from 'react'
+<% if (withSubscription) { %> import { useEffect } from 'react' <% } %>
 import PropTypes from 'prop-types'
 import { ApolloProvider } from '@apollo/client'
 import { useOidcUser, OidcUserStatus <% if (withSubscription) { %>, useOidcAccessToken <% } %> } from '@axa-fr/react-oidc'

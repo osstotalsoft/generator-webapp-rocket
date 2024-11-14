@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import { useRef } from 'react'
 import PropTypes from 'prop-types'
 import { SidebarRef } from './SidebarStyle'
 import SimpleBar from 'simplebar-react'
@@ -19,7 +19,7 @@ function SidebarWrapper({ children, drawerOpen }) {
 }
 
 SidebarWrapper.propTypes = {
-  children: PropTypes.array.isRequired,
+  children: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
   drawerOpen: PropTypes.bool.isRequired
 }
 

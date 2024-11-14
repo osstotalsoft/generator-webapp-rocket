@@ -1,4 +1,3 @@
-import React from 'react'
 import PropTypes from 'prop-types'
 import { useLocation } from 'react-router-dom'
 import { reduce } from 'ramda'
@@ -35,8 +34,8 @@ function Header({ drawerOpen, handleDrawerToggle }) {
   const pathName = makeBrand(location.pathname)
 
   return (
-    <AppBar position='sticky'>
-      <Toolbar>
+    <AppBar position='sticky' color='transparent'>
+      <Toolbar color='transparent'>
         {isMobile ? (
           <MobileHeader handleDrawerToggle={handleDrawerToggle} pathName={pathName} />
         ) : (

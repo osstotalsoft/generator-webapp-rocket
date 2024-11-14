@@ -1,4 +1,3 @@
-import React from 'react'
 import PropTypes from 'prop-types'
 import { ThemeProvider as MUIThemeProvider } from '@mui/material'
 import getTheme from 'utils/theme'

@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, useLayoutEffect } from 'react';
+import { createContext, useState, useContext, useLayoutEffect } from 'react';
 import PropTypes from 'prop-types';
 
 export const AreasWrapper = ({ children }) => (

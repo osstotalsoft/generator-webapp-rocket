@@ -1,24 +1,25 @@
-import React, { useRef } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import { useHeader } from 'providers/AreasProvider'
-import { HeaderRef, HeaderResponsive, StyledMobileTitle } from './HeaderStyle'
-import { IconButton } from '@totalsoft/rocket-ui'
+import { IconButton, Typography } from '@totalsoft/rocket-ui'
 import Menu from '@mui/icons-material/Menu'
+import { Stack } from '@mui/material'
 
 const MobileHeader = ({ handleDrawerToggle, pathName }) => {
   const { t } = useTranslation()
   const [header] = useHeader()
-  const headerRef = useRef()
   return (
     <>
-      {header || <StyledMobileTitle variant='subtitle1'>{pathName && t('NavBar.' + pathName)}</StyledMobileTitle>}
-      <HeaderRef ref={headerRef}></HeaderRef>
-      <HeaderResponsive>
-        <IconButton color='secondary' aria-label='open drawer' onClick={handleDrawerToggle}>
-          <Menu fontSize='small' />
-        </IconButton>
-      </HeaderResponsive>
+      <Stack direction='row' gap={1} alignItems='center' width='100%'>
+        {header || (
+          <Typography emphasis='bold' variant='subtitle1'>
+            {pathName && t('NavBar.' + pathName)}
+          </Typography>
+        )}
+      </Stack>
+      <IconButton variant='text' size='small' aria-label='open drawer' onClick={handleDrawerToggle}>
+        <Menu fontSize='small' />
+      </IconButton>
     </>
   )
 }
