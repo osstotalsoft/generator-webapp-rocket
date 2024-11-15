@@ -44,5 +44,8 @@
       "MinCharacters": "Lungimea trebuie sa fie mai mare decat {{min}}",
       "Unique": "Valoarea pentru {{selector}} trebuie sa fie unica"
     }
+  },
+  "General": {
+    "LeavingWithoutSaving": "Renuntati la modificari? Modificarile nesalvate se vor pierde."
   }
 }

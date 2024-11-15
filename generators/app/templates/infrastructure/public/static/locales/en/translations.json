@@ -52,5 +52,8 @@
       "MinCharacters": "The length must be greater than {{min}}",
       "Unique": "The value of {{selector}} must be unique"
     }
+  },
+  "General":{
+    "LeavingWithoutSaving": "Leaving without saving? Unsaved changes will be lost."
   }
 }
