@@ -1,25 +1,39 @@
 import { styled, Select as MuiSelect, ListItem as MuiListItem, Typography as MuiTypography } from '@mui/material'
 import styles from 'assets/jss/styles'
+import { includes, isNil } from 'ramda'
 
-export const Select = styled(MuiSelect)(({ theme }) => ({
+export const Select = styled(MuiSelect, {
+  shouldForwardProp: prop => !includes(prop, ['drawerOpen'])
+})(({ theme, drawerOpen }) => ({
   width: '100%',
-  verticalAlign: 'middle',
-  color: theme?.palette?.sideMenu?.color,
+  color: styles(theme)?.menuColor,
+  paddingRight: 0,
   '&:before,&:after': {
     display: 'none !important'
   },
   [`.MuiSelect-select`]: {
     textOverflow: 'unset',
-    paddingLeft: '10px'
+    justifyContent: Boolean(drawerOpen) || isNil(drawerOpen) ? 'flex-start' : 'center',
+    position: 'relative',
+    display: 'flex',
+    alignItems: 'center'
   },
   [`.MuiSelect-icon`]: {
-    color: theme.palette.sideMenu.color,
-    right: '10px'
+    color: styles(theme)?.menuColor,
+    float: 'right'
+  },
+  [`.MuiInputBase-input`]: {
+    padding: 0,
+    paddingRight: '0px !important'
   }
 }))
 
-export const ListItem = styled(MuiListItem)(() => ({
-  padding: '2px 16px'
+export const ListItem = styled(MuiListItem)(({ theme }) => ({
+  padding: '5px 16px',
+  '&:hover': {
+    color: styles(theme)?.menuActiveColor,
+    backgroundColor: styles(theme)?.menuActiveBkColor
+  }
 }))
 
 export const Typography = styled(MuiTypography)(({ theme }) => ({
@@ -33,5 +47,5 @@ export const Typography = styled(MuiTypography)(({ theme }) => ({
   transition: 'transform 300ms ease 0s, opacity 300ms ease 0s',
   fontSize: '15px',
   fontWeight: 'bold',
-  paddingLeft: '25px'
+  paddingLeft: '19px'
 }))

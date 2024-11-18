@@ -1,26 +1,6 @@
-import { styled, Drawer as MuiDrawer, Typography as MuiTypography } from '@mui/material'
+import { styled, Drawer as MuiDrawer, Divider as MuiDivider } from '@mui/material'
 import { includes } from 'ramda'
 import styles from 'assets/jss/styles'
-import { sidebarWrapperHeight } from 'utils/constants'
-
-export const SidebarRef = styled('div', {
-  shouldForwardProp: prop => !includes(prop, ['drawerOpen'])
-})(({ theme, drawerOpen }) => ({
-  [theme.breakpoints.up('md')]: {
-    ...styles(theme)?.transition
-  },
-  position: 'relative',
-  height: sidebarWrapperHeight,
-  overflow: 'none',
-  width: '260px',
-  zIndex: '4',
-  overflowScrolling: 'touch',
-  color: 'inherit',
-  ...(!drawerOpen && {
-    overflow: 'none',
-    width: styles(theme)?.drawerMiniWidth + 'px!important'
-  })
-}))
 
 export const Drawer = styled(MuiDrawer, {
   shouldForwardProp: prop => !includes(prop, ['drawerOpen'])
@@ -29,71 +9,18 @@ export const Drawer = styled(MuiDrawer, {
     ...styles(theme)?.transition,
     border: 'none',
     position: 'fixed',
-    top: '0',
-    bottom: '0',
-    left: '0',
-    zIndex: '1032',
-    overflowY: 'unset',
-    ...styles(theme)?.boxShadow,
-    width: styles(theme)?.drawerWidth,
-    [theme.breakpoints.up('md')]: {
-      width: styles(theme)?.drawerWidth,
-      position: 'fixed',
-      height: '100%'
-    },
-    [theme.breakpoints.down('md')]: {
-      width: styles(theme)?.drawerWidth,
-      ...styles(theme)?.boxShadow,
-      position: 'fixed',
-      top: '0',
-      height: '100vh',
-      right: '0',
-      left: 'auto',
-      zIndex: '1032',
-      visibility: 'visible',
-      overflowY: 'visible',
-      borderTop: 'none',
-      textAlign: 'left',
-      paddingRight: '0px',
-      paddingLeft: '0',
-      ...styles(theme)?.transition
-    },
-    '&:before,&:after': {
-      position: 'absolute',
-      zIndex: '3',
-      width: '100%',
-      height: '100%',
-      content: '""',
-      display: 'block',
-      top: '0'
-    },
-    ...(!drawerOpen && {
-      overflow: 'none',
-      width: styles(theme)?.drawerMiniWidth + 'px!important'
-    }),
     color: styles(theme)?.menuColor,
-    '&:after': {
-      background: styles(theme)?.menuBkColor,
-      opacity: styles(theme)?.menuBkOpacity
-    }
+    background: styles(theme)?.menuBkColor,
+    width: drawerOpen ? styles(theme)?.drawerWidth : styles(theme)?.drawerMiniWidth
   }
 }))
 
-export const StyledLogo = styled('div')(({ theme }) => ({
+export const StyledLogo = styled('div')(() => ({
   padding: '15px 0px 30px 0',
   margin: '0',
   display: 'block',
   position: 'relative',
-  zIndex: '4',
-  '&:after': {
-    content: '""',
-    position: 'absolute',
-    bottom: '0',
-    height: '1px',
-    right: '15px',
-    width: 'calc(100% - 30px)',
-    backgroundColor: theme.palette.primary.main
-  }
+  zIndex: '4'
 }))
 
 export const StyledLogoMini = styled('a')(({ theme }) => ({
@@ -138,10 +65,6 @@ export const StyledLogoDefault = styled('a', {
   })
 }))
 
-export const Typography = styled(MuiTypography)(({ theme }) => ({
-  ...styles(theme)?.defaultFont,
-  padding: '0px 10px',
-  margin: '0',
-  display: 'block',
-  zIndex: '4'
+export const Divider = styled(MuiDivider)(() => ({
+  backgroundImage: 'linear-gradient(to right, rgba(52, 71, 103, 0), rgba(255, 255, 255, 0.4), rgba(52, 71, 103, 0))'
 }))

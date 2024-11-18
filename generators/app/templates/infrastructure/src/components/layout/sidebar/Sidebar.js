@@ -1,14 +1,15 @@
 import { useTranslation } from 'react-i18next'
 import PropTypes from 'prop-types'
 import { env } from 'utils/env'
-import { StyledImage, StyledLogo, StyledLogoDefault, StyledLogoMini, Typography } from './SidebarStyle'
-import WebSidebar from './WebSidebar'
-import MobileSidebar from './MobileSidebar'
+import { Divider, Drawer, StyledImage, StyledLogo, StyledLogoDefault, StyledLogoMini } from './SidebarStyle'
 import { useMediaQuery } from 'react-responsive'
 import { mobileWidth } from 'utils/constants'
+import { Typography } from '@totalsoft/rocket-ui'
+import UserMenu from 'components/menu/user/UserMenu'
+import Menu from 'components/menu/Menu'
 
 function Sidebar({ logo, logoText, drawerOpen, changeLanguage, closeDrawer, withGradient }) {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const isMobile = useMediaQuery({ query: mobileWidth })
 
   const brand = (
@@ -24,19 +25,31 @@ function Sidebar({ logo, logoText, drawerOpen, changeLanguage, closeDrawer, with
     </StyledLogo>
   )
 
-  const appVersion = <Typography variant={'caption'}>{`${t('BuildVersion')} ${env.REACT_APP_VERSION}`}</Typography>
+  const appVersion = (
+    <Typography
+      variant='caption'
+      sx={{ position: 'absolute', bottom: 0, ml: 2 }}
+    >{`${t('BuildVersion')} ${env.REACT_APP_VERSION}`}</Typography>
+  )
 
-  return isMobile ? (
-    <MobileSidebar
-      drawerOpen={drawerOpen}
-      closeDrawer={closeDrawer}
-      brand={brand}
-      changeLanguage={changeLanguage}
-      withGradient={withGradient}
-      appVersion={appVersion}
-    />
-  ) : (
-    <WebSidebar drawerOpen={drawerOpen} brand={brand} changeLanguage={changeLanguage} withGradient={withGradient} appVersion={appVersion} />
+  const drawerProps = isMobile
+    ? {
+        variant: 'temporary',
+        anchor: 'right',
+        ModalProps: {
+          keepMounted: true // Better open performance on mobile.
+        }
+      }
+    : { anchor: 'left', variant: 'permanent' }
+  return (
+    <Drawer open={drawerOpen} drawerOpen={drawerOpen} onClose={closeDrawer} {...drawerProps}>
+      {brand}
+      <Divider />
+      <UserMenu drawerOpen={drawerOpen} changeLanguage={changeLanguage} language={i18n.language} withGradient={withGradient} />
+      <Divider />
+      <Menu drawerOpen={drawerOpen} withGradient={withGradient} />
+      {appVersion}
+    </Drawer>
   )
 }
 
