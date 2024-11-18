@@ -10,17 +10,12 @@ const LanguageSelector = ({ language, changeLanguage, drawerOpen }) => {
   const iconComponent = !drawerOpen ? { IconComponent: EmptyElement } : {}
 
   return (
-    <Select
-      value={language}
-      onChange={changeLanguage}
-      {...iconComponent}
-      variant='standard'
-    >
-      <ListItem button value='ro'>
+    <Select value={language} onChange={changeLanguage} {...iconComponent} variant='standard' drawerOpen={drawerOpen}>
+      <ListItem value='ro'>
         <ReactCountryFlag countryCode='RO' svg style={{ margin: '0px 7px' }} />
         {drawerOpen && <Typography>{'Romana'}</Typography>}
       </ListItem>
-      <ListItem button value='en'>
+      <ListItem value='en'>
         <ReactCountryFlag countryCode='GB' svg style={{ margin: '0px 7px' }} />
         {drawerOpen && <Typography>{'English'}</Typography>}
       </ListItem>

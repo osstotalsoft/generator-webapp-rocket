@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { useLocation } from 'react-router-dom'
 import MenuItem from './MenuItem'
 import CollapsibleMenuItem from './CollapsibleMenuItem'
-import { List } from './MenuStyle'
+import { StyledList } from './MenuStyle'
 <%_ if (withRights) { _%>
   import { emptyArray } from 'utils/constants'
   import { useOidcUser } from '@axa-fr/react-oidc'
@@ -68,12 +68,12 @@ function Menu({ drawerOpen, withGradient  }) {
 
   return (
     <nav>
-      <List>
+      <StyledList>
         {menuItems.map((menu, key) => {
           const menuItemProps = { menu, drawerOpen, activeRoute, withGradient }
           return menu.children ? <CollapsibleMenuItem key={key} {...menuItemProps} /> : <MenuItem key={key} {...menuItemProps} />
         })}
-      </List>
+      </StyledList>
     </nav>
   )
 }
