@@ -65,6 +65,10 @@ export const StyledLogoDefault = styled('a', {
   })
 }))
 
-export const Divider = styled(MuiDivider)(() => ({
-  backgroundImage: 'linear-gradient(to right, rgba(52, 71, 103, 0), rgba(255, 255, 255, 0.4), rgba(52, 71, 103, 0))'
-}))
+export const Divider = styled(MuiDivider)(({ theme }) => {
+  const baseColor = styles(theme).menuColor
+  const rgb = hexToRgb(baseColor).replace(/rgb\(([^)]+)\)/, 'rgba($1, 0)')
+  return {
+    backgroundImage: `linear-gradient(to right, ${rgb}, ${baseColor}, ${rgb})`
+  }
+})
