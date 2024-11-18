@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect, useContext, useMemo } from 'react'
+import { useState, useCallback<% if (withMultiTenancy) { %>, useEffect, useContext<% } %><% if (withRights) { %>, useMemo <% } %>} from 'react'
 import PropTypes from 'prop-types'
 import { useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
@@ -115,7 +115,7 @@ function UserMenu({ drawerOpen, avatar, language, changeLanguage, withGradient }
           <Avatar src={avatar ? avatar : avatar_default} alt='...' />
         </ListItemIcon>
         <ListItemText
-          primary={displayName}
+          primary={<% if (withMultiTenancy) { %>displayName<% }else{ %>userName<% } %>}
           secondary={openAvatar ? <StyledArrowDropUp /> : <StyledArrowDropDown />}
           disableTypography={true}
           drawerOpen={drawerOpen}
@@ -139,6 +139,7 @@ function UserMenu({ drawerOpen, avatar, language, changeLanguage, withGradient }
           <StyledListItem withGradient={withGradient} drawerOpen={drawerOpen}>
             <LanguageSelector language={language} changeLanguage={changeLanguage} drawerOpen={drawerOpen} />
           </StyledListItem>
+    <%_ if (withMultiTenancy) { _%>
           {!tenantsLoading && myTenants?.length > 1 && (
             <Tooltip disableHoverListener={drawerOpen} title={t('Tooltips.TenantList')} placement='right'>
               <StyledListItem withGradient={withGradient} drawerOpen={drawerOpen}>
@@ -146,6 +147,7 @@ function UserMenu({ drawerOpen, avatar, language, changeLanguage, withGradient }
               </StyledListItem>
             </Tooltip>
           )}
+    <%_}_%>
         </StyledList>
       </Collapse>
     </StyledList>
