@@ -8,8 +8,8 @@ COPY yarn.lock ./
 <%_}_%>
 RUN <%=packageManager%> install
 
-ARG REACT_APP_VERSION=0.0.0.0
-ENV REACT_APP_VERSION=${REACT_APP_VERSION}
+ARG VITE_APP_VERSION=0.0.0.0
+ENV VITE_APP_VERSION=${VITE_APP_VERSION}
 
 COPY . ./
 RUN <%=packageManager%> run build

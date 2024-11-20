@@ -29,7 +29,7 @@ function Sidebar({ logo, logoText, drawerOpen, changeLanguage, closeDrawer, with
     <Typography
       variant='caption'
       sx={{ position: 'absolute', bottom: 0, ml: 2 }}
-    >{`${t('BuildVersion')} ${env.REACT_APP_VERSION}`}</Typography>
+    >{`${t('BuildVersion')} ${env.VITE_APP_VERSION}`}</Typography>
   )
 
   const drawerProps = isMobile
