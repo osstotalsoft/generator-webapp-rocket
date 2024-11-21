@@ -17,5 +17,8 @@ export default defineConfig({
       routes: '/src/routes',
       utils: '/src/utils'
     }
+  },
+  build: {
+    outDir: 'build'
   }
 })

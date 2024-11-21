@@ -1,5 +1,5 @@
 # build environment
-FROM node:18-slim as builder
+FROM node:18-slim AS builder
 WORKDIR /app
 
 COPY package*.json ./
@@ -28,10 +28,10 @@ RUN addgroup --system --gid $imageUserGroupId $imageUserGroup && \
 COPY --chown=$imageUser:$imageUserGroup --from=builder /app/build ./build
 COPY --chown=$imageUser:$imageUserGroup --from=builder /app/setenv.js ./setenv.js
 
-RUN <%=packageManager%> install -g serve@6
+RUN <%=packageManager%> install -g serve@14
 
 USER $imageUser
 
 EXPOSE 8080
 
-CMD ["sh","-c","node setenv.js && serve -s build -p 8080"]
+CMD ["sh","-c","node --experimental-default-type=module setenv.mjs && serve -s build -p 8080"]

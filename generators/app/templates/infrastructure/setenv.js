@@ -7,7 +7,8 @@ const envFileRegEx = /env.([a-z0-9]*.)?js/g
 const injectedObjectRegEx = /(const oidc = {[^}]*})/
 const buildDir = './build'
 
-const env = import.meta.env
+// eslint-disable-next-line no-undef
+const env = process.env
 
 // Generate the configuration script from environment variables
 function generateConfigScript() {
