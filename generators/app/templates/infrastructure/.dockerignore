@@ -1,0 +1,14 @@
+.husky
+.vscode
+build
+helm
+node_modules
+.dockerignore
+*/.git
+.gitignore
+.prettierrc
+.yo-rc.json
+Dockerfile
+eslint.config.js
+jsconfig.json
+README.MD
