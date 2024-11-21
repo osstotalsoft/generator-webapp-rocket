@@ -28,7 +28,7 @@ RUN addgroup --system --gid $imageUserGroupId $imageUserGroup && \
 COPY --chown=$imageUser:$imageUserGroup --from=builder /app/build ./build
 COPY --chown=$imageUser:$imageUserGroup --from=builder /app/setenv.js ./setenv.js
 
-RUN <%=packageManager%> install -g serve@6
+RUN <%=packageManager%> install -g serve@14
 
 USER $imageUser
 
