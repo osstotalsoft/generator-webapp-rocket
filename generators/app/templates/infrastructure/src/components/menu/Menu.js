@@ -1,6 +1,6 @@
 import { useCallback<%_ if (withRights){ _%>, useMemo <%_ } _%>} from 'react'
 import PropTypes from 'prop-types'
-import { useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router'
 import MenuItem from './MenuItem'
 import CollapsibleMenuItem from './CollapsibleMenuItem'
 import { StyledList } from './MenuStyle'

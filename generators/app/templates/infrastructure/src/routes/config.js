@@ -1,4 +1,4 @@
-import { Navigate } from 'react-router-dom'
+import { Navigate } from 'react-router'
 import CustomRoute from 'components/routing/CustomRoute'
 
 import { Forbidden, NotFound } from '@totalsoft/rocket-ui'

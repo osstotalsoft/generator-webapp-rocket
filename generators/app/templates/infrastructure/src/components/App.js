@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useCallback, Suspense } from 'react'
-import { Outlet, useLocation } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { getTheme, ToastContainer } from '@totalsoft/rocket-ui'
 
