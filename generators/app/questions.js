@@ -1,6 +1,6 @@
-const chalk = require('chalk')
+import chalk from 'chalk'
 
-module.exports.projectNameQ = {
+export const projectNameQ = {
   type: 'input',
   name: 'projectName',
   message: 'What is the name of your project?',
@@ -17,14 +17,14 @@ module.exports.projectNameQ = {
   default: 'new-project'
 }
 
-module.exports.usePrevConfigsQ = {
+export const usePrevConfigsQ = {
   type: 'confirm',
   name: 'usePrevConfigs',
   message: 'You are regenerating over an existing project, would you like to use its previously saved generator configurations?',
   default: true
 }
 
-module.exports.getQuestions = projectName => [
+export const getQuestions = projectName => [
   {
     type: 'input',
     name: 'projectDescriptionName',
@@ -90,12 +90,5 @@ module.exports.getQuestions = projectName => [
     name: 'addQuickStart',
     message: 'Would you like to include quick start examples?',
     default: false
-  },
-  {
-    type: 'list',
-    name: 'packageManager',
-    message: 'What package manager would you like to use?',
-    choices: ['npm', 'yarn'],
-    default: 'npm'
   }
 ]

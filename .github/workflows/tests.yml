@@ -20,4 +20,4 @@ jobs:
       - name: Test EJS syntax
         run: npm run ejslint
       - name: Run tests
-        run: npm test
+        run: npm run test:coverage

@@ -3,16 +3,14 @@ FROM node:18-slim as builder
 WORKDIR /app
 
 COPY package*.json ./
-<%_ if(packageManager === 'yarn'){ _%>
-COPY yarn.lock ./
-<%_}_%>
-RUN <%=packageManager%> install
+
+RUN npm install
 
 ARG REACT_APP_VERSION=0.0.0.0
 ENV REACT_APP_VERSION=${REACT_APP_VERSION}
 
 COPY . ./
-RUN <%=packageManager%> run build
+RUN npm run build
 
 # production environment
 FROM node:18-slim
@@ -28,7 +26,7 @@ RUN addgroup --system --gid $imageUserGroupId $imageUserGroup && \
 COPY --chown=$imageUser:$imageUserGroup --from=builder /app/build ./build
 COPY --chown=$imageUser:$imageUserGroup --from=builder /app/setenv.js ./setenv.js
 
-RUN <%=packageManager%> install -g serve@6
+RUN npm install -g serve@6
 
 USER $imageUser
 

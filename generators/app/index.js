@@ -1,17 +1,16 @@
 'use strict'
-const Generator = require('yeoman-generator')
-require('lodash').extend(Generator.prototype, require('yeoman-generator/lib/actions/install'))
-const chalk = require('chalk')
-const yosay = require('yosay')
-const path = require('path')
-const { concat, mergeLeft } = require('ramda')
-const { projectNameQ, getQuestions, usePrevConfigsQ } = require('./questions')
-const { checkForLatestVersion, getCurrentVersion } = require('../utils')
-const filter = require('gulp-filter')
-const { prettierTransform, defaultPrettierOptions } = require('../generator-transforms')
-const { NPM_MIN_VERSION, YARN_MIN_VERSION, YO_RC_FILE } = require('./constants')
+import Generator from 'yeoman-generator'
+import chalk from 'chalk'
+import yosay from 'yosay'
+import path from 'path'
+import { concat, mergeLeft } from 'ramda'
+import { projectNameQ, getQuestions, usePrevConfigsQ } from './questions.js'
+import { checkForLatestVersion, getCurrentVersion } from '../utils.js'
+import filter from 'gulp-filter'
+import { prettierTransform, defaultPrettierOptions } from '../generator-transforms.js'
+import { YO_RC_FILE } from './constants.js'
 
-module.exports = class extends Generator {
+export default class extends Generator {
   constructor(args, opts) {
     super(args, { ...opts, skipRegenerate: true, ignoreWhitespace: true, force: true, skipLocalCache: false })
     this.registerClientTransforms()
@@ -47,7 +46,7 @@ module.exports = class extends Generator {
   writing() {
     if (!this.isLatest) return
 
-    const { addHelm, withRights, withMultiTenancy, packageManager, helmChartName, addQuickStart } = this.answers
+    const { addHelm, withRights, withMultiTenancy, helmChartName, addQuickStart } = this.answers
 
     const templatePath = this.templatePath('infrastructure/**/*')
     const destinationPath = this.destinationPath()
@@ -60,16 +59,7 @@ module.exports = class extends Generator {
 
     if (!addQuickStart) ignoreFiles = concat(['**/features/**', '**/README.md'], ignoreFiles)
 
-    const packageManagerVersion =
-      packageManager === 'npm' ? NPM_MIN_VERSION : packageManager === 'yarn' ? YARN_MIN_VERSION : NPM_MIN_VERSION
-
-    this.fs.copyTpl(
-      templatePath,
-      destinationPath,
-      { ...this.answers, packageManagerVersion },
-      {},
-      { globOptions: { ignore: ignoreFiles, dot: true } }
-    )
+    this.fs.copyTpl(templatePath, destinationPath, this.answers, {}, { globOptions: { ignore: ignoreFiles, dot: true } })
 
     const gitignorePath = this.templatePath('infrastructure/.gitignore-template')
     const gitignoreDestinationPath = path.join(destinationPath, `/.gitignore`)
@@ -78,22 +68,15 @@ module.exports = class extends Generator {
     if (addHelm) {
       const helmTemplatePath = this.templatePath('infrastructure/helm/frontend/**')
       const helmDestinationPath = path.join(destinationPath, `/helm/${helmChartName}`)
-      this.fs.copyTpl(helmTemplatePath, helmDestinationPath, { ...this.answers, packageManagerVersion }, {}, { globOptions: { dot: true } })
+      this.fs.copyTpl(helmTemplatePath, helmDestinationPath, this.answers, {}, { globOptions: { dot: true } })
     }
   }
 
   install() {
-    if (!this.isLatest) return
+    if (!this.isLatest || this?.options?.skipPackageInstall) return
 
-    const { packageManager, projectName } = this.answers
-
-    this.log(chalk.greenBright(`All the dependencies will be installed shortly using "${packageManager}" package manager...`))
-    // eslint-disable-next-line no-unused-expressions
-    packageManager === 'npm'
-      ? this.npmInstall(null, {}, { cwd: projectName })
-      : packageManager === 'yarn'
-      ? this.yarnInstall(null, {}, { cwd: projectName })
-      : this.npmInstall(null, {}, { cwd: projectName })
+    this.log(chalk.greenBright(`All the dependencies will be installed shortly using "npm" package manager...`))
+    this.spawnCommandSync('npm install')
   }
 
   end() {

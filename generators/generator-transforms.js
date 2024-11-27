@@ -1,5 +1,6 @@
-const through = require('through2')
-const prettier = require('prettier')
+/* eslint-disable node/no-unpublished-import */
+import through from 'through2'
+import prettier from 'prettier'
 
 const defaultPrettierOptions = {
   printWidth: 125,
@@ -30,7 +31,4 @@ const prettierTransform = function (defaultOptions) {
   return through.obj(transform)
 }
 
-module.exports = {
-  prettierTransform,
-  defaultPrettierOptions
-}
+export { prettierTransform, defaultPrettierOptions }
