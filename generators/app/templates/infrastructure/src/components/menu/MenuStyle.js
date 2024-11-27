@@ -1,6 +1,6 @@
 import { styled, List as MuiList, ListItemIcon as MuiListItemIcon, ListItemText as MuiListItemText } from '@mui/material'
 import { ArrowDropDown, ArrowDropUp } from '@mui/icons-material'
-import { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router'
 import { includes } from 'ramda'
 import styles from 'assets/jss/styles'
 

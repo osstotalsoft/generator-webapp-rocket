@@ -1,6 +1,6 @@
 import { useState, useCallback<% if (withMultiTenancy) { %>, useEffect, useContext<% } %><% if (withRights) { %>, useMemo <% } %>} from 'react'
 import PropTypes from 'prop-types'
-import { useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { useOidcUser, useOidc } from '@axa-fr/react-oidc'
 import { Collapse, Tooltip } from '@mui/material'

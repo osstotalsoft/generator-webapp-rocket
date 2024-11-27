@@ -1,6 +1,6 @@
 import { useEffect, useCallback, useRef } from 'react'
 import PropTypes from 'prop-types'
-import { useBlocker } from 'react-router-dom'
+import { useBlocker } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { equals } from 'ramda'
 
