@@ -11,7 +11,7 @@
   "files": [
     "generators"
   ],
-  "main": "generators/index.mjs",
+  "main": "generators/index.js",
   "keywords": [
     "React",
     "Apollo",
