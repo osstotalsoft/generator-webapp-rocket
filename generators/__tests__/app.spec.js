@@ -7,7 +7,7 @@ import { projectNameQ, getQuestions } from '../app/questions.js'
 import { findIndex } from 'ramda'
 import { expect } from 'chai'
 import { fileURLToPath } from 'url'
-import { after, afterEach, before, describe, it } from 'mocha'
+import { after, before, describe, it } from 'mocha'
 import fs from 'fs-extra'
 
 const __filename = fileURLToPath(import.meta.url)
