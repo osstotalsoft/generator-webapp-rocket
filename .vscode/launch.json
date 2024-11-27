@@ -5,6 +5,15 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "args": ["-u", "tdd", "--timeout", "999999", "--colors", "${workspaceRoot}/generators/__tests__"],
+      "internalConsoleOptions": "openOnSessionStart",
+      "name": "Mocha Tests",
+      "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
+      "request": "launch",
+      "skipFiles": ["<node_internals>/**"],
+      "type": "node"
+    },
+    {
       "type": "node",
       "request": "launch",
       "name": "yeoman",
@@ -14,24 +23,6 @@
       "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen"
-    },
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "Jest Current File",
-      "program": "${workspaceFolder}/node_modules/jest/bin/jest",
-      "args": ["${fileBasenameNoExtension}"],
-      "console": "integratedTerminal",
-      "internalConsoleOptions": "neverOpen",
-      "disableOptimisticBPs": true
-    },
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "Jest",
-      "program": "${workspaceRoot}/node_modules/jest/bin/jest.js",
-      "args": ["-i"],
-      "skipFiles": ["<node_internals>/**/*.js", "node_modules", "templates"]
     }
   ]
 }

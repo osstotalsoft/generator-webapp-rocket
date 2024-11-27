@@ -4,7 +4,7 @@
   "private": true,
   "engines": {
     "node": ">=16.x",
-    "<%=packageManager%>": ">= <%= packageManagerVersion %>"
+    "npm": ">= 9.x"
   },
   "description": "•\tVisual Studio Code: https://code.visualstudio.com/download<br> •\tGit: https://git-scm.com/download/win <br> •\tGit Extensions: https://github.com/gitextensions/gitextensions/releases <br> •\tNode.js: https://nodejs.org/en/download/",
   "author": "",
@@ -19,7 +19,7 @@
     "eslint:report": "eslint --fix --ext .js .",
     "prettier": "prettier --write **/*.js",
     "prepack": "husky install",
-    "postinstall": "node ./node_modules/@axa-fr/oidc-client/bin/copy-service-worker-files.mjs public"
+    "postinstall": "node ./node_modules/@axa-fr/oidc-client/bin/copy-service-worker-files.mjs public && npx sort-package-json"
   },
   "dependencies": {
     "@apollo/client": "^3.11.10",

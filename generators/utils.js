@@ -1,9 +1,10 @@
-const boxen = require('boxen')
-const { UpdateNotifier } = require('update-notifier')
-const pkg = require('../package.json')
-const chalk = require('chalk')
+import boxen from 'boxen'
+import updateNotifier from 'update-notifier'
+import chalk from 'chalk'
+// eslint-disable-next-line node/no-unsupported-features/es-syntax
+const pkg = await import('../package.json', { with: { type: 'json' } })
 
-const notifier = new UpdateNotifier({ pkg, updateCheckInterval: 0 })
+const notifier = updateNotifier({ pkg: pkg.default, updateCheckInterval: 0 })
 
 async function checkForLatestVersion() {
   const updateInfo = await notifier.fetchInfo()
@@ -40,4 +41,4 @@ async function getCurrentVersion() {
   return updateInfo.current
 }
 
-module.exports = { checkForLatestVersion, getCurrentVersion }
+export { checkForLatestVersion, getCurrentVersion }

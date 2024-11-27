@@ -1,7 +1,7 @@
 {
+  "eslint.useFlatConfig": true,
   "javascript.validate.enable": false,
-  "javascript.format.enable": true,
-  "typescript.format.enable": false,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "cSpell.words": [
     "Oidc",
     "totalsoft"
