@@ -1,4 +1,4 @@
-import { styled, Drawer as MuiDrawer, Divider as MuiDivider } from '@mui/material'
+import { styled, Drawer as MuiDrawer, Divider as MuiDivider, hexToRgb } from '@mui/material'
 import { includes } from 'ramda'
 import styles from 'assets/jss/styles'
 

@@ -1,4 +1,4 @@
 node_modules
 coverage
-__tests__/**/tmp
-.tmp
+**/__tests__/test-project
+.tmp*
