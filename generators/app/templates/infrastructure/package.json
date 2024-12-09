@@ -12,7 +12,7 @@
   "license": "ISC",
   "scripts": {
     "prestart": "node setOidcDomains.js",
-     "start": "vite",
+    "start": "vite",
     "build": "vite build",
     "preview": "vite preview --port 3000",
     "test:ci": "cross-env CI=true npm test -- --reporters=default --reporters=jest-junit --coverage --coverageReporters=cobertura --coverageReporters=lcov --coverageReporters=html",
