@@ -53,7 +53,7 @@ export default function App() {
       <Content ref={mainPanelRef} drawerOpen={drawerOpen}>
         <Header drawerOpen={drawerOpen} handleDrawerToggle={handleDrawerToggle} />
         <Outlet />
-        <Footer fluid />
+        <Footer />
       </Content>
       <ToastContainer theme='colored' />
     </Suspense>

@@ -18,7 +18,7 @@ import AuthProvider from 'providers/AuthenticationProvider';
 
 const theme = getTheme()
 const container = document.getElementById('root')
-Object.assign(container.style, { ...theme.typography.defaultFont, color: theme.palette.primary.main, display: 'table' })
+Object.assign(container.style, { ...theme.typography.defaultFont, color: theme.palette.primary.main})
 const root = createRoot(container)
 
 root.render(

@@ -51,9 +51,8 @@ PrivateRoute.propTypes = {
 };
 
 function CustomRoute({ isPrivate = true, component: Component, ...props }) {
-    const [header] = useHeader()
     const [footer] = useFooter()
-    return <Container  hasHeader={header} hasFooter={footer}>{isPrivate ? <PrivateRoute component={Component} {...props} /> : <Component />}</Container>
+    return <Container footer={footer}>{isPrivate ? <PrivateRoute component={Component} {...props} /> : <Component />}</Container>
   }
 
 CustomRoute.propTypes = {
