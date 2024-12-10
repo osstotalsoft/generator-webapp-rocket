@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Container } from "./CustomRouteStyle";
 import {  getOidcConfigName } from "utils/functions";
 import { <% if (withRights) { %>useOidcUser, <% } %> withOidcSecure } from '@axa-fr/react-oidc';
-import { useFooter, useHeader } from 'providers/AreasProvider'
+import { useFooter } from 'providers/AreasProvider'
 <%_ if (withRights) { _%>
 import { emptyArray } from "utils/constants";
 import { isEmpty, defaultTo } from "ramda";

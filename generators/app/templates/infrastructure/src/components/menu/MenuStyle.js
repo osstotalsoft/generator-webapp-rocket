@@ -16,7 +16,8 @@ export const ListItemIcon = styled(MuiListItemIcon)(() => ({
   color: 'inherit',
   alignItems: 'center',
   minWidth: '2rem',
-  minHeight: '2rem'
+  minHeight: '2rem',
+  justifyContent: 'center'
 }))
 
 export const ListItemText = styled(MuiListItemText, {
