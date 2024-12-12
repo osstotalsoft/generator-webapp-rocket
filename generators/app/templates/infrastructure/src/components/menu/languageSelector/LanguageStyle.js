@@ -1,4 +1,4 @@
-import { styled, Select as MuiSelect, ListItem as MuiListItem, Typography as MuiTypography } from '@mui/material'
+import { styled, Select as MuiSelect, MenuItem as MuiMenuItem, Typography as MuiTypography } from '@mui/material'
 import styles from 'assets/jss/styles'
 import { includes, isNil } from 'ramda'
 
@@ -28,7 +28,7 @@ export const Select = styled(MuiSelect, {
   }
 }))
 
-export const ListItem = styled(MuiListItem)(({ theme }) => ({
+export const MenuItem = styled(MuiMenuItem)(({ theme }) => ({
   padding: '5px 16px',
   '&:hover': {
     color: styles(theme)?.menuActiveColor,

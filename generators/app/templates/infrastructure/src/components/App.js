@@ -16,7 +16,6 @@ const isWeb = () => window.matchMedia(`(min-width: ${getTheme().breakpoints.valu
 export default function App() {
   const location = useLocation()
   const mainPanelRef = useRef()
-  const { i18n } = useTranslation()
 
   const [drawerOpen, setDrawerOpen] = useState(isWeb())
   window.onresize = _e => setDrawerOpen(isWeb())
@@ -30,26 +29,13 @@ export default function App() {
     setDrawerOpen(false)
   }, [drawerOpen])
 
-  const changeLanguage = useCallback(
-    lng => {
-      i18n.changeLanguage(lng.target.value)
-    },
-    [i18n]
-  )
-
   useEffect(() => {
     if (mainPanelRef?.current?.scrollTop) mainPanelRef.current.scrollTop = 0
   }, [location.pathname])
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <Sidebar
-        logo={drawerOpen ? logo : miniLogo}
-        closeDrawer={handleCloseDrawer}
-        changeLanguage={changeLanguage}
-        drawerOpen={drawerOpen}
-        withGradient={false}
-      />
+      <Sidebar logo={drawerOpen ? logo : miniLogo} closeDrawer={handleCloseDrawer} drawerOpen={drawerOpen} withGradient={false} />
       <Content ref={mainPanelRef} drawerOpen={drawerOpen}>
         <Header drawerOpen={drawerOpen} handleDrawerToggle={handleDrawerToggle} />
         <Outlet />

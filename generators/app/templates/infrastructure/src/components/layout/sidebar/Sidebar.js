@@ -8,8 +8,8 @@ import { Typography } from '@totalsoft/rocket-ui'
 import UserMenu from 'components/menu/user/UserMenu'
 import Menu from 'components/menu/Menu'
 
-function Sidebar({ logo, logoText, drawerOpen, changeLanguage, closeDrawer, withGradient }) {
-  const { t, i18n } = useTranslation()
+function Sidebar({ logo, logoText, drawerOpen, closeDrawer, withGradient }) {
+  const { t } = useTranslation()
   const isMobile = useMediaQuery({ query: mobileWidth })
 
   const brand = (
@@ -45,7 +45,7 @@ function Sidebar({ logo, logoText, drawerOpen, changeLanguage, closeDrawer, with
     <Drawer open={drawerOpen} drawerOpen={drawerOpen} onClose={closeDrawer} {...drawerProps}>
       {brand}
       <Divider />
-      <UserMenu drawerOpen={drawerOpen} changeLanguage={changeLanguage} language={i18n.language} withGradient={withGradient} />
+      <UserMenu drawerOpen={drawerOpen} withGradient={withGradient} />
       <Divider />
       <Menu drawerOpen={drawerOpen} withGradient={withGradient} />
       {appVersion}
@@ -56,7 +56,6 @@ function Sidebar({ logo, logoText, drawerOpen, changeLanguage, closeDrawer, with
 Sidebar.propTypes = {
   drawerOpen: PropTypes.bool.isRequired,
   closeDrawer: PropTypes.func.isRequired,
-  changeLanguage: PropTypes.func.isRequired,
   logo: PropTypes.string,
   logoText: PropTypes.string,
   withGradient: PropTypes.bool.isRequired

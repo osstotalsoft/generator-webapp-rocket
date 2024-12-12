@@ -1,31 +1,39 @@
 import PropTypes from 'prop-types'
 import ReactCountryFlag from 'react-country-flag'
-import { ListItem, Select, Typography } from './LanguageStyle'
+import { MenuItem, Select, Typography } from './LanguageStyle'
+import { useTranslation } from 'react-i18next'
+import { useCallback } from 'react'
 
 function EmptyElement() {
   return <span></span>
 }
 
-const LanguageSelector = ({ language, changeLanguage, drawerOpen }) => {
+const LanguageSelector = ({ drawerOpen }) => {
+  const { i18n } = useTranslation()
   const iconComponent = !drawerOpen ? { IconComponent: EmptyElement } : {}
 
+  const changeLanguage = useCallback(
+    lng => {
+      i18n.changeLanguage(lng.target.value)
+    },
+    [i18n]
+  )
+
   return (
-    <Select value={language} onChange={changeLanguage} {...iconComponent} variant='standard' drawerOpen={drawerOpen}>
-      <ListItem value='ro'>
+    <Select value={i18n.language} onChange={changeLanguage} {...iconComponent} variant='standard' drawerOpen={drawerOpen}>
+      <MenuItem value='ro'>
         <ReactCountryFlag countryCode='RO' svg style={{ margin: '0px 7px' }} />
         {drawerOpen && <Typography>{'Romana'}</Typography>}
-      </ListItem>
-      <ListItem value='en'>
+      </MenuItem>
+      <MenuItem value='en'>
         <ReactCountryFlag countryCode='GB' svg style={{ margin: '0px 7px' }} />
         {drawerOpen && <Typography>{'English'}</Typography>}
-      </ListItem>
+      </MenuItem>
     </Select>
   )
 }
 
 LanguageSelector.propTypes = {
-  changeLanguage: PropTypes.func.isRequired,
-  language: PropTypes.string.isRequired,
   drawerOpen: PropTypes.bool
 }
 
