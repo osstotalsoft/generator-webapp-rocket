@@ -18,7 +18,7 @@
     "test:ci": "cross-env CI=true npm test -- --reporters=default --reporters=jest-junit --coverage --coverageReporters=cobertura --coverageReporters=lcov --coverageReporters=html",
     "lint": "eslint .",
     "eslint:report": "eslint --fix --ext .js .",
-    "prettier": "prettier --write **/*.js",
+    "prettier": "prettier --write **/*.{js,jsx,ts,tsx,css,md,json}",
     "prepack": "husky install",
     "postinstall": "node ./node_modules/@axa-fr/oidc-client/bin/copy-service-worker-files.mjs public && npx sort-package-json"
   },
