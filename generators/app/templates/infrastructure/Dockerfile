@@ -1,5 +1,5 @@
 # build environment
-FROM node:18-slim AS builder
+FROM node:22-slim AS builder
 WORKDIR /app
 
 COPY package*.json ./
@@ -13,7 +13,7 @@ COPY . ./
 RUN npm run build
 
 # production environment
-FROM node:18-slim
+FROM node:22-slim
 
 ARG imageUser=appuser
 ARG imageUserGroup=appgroup
