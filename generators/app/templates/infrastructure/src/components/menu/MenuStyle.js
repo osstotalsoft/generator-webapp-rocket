@@ -16,29 +16,31 @@ export const ListItemIcon = styled(MuiListItemIcon)(() => ({
   color: 'inherit',
   alignItems: 'center',
   minWidth: '2rem',
-  minHeight: '2rem'
+  minHeight: '2rem',
+  justifyContent: 'center',
+  margin: '0 4px'
 }))
 
 export const ListItemText = styled(MuiListItemText, {
   shouldForwardProp: prop => !includes(prop, ['drawerOpen'])
 })(({ theme, drawerOpen }) => ({
   ...styles(theme)?.defaultFont,
-  transition: 'all 300ms linear',
+  transition: 'all 200ms ease-in',
   margin: '0',
   textOverflow: 'ellipsis',
   paddingLeft: '18px',
   lineHeight: '30px',
   fontWeight: 'bold',
   fontSize: '15px',
-  display: drawerOpen ? 'relative' : 'none'
+  visibility: drawerOpen ? 'visible' : 'hidden'
 }))
 
 export const StyledArrowDropUp = styled(ArrowDropUp, {
   shouldForwardProp: prop => !includes(prop, ['isSubMenuItem'])
 })(({ isSubMenuItem }) => ({
-  position: 'relative',
+  transition: 'all 200ms ease-in',
+  marginLeft: 'auto',
   float: 'right',
-  transition: 'all 150ms ease-in',
   ...(isSubMenuItem && {
     display: 'none'
   })
@@ -47,17 +49,17 @@ export const StyledArrowDropUp = styled(ArrowDropUp, {
 export const StyledArrowDropDown = styled(ArrowDropDown, {
   shouldForwardProp: prop => !includes(prop, ['isSubMenuItem'])
 })(({ isSubMenuItem }) => ({
-  position: 'relative',
+  transition: 'all 200ms ease-in',
+  marginLeft: 'auto',
   float: 'right',
-  transition: 'all 150ms ease-in',
   ...(isSubMenuItem && {
     display: 'none'
   })
 }))
 
 export const StyledNavLink = styled(NavLink, {
-  shouldForwardProp: prop => !includes(prop, ['drawerOpen', 'isActive', 'withGradient'])
-})(({ theme, drawerOpen, isActive, withGradient }) => ({
+  shouldForwardProp: prop => !includes(prop, ['isActive', 'withGradient'])
+})(({ theme, isActive, withGradient }) => ({
   ...styles(theme)?.defaultFont,
   transition: 'all 300ms linear',
   margin: '5px 10px',
@@ -65,7 +67,7 @@ export const StyledNavLink = styled(NavLink, {
   display: 'flex',
   padding: '10px',
   textDecoration: 'unset',
-  justifyContent: drawerOpen ? 'flex-start' : 'center',
+  alignItems: 'center',
   '&:hover': {
     color: styles(theme)?.menuActiveColor,
     backgroundColor: styles(theme)?.menuActiveBkColor
