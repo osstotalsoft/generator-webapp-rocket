@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { useLocation } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { useOidcUser, useOidc } from '@axa-fr/react-oidc'
-import { Collapse, Tooltip } from '@mui/material'
+import { Collapse, Stack, Tooltip } from '@mui/material'
 import { PowerSettingsNew } from '@mui/icons-material'
 import LanguageSelector from '../languageSelector/LanguageSelector'
 import avatar_default from 'assets/img/default-avatar.png'
@@ -26,7 +26,7 @@ import { Avatar, StyledListItem } from './UserMenuStyle'
 import { ListItemIcon, ListItemText, StyledArrowDropDown, StyledArrowDropUp, StyledList, StyledNavLink } from '../MenuStyle'
 import MenuItem from '../MenuItem'
 
-function UserMenu({ drawerOpen, avatar, language, changeLanguage, withGradient }) {
+function UserMenu({ drawerOpen, avatar, withGradient }) {
   const [openAvatar, setOpenAvatar] = useState(false)
   const { t } = useTranslation()
   const location = useLocation()
@@ -110,13 +110,16 @@ function UserMenu({ drawerOpen, avatar, language, changeLanguage, withGradient }
 
   return (
     <StyledList>
-      <StyledNavLink to={'/'} withGradient={withGradient} onClick={openCollapseAvatar} drawerOpen={drawerOpen}>
+      <StyledNavLink to={'/'} withGradient={withGradient} onClick={openCollapseAvatar}>
         <ListItemIcon>
           <Avatar src={avatar ? avatar : avatar_default} alt='...' />
         </ListItemIcon>
         <ListItemText
-          primary={<% if (withMultiTenancy) { %>displayName<% }else{ %>userName<% } %>}
-          secondary={openAvatar ? <StyledArrowDropUp /> : <StyledArrowDropDown />}
+          primary={
+          <Stack direction='row'>
+            {<% if (withMultiTenancy) { %>displayName<% }else{ %>userName<% } %>}
+            {openAvatar ? <StyledArrowDropUp /> : <StyledArrowDropDown />}
+          </Stack>}
           disableTypography={true}
           drawerOpen={drawerOpen}
         />
@@ -128,7 +131,7 @@ function UserMenu({ drawerOpen, avatar, language, changeLanguage, withGradient }
           ))}
           {oidcUser && (
             <Tooltip disableHoverListener={drawerOpen} title={t('Tooltips.Logout')} placement='right'>
-              <StyledNavLink to={'/'} withGradient={withGradient} drawerOpen={drawerOpen} onClick={logoutAction}>
+              <StyledNavLink to={'/'} withGradient={withGradient} onClick={logoutAction}>
                 <ListItemIcon>
                   <PowerSettingsNew />
                 </ListItemIcon>
@@ -137,7 +140,7 @@ function UserMenu({ drawerOpen, avatar, language, changeLanguage, withGradient }
             </Tooltip>
           )}
           <StyledListItem withGradient={withGradient} drawerOpen={drawerOpen}>
-            <LanguageSelector language={language} changeLanguage={changeLanguage} drawerOpen={drawerOpen} />
+            <LanguageSelector drawerOpen={drawerOpen} />
           </StyledListItem>
     <%_ if (withMultiTenancy) { _%>
           {!tenantsLoading && myTenants?.length > 1 && (
@@ -157,8 +160,6 @@ function UserMenu({ drawerOpen, avatar, language, changeLanguage, withGradient }
 UserMenu.propTypes = {
   avatar: PropTypes.string,
   drawerOpen: PropTypes.bool.isRequired,
-  changeLanguage: PropTypes.func.isRequired,
-  language: PropTypes.string.isRequired,
   withGradient: PropTypes.bool.isRequired
 }
 

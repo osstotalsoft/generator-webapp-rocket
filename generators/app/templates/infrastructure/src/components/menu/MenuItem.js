@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { Tooltip } from '@mui/material'
+import { Stack, Tooltip } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { ListItemIcon, ListItemText, StyledArrowDropDown, StyledArrowDropUp, StyledNavLink } from './MenuStyle'
 
@@ -18,13 +18,15 @@ const MenuItem = ({ menu, drawerOpen, activeRoute, isSubMenuItem, subMenuOpen, o
 
   return (
     <Tooltip disableHoverListener={drawerOpen} title={translatedText} placement='right'>
-      <StyledNavLink {...itemProps} drawerOpen={drawerOpen} isActive={isActive} withGradient={withGradient}>
+      <StyledNavLink {...itemProps} isActive={isActive} withGradient={withGradient}>
         {icon && <ListItemIcon>{icon}</ListItemIcon>}
         <ListItemText
-          primary={translatedText}
-          secondary={
-            isSubMenu &&
-            (subMenuOpen ? <StyledArrowDropUp isSubMenuItem={isSubMenuItem} /> : <StyledArrowDropDown isSubMenuItem={isSubMenuItem} />)
+          primary={
+            <Stack direction='row'>
+              {translatedText}
+              {isSubMenu &&
+                (subMenuOpen ? <StyledArrowDropUp isSubMenuItem={isSubMenuItem} /> : <StyledArrowDropDown isSubMenuItem={isSubMenuItem} />)}
+            </Stack>
           }
           drawerOpen={drawerOpen}
           disableTypography={true}
