@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Container } from "./CustomRouteStyle";
 import {  getOidcConfigName } from "utils/functions";
 import { <% if (withRights) { %>useOidcUser, <% } %> withOidcSecure } from '@axa-fr/react-oidc';
+import { useFooter } from 'providers/AreasProvider'
 <%_ if (withRights) { _%>
 import { emptyArray } from "utils/constants";
 import { isEmpty, defaultTo } from "ramda";
@@ -50,7 +51,8 @@ PrivateRoute.propTypes = {
 };
 
 function CustomRoute({ isPrivate = true, component: Component, ...props }) {
-    return <Container>{isPrivate ? <PrivateRoute component={Component} {...props} /> : <Component />}</Container>
+    const [footer] = useFooter()
+    return <Container footer={footer}>{isPrivate ? <PrivateRoute component={Component} {...props} /> : <Component />}</Container>
   }
 
 CustomRoute.propTypes = {
