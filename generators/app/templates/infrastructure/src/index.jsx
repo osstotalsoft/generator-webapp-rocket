@@ -9,6 +9,7 @@ import './assets/css/index.css'
 import 'moment/locale/ro'
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css'
 import { AreasWrapper } from './providers/AreasProvider'
+import getTheme from './utils/theme'
 
 import AuthApolloProvider from 'apollo/AuthApolloProvider'
 <%_ if (withMultiTenancy) { _%>

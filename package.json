@@ -65,5 +65,6 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/osstotalsoft/generator-webapp-rocket/issues"
-  }
+  },
+  "packageManager": "npm@9.0.0"
 }
