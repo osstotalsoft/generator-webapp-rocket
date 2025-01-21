@@ -70,7 +70,7 @@ describe('generator-webapp-rocket:app', function () {
   })
 
   it('create component with given name', function () {
-    const resPath = `./${projectName}/src/index.js`
+    const resPath = `./${projectName}/src/index.jsx`
     result.assertFile(resPath)
   })
 
