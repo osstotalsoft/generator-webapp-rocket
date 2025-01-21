@@ -79,7 +79,7 @@ describe('generator-webapp-rocket:app', function () {
   })
 
   it('gql address is configured', function () {
-    result.assertFileContent(`./${projectName}/.env`, `REACT_APP_GQL=${gqlAddress}`)
+    result.assertFileContent(`./${projectName}/.env`, `VITE_APP_GQL=${gqlAddress}`)
   })
 
   it('helm files are added when addHelm option is true', function () {
