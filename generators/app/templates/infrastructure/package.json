@@ -29,13 +29,13 @@
     "@emotion/styled": "^11.13.0",
     "@mui/icons-material": "^6.1.6",
     "@mui/material": "^6.1.6",
-    "@totalsoft/rocket-ui": "^0.1.63",
+    "@totalsoft/rocket-ui": "^1.0.2",
     "@totalsoft/change-tracking-react": "^5.0.37",
     "@totalsoft/pure-validations-react": "^5.0.37",
     "@totalsoft/rules-algebra-react": "^5.0.37",
     "@totalsoft/validations": "^1.0.5",
     "apollo-link-mock": "^1.0.1",
-    "date-fns": "^3.6.0",
+    "date-fns": "^4.1.0",
     "dotenv": "^16.4.5",
     "file-saver": "^2.0.5",
     "graphql": "^16.9.0",
@@ -70,7 +70,7 @@
     "husky": "^9.1.4",
     "jest-junit": "^16.0.0",
     "prettier": "^3.3.3",
-    "vite": "^5.4.9"
+    "vite": "^6.0.11"
   },
   "lint-staged": {
     "**/*.+(js|md|css|graphql|json)": "prettier --write"
