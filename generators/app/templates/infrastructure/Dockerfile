@@ -32,4 +32,4 @@ USER $imageUser
 
 EXPOSE 8080
 
-CMD ["sh","-c","node --experimental-default-type=module setenv.mjs && serve -s build -p 8080"]
+CMD ["sh","-c","node --experimental-default-type=module setenv.js && serve -s build -p 8080"]
