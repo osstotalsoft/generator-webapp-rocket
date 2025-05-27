@@ -2,6 +2,7 @@
   "name": "<%= projectName %>",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "engines": {
     "node": ">=16.x",
     "npm": ">= 9.x"
@@ -11,15 +12,16 @@
   "license": "ISC",
   "scripts": {
     "prestart": "node setOidcDomains.js",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "test:ci": "cross-env CI=true npm test -- --reporters=default --reporters=jest-junit --coverage --coverageReporters=cobertura --coverageReporters=lcov --coverageReporters=html",
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview --port 3000",
     "lint": "eslint .",
     "eslint:report": "eslint --fix --ext .js .",
     "prettier": "prettier --write **/*.{js,jsx,ts,tsx,css,md,json}",
     "prepack": "husky install",
-    "postinstall": "node ./node_modules/@axa-fr/oidc-client/bin/copy-service-worker-files.mjs public && npx sort-package-json"
+    "postinstall": "node ./node_modules/@axa-fr/oidc-client/bin/copy-service-worker-files.mjs public && npx sort-package-json",
+    "test": "vitest --coverage",
+    "test:ci": "vitest run --coverage"
   },
   "dependencies": {
     "@apollo/client": "^3.11.10",
@@ -35,6 +37,7 @@
     "@totalsoft/validations": "^1.0.5",
     "apollo-link-mock": "^1.0.1",
     "date-fns": "^4.1.0",
+    "dotenv": "^16.4.5",
     "file-saver": "^2.0.5",
     "graphql": "^16.9.0",
 <%_ if (withSubscription) { _%>
@@ -52,25 +55,26 @@
     "react-i18next": "^15.1.1",
     "react-responsive": "^10.0.0",
     "react-router": "^7.0.1",
-    "react-scripts": "^5.0.1",
     "react-super-responsive-table": "^6.0.0",
     "simplebar-react": "^3.2.6",
     "url-search-params-polyfill": "^8.2.5"
   },
   "devDependencies": {
-    "@babel/core": "^7.26.0",
-    "@babel/eslint-parser": "^7.25.9",
-    "@babel/preset-react": "^7.25.9",
+    "@eslint/js": "^9.13.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.2.0",
+    "@vitejs/plugin-react-swc": "^3.5.0",
+    "@vitest/coverage-v8": "^3.0.4",
+    "@vitest/eslint-plugin": "^1.1.25",
     "cross-env": "^7.0.3",
-    "customize-cra": "^1.0.0",
-    "eslint-plugin-jest": "27.9.0",
-    "eslint-plugin-react": "^7.37.2",
+    "eslint-plugin-react": "^7.35.0",
     "eslint-plugin-react-hooks": "^5.0.0",
-    "husky": "^9.1.6",
-    "jest-junit": "^16.0.0",
-    "mini-css-extract-plugin": "2.9.2",
+    "eslint-plugin-react-refresh": "^0.4.13",
+    "globals": "^15.11.0",
+    "husky": "^9.1.4",
     "prettier": "^3.3.3",
-    "react-error-overlay": "6.0.11"
+    "vite": "^6.0.11",
+    "vitest": "^3.0.4"
   },
   "lint-staged": {
     "**/*.+(js|md|css|graphql|json)": "prettier --write"
@@ -85,22 +89,6 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
-    ]
-  },
-  "jest": {
-    "moduleDirectories": [
-      "node_modules",
-      "src"
-    ],
-    "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/src/__mocks__/fileMock.js",
-      "\\.(css|less)$": "identity-obj-proxy"
-    }
-  },
-  "babel": {
-    "presets": [
-      "@babel/preset-env",
-      "@babel/preset-react"
     ]
   }
 }

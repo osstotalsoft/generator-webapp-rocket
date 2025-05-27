@@ -19,7 +19,7 @@ const getWsLink = () => {
   let activeSocket, currentAccessToken
   if (!wsLink) {
     const wsClient = createClient({
-      url: `${env.REACT_APP_GQL_WS_PROTOCOL}://${env.REACT_APP_GQL}/graphql`,
+      url: `${env.VITE_APP_GQL_HTTP_PROTOCOL}://${env.VITE_APP_GQL}/graphql`,
       keepAlive: 10000, // ping server every 10 seconds,
       connectionParams: async () => {
         currentAccessToken = access_token
@@ -59,7 +59,7 @@ const getWsLink = () => {
 <%_ } _%>
 
 const httpLink = new HttpLink({
-  uri: `${env.REACT_APP_GQL_HTTP_PROTOCOL}://${env.REACT_APP_GQL}/graphql`,
+  uri: `${env.VITE_APP_GQL_HTTP_PROTOCOL}://${env.VITE_APP_GQL}/graphql`,
   onError: onError(({ graphQLErrors, networkError }) => {
     if (graphQLErrors)
       graphQLErrors.map(({ message, locations, path }) =>

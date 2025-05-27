@@ -9,6 +9,6 @@ node_modules
 .prettierrc
 .yo-rc.json
 Dockerfile
-.eslintrc.json
+eslint.config.js
 jsconfig.json
 README.MD

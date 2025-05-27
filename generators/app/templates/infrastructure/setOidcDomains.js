@@ -1,3 +1,4 @@
+// Copyright 2023 cdiaconita
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -10,8 +11,8 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-const fs = require('fs')
-const dotenv = require('dotenv')
+import fs from 'fs'
+import dotenv from 'dotenv'
 
 const injectedObjectRegEx = /(const oidc = {[^}]*})/
 
@@ -26,14 +27,15 @@ fs.readFile('public/OidcTrustedDomains.js', 'utf8', function (err, data) {
     dotenv.config({ path })
   }
 
-  const { REACT_APP_IDENTITY_AUTHORITY, REACT_APP_GQL_HTTP_PROTOCOL, REACT_APP_GQL } = process.env
+  // eslint-disable-next-line no-undef
+  const { VITE_APP_IDENTITY_AUTHORITY, VITE_APP_GQL_HTTP_PROTOCOL, VITE_APP_GQL } = process.env
 
   const injectedValue =
     'const oidc = ' +
     JSON.stringify({
-      REACT_APP_IDENTITY_AUTHORITY,
-      REACT_APP_GQL_HTTP_PROTOCOL,
-      REACT_APP_GQL
+      VITE_APP_IDENTITY_AUTHORITY,
+      VITE_APP_GQL_HTTP_PROTOCOL,
+      VITE_APP_GQL
     })
 
   if (data.match(injectedObjectRegEx)) {

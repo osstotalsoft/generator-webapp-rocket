@@ -15,11 +15,11 @@ const getAuthenticationConfiguration = (<% if (withMultiTenancy) { %>tenant<%}%>
     const extras = isNullOrWhitespace(tenant) ? undefined : { acr_values: `tenant:${tenant}` }
     <%_ } _%>
     return {
-        client_id: env.REACT_APP_IDENTITY_CLIENT_ID,
-        authority: env.REACT_APP_IDENTITY_AUTHORITY,
+        client_id: env.VITE_APP_IDENTITY_CLIENT_ID,
+        authority: env.VITE_APP_IDENTITY_AUTHORITY,
         redirect_uri: `${root}${AUTH.CALLBACK}`,
         silent_redirect_uri: `${root}${AUTH.SILENT_CALLBACK}`,
-        scope: 'openid profile ' + env.REACT_APP_IDENTITY_SCOPE,
+        scope: 'openid profile ' + env.VITE_APP_IDENTITY_SCOPE,
         refresh_time_before_tokens_expiration_in_second: 40,
         token_renew_mode: TokenRenewMode.access_token_invalid,
         service_worker_relative_url: '/OidcServiceWorker.js'<%_ if (withMultiTenancy) { _%>,

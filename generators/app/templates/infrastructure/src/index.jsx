@@ -1,5 +1,6 @@
 import 'url-search-params-polyfill'
 
+import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import Root from './routes/root'
 import ThemeProvider from 'providers/ThemeProvider'
@@ -23,13 +24,15 @@ Object.assign(container.style, { ...theme.typography.defaultFont, color: theme.p
 const root = createRoot(container)
 
 root.render(
-  <ThemeProvider>
-    <AreasWrapper>
-      <AuthProvider>
-        <AuthApolloProvider>
-            <Root />
-        </AuthApolloProvider>
-      </AuthProvider>
-    </AreasWrapper>
-  </ThemeProvider>
+  <StrictMode>
+    <ThemeProvider>
+      <AreasWrapper>
+        <AuthProvider>
+          <AuthApolloProvider>
+              <Root />
+          </AuthApolloProvider>
+        </AuthProvider>
+      </AreasWrapper>
+    </ThemeProvider>
+  </StrictMode>
 )

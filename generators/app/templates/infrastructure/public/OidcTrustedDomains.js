@@ -1,10 +1,10 @@
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,27 +19,26 @@
 // Ideal to hide refresh token from client JavaScript, but to retrieve access_token for some
 // scenarios which require it. For example, to send it via websocket connection.
 
-const REACT_APP_URL = `${oidc.REACT_APP_GQL_HTTP_PROTOCOL}://${oidc.REACT_APP_GQL}/graphql`
+const VITE_APP_URL = `${oidc.VITE_APP_GQL_HTTP_PROTOCOL}://${oidc.VITE_APP_GQL}/graphql`
 
 // Domains used by OIDC server must be also declared here
 const defaultTrustedDomains = {
-    config_show_access_token: {
-      domains: [oidc.REACT_APP_IDENTITY_AUTHORITY, REACT_APP_URL],
+  config_show_access_token: {
+    domains: [oidc.VITE_APP_IDENTITY_AUTHORITY, VITE_APP_URL],
+    showAccessToken: true
+  }
+}
+
+const handler = {
+  get(target, name) {
+    if (name in target) {
+      return target[name]
+    }
+    return {
+      domains: [oidc.VITE_APP_IDENTITY_AUTHORITY, VITE_APP_URL],
       showAccessToken: true
     }
   }
-  
-  const handler = {
-    get(target, name) {
-      if (name in target) {
-        return target[name]
-      }
-      return {
-        domains: [oidc.REACT_APP_IDENTITY_AUTHORITY, REACT_APP_URL],
-        showAccessToken: true
-      }
-    }
-  }
-  
-  const trustedDomains = new Proxy(defaultTrustedDomains, handler)
-  
+}
+
+const trustedDomains = new Proxy(defaultTrustedDomains, handler)
