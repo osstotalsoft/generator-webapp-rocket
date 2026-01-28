@@ -36,7 +36,7 @@
     "ramda": "^0.30.1",
     "update-notifier": "^7.3.1",
     "yeoman-generator": "^7.3.3",
-    "yo": "^5.0.0",
+    "yo": "^6.0.0",
     "yosay": "^3.0.0"
   },
   "devDependencies": {
